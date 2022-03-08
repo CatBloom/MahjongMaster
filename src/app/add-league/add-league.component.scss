@@ -1,0 +1,29 @@
+h2 {
+  margin-top: 2rem;
+}
+.league {
+  text-align: center;
+  p {
+    font-size: 3rem;
+  }
+  &__input {
+    width: 70%;
+  }
+  &__radio {
+    margin: 1rem 0;
+    text-align: left;
+
+    .mat-radio-button {
+      margin-left: 1rem;
+      width: 20%;
+      min-width: 20%;
+    }
+  }
+  label {
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    width: 10%;
+    min-width: 10%;
+  }
+}

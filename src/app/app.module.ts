@@ -10,9 +10,10 @@ import { MaterialModule } from './material.module';
 // components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { AddLeagueComponent } from './add-league/add-league.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, AddLeagueComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
