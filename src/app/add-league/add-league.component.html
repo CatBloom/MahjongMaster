@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" autocomplete="off" class="formGroup">
+    <h2>大会登録</h2>
+    <div class="league">
+        <p>大会名</p>
+        <mat-form-field class="league__input" appearance="outline">
+            <mat-label>大会名</mat-label>
+            <input matInput placeholder="" value="" formControlName="leagueInput" />
+        </mat-form-field>
+        <div class="league__radio">
+            <mat-radio-group formControlName="rulesRadio">
+                <mat-radio-button value="mahjongsoulRules">雀魂公式ルール</mat-radio-button>
+                <mat-radio-button value="tenhouRules">天鳳公式ルール</mat-radio-button>
+                <mat-radio-button value="custom">カスタムルール</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+</form>
