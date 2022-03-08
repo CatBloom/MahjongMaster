@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LeagueService } from '../shared/services/league.service';
 
 @Component({
   selector: 'app-add-league',
@@ -11,7 +12,7 @@ export class AddLeagueComponent implements OnInit {
     leagueInput: new FormControl('', [Validators.required]),
     rulesRadio: new FormControl('', [Validators.required]),
   });
-  constructor() {}
+  constructor(private leagueService: LeagueService) {}
 
   ngOnInit(): void {}
 }
