@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rules } from '../shared/interfaces/rules';
 import { LeagueService } from '../shared/services/league.service';
+import { RulesService } from '../shared/services/rules.service';
 
 @Component({
   selector: 'app-add-league',
@@ -22,7 +23,7 @@ export class AddLeagueComponent implements OnInit {
     radioTime: '',
   };
 
-  constructor(private leagueService: LeagueService) {}
+  constructor(private leagueService: LeagueService, private rulesService: RulesService) {}
 
   ngOnInit(): void {}
 
