@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rules } from '../shared/interfaces/rules';
 @Component({
@@ -7,6 +7,7 @@ import { Rules } from '../shared/interfaces/rules';
   styleUrls: ['./rules.component.scss'],
 })
 export class RulesComponent implements OnInit {
+  @Input('rulesRadioValue') rulesRadioValue?: string;
   // 雀魂公式ルール
   readonly mahjongsoulRules: Rules = {
     radioGame: '2',
