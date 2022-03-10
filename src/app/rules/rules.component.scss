@@ -1,0 +1,22 @@
+.rules {
+  margin-left: 1rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  &__radio {
+    margin: 1rem 0;
+
+    .mat-radio-button {
+      margin-left: 1rem;
+      width: 15%;
+      min-width: 15%;
+    }
+  }
+  label {
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    width: 10%;
+    min-width: 10%;
+  }
+}
