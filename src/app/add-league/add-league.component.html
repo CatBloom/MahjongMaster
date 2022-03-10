@@ -21,6 +21,9 @@
         <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value"></app-rules>
     </div>
     <div *ngIf="formGroup.get('rulesRadio')?.value === 'custom'">
-        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value"></app-rules>
+        <app-rules
+            [rulesRadioValue]="formGroup.get('rulesRadio')?.value"
+            (costomRules)="setCostomRules($event)"
+        ></app-rules>
     </div>
 </form>

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Rules } from '../shared/interfaces/rules';
 @Component({
   selector: 'app-rules',
@@ -7,7 +8,9 @@ import { Rules } from '../shared/interfaces/rules';
   styleUrls: ['./rules.component.scss'],
 })
 export class RulesComponent implements OnInit {
-  @Input('rulesRadioValue') rulesRadioValue?: string;
+  @Input('rulesRadioValue') rulesRadioValue!: string;
+  @Output() costomRules = new EventEmitter<Rules>();
+
   // 雀魂公式ルール
   readonly mahjongsoulRules: Rules = {
     radioGame: '2',
@@ -22,15 +25,29 @@ export class RulesComponent implements OnInit {
     radioTanyao: '2',
     radioTime: '2',
   };
-  constructor() {}
+
   formGroup = new FormGroup({
     radioGame: new FormControl('', [Validators.required]),
     radioDora: new FormControl('', [Validators.required]),
     radioTanyao: new FormControl('', [Validators.required]),
     radioTime: new FormControl('', [Validators.required]),
   });
+
+  private subscriptions = new Subscription();
+
+  constructor() {}
+
   ngOnInit(): void {
     this.setRules();
+    this.subscriptions = this.formGroup.valueChanges.subscribe(() => {
+      if (!this.formGroup.invalid) {
+        this.costomRules.emit(this.formGroup.value);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   // 固定ルールをセットする関数
