@@ -29,5 +29,18 @@ export class RulesComponent implements OnInit {
     radioTanyao: new FormControl('', [Validators.required]),
     radioTime: new FormControl('', [Validators.required]),
   });
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setRules();
+  }
+
+  // 固定ルールをセットする関数
+  setRules() {
+    let rules = this.rulesRadioValue;
+    if (rules && rules !== 'custom') {
+      for (let control in this.formGroup.controls) {
+        this.formGroup.get(control)!.setValue((this as any)[rules][control]);
+      }
+      this.formGroup.disable(); // 入力を無効化する
+    }
+  }
 }
