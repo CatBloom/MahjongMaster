@@ -26,11 +26,27 @@ export class RulesComponent implements OnInit {
     radioTime: '2',
   };
 
+  // 詳細ルール表示用のフォームコントロール
+  isAdvanced = new FormControl(false);
+
   formGroup = new FormGroup({
     radioGame: new FormControl('', [Validators.required]),
     radioDora: new FormControl('', [Validators.required]),
     radioTanyao: new FormControl('', [Validators.required]),
     radioTime: new FormControl('', [Validators.required]),
+    inputStartPoint: new FormControl(25000, [Validators.required]),
+    inputFinishPoint: new FormControl(30000, [Validators.required]),
+    inputReturnPoint: new FormControl(25000, [Validators.required]),
+    inputCalledPoint: new FormControl(0, [Validators.required]),
+    inputReachPoint: new FormControl(1000, [Validators.required]),
+    inputDeposit: new FormControl(300, [Validators.required]),
+    inputPenalty1: new FormControl(1000, [Validators.required]),
+    inputPenalty2: new FormControl(1500, [Validators.required]),
+    inputPenalty3: new FormControl(3000, [Validators.required]),
+    inputUma1: new FormControl(10, [Validators.required]),
+    inputUma2: new FormControl(5, [Validators.required]),
+    inputUma3: new FormControl(-5, [Validators.required]),
+    inputUma4: new FormControl(-10, [Validators.required]),
   });
 
   private subscriptions = new Subscription();

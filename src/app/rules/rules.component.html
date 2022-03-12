@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
-    <h2>ルール</h2>
     <div class="rules">
+        <div class="rules__title">基本ルール</div>
         <div class="rules__radio">
             <label for="">局数</label>
             <mat-radio-group formControlName="radioGame">
@@ -33,6 +33,87 @@
                 <mat-radio-button value="3">5+20秒</mat-radio-button>
                 <mat-radio-button value="4">60+0秒</mat-radio-button>
             </mat-radio-group>
+        </div>
+
+        <div class="rules__title">
+            詳細ルール
+            <div class="rules__toggle">
+                <mat-slide-toggle [formControl]="isAdvanced">{{
+                    isAdvanced.value ? "表示" : "非表示"
+                }}</mat-slide-toggle>
+            </div>
+        </div>
+        <div [hidden]="!isAdvanced.value">
+            <div class="rules__input">
+                <label for="">配給原点</label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput formControlName="inputStartPoint" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">終局必要点数</label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput formControlName="inputFinishPoint" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">返し点</label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput formControlName="inputReturnPoint" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">コールド</label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput formControlName="inputCalledPoint" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">リーチ必要点数</label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput formControlName="inputReachPoint" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">場棒点</label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput formControlName="inputDeposit" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">ノーテン罰符</label>
+                <mat-form-field appearance="outline">
+                    <mat-label>1人</mat-label>
+                    <input type="number" matInput formControlName="inputPenalty1" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>2人</mat-label>
+                    <input type="number" matInput formControlName="inputPenalty2" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>3人</mat-label>
+                    <input type="number" matInput formControlName="inputPenalty3" />
+                </mat-form-field>
+            </div>
+            <div class="rules__input">
+                <label for="">ウマ</label>
+                <mat-form-field appearance="outline">
+                    <mat-label>1位</mat-label>
+                    <input type="number" matInput formControlName="inputUma1" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>2位</mat-label>
+                    <input type="number" matInput formControlName="inputUma2" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>3位</mat-label>
+                    <input type="number" matInput formControlName="inputUma3" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>4位</mat-label>
+                    <input type="number" matInput formControlName="inputUma4" />
+                </mat-form-field>
+            </div>
         </div>
     </div>
 </form>
