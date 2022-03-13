@@ -8,8 +8,9 @@ import { Rules } from '../shared/interfaces/rules';
   styleUrls: ['./rules.component.scss'],
 })
 export class RulesComponent implements OnInit {
-  @Input('rulesRadioValue') rulesRadioValue!: string;
-  @Output() costomRules = new EventEmitter<Rules>();
+  @Input('rules') rules?: Rules;
+  @Input('rulesRadioValue') rulesRadioValue?: string;
+  @Output() sendRules = new EventEmitter<Rules>();
 
   // 雀魂公式ルール
   readonly mahjongsoulRules: Rules = {
@@ -81,9 +82,10 @@ export class RulesComponent implements OnInit {
 
   ngOnInit(): void {
     this.setRules();
+    this.sendRules.emit(this.formGroup.value);
     this.subscriptions = this.formGroup.valueChanges.subscribe(() => {
       if (!this.formGroup.invalid) {
-        this.costomRules.emit(this.formGroup.value);
+        this.sendRules.emit(this.formGroup.value);
       }
     });
   }
@@ -94,12 +96,19 @@ export class RulesComponent implements OnInit {
 
   // 固定ルールをセットする関数
   setRules() {
-    let rules = this.rulesRadioValue;
-    if (rules && rules !== 'custom') {
+    let rulesName: string;
+    if (this.rules) {
+      rulesName = 'rules';
+    } else {
+      rulesName = this.rulesRadioValue!;
+    }
+    if (rulesName && rulesName !== 'custom') {
       for (let control in this.formGroup.controls) {
-        this.formGroup.get(control)!.setValue((this as any)[rules][control]);
+        this.formGroup.get(control)!.setValue((this as any)[rulesName][control]);
       }
-      this.formGroup.disable(); // 入力を無効化する
+      if (!this.rules) {
+        this.formGroup.disable(); // 入力を無効化する
+      }
     }
   }
 }

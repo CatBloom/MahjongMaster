@@ -15,8 +15,8 @@ export class AddLeagueComponent implements OnInit {
     rulesRadio: new FormControl('', [Validators.required]),
   });
 
-  // カスタムルール(ユーザーが選択したものを格納)
-  costomRules: Rules = {
+  // 取得したルール
+  rules: Rules = {
     radioGame: '',
     radioDora: '',
     radioTanyao: '',
@@ -40,8 +40,7 @@ export class AddLeagueComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  setCostomRules(costomRules: Rules) {
-    this.costomRules = costomRules;
-    console.log(this.costomRules);
+  setRules(rules: Rules) {
+    this.rules = rules;
   }
 }
