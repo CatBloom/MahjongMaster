@@ -1,0 +1,43 @@
+.rules {
+  margin-left: 1rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  &__title {
+    font-size: 2rem;
+    color: rgb(158, 158, 197);
+    font-weight: bolder;
+  }
+  &__radio {
+    margin: 1rem 0;
+    .mat-radio-button {
+      margin-left: 1rem;
+      width: 15%;
+      min-width: 15%;
+    }
+  }
+  &__input {
+    font-size: 1.5rem;
+    .mat-form-field {
+      margin-left: 1rem;
+      font-weight: bolder;
+      width: 20%;
+      min-width: 10%;
+    }
+  }
+  &__toggle {
+    display: inline;
+    font-size: 1rem;
+    .mat-slide-toggle {
+      margin-left: 1rem;
+    }
+  }
+
+  label {
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    width: 15%;
+    min-width: 10%;
+  }
+}

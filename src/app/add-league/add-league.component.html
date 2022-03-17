@@ -14,4 +14,13 @@
             </mat-radio-group>
         </div>
     </div>
+    <div *ngIf="formGroup.get('rulesRadio')?.value === 'mahjongsoulRules'">
+        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
+    </div>
+    <div *ngIf="formGroup.get('rulesRadio')?.value === 'tenhouRules'">
+        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
+    </div>
+    <div *ngIf="formGroup.get('rulesRadio')?.value === 'custom'">
+        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
+    </div>
 </form>
