@@ -12,6 +12,14 @@ export class AddResultComponent implements OnInit {
     playerName2: new FormControl('', [Validators.required]),
     playerName3: new FormControl('', [Validators.required]),
     playerName4: new FormControl('', [Validators.required]),
+    playerPoint1: new FormControl('', [Validators.required, Validators.pattern('^[-.0-9]+$')]),
+    playerPoint2: new FormControl('', [Validators.required, Validators.pattern('^[-.0-9]+$')]),
+    playerPoint3: new FormControl('', [Validators.required, Validators.pattern('^[-.0-9]+$')]),
+    playerPoint4: new FormControl('', [Validators.required, Validators.pattern('^[-.0-9]+$')]),
+    calcPoint1: new FormControl('', []),
+    calcPoint2: new FormControl('', []),
+    calcPoint3: new FormControl('', []),
+    calcPoint4: new FormControl('', []),
   });
   constructor() {}
 
