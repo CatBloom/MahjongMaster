@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Rules } from '../shared/interfaces/rules';
 
 @Component({
   selector: 'app-add-result',
   templateUrl: './add-result.component.html',
   styleUrls: ['./add-result.component.scss'],
 })
-export class AddResultComponent implements OnInit {
+export class AddResultComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
     playerName1: new FormControl('', [Validators.required]),
     playerName2: new FormControl('', [Validators.required]),
@@ -21,7 +23,93 @@ export class AddResultComponent implements OnInit {
     calcPoint3: new FormControl('', []),
     calcPoint4: new FormControl('', []),
   });
+
+  // 取得したルール
+  rules: Rules = {
+    radioGame: '',
+    radioDora: '',
+    radioTanyao: '',
+    radioTime: '',
+    inputStartPoint: 0,
+    inputFinishPoint: 0,
+    inputReturnPoint: 0,
+    inputCalledPoint: 0,
+    inputReachPoint: 0,
+    inputDeposit: 0,
+    inputPenalty1: 0,
+    inputPenalty2: 0,
+    inputPenalty3: 0,
+    inputUma1: 0,
+    inputUma2: 0,
+    inputUma3: 0,
+    inputUma4: 0,
+  };
+
+  private subscriptions = new Subscription();
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pointSubscriptions();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  private calcPoint(point: number, uma: number) {
+    return (point - this.rules.inputReturnPoint) / 1000 + uma;
+  }
+
+  private pointSubscriptions() {
+    // player1の点数を変換
+    this.subscriptions.add(
+      this.formGroup.get('playerPoint1')!.valueChanges.subscribe(() => {
+        let point: number = Number(this.formGroup.get('playerPoint1')!.value);
+        let topPrize = ((this.rules.inputReturnPoint - this.rules.inputStartPoint) * 4) / 1000;
+        let setPoint = this.calcPoint(point, this.rules.inputUma1) + topPrize;
+        if (isNaN(setPoint)) {
+          this.formGroup.get('calcPoint1')!.setValue('');
+        } else {
+          this.formGroup.get('calcPoint1')!.setValue(setPoint);
+        }
+      })
+    );
+    // player2の点数を変換
+    this.subscriptions.add(
+      this.formGroup.get('playerPoint2')!.valueChanges.subscribe(() => {
+        let point = Number(this.formGroup.get('playerPoint2')!.value);
+        let setPoint = this.calcPoint(point, this.rules.inputUma2);
+        if (isNaN(setPoint)) {
+          this.formGroup.get('calcPoint2')!.setValue('');
+        } else {
+          this.formGroup.get('calcPoint2')!.setValue(setPoint);
+        }
+      })
+    );
+    // player3の点数を変換
+    this.subscriptions.add(
+      this.formGroup.get('playerPoint3')!.valueChanges.subscribe(() => {
+        let point = Number(this.formGroup.get('playerPoint3')!.value);
+        let setPoint = this.calcPoint(point, this.rules.inputUma3);
+        if (isNaN(setPoint)) {
+          this.formGroup.get('calcPoint3')!.setValue('');
+        } else {
+          this.formGroup.get('calcPoint3')!.setValue(setPoint);
+        }
+      })
+    );
+    // player4の点数を変換
+    this.subscriptions.add(
+      this.formGroup.get('playerPoint4')!.valueChanges.subscribe(() => {
+        let point = Number(this.formGroup.get('playerPoint4')!.value);
+        let setPoint = this.calcPoint(point, this.rules.inputUma4);
+        if (isNaN(setPoint)) {
+          this.formGroup.get('calcPoint4')!.setValue('');
+        } else {
+          this.formGroup.get('calcPoint4')!.setValue(setPoint);
+        }
+      })
+    );
+  }
 }
