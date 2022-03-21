@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Rules } from '../shared/interfaces/rules';
+import { RulesService } from '../shared/services/rules.service';
 
 @Component({
   selector: 'app-add-result',
@@ -47,14 +49,26 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor() {}
+  constructor(private rulesService: RulesService, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.getRules();
     this.pointSubscriptions();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private getRules() {
+    let leagueId = this.activeRoute.snapshot.paramMap.get('league-id');
+    if (!leagueId) {
+      return;
+    } else {
+      this.rulesService.getRules(leagueId).subscribe((rules) => {
+        this.rules = rules;
+      });
+    }
   }
 
   private calcPoint(point: number, uma: number) {

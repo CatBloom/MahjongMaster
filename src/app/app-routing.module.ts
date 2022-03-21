@@ -6,7 +6,7 @@ import { AddResultComponent } from './add-result/add-result.component';
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'add-league', component: AddLeagueComponent },
-  { path: 'add-result', component: AddResultComponent },
+  { path: 'add-result/:league-id', component: AddResultComponent },
 ];
 
 @NgModule({
