@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Rules } from '../shared/interfaces/rules';
 import { RulesService } from '../shared/services/rules.service';
+import { ResultService } from '../shared/services/result.service';
 
 @Component({
   selector: 'app-add-result',
@@ -49,7 +50,11 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(private rulesService: RulesService, private activeRoute: ActivatedRoute) {}
+  constructor(
+    private rulesService: RulesService,
+    private resultService: ResultService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getRules();
