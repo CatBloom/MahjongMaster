@@ -76,6 +76,20 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
   }
 
+  private pointCheck() {
+    let point1 = Number(this.formGroup.get('playerPoint1')!.value);
+    let point2 = Number(this.formGroup.get('playerPoint2')!.value);
+    let point3 = Number(this.formGroup.get('playerPoint3')!.value);
+    let point4 = Number(this.formGroup.get('playerPoint4')!.value);
+    if (point1 + point2 + point3 + point4 === this.rules.inputStartPoint * 4) {
+      console.log('ok');
+      return true;
+    } else {
+      console.log('error');
+      return false;
+    }
+  }
+
   private calcPoint(point: number, uma: number) {
     return (point - this.rules.inputReturnPoint) / 1000 + uma;
   }
