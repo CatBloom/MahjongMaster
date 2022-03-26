@@ -14,8 +14,18 @@ import { AddLeagueComponent } from './add-league/add-league.component';
 import { AddResultComponent } from './add-result/add-result.component';
 import { RulesComponent } from './rules/rules.component';
 
+// directives
+import { ReplaceDirective } from './shared/directives/replace.directive';
+
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, AddLeagueComponent, AddResultComponent, RulesComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    AddLeagueComponent,
+    AddResultComponent,
+    RulesComponent,
+    ReplaceDirective,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
