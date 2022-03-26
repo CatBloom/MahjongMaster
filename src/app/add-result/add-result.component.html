@@ -13,7 +13,12 @@
             <div class="result__input--point">
                 <mat-form-field appearance="outline">
                     <mat-label>点数</mat-label>
-                    <input matInput maxlength="6" formControlName="playerPoint1" />
+                    <input
+                        matInput
+                        maxlength="6"
+                        formControlName="playerPoint1"
+                        [appReplace]="formGroup.get('playerPoint1')"
+                    />
                 </mat-form-field>
             </div>
             <div class="result__input--calc-point">
@@ -33,12 +38,17 @@
             <div class="result__input--point">
                 <mat-form-field appearance="outline">
                     <mat-label>点数</mat-label>
-                    <input matInput formControlName="playerPoint2" />
+                    <input
+                        matInput
+                        maxlength="6"
+                        formControlName="playerPoint2"
+                        [appReplace]="formGroup.get('playerPoint2')"
+                    />
                 </mat-form-field>
             </div>
             <div class="result__input--calc-point">
                 <mat-form-field appearance="outline">
-                    <input matInput maxlength="6" readonly formControlName="calcPoint2" />
+                    <input matInput readonly formControlName="calcPoint2" />
                 </mat-form-field>
             </div>
         </div>
@@ -53,7 +63,12 @@
             <div class="result__input--point">
                 <mat-form-field appearance="outline">
                     <mat-label>点数</mat-label>
-                    <input matInput maxlength="6" formControlName="playerPoint3" />
+                    <input
+                        matInput
+                        maxlength="6"
+                        formControlName="playerPoint3"
+                        [appReplace]="formGroup.get('playerPoint3')"
+                    />
                 </mat-form-field>
             </div>
             <div class="result__input--calc-point">
@@ -73,7 +88,12 @@
             <div class="result__input--point">
                 <mat-form-field appearance="outline">
                     <mat-label>点数</mat-label>
-                    <input matInput maxlength="6" formControlName="playerPoint4" />
+                    <input
+                        matInput
+                        maxlength="6"
+                        formControlName="playerPoint4"
+                        [appReplace]="formGroup.get('playerPoint4')"
+                    />
                 </mat-form-field>
             </div>
             <div class="result__input--calc-point">
