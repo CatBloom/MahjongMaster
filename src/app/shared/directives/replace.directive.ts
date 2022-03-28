@@ -40,8 +40,8 @@ export class ReplaceDirective implements OnInit, OnDestroy {
         });
         // 数字以外の文字を空文字に変換
         newValue = newValue.replace(/[^0-9]/g, '');
-        // 先頭が0の場合に空にする
-        newValue = newValue.replace(/^0/, '');
+        // 0が先頭で2桁以上の場合、先頭の0を省く
+        newValue = newValue.replace(/^0([0-9]{1,})/g, '$1');
 
         if (value !== newValue) {
           this.formControl.setValue(newValue);
