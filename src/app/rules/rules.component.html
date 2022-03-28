@@ -47,71 +47,116 @@
             <div class="rules__input">
                 <label for="">配給原点</label>
                 <mat-form-field appearance="outline">
-                    <input type="number" matInput formControlName="inputStartPoint" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputStartPoint"
+                        [appReplace]="formGroup.get('inputStartPoint')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">終局必要点数</label>
                 <mat-form-field appearance="outline">
-                    <input type="number" matInput formControlName="inputFinishPoint" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputFinishPoint"
+                        [appReplace]="formGroup.get('inputFinishPoint')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">返し点</label>
                 <mat-form-field appearance="outline">
-                    <input type="number" matInput formControlName="inputReturnPoint" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputReturnPoint"
+                        [appReplace]="formGroup.get('inputReturnPoint')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">コールド</label>
                 <mat-form-field appearance="outline">
-                    <input type="number" matInput formControlName="inputCalledPoint" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputCalledPoint"
+                        [appReplace]="formGroup.get('inputCalledPoint')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">リーチ必要点数</label>
                 <mat-form-field appearance="outline">
-                    <input type="number" matInput formControlName="inputReachPoint" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputReachPoint"
+                        [appReplace]="formGroup.get('inputReachPoint')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">場棒点</label>
                 <mat-form-field appearance="outline">
-                    <input type="number" matInput formControlName="inputDeposit" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputDeposit"
+                        [appReplace]="formGroup.get('inputDeposit')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">ノーテン罰符</label>
                 <mat-form-field appearance="outline">
                     <mat-label>1人</mat-label>
-                    <input type="number" matInput formControlName="inputPenalty1" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputPenalty1"
+                        [appReplace]="formGroup.get('inputPenalty1')"
+                    />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>2人</mat-label>
-                    <input type="number" matInput formControlName="inputPenalty2" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputPenalty2"
+                        [appReplace]="formGroup.get('inputPenalty2')"
+                    />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>3人</mat-label>
-                    <input type="number" matInput formControlName="inputPenalty3" />
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="inputPenalty3"
+                        [appReplace]="formGroup.get('inputPenalty3')"
+                    />
                 </mat-form-field>
             </div>
             <div class="rules__input">
                 <label for="">ウマ</label>
                 <mat-form-field appearance="outline">
                     <mat-label>1位</mat-label>
-                    <input type="number" matInput formControlName="inputUma1" />
+                    <input type="text" matInput formControlName="inputUma1" [appReplace]="formGroup.get('inputUma1')" />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>2位</mat-label>
-                    <input type="number" matInput formControlName="inputUma2" />
+                    <input type="text" matInput formControlName="inputUma2" [appReplace]="formGroup.get('inputUma2')" />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>3位</mat-label>
-                    <input type="number" matInput formControlName="inputUma3" />
+                    <input type="text" matInput formControlName="inputUma3" [appReplace]="formGroup.get('inputUma3')" />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>4位</mat-label>
-                    <input type="number" matInput formControlName="inputUma4" />
+                    <input type="text" matInput formControlName="inputUma4" [appReplace]="formGroup.get('inputUma4')" />
                 </mat-form-field>
             </div>
         </div>
