@@ -39,9 +39,9 @@ export class ReplaceDirective implements OnInit, OnDestroy {
           return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
         });
         // 数字以外の文字を空文字に変換
-        newValue = newValue.replace(/[^0-9]/g, '');
+        newValue = newValue.replace(/[^\d\-]/g, '');
         // 0が先頭で2桁以上の場合、先頭の0を省く
-        newValue = newValue.replace(/^0([0-9]{1,})/g, '$1');
+        newValue = newValue.replace(/^0([\d]{1,})/g, '$1');
 
         if (value !== newValue) {
           this.formControl.setValue(newValue);
