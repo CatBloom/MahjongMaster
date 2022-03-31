@@ -13,6 +13,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { AddLeagueComponent } from './add-league/add-league.component';
 import { AddResultComponent } from './add-result/add-result.component';
 import { RulesComponent } from './rules/rules.component';
+import { PlayerDetailsComponent } from './player-details/player-details.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -25,6 +26,7 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
     AddResultComponent,
     RulesComponent,
     ReplaceDirective,
+    PlayerDetailsComponent,
   ],
   imports: [
     BrowserModule,
