@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
+import { NgChartsModule } from 'ng2-charts';
 
 // components
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { AddResultComponent } from './add-result/add-result.component';
 import { RulesComponent } from './rules/rules.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { TableComponent } from './shared/components/table/table.component';
+import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -33,6 +35,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     PlayerDetailsComponent,
     TableComponent,
     JapanesePipe,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
