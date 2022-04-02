@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -14,13 +14,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 export class TableComponent implements OnInit {
+  @Input('results') results!: ResultTableWrapper[];
   dataSource = sampleData;
   columnsToDisplay: string[] = ['rank', 'point', 'calcPoint', 'date'];
   expandedElement?: ResultTable | null;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.dataSource = this.results;
+  }
 }
 
 interface ResultTable {
