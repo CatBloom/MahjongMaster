@@ -19,6 +19,9 @@ import { TableComponent } from './shared/components/table/table.component';
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
 
+// pipes
+import { JapanesePipe } from './shared/pipes/japanese.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +32,7 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
     ReplaceDirective,
     PlayerDetailsComponent,
     TableComponent,
+    JapanesePipe,
   ],
   imports: [
     BrowserModule,
