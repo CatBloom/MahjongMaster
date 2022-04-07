@@ -17,6 +17,7 @@ import { RulesComponent } from './rules/rules.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
+import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -36,6 +37,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     TableComponent,
     JapanesePipe,
     PieChartComponent,
+    LineChartComponent,
   ],
   imports: [
     BrowserModule,
