@@ -1,0 +1,10 @@
+.player-result-container {
+  display: flex;
+  &__contents {
+    width: 70%;
+  }
+}
+
+.player-result-table {
+  margin-top: 2rem;
+}

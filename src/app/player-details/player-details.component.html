@@ -1,2 +1,7 @@
-<app-pie-chart [pieData]="pieData"></app-pie-chart>
-<app-table [results]="tableData"></app-table>
+<div class="player-result-container">
+    <div class="player-result-container__contents"></div>
+    <div class="player-resul-container__pie"><app-pie-chart [pieData]="pieData"></app-pie-chart></div>
+</div>
+<div class="player-result-table">
+    <app-table [results]="tableData"></app-table>
+</div>
