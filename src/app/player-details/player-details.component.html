@@ -3,9 +3,13 @@
         <div class="player-result-container__contents">
             <p class="player-result-container__contents--name">{{ playerName }}</p>
         </div>
-        <div class="player-result-container__line"><app-line-chart></app-line-chart></div>
+        <div class="player-result-container__line">
+            <app-line-chart [lineLabels]="lineLabels" [lineData]="lineData"></app-line-chart>
+        </div>
     </div>
-    <div class="player-resul-container__pie"><app-pie-chart [pieData]="pieData"></app-pie-chart></div>
+    <div class="player-resul-container__pie">
+        <app-pie-chart [pieData]="pieData"></app-pie-chart>
+    </div>
 </div>
 <div class="player-result-table">
     <app-table [results]="tableData"></app-table>

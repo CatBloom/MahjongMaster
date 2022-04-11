@@ -7,12 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerDetailsComponent implements OnInit {
   playerName: string = '';
+  lineLabels: string[] = [];
+  lineData: number[] = [];
   pieData: number[] = [];
   tableData: ResultTableWrapper[] = [];
   constructor() {}
 
   ngOnInit(): void {
     this.playerName = 'catBloom';
+    this.lineLabels = [
+      '2022/02/03/22:00',
+      '2022/02/04/22:00',
+      '2022/02/05/22:00',
+      '2022/02/06/22:00',
+      '2022/02/07/22:00',
+      '2022/02/08/22:00',
+      '2022/02/09/22:00',
+      '2022/02/10/22:00',
+      '2022/02/11/22:00',
+      '2022/02/12/22:00',
+    ];
+    this.lineData = [1, 1, 3, 2, 4, 2, 3, 1, 4, 4];
     this.pieData = [10, 9, 8, 7];
     this.tableData = [
       {

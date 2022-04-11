@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
@@ -7,23 +7,14 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit {
+  @Input('lineLabels') lineLabels!: string[];
+  @Input('lineData') lineData!: number[];
   // datasets
   public lineChartData: ChartConfiguration['data'] = {
-    labels: [
-      '2022/02/03/22:00',
-      '2022/02/04',
-      '2022/02/05',
-      '2022/02/06',
-      '2022/02/07',
-      '2022/02/08',
-      '2022/02/09',
-      '2022/02/10',
-      '2022/02/11',
-      '2022/02/12',
-    ],
+    labels: [],
     datasets: [
       {
-        data: [1, 1, 3, 2, 4, 2, 3, 1, 4, 4],
+        data: [],
         borderColor: 'rgba(148,159,177,1)',
         borderWidth: 2,
         pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -68,5 +59,8 @@ export class LineChartComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.lineChartData.labels = this.lineLabels;
+    this.lineChartData.datasets = [{ data: this.lineData }];
+  }
 }
