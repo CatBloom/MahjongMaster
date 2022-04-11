@@ -6,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./player-details.component.scss'],
 })
 export class PlayerDetailsComponent implements OnInit {
+  playerName: string = '';
   pieData: number[] = [];
   tableData: ResultTableWrapper[] = [];
   constructor() {}
 
   ngOnInit(): void {
+    this.playerName = 'catBloom';
     this.pieData = [10, 9, 8, 7];
     this.tableData = [
       {
