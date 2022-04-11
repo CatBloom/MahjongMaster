@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
-import { ChartConfiguration, ChartData } from 'chart.js';
+import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-pie-chart',
@@ -11,7 +11,7 @@ export class PieChartComponent implements OnInit {
   @Input('pieData') pieData!: number[];
 
   // datasets
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+  public pieChartData: ChartConfiguration['data'] = {
     labels: ['1位', '2位', '3位', '4位'],
     datasets: [
       {
