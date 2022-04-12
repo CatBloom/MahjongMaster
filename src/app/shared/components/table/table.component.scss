@@ -1,0 +1,30 @@
+@import "~@angular/material/theming";
+
+.table {
+  width: 100%;
+  @include mat-elevation(8);
+
+  &__header {
+    font-size: 2rem;
+    font-weight: 100;
+    width: 20%;
+  }
+  &__element-row {
+    &:not(.expanded-row):hover {
+      background: whitesmoke;
+    }
+    &:not(.expanded-row):active {
+      background: #efefef;
+    }
+    td {
+      border-bottom-width: 0;
+    }
+  }
+  &__detail {
+    overflow: hidden;
+    display: flex;
+  }
+  &__detail-row {
+    height: 0;
+  }
+}

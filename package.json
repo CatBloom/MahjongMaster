@@ -21,8 +21,11 @@
     "@angular/platform-browser": "12.2.0",
     "@angular/platform-browser-dynamic": "12.2.0",
     "@angular/router": "12.2.0",
+    "chart.js": "^3.7.1",
+    "chartjs-plugin-datalabels": "^2.0.0",
     "exceljs": "1.12.0",
     "file-saver": "^2.0.5",
+    "ng2-charts": "^3.0.8",
     "rxjs": "6.6.0",
     "tslib": "2.3.0",
     "zone.js": "0.11.4"
