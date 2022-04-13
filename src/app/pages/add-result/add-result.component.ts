@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Rules } from '../shared/interfaces/rules';
-import { RulesService } from '../shared/services/rules.service';
-import { ResultService } from '../shared/services/result.service';
+import { Rules } from '../../shared/interfaces/rules';
+import { RulesService } from '../../shared/services/rules.service';
+import { ResultService } from '../../shared/services/result.service';
 
 @Component({
   selector: 'app-add-result',
