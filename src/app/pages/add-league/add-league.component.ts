@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Rules } from '../shared/interfaces/rules';
-import { LeagueService } from '../shared/services/league.service';
-import { RulesService } from '../shared/services/rules.service';
+import { Rules } from '../../shared/interfaces/rules';
+import { LeagueService } from '../../shared/services/league.service';
+import { RulesService } from '../../shared/services/rules.service';
 
 @Component({
   selector: 'app-add-league',
