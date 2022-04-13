@@ -11,7 +11,7 @@ import { NgChartsModule } from 'ng2-charts';
 // components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { AddLeagueComponent } from './add-league/add-league.component';
+import { AddLeagueComponent } from './pages/add-league/add-league.component';
 import { AddResultComponent } from './add-result/add-result.component';
 import { RulesComponent } from './rules/rules.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';

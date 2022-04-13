@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddLeagueComponent } from './add-league/add-league.component';
+import { AddLeagueComponent } from './pages/add-league/add-league.component';
 import { AddResultComponent } from './add-result/add-result.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
 
