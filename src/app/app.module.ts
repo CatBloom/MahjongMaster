@@ -14,7 +14,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { AddLeagueComponent } from './add-league/add-league.component';
 import { AddResultComponent } from './add-result/add-result.component';
 import { RulesComponent } from './rules/rules.component';
-import { PlayerDetailsComponent } from './player-details/player-details.component';
+import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
 import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
