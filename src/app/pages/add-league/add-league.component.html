@@ -4,7 +4,11 @@
         <p>大会名</p>
         <mat-form-field class="league__input" appearance="outline">
             <mat-label>大会名</mat-label>
-            <input matInput placeholder="" value="" formControlName="leagueInput" />
+            <input matInput placeholder="" value="" formControlName="leagueName" />
+        </mat-form-field>
+        <mat-form-field class="league__input" appearance="outline">
+            <mat-label>大会説明</mat-label>
+            <textarea matInput placeholder="" value="" formControlName="leagueManual"></textarea>
         </mat-form-field>
         <div class="league__radio">
             <mat-radio-group formControlName="rulesRadio">
