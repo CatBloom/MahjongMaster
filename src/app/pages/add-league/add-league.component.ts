@@ -11,7 +11,8 @@ import { RulesService } from '../../shared/services/rules.service';
 })
 export class AddLeagueComponent implements OnInit {
   formGroup = new FormGroup({
-    leagueInput: new FormControl('', [Validators.required]),
+    leagueName: new FormControl('', [Validators.required]),
+    leagueManual: new FormControl('', []),
     rulesRadio: new FormControl('', [Validators.required]),
   });
 

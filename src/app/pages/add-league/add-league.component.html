@@ -4,7 +4,11 @@
         <p>大会名</p>
         <mat-form-field class="league__input" appearance="outline">
             <mat-label>大会名</mat-label>
-            <input matInput placeholder="" value="" formControlName="leagueInput" />
+            <input matInput placeholder="" value="" formControlName="leagueName" maxlength="40" />
+        </mat-form-field>
+        <mat-form-field class="league__input" appearance="outline">
+            <mat-label>大会説明</mat-label>
+            <textarea matInput placeholder="" value="" formControlName="leagueManual" maxlength="100"></textarea>
         </mat-form-field>
         <div class="league__radio">
             <mat-radio-group formControlName="rulesRadio">
@@ -14,13 +18,13 @@
             </mat-radio-group>
         </div>
     </div>
-    <div *ngIf="formGroup.get('rulesRadio')?.value === 'mahjongsoulRules'">
+    <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'mahjongsoulRules'">
         <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
-    </div>
-    <div *ngIf="formGroup.get('rulesRadio')?.value === 'tenhouRules'">
+    </ng-container>
+    <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'tenhouRules'">
         <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
-    </div>
-    <div *ngIf="formGroup.get('rulesRadio')?.value === 'custom'">
+    </ng-container>
+    <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'custom'">
         <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
-    </div>
+    </ng-container>
 </form>
