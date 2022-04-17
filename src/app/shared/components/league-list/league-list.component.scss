@@ -1,0 +1,28 @@
+.league-list {
+  font-family: "Noto Sans JP";
+  padding: 0;
+
+  li {
+    margin-top: 2rem;
+    list-style-type: none;
+    line-height: 5vh;
+    font-weight: bold;
+    font-size: 2rem;
+
+    a {
+      text-decoration: none;
+      display: block;
+      color: rgb(151, 204, 193);
+      border-radius: 4px;
+
+      &:hover {
+        color: white;
+        background-color: rgb(151, 204, 193);
+      }
+
+      span {
+        margin-left: 1rem;
+      }
+    }
+  }
+}
