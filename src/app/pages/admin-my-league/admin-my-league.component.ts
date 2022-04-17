@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-my-league.component.scss'],
 })
 export class AdminMyLeagueComponent implements OnInit {
+  leagueList: string[] = ['sampleLeague1', 'sampleLeague2', 'sampleLeague3', 'sampleLeague4'];
+
   constructor() {}
 
   ngOnInit(): void {}
