@@ -1,0 +1,8 @@
+<ul class="league-list">
+    <li *ngFor="let league of leagueList">
+        <a routerLink="/{{ league }}">
+            <i class="fa-solid fa-circle-arrow-right"></i>
+            <span>{{ league }}</span>
+        </a>
+    </li>
+</ul>
