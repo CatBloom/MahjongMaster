@@ -1,38 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-/* Application-wide Styles */
+@use "material-custom";
 
 html {
-  font-family: "Noto Sans JP", "Helvetica Neue", sans-serif;
-  // font-family: "MS Gothic";
-  // font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 62.5%;
   height: 100%;
 
   body {
     height: 100%;
     margin: 0px;
-    font-family: "Noto Sans JP,monospace";
-    h1 {
-      color: #369;
-      font-size: 250%;
-    }
-
-    h2 {
-      color: #369;
-    }
-    h3 {
-      color: #444;
-      font-weight: lighter;
-    }
-
-    input {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1.4rem;
-      padding: 0px;
-    }
-
-    button {
-      color: #333;
-    }
   }
 }
