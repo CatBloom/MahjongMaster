@@ -1,11 +1,11 @@
+@use "variable" as var;
+
 h2 {
   margin-top: 2rem;
+  color: var.$titleFontColor;
 }
 .league {
   text-align: center;
-  p {
-    font-size: 3rem;
-  }
   &__input {
     width: 70%;
   }

@@ -33,11 +33,10 @@
             "inlineStyleLanguage": "scss",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "src/material-custom.scss"
-            ],
+            "styles": ["src/styles.scss", "src/sass/material-custom.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/sass"]
+            },
             "scripts": []
           },
           "configurations": {
@@ -99,7 +98,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.scss"],
+            "styles": ["src/styles.scss", "src/sass/material-custom.scss"],
             "scripts": []
           }
         }

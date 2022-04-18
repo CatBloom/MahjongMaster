@@ -1,5 +1,6 @@
+@use "variable" as var;
+
 .league-list {
-  font-family: "Noto Sans JP";
   padding: 0;
 
   li {
@@ -12,12 +13,12 @@
     a {
       text-decoration: none;
       display: block;
-      color: rgb(151, 204, 193);
+      color: var.$accent;
       border-radius: 4px;
 
       &:hover {
-        color: white;
-        background-color: rgb(151, 204, 193);
+        color: var.$hoverFontColor;
+        background-color: var.$accent;
       }
 
       span {

@@ -1,0 +1,15 @@
+@use "@angular/material" as mat;
+
+// material-color
+$primary: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette));
+$accent: mat.get-color-from-palette(mat.define-palette(mat.$teal-palette));
+$warn: mat.get-color-from-palette(mat.define-palette(mat.$red-palette));
+
+// color
+$backgroundColor: #ffffff;
+
+// font-color
+$normalFontColor: #333333;
+$hoverFontColor: #ffffff;
+$titleFontColor: darken($primary, 10%);
+$subTitleFontColor: darken($accent, 10%);
