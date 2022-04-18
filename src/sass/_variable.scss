@@ -11,3 +11,5 @@ $backgroundColor: #ffffff;
 // font-color
 $normalFontColor: #333333;
 $hoverFontColor: #ffffff;
+$titleFontColor: darken($primary, 10%);
+$subTitleFontColor: darken($accent, 10%);
