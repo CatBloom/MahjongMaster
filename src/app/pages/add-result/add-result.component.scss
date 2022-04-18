@@ -1,6 +1,10 @@
+@use "variable" as var;
+
 h2 {
   margin-top: 2rem;
+  color: var.$titleFontColor;
 }
+
 .result {
   margin-left: 1rem;
   display: flex;
@@ -17,7 +21,6 @@ h2 {
       display: inline-block;
       .mat-form-field {
         margin-left: 1rem;
-        font-weight: bolder;
         width: 20vw;
         min-width: 20rem;
       }
@@ -26,7 +29,6 @@ h2 {
       display: inline-block;
       .mat-form-field {
         margin-left: 1rem;
-        font-weight: bolder;
         width: 10vw;
         min-width: 10rem;
       }
@@ -35,7 +37,6 @@ h2 {
       display: inline-block;
       .mat-form-field {
         margin-left: 1rem;
-        font-weight: bolder;
         width: 5vw;
         min-width: 5rem;
       }

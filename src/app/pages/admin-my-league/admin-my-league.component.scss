@@ -1,5 +1,8 @@
+@use "variable" as var;
+
 h2 {
   margin-top: 2rem;
+  color: var.$titleFontColor;
 }
 
 .add-league__button {
@@ -10,17 +13,18 @@ h2 {
   display: block;
   width: 100%;
   height: 5rem;
-  background-color: white;
+  background-color: var.$backgroundColor;
   border-radius: 1rem;
-  border-color: rgb(151, 204, 193);
-  font-family: "Noto Sans JP";
+  border-color: var.$accent;
+  font-family: '"Noto Sans JP",monospace';
+  color: var.$accent;
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
 
   &:hover {
-    background-color: rgb(151, 204, 193);
-    color: white;
+    background-color: var.$accent;
+    color: var.$hoverFontColor;
   }
 
   span {
