@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-league-list',
@@ -7,6 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LeagueListComponent implements OnInit {
   @Input('leagueList') leagueList!: string[];
+
+  iconSquareCaretRight = faSquareCaretRight;
+
   constructor() {}
 
   ngOnInit(): void {}
