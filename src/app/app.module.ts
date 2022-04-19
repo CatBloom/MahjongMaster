@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { NgChartsModule } from 'ng2-charts';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // components
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     HttpClientModule,
     MaterialModule,
     NgChartsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
