@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerDetailsComponent implements OnInit {
   playerName: string = '';
+  totalGame: number = 0;
+  totalPoint: number = 0;
   lineLabels: string[] = [];
   lineData: number[] = [];
   pieData: number[] = [];
@@ -15,6 +17,8 @@ export class PlayerDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.playerName = 'catBloom';
+    this.totalGame = 34;
+    this.totalPoint = 200.5;
     this.lineLabels = [
       '2022/02/03/22:00',
       '2022/02/04/22:00',

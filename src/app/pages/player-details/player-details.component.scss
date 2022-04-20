@@ -1,19 +1,62 @@
 @use "variable" as var;
+@use "@angular/material" as mat;
 
-.player-result-container {
-  display: flex;
+@mixin material {
+  @include mat.elevation(2);
+  border-radius: 0.5rem;
+}
+
+.player-name {
+  color: var.$titleFontColor;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+}
+
+.player-grid {
+  display: grid;
   width: 100%;
+  gap: 1rem;
+  grid-template-columns: 30% 30% 40%;
+  grid-template-rows: 10rem 10rem 10rem;
 
+  &__title {
+    font-size: 2rem;
+    text-align: center;
+    height: 1rem;
+  }
   &__contents {
-    height: 10rem;
+    font-size: 3rem;
+    text-align: center;
+    height: 8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: var.$titleFontColor;
   }
 }
 
-.player-result-table {
-  margin-top: 2rem;
+.material {
+  @include material();
+}
+
+.grid-item {
+  &__total-game {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+  &__total-point {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+  &__line {
+    grid-column: 1 / 3;
+    grid-row: 2 / 4;
+  }
+  &__pie {
+    grid-column: 3 / 4;
+    grid-row: 1 / 4;
+  }
+  &__table {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+  }
 }

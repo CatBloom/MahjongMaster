@@ -1,8 +1,5 @@
-@import "~@angular/material/theming";
-
 .table {
   width: 100%;
-  @include mat-elevation(8);
 
   &__header {
     font-size: 2rem;

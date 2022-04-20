@@ -36,6 +36,7 @@ export class LineChartComponent implements OnInit {
         },
       },
     },
+    maintainAspectRatio: false,
     scales: {
       x: {
         display: false,

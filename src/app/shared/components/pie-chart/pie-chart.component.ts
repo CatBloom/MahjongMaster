@@ -23,9 +23,10 @@ export class PieChartComponent implements OnInit {
   // options
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
+        display: true,
         position: 'top',
         onClick: function () {
           return false;
