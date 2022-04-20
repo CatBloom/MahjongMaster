@@ -1,13 +1,10 @@
 // /* AppComponent's private CSS styles */
 .container {
-  color: black;
   min-height: 100%;
-  margin: 0 auto;
+  margin: auto;
   width: 70%;
-  min-width: 100rem;
-
-  h1 {
-    margin-bottom: 0;
+  .main {
+    padding-top: 7.5rem;
   }
 
   nav {
@@ -34,9 +31,5 @@
         background-color: black;
       }
     }
-  }
-  .main {
-    margin-left: 10px;
-    padding-top: 64px;
   }
 }
