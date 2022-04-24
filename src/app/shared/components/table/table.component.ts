@@ -15,14 +15,16 @@ import { Result } from '../../interfaces/result';
   ],
 })
 export class TableComponent implements OnInit {
+  @Input('columns') columns!: string[];
   @Input('results') results!: ResultTableWrapper[];
   dataSource = [{}];
-  columnsToDisplay: string[] = ['rank', 'point', 'calcPoint', 'date'];
+  columnsToDisplay: string[] = [];
   expandedElement?: ResultTable | null;
 
   constructor() {}
 
   ngOnInit(): void {
+    this.columnsToDisplay = this.columns;
     this.dataSource = this.results;
   }
 }
