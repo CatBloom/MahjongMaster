@@ -1,8 +1,13 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="table">
     <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
         <th class="table__header" mat-header-cell *matHeaderCellDef>{{ column | japanese }}</th>
-        <td mat-cell *matCellDef="let element">
-            {{ column === "date" ? (element[column] | date: "yyyy/MM/dd HH:mm") : element[column] }}
+        <td class="table__cell" mat-cell *matCellDef="let element">
+            <ng-container *ngIf="column !== 'playerName'">
+                {{ column === "date" ? (element[column] | date: "yyyy/MM/dd HH:mm") : element[column] }}
+            </ng-container>
+            <ng-container *ngIf="column === 'playerName'">
+                <a routerLink="/player/{{ element.playerId }}">{{ element[column] }}</a>
+            </ng-container>
         </td>
     </ng-container>
     <ng-container matColumnDef="expandedDetail">

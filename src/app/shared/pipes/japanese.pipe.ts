@@ -14,6 +14,12 @@ export class JapanesePipe implements PipeTransform {
         return (value = '順位点');
       case 'date':
         return (value = '日付');
+      case 'playerName':
+        return (value = 'プレイヤー名');
+      case 'totalGameCount':
+        return (value = '対戦回数');
+      case 'totalCalcPoint':
+        return (value = '順位点合計');
       default:
         return value;
     }
