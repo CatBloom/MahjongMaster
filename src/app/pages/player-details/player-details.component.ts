@@ -12,6 +12,7 @@ export class PlayerDetailsComponent implements OnInit {
   lineLabels: string[] = [];
   lineData: number[] = [];
   pieData: number[] = [];
+  tableColumns: string[] = [];
   tableData: ResultTableWrapper[] = [];
   constructor() {}
 
@@ -33,6 +34,7 @@ export class PlayerDetailsComponent implements OnInit {
     ];
     this.lineData = [1, 1, 3, 2, 4, 2, 3, 1, 4, 4];
     this.pieData = [10, 9, 8, 7];
+    this.tableColumns = ['rank', 'point', 'calcPoint', 'date'];
     this.tableData = [
       {
         rank: '1位',
