@@ -1,3 +1,5 @@
+@use "variable" as var;
+
 .table {
   width: 100%;
 
@@ -6,6 +8,13 @@
     font-weight: 100;
     width: 20%;
   }
+
+  &__cell {
+    a {
+      color: var.$normalFontColor;
+    }
+  }
+
   &__element-row {
     &:not(.expanded-row):hover {
       background: whitesmoke;
