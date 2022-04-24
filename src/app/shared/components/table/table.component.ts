@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Result } from '../../interfaces/result';
+import { PlayerResult, PlayerResultWrapper, LeagueResult } from '../../interfaces/result';
 
 @Component({
   selector: 'app-table',
@@ -15,25 +15,16 @@ import { Result } from '../../interfaces/result';
   ],
 })
 export class TableComponent implements OnInit {
-  @Input('results') results!: ResultTableWrapper[];
+  @Input('columns') columns!: string[];
+  @Input('results') results!: PlayerResultWrapper[] | LeagueResult[];
   dataSource = [{}];
-  columnsToDisplay: string[] = ['rank', 'point', 'calcPoint', 'date'];
-  expandedElement?: ResultTable | null;
+  columnsToDisplay: string[] = [];
+  expandedElement?: PlayerResult | null;
 
   constructor() {}
 
   ngOnInit(): void {
+    this.columnsToDisplay = this.columns;
     this.dataSource = this.results;
   }
-}
-
-interface ResultTable {
-  rank: string;
-  point: number;
-  calcPoint: number;
-  date: Date;
-  group: number;
-}
-interface ResultTableWrapper extends ResultTable {
-  resultData: ResultTable[];
 }

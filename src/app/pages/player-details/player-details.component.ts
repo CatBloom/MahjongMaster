@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayerResultWrapper } from '../../shared/interfaces/result';
 
 @Component({
   selector: 'app-player-details',
@@ -12,7 +13,8 @@ export class PlayerDetailsComponent implements OnInit {
   lineLabels: string[] = [];
   lineData: number[] = [];
   pieData: number[] = [];
-  tableData: ResultTableWrapper[] = [];
+  tableColumns: string[] = [];
+  tableData: PlayerResultWrapper[] = [];
   constructor() {}
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class PlayerDetailsComponent implements OnInit {
     ];
     this.lineData = [1, 1, 3, 2, 4, 2, 3, 1, 4, 4];
     this.pieData = [10, 9, 8, 7];
+    this.tableColumns = ['rank', 'point', 'calcPoint', 'date'];
     this.tableData = [
       {
         rank: '1位',
@@ -62,15 +65,4 @@ export class PlayerDetailsComponent implements OnInit {
       },
     ];
   }
-}
-
-interface ResultTable {
-  rank: string;
-  point: number;
-  calcPoint: number;
-  date: Date;
-  group: number;
-}
-interface ResultTableWrapper extends ResultTable {
-  resultData: ResultTable[];
 }

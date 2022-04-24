@@ -12,3 +12,23 @@ export interface Result {
   calcPoint3: number;
   calcPoint4: number;
 }
+
+export interface PlayerResult {
+  rank: string;
+  point: number;
+  calcPoint: number;
+  date: Date;
+  group: number;
+}
+export interface PlayerResultWrapper extends PlayerResult {
+  resultData: PlayerResult[];
+}
+
+export interface LeagueResult {
+  rank: string;
+  plyerId: string;
+  playerName: string;
+  totalGameCount: number;
+  totalCalcPoint: number;
+  date: Date;
+}
