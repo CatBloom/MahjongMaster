@@ -1,0 +1,38 @@
+<div class="league-name">
+    <p>{{ leagueName }}</p>
+</div>
+
+<div class="league-grid">
+    <div class="material grid-item__league-manual">
+        <p class="league-grid__title">大会説明</p>
+        <mat-divider></mat-divider>
+        <p class="league-grid__contents--manual">{{ leagueManual }}</p>
+    </div>
+    <div class="grid-item__buttons">
+        <button>Player登録</button>
+        <button>成績登録</button>
+    </div>
+    <div class="material grid-item__league-admin-name">
+        <p class="league-grid__title">大会管理者</p>
+        <mat-divider></mat-divider>
+        <p class="league-grid__contents">{{ leagueAdminName }}</p>
+    </div>
+    <div class="material grid-item__league-total-game">
+        <p class="league-grid__title">総合対戦回数</p>
+        <mat-divider></mat-divider>
+        <p class="league-grid__contents">{{ leagueTotalGame }}</p>
+    </div>
+    <div class="material grid-item__league-date">
+        <p class="league-grid__title">大会期間</p>
+        <mat-divider></mat-divider>
+        <p class="league-grid__contents--date">{{ leagueStartAt | date: "yyyy/MM/dd HH:mm" }}</p>
+        <p class="league-grid__contents--date">~</p>
+        <p class="league-grid__contents--date">{{ leagueFnishAt | date: "yyyy/MM/dd HH:mm" }}</p>
+    </div>
+    <div class="material grid-item__table"><app-table></app-table></div>
+    <div class="material grid-item__rules">
+        <p class="league-grid__title">ルール</p>
+        <mat-divider></mat-divider>
+        <app-rules [rules]="rules"></app-rules>
+    </div>
+</div>
