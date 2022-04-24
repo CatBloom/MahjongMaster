@@ -26,7 +26,7 @@ export interface PlayerResultWrapper extends PlayerResult {
 
 export interface LeagueResult {
   rank: string;
-  plyerId: string;
+  playerId: string;
   playerName: string;
   totalGameCount: number;
   totalCalcPoint: number;
