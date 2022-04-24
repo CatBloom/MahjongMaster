@@ -23,3 +23,12 @@ export interface PlayerResult {
 export interface PlayerResultWrapper extends PlayerResult {
   resultData: PlayerResult[];
 }
+
+export interface LeagueResult {
+  rank: string;
+  plyerId: string;
+  playerName: string;
+  totalGameCount: number;
+  totalCalcPoint: number;
+  date: Date;
+}
