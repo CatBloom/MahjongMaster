@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PlayerResult, PlayerResultWrapper, LeagueResult } from '../../interfaces/result';
 
@@ -21,10 +22,14 @@ export class TableComponent implements OnInit {
   columnsToDisplay: string[] = [];
   expandedElement?: PlayerResult | null;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.columnsToDisplay = this.columns;
     this.dataSource = this.results;
+  }
+
+  goPlayerResult(playerId: string) {
+    this.router.navigateByUrl(`/player/${playerId}`);
   }
 }
