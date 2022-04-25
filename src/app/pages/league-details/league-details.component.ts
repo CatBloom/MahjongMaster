@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Rules } from '../../shared/interfaces/rules';
+import { LeagueResult } from '../../shared/interfaces/result';
 @Component({
   selector: 'app-league-details',
   templateUrl: './league-details.component.html',
@@ -12,8 +13,8 @@ export class LeagueDetailsComponent implements OnInit {
   leagueTotalGame: number = 0;
   leagueStartAt: Date = new Date();
   leagueFnishAt: Date = new Date();
-  tableColumn: string[] = [];
-  tableDate: {} = {};
+  tableColumns: string[] = [];
+  tableData: LeagueResult[] = [];
   rules: Rules = {
     radioGame: '',
     radioDora: '',
@@ -44,7 +45,17 @@ export class LeagueDetailsComponent implements OnInit {
       '大会の説明 Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum saepe praesentium quaerat ipsa deserunt totam, provident placeat aliquam';
     this.leagueStartAt = new Date('Sat Apr 04 2022 22:00:00 GMT+0900 (日本標準時)');
     this.leagueFnishAt = new Date('Sat Apr 30 2022 22:00:00 GMT+0900 (日本標準時)');
-    this.tableColumn = ['rank', 'totalGame', 'totalCalcPoint', 'lastGameDate'];
+    this.tableColumns = ['rank', 'playerName', 'totalGameCount', 'totalCalcPoint', 'date'];
+    this.tableData = [
+      {
+        rank: '1位',
+        playerId: '01',
+        playerName: 'CatBloom',
+        totalGameCount: 34,
+        totalCalcPoint: 200.5,
+        date: new Date('Sat Apr 30 2022 22:00:00 GMT+0900 (日本標準時)'),
+      },
+    ];
     this.rules = {
       radioGame: '2',
       radioDora: '2',
