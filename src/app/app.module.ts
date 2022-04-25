@@ -21,6 +21,7 @@ import { PieChartComponent } from './shared/components/pie-chart/pie-chart.compo
 import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
 import { LeagueListComponent } from './shared/components/league-list/league-list.component';
+import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -43,6 +44,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     LineChartComponent,
     AdminMyLeagueComponent,
     LeagueListComponent,
+    LeagueDetailsComponent,
   ],
   imports: [
     BrowserModule,
