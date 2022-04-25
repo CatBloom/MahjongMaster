@@ -2,11 +2,8 @@
     <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
         <th class="table__header" mat-header-cell *matHeaderCellDef>{{ column | japanese }}</th>
         <td class="table__cell" mat-cell *matCellDef="let element">
-            <ng-container *ngIf="column !== 'playerName'">
+            <ng-container>
                 {{ column === "date" ? (element[column] | date: "yyyy/MM/dd HH:mm") : element[column] }}
-            </ng-container>
-            <ng-container *ngIf="column === 'playerName'">
-                <a routerLink="/player/{{ element.playerId }}">{{ element[column] }}</a>
             </ng-container>
         </td>
     </ng-container>
@@ -33,6 +30,7 @@
         class="table__element-row"
         [class.expanded-row]="expandedElement === element"
         (click)="expandedElement = expandedElement === element ? null : element"
+        (click)="element.playerId ? goPlayerResult(element.playerId) : null"
     ></tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table__detail-row"></tr>
 </table>
