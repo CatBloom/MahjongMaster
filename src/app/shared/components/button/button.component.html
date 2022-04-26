@@ -1,0 +1,6 @@
+<button mat-stroked-button color="accent">
+    <ng-container *ngIf="icon">
+        <fa-icon transform="left-2 up-2" [icon]="icon" size="sm"></fa-icon>
+    </ng-container>
+    {{ buttonText }}
+</button>
