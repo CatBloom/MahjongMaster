@@ -13,6 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { AddLeagueComponent } from './pages/add-league/add-league.component';
+import { AddLeagueDialogComponent } from './pages/add-league/add-league-dialog/add-league-dialog.component';
 import { AddResultComponent } from './pages/add-result/add-result.component';
 import { RulesComponent } from './shared/components/rules/rules.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
@@ -35,6 +36,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     AppComponent,
     HeaderComponent,
     AddLeagueComponent,
+    AddLeagueDialogComponent,
     AddResultComponent,
     RulesComponent,
     ReplaceDirective,
