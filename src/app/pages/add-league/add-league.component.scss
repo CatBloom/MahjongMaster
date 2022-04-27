@@ -11,7 +11,6 @@ h2 {
   }
   &__radio {
     margin: 1rem 0;
-    text-align: left;
     .mat-radio-button {
       margin-left: 1rem;
       width: 20%;
@@ -21,12 +20,6 @@ h2 {
   &__button {
     width: 70%;
     margin: auto;
-  }
-  label {
-    display: inline-block;
-    font-size: 1.5rem;
-    vertical-align: middle;
-    width: 10%;
-    min-width: 10%;
+    min-height: 10rem;
   }
 }
