@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rules } from '../../shared/interfaces/rules';
+import { LeagueDialog } from '../../shared/interfaces/league';
 import { LeagueService } from '../../shared/services/league.service';
 import { RulesService } from '../../shared/services/rules.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddLeagueDialogComponent } from '../add-league/add-league-dialog/add-league-dialog.component';
 
 @Component({
   selector: 'app-add-league',
@@ -37,11 +40,35 @@ export class AddLeagueComponent implements OnInit {
     inputUma4: 0,
   };
 
-  constructor(private leagueService: LeagueService, private rulesService: RulesService) {}
+  constructor(private leagueService: LeagueService, private rulesService: RulesService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   setRules(rules: Rules) {
     this.rules = rules;
+  }
+
+  openDialog() {
+    if (this.formGroup.invalid) {
+      return;
+    }
+
+    const newLeague: LeagueDialog = {
+      leagueName: this.formGroup.get('leagueName')?.value,
+      leagueManual: this.formGroup.get('leagueManual')?.value,
+      rules: this.rules,
+    };
+
+    //Dialogを表示
+    const dialogRef = this.matDialog.open(AddLeagueDialogComponent, {
+      width: '60%',
+      data: newLeague,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('true');
+      }
+    });
   }
 }
