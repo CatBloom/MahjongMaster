@@ -1,5 +1,5 @@
-@use "variable" as var;
-@use "@angular/material" as mat;
+@use 'variable' as var;
+@use '@angular/material' as mat;
 
 @mixin material {
   @include mat.elevation(2);

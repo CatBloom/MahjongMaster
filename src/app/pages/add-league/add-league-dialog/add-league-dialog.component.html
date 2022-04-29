@@ -1,27 +1,27 @@
 <h1 mat-dialog-title>登録確認</h1>
 
 <mat-dialog-content>
-    <mat-label>大会</mat-label>
-    <mat-list class="league-mat-list">
-        <ng-container>
-            <mat-list-item>
-                <mat-label>大会名</mat-label>
-                {{ data.leagueName }}
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </ng-container>
-        <ng-container *ngIf="data.leagueManual">
-            <mat-list-item>
-                <mat-label>大会説明</mat-label>
-                {{ data.leagueManual }}
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </ng-container>
-    </mat-list>
-    <mat-label>ルール</mat-label>
-    <app-rule-list [rules]="data.rules"></app-rule-list>
+  <mat-label>大会</mat-label>
+  <mat-list class="league-mat-list">
+    <ng-container>
+      <mat-list-item>
+        <mat-label>大会名</mat-label>
+        {{ data.leagueName }}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+    <ng-container *ngIf="data.leagueManual">
+      <mat-list-item>
+        <mat-label>大会説明</mat-label>
+        {{ data.leagueManual }}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>
+  <mat-label>ルール</mat-label>
+  <app-rule-list [rules]="data.rules"></app-rule-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="null">Cancel</button>
-    <button mat-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>登録</button>
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+  <button mat-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>登録</button>
 </mat-dialog-actions>
