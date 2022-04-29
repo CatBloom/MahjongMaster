@@ -7,8 +7,8 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit {
-  @Input('lineLabels') lineLabels!: string[];
-  @Input('lineData') lineData!: number[];
+  @Input() lineLabels!: string[];
+  @Input() lineData!: number[];
   // datasets
   public lineChartData: ChartConfiguration['data'] = {
     labels: [],

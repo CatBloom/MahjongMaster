@@ -17,14 +17,14 @@ export class AddResultComponent implements OnInit, OnDestroy {
     playerName2: new FormControl('', [Validators.required]),
     playerName3: new FormControl('', [Validators.required]),
     playerName4: new FormControl('', [Validators.required]),
-    playerPoint1: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-]+$/)]),
-    playerPoint2: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-]+$/)]),
-    playerPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-]+$/)]),
-    playerPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-]+$/)]),
-    calcPoint1: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-\.]+$/)]),
-    calcPoint2: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-\.]+$/)]),
-    calcPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-\.]+$/)]),
-    calcPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-\.]+$/)]),
+    playerPoint1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+    playerPoint2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+    playerPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+    playerPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+    calcPoint1: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
+    calcPoint2: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
+    calcPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
+    calcPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
   });
 
   // 取得したルール
@@ -57,7 +57,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getRules();
+    // this.getRules();
     this.pointSubscriptions();
   }
 
@@ -66,7 +66,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   }
 
   private getRules() {
-    let leagueId = this.activeRoute.snapshot.paramMap.get('league-id');
+    const leagueId = this.activeRoute.snapshot.paramMap.get('league-id');
     if (!leagueId) {
       return;
     } else {
@@ -77,10 +77,10 @@ export class AddResultComponent implements OnInit, OnDestroy {
   }
 
   private pointCheck() {
-    let point1 = Number(this.formGroup.get('playerPoint1')!.value);
-    let point2 = Number(this.formGroup.get('playerPoint2')!.value);
-    let point3 = Number(this.formGroup.get('playerPoint3')!.value);
-    let point4 = Number(this.formGroup.get('playerPoint4')!.value);
+    const point1 = Number(this.formGroup.get('playerPoint1')?.value);
+    const point2 = Number(this.formGroup.get('playerPoint2')?.value);
+    const point3 = Number(this.formGroup.get('playerPoint3')?.value);
+    const point4 = Number(this.formGroup.get('playerPoint4')?.value);
     if (point1 + point2 + point3 + point4 === this.rules.inputStartPoint * 4) {
       console.log('ok');
       return true;
@@ -97,50 +97,50 @@ export class AddResultComponent implements OnInit, OnDestroy {
   private pointSubscriptions() {
     // player1の点数を変換
     this.subscriptions.add(
-      this.formGroup.get('playerPoint1')!.valueChanges.subscribe(() => {
-        let point: number = Number(this.formGroup.get('playerPoint1')!.value);
-        let topPrize = ((this.rules.inputReturnPoint - this.rules.inputStartPoint) * 4) / 1000;
-        let setPoint = this.calcPoint(point, this.rules.inputUma1) + topPrize;
+      this.formGroup.get('playerPoint1')?.valueChanges.subscribe(() => {
+        const point = Number(this.formGroup.get('playerPoint1')?.value);
+        const topPrize = ((this.rules.inputReturnPoint - this.rules.inputStartPoint) * 4) / 1000;
+        const setPoint = this.calcPoint(point, this.rules.inputUma1) + topPrize;
         if (isNaN(setPoint)) {
-          this.formGroup.get('calcPoint1')!.setValue('');
+          this.formGroup.get('calcPoint1')?.setValue('');
         } else {
-          this.formGroup.get('calcPoint1')!.setValue(setPoint);
+          this.formGroup.get('calcPoint1')?.setValue(setPoint);
         }
       })
     );
     // player2の点数を変換
     this.subscriptions.add(
-      this.formGroup.get('playerPoint2')!.valueChanges.subscribe(() => {
-        let point = Number(this.formGroup.get('playerPoint2')!.value);
-        let setPoint = this.calcPoint(point, this.rules.inputUma2);
+      this.formGroup.get('playerPoint2')?.valueChanges.subscribe(() => {
+        const point = Number(this.formGroup.get('playerPoint2')?.value);
+        const setPoint = this.calcPoint(point, this.rules.inputUma2);
         if (isNaN(setPoint)) {
-          this.formGroup.get('calcPoint2')!.setValue('');
+          this.formGroup.get('calcPoint2')?.setValue('');
         } else {
-          this.formGroup.get('calcPoint2')!.setValue(setPoint);
+          this.formGroup.get('calcPoint2')?.setValue(setPoint);
         }
       })
     );
     // player3の点数を変換
     this.subscriptions.add(
-      this.formGroup.get('playerPoint3')!.valueChanges.subscribe(() => {
-        let point = Number(this.formGroup.get('playerPoint3')!.value);
-        let setPoint = this.calcPoint(point, this.rules.inputUma3);
+      this.formGroup.get('playerPoint3')?.valueChanges.subscribe(() => {
+        const point = Number(this.formGroup.get('playerPoint3')?.value);
+        const setPoint = this.calcPoint(point, this.rules.inputUma3);
         if (isNaN(setPoint)) {
-          this.formGroup.get('calcPoint3')!.setValue('');
+          this.formGroup.get('calcPoint3')?.setValue('');
         } else {
-          this.formGroup.get('calcPoint3')!.setValue(setPoint);
+          this.formGroup.get('calcPoint3')?.setValue(setPoint);
         }
       })
     );
     // player4の点数を変換
     this.subscriptions.add(
-      this.formGroup.get('playerPoint4')!.valueChanges.subscribe(() => {
-        let point = Number(this.formGroup.get('playerPoint4')!.value);
-        let setPoint = this.calcPoint(point, this.rules.inputUma4);
+      this.formGroup.get('playerPoint4')?.valueChanges.subscribe(() => {
+        const point = Number(this.formGroup.get('playerPoint4')?.value);
+        const setPoint = this.calcPoint(point, this.rules.inputUma4);
         if (isNaN(setPoint)) {
-          this.formGroup.get('calcPoint4')!.setValue('');
+          this.formGroup.get('calcPoint4')?.setValue('');
         } else {
-          this.formGroup.get('calcPoint4')!.setValue(setPoint);
+          this.formGroup.get('calcPoint4')?.setValue(setPoint);
         }
       })
     );

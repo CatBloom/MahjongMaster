@@ -7,7 +7,7 @@ import { faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./league-list.component.scss'],
 })
 export class LeagueListComponent implements OnInit {
-  @Input('leagueList') leagueList!: string[];
+  @Input() leagueList!: string[];
 
   iconSquareCaretRight = faSquareCaretRight;
 

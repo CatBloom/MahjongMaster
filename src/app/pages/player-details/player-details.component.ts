@@ -7,9 +7,9 @@ import { PlayerResultWrapper } from '../../shared/interfaces/result';
   styleUrls: ['./player-details.component.scss'],
 })
 export class PlayerDetailsComponent implements OnInit {
-  playerName: string = '';
-  totalGame: number = 0;
-  totalPoint: number = 0;
+  playerName = '';
+  totalGame = 0;
+  totalPoint = 0;
   lineLabels: string[] = [];
   lineData: number[] = [];
   pieData: number[] = [];

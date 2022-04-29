@@ -7,7 +7,7 @@ import { Rules } from '../../interfaces/rules';
   styleUrls: ['./rule-list.component.scss'],
 })
 export class RuleListComponent implements OnInit {
-  @Input('rules') rules!: Rules;
+  @Input() rules!: Rules;
   constructor() {}
 
   ngOnInit(): void {}

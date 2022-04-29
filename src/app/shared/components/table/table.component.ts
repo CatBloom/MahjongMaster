@@ -16,8 +16,8 @@ import { PlayerResult, PlayerResultWrapper, LeagueResult } from '../../interface
   ],
 })
 export class TableComponent implements OnInit {
-  @Input('columns') columns!: string[];
-  @Input('results') results!: PlayerResultWrapper[] | LeagueResult[];
+  @Input() columns!: string[];
+  @Input() results!: PlayerResultWrapper[] | LeagueResult[];
   dataSource = [{}];
   columnsToDisplay: string[] = [];
   expandedElement?: PlayerResult | null;
