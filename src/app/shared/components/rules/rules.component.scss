@@ -5,6 +5,7 @@
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
+  text-align: left;
   &__title {
     font-size: 2rem;
     color: var.$subTitleFontColor;

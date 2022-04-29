@@ -16,14 +16,28 @@
                 <mat-radio-button value="custom">カスタムルール</mat-radio-button>
             </mat-radio-group>
         </div>
+
+        <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'mahjongsoulRules'">
+            <app-rules
+                [rulesRadioValue]="formGroup.get('rulesRadio')?.value"
+                (sendRules)="setRules($event)"
+            ></app-rules>
+        </ng-container>
+        <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'tenhouRules'">
+            <app-rules
+                [rulesRadioValue]="formGroup.get('rulesRadio')?.value"
+                (sendRules)="setRules($event)"
+            ></app-rules>
+        </ng-container>
+        <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'custom'">
+            <app-rules
+                [rulesRadioValue]="formGroup.get('rulesRadio')?.value"
+                (sendRules)="setRules($event)"
+            ></app-rules>
+        </ng-container>
+
+        <div class="league__button" (click)="openDialog()">
+            <app-button [buttonText]="'大会登録'"></app-button>
+        </div>
     </div>
-    <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'mahjongsoulRules'">
-        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
-    </ng-container>
-    <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'tenhouRules'">
-        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
-    </ng-container>
-    <ng-container *ngIf="formGroup.get('rulesRadio')?.value === 'custom'">
-        <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
-    </ng-container>
 </form>
