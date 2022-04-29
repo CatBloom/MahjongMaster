@@ -7,10 +7,10 @@ import { LeagueResult } from '../../shared/interfaces/result';
   styleUrls: ['./league-details.component.scss'],
 })
 export class LeagueDetailsComponent implements OnInit {
-  leagueName: string = '';
-  leagueAdminName: string = '';
-  leagueManual: string = '';
-  leagueTotalGame: number = 0;
+  leagueName = '';
+  leagueAdminName = '';
+  leagueManual = '';
+  leagueTotalGame = 0;
   leagueStartAt: Date = new Date();
   leagueFnishAt: Date = new Date();
   tableColumns: string[] = [];

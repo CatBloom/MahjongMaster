@@ -1,23 +1,25 @@
 <div class="player-name">
-    <p>{{ playerName }}</p>
+  <p>{{ playerName }}</p>
 </div>
 
 <div class="player-grid">
-    <div class="material grid-item__total-game">
-        <p class="player-grid__title">対戦回数</p>
-        <mat-divider></mat-divider>
-        <p class="player-grid__contents">{{ totalGame }}</p>
-    </div>
-    <div class="material grid-item__total-point">
-        <p class="player-grid__title">合計得点</p>
-        <mat-divider></mat-divider>
-        <p class="player-grid__contents">{{ totalPoint }}</p>
-    </div>
-    <div class="material grid-item__line">
-        <app-line-chart [lineLabels]="lineLabels" [lineData]="lineData"></app-line-chart>
-    </div>
-    <div class="material grid-item__pie">
-        <app-pie-chart [pieData]="pieData"></app-pie-chart>
-    </div>
-    <div class="material grid-item__table"><app-table [columns]="tableColumns" [results]="tableData"></app-table></div>
+  <div class="material grid-item__total-game">
+    <p class="player-grid__title">対戦回数</p>
+    <mat-divider></mat-divider>
+    <p class="player-grid__contents">{{ totalGame }}</p>
+  </div>
+  <div class="material grid-item__total-point">
+    <p class="player-grid__title">合計得点</p>
+    <mat-divider></mat-divider>
+    <p class="player-grid__contents">{{ totalPoint }}</p>
+  </div>
+  <div class="material grid-item__line">
+    <app-line-chart [lineLabels]="lineLabels" [lineData]="lineData"></app-line-chart>
+  </div>
+  <div class="material grid-item__pie">
+    <app-pie-chart [pieData]="pieData"></app-pie-chart>
+  </div>
+  <div class="material grid-item__table">
+    <app-table [columns]="tableColumns" [results]="tableData"></app-table>
+  </div>
 </div>

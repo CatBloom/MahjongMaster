@@ -8,7 +8,7 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit {
-  @Input('pieData') pieData!: number[];
+  @Input() pieData!: number[];
 
   // datasets
   public pieChartData: ChartConfiguration['data'] = {
@@ -46,13 +46,13 @@ export class PieChartComponent implements OnInit {
         },
         formatter: (value, ctx) => {
           if (ctx.chart.data.labels) {
-            let label = ctx.chart.data.labels[ctx.dataIndex];
+            const label = ctx.chart.data.labels[ctx.dataIndex];
             let sum = 0;
-            let dataArr = ctx.chart.data.datasets[0].data;
+            const dataArr = ctx.chart.data.datasets[0].data;
             dataArr.map((data) => {
               sum += Number(data);
             });
-            let percentage: string = ':' + ((value * 100) / sum).toFixed(1) + '%';
+            const percentage: string = ':' + ((value * 100) / sum).toFixed(1) + '%';
             return percentage ? label + percentage : label;
           }
         },
