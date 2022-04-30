@@ -27,6 +27,7 @@ import { LeagueDetailsComponent } from './pages/league-details/league-details.co
 import { ButtonComponent } from './shared/components/button/button.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayerListComponent } from './shared/components/player-list/player-list.component';
+import { PlayerListEditComponent } from './shared/components/player-list/player-list-edit/player-list-edit.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -55,6 +56,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     ButtonComponent,
     AddPlayerComponent,
     PlayerListComponent,
+    PlayerListEditComponent,
   ],
   imports: [
     BrowserModule,
