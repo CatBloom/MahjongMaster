@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PlayerList } from '../../../shared/interfaces/player';
 
 @Component({
   selector: 'app-player-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./player-list.component.scss'],
 })
 export class PlayerListComponent implements OnInit {
+  @Input() playerList!: PlayerList[];
+
   constructor() {}
 
   ngOnInit(): void {}
