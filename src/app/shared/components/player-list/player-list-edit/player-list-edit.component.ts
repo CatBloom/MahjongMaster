@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PlayerList } from '../../../../shared/interfaces/player';
+import { PlayerList } from '../../../interfaces/player';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-player-list-edit',
@@ -12,7 +13,7 @@ export class PlayerListEditComponent implements OnInit {
   isPlayerEdit = false;
   inputPlayer: FormControl = new FormControl();
 
-  constructor() {}
+  constructor(private playerSevice: PlayerService) {}
 
   ngOnInit(): void {}
 
@@ -21,10 +22,24 @@ export class PlayerListEditComponent implements OnInit {
     this.isPlayerEdit = true;
   }
 
+  onDeleteClick() {
+    const playerList: PlayerList = {
+      leagueId: this.playerList.leagueId,
+      playerId: this.playerList.playerId,
+      playerName: this.playerList.playerName,
+    };
+    this.playerSevice.deletePlayer(playerList);
+    this.isPlayerEdit = false;
+  }
+
   onSaveClick() {
     if (this.inputPlayer.value !== this.playerList.playerName) {
-      console.log(this.playerList.playerId);
-      console.log(this.inputPlayer.value);
+      const editData: PlayerList = {
+        leagueId: this.playerList.leagueId,
+        playerId: this.playerList.playerId,
+        playerName: this.inputPlayer.value,
+      };
+      this.playerSevice.updatePlayer(editData);
     }
     this.isPlayerEdit = false;
   }
