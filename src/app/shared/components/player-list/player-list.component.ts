@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlayerList } from '../../../shared/interfaces/player';
+import { PlayerDataset } from '../../../shared/interfaces/player';
 
 @Component({
   selector: 'app-player-list',
@@ -7,7 +7,7 @@ import { PlayerList } from '../../../shared/interfaces/player';
   styleUrls: ['./player-list.component.scss'],
 })
 export class PlayerListComponent implements OnInit {
-  @Input() playerList!: PlayerList[];
+  @Input() players!: PlayerDataset[];
 
   constructor() {}
 

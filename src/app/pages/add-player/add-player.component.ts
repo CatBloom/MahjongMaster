@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PlayerList } from 'src/app/shared/interfaces/player';
+import { PlayerDataset } from 'src/app/shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class AddPlayerComponent implements OnInit {
   formGroup = new FormGroup({
     playerName: new FormControl('', [Validators.required]),
   });
-  playerList: PlayerList[] = [];
-  // playerList$ = this.playerService.player$;
+  players: PlayerDataset[] = [];
+  // players$ = this.playerService.players$;
 
   constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}
 
@@ -28,7 +28,7 @@ export class AddPlayerComponent implements OnInit {
     // }
 
     // sampleData
-    this.playerList = [
+    this.players = [
       {
         leagueId: '01',
         playerId: '01',

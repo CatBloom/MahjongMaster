@@ -3,6 +3,6 @@ export interface Player {
   playerName: string;
 }
 
-export interface PlayerList extends Player {
+export interface PlayerDataset extends Player {
   playerId: string;
 }
