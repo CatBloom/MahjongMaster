@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { PlayerList } from 'src/app/shared/interfaces/player';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-add-player',
@@ -11,12 +13,21 @@ export class AddPlayerComponent implements OnInit {
   formGroup = new FormGroup({
     playerName: new FormControl('', [Validators.required]),
   });
-
   playerList: PlayerList[] = [];
+  // playerList$ = this.playerService.player$;
 
-  constructor() {}
+  constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    // apiからデータを取得
+    // const leagueId = this.activeRoute.snapshot.paramMap.get('league-id');
+    // if (!leagueId) {
+    //   return;
+    // } else {
+    //   this.playerService.getPlayerList(leagueId);
+    // }
+
+    // sampleData
     this.playerList = [
       {
         leagueId: '01',
