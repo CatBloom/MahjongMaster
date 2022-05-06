@@ -1,0 +1,5 @@
+<mat-list class="player-list">
+  <mat-list-item *ngFor="let player of players">
+    <app-player-list-edit class="player-edit-list" [player]="player"></app-player-list-edit>
+  </mat-list-item>
+</mat-list>

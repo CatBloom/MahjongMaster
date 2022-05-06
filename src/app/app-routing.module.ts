@@ -5,6 +5,7 @@ import { AddResultComponent } from './pages/add-result/add-result.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
+import { AddPlayerComponent } from './pages/add-player/add-player.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'player/:player-id', component: PlayerDetailsComponent },
   { path: 'admin/my-league/:admin-name', component: AdminMyLeagueComponent },
   { path: 'league/:league-id', component: LeagueDetailsComponent },
+  { path: 'league/add-player/:league-id', component: AddPlayerComponent },
 ];
 
 @NgModule({
