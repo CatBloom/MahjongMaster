@@ -1,0 +1,6 @@
+@use 'variable' as var;
+
+@mixin title {
+  color: var.$titleFontColor;
+  margin-top: 2rem;
+}
