@@ -55,6 +55,30 @@ export class LeagueDetailsComponent implements OnInit {
         totalCalcPoint: 200.5,
         date: new Date('Sat Apr 30 2022 22:00:00 GMT+0900 (日本標準時)'),
       },
+      {
+        rank: '2位',
+        playerId: '02',
+        playerName: 'sample02',
+        totalGameCount: 34,
+        totalCalcPoint: 190.5,
+        date: new Date('Sat Apr 30 2022 22:00:00 GMT+0900 (日本標準時)'),
+      },
+      {
+        rank: '3位',
+        playerId: '03',
+        playerName: 'sample03',
+        totalGameCount: 34,
+        totalCalcPoint: -15,
+        date: new Date('Sat Apr 30 2022 22:00:00 GMT+0900 (日本標準時)'),
+      },
+      {
+        rank: '4位',
+        playerId: '04',
+        playerName: 'sample04',
+        totalGameCount: 34,
+        totalCalcPoint: -100,
+        date: new Date('Sat Apr 30 2022 22:00:00 GMT+0900 (日本標準時)'),
+      },
     ];
     this.rules = {
       radioGame: '2',
