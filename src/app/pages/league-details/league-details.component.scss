@@ -7,79 +7,37 @@
 }
 
 .league-name {
+  display: flex;
+  justify-content: space-between;
   color: var.$titleFontColor;
   margin-top: 2rem;
   font-size: 2.5rem;
 }
 
-.league-grid {
-  display: grid;
-  width: 100%;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 10rem 10rem 10rem;
-
-  p {
-    margin: 0;
+.league-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  &__button {
+    width: 20rem;
   }
+}
 
+.league-details {
+  margin-top: 2rem;
   &__title {
+    color: var.$subTitleFontColor;
     font-size: 2rem;
-    text-align: center;
   }
-  &__contents {
-    font-size: 3rem;
-    text-align: center;
-    height: 8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &--manual {
-      font-size: 2rem;
-    }
-
-    &--date {
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  &__content {
+    font-size: 1.5rem;
   }
+}
+
+.league-table {
+  margin-top: 4rem;
 }
 
 .material {
   @include material();
-}
-
-.grid-item {
-  &__league-manual {
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
-  }
-
-  &__league-admin-name {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-  }
-
-  &__league-total-game {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-  }
-
-  &__league-date {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-  }
-
-  &__table {
-    grid-column: 1 / 4;
-    grid-row: 3 / 4;
-  }
-
-  &__rules {
-    grid-column: 1 / 4;
-    grid-row: 4 / 5;
-  }
 }
