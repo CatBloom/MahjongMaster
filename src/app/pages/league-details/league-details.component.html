@@ -2,38 +2,17 @@
   <p>{{ leagueName }}</p>
 </div>
 
-<div class="league-grid">
-  <div class="material grid-item__league-manual">
-    <p class="league-grid__title">大会説明</p>
-    <mat-divider></mat-divider>
-    <p class="league-grid__contents--manual">{{ leagueManual }}</p>
-  </div>
-  <div class="grid-item__buttons">
-    <app-button [buttonText]="'Player登録'"></app-button>
-    <app-button [buttonText]="'成績登録'"></app-button>
-  </div>
-  <div class="material grid-item__league-admin-name">
-    <p class="league-grid__title">大会管理者</p>
-    <mat-divider></mat-divider>
-    <p class="league-grid__contents">{{ leagueAdminName }}</p>
-  </div>
-  <div class="material grid-item__league-total-game">
-    <p class="league-grid__title">総合対戦回数</p>
-    <mat-divider></mat-divider>
-    <p class="league-grid__contents">{{ leagueTotalGame }}</p>
-  </div>
-  <div class="material grid-item__league-date">
-    <p class="league-grid__title">大会期間</p>
-    <mat-divider></mat-divider>
-    <p class="league-grid__contents--date">
-      {{ leagueStartAt | date: 'yyyy/MM/dd HH:mm' }}
-    </p>
-    <p class="league-grid__contents--date">~</p>
-    <p class="league-grid__contents--date">
-      {{ leagueFnishAt | date: 'yyyy/MM/dd HH:mm' }}
-    </p>
-  </div>
-  <div class="material grid-item__table">
-    <app-table [columns]="tableColumns" [results]="tableData"></app-table>
-  </div>
+<div class="league">
+  <p class="league__title">大会期間</p>
+  <mat-divider></mat-divider>
+  <p class="league__content">
+    {{ leagueStartAt | date: 'yyyy/MM/dd HH:mm' }} ~
+    {{ leagueFnishAt | date: 'yyyy/MM/dd HH:mm' }}
+  </p>
+  <p class="league__title">大会説明</p>
+  <mat-divider></mat-divider>
+  <p class="league__content">{{ leagueManual }}</p>
+</div>
+<div class="material league-table">
+  <app-table [columns]="tableColumns" [results]="tableData"></app-table>
 </div>
