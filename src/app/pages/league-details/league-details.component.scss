@@ -17,7 +17,7 @@
   width: 100%;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 10rem 10rem 10rem;
+  grid-template-rows: 10rem 10rem;
 
   p {
     margin: 0;
@@ -76,10 +76,5 @@
   &__table {
     grid-column: 1 / 4;
     grid-row: 3 / 4;
-  }
-
-  &__rules {
-    grid-column: 1 / 4;
-    grid-row: 4 / 5;
   }
 }
