@@ -14,7 +14,16 @@
   font-size: 2.5rem;
 }
 
-.league {
+.league-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  &__button {
+    width: 20rem;
+  }
+}
+
+.league-details {
   margin-top: 2rem;
   &__title {
     color: var.$subTitleFontColor;

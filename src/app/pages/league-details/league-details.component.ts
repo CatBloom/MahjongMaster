@@ -7,6 +7,7 @@ import { LeagueResult } from '../../shared/interfaces/result';
   styleUrls: ['./league-details.component.scss'],
 })
 export class LeagueDetailsComponent implements OnInit {
+  leagueId = '';
   leagueName = '';
   leagueAdminName = '';
   leagueManual = '';
@@ -39,6 +40,7 @@ export class LeagueDetailsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    this.leagueId = '01';
     this.leagueName = 'catBloomLeague';
     this.leagueAdminName = 'catBloom';
     this.leagueTotalGame = 200;

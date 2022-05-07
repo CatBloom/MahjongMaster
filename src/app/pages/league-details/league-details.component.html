@@ -2,27 +2,40 @@
   <p>{{ leagueName }}</p>
 </div>
 
-<div class="league">
-  <p class="league__title">大会期間</p>
+<ng-container>
+  <div class="league-buttons">
+    <button
+      class="league-buttons__button"
+      mat-stroked-button
+      color="accent"
+      routerLink="/league/add-player/{{ leagueId }}"
+    >
+      プレイヤー追加
+    </button>
+    <button class="league-buttons__button" mat-stroked-button color="accent" routerLink="/add-result/{{ leagueId }}">
+      成績追加
+    </button>
+  </div>
+</ng-container>
+
+<div class="league-details">
+  <p class="league-details__title">大会期間</p>
   <mat-divider></mat-divider>
-  <p class="league__content">
+  <p class="league-details__content">
     {{ leagueStartAt | date: 'yyyy/MM/dd HH:mm' }} ~
     {{ leagueFnishAt | date: 'yyyy/MM/dd HH:mm' }}
   </p>
-  <p class="league__title">大会説明</p>
+  <p class="league-details__title">大会説明</p>
   <mat-divider></mat-divider>
-  <p class="league__content">{{ leagueManual }}</p>
-
-  <div class="league-rules-toggle">
-    <p class="league__title">
-      ルール
-      <mat-slide-toggle (change)="isRules = isRules === false ? true : false"></mat-slide-toggle>
-    </p>
-    <mat-divider></mat-divider>
-    <ng-container *ngIf="isRules">
-      <app-rule-list [rules]="rules"></app-rule-list>
-    </ng-container>
-  </div>
+  <p class="league-details__content">{{ leagueManual }}</p>
+  <p class="league-details__title">
+    ルール
+    <mat-slide-toggle (change)="isRules = isRules === false ? true : false"></mat-slide-toggle>
+  </p>
+  <mat-divider></mat-divider>
+  <ng-container *ngIf="isRules">
+    <app-rule-list [rules]="rules"></app-rule-list>
+  </ng-container>
 </div>
 <div class="material league-table">
   <app-table [columns]="tableColumns" [results]="tableData"></app-table>
