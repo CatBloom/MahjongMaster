@@ -1,4 +1,5 @@
 @use 'variable' as var;
+@use 'mixin' as mixin;
 @use '@angular/material' as mat;
 
 @mixin material {
@@ -6,16 +7,11 @@
   border-radius: 0.5rem;
 }
 
-.league-name {
-  display: flex;
-  justify-content: space-between;
-  color: var.$titleFontColor;
-  margin-top: 2rem;
-  font-size: 2.5rem;
+h2 {
+  @include mixin.title;
 }
 
 .league-buttons {
-  margin-top: 2rem;
   display: flex;
   gap: 0.5rem;
   &__button {

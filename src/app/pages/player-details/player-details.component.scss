@@ -1,9 +1,14 @@
 @use 'variable' as var;
+@use 'mixin' as mixin;
 @use '@angular/material' as mat;
 
 @mixin material {
   @include mat.elevation(2);
   border-radius: 0.5rem;
+}
+
+h2 {
+  @include mixin.title;
 }
 
 .player-name {
