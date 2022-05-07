@@ -1,0 +1,12 @@
+@use 'variable' as var;
+@use '@angular/material' as mat;
+
+@mixin title {
+  color: var.$titleFontColor;
+  margin-top: 2rem;
+}
+
+@mixin material {
+  @include mat.elevation(2);
+  border-radius: 0.5rem;
+}

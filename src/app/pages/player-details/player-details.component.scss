@@ -1,9 +1,8 @@
 @use 'variable' as var;
-@use '@angular/material' as mat;
+@use 'mixin' as mixin;
 
-@mixin material {
-  @include mat.elevation(2);
-  border-radius: 0.5rem;
+h2 {
+  @include mixin.title;
 }
 
 .player-name {
@@ -35,7 +34,7 @@
 }
 
 .material {
-  @include material();
+  @include mixin.material;
 }
 
 .grid-item {

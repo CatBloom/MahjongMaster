@@ -1,8 +1,8 @@
 @use 'variable' as var;
+@use 'mixin' as mixin;
 
 h2 {
-  margin-top: 2rem;
-  color: var.$titleFontColor;
+  @include mixin.title;
 }
 
 .result {

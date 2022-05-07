@@ -1,21 +1,11 @@
 @use 'variable' as var;
-@use '@angular/material' as mat;
+@use 'mixin' as mixin;
 
-@mixin material {
-  @include mat.elevation(2);
-  border-radius: 0.5rem;
-}
-
-.league-name {
-  display: flex;
-  justify-content: space-between;
-  color: var.$titleFontColor;
-  margin-top: 2rem;
-  font-size: 2.5rem;
+h2 {
+  @include mixin.title;
 }
 
 .league-buttons {
-  margin-top: 2rem;
   display: flex;
   gap: 0.5rem;
   &__button {
@@ -39,5 +29,5 @@
 }
 
 .material {
-  @include material();
+  @include mixin.material;
 }
