@@ -1,29 +1,18 @@
 @use 'variable' as var;
 
 .league-list {
-  padding: 0;
-
-  li {
-    margin-top: 2rem;
+  .league-list-item {
     list-style-type: none;
-    line-height: 5vh;
-    font-weight: bold;
     font-size: 2rem;
 
     a {
       text-decoration: none;
-      display: block;
-      color: var.$accent;
-      border-radius: 4px;
-
-      &:hover {
-        color: var.$hoverFontColor;
-        background-color: var.$accent;
-      }
-
-      span {
-        margin-left: 1rem;
-      }
+      color: var.$normalFontColor;
+      font-size: 2rem;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
     }
   }
 }

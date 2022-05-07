@@ -1,8 +1,9 @@
-<ul class="league-list">
-  <li *ngFor="let league of leagueList">
-    <a routerLink="/{{ league }}">
-      <fa-icon [icon]="iconSquareCaretRight"></fa-icon>
-      <span>{{ league }}</span>
+<mat-list class="league-list">
+  <mat-list-item class="league-list-item" *ngFor="let league of leagueList">
+    <a routerLink="/league/{{ league.leagueId }}">
+      <mat-icon>login</mat-icon>
+      {{ league.leagueName }}
     </a>
-  </li>
-</ul>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
