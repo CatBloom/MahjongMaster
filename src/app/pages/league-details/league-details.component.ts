@@ -15,6 +15,7 @@ export class LeagueDetailsComponent implements OnInit {
   leagueFnishAt: Date = new Date();
   tableColumns: string[] = [];
   tableData: LeagueResult[] = [];
+  isRules = false;
   rules: Rules = {
     radioGame: '',
     radioDora: '',
