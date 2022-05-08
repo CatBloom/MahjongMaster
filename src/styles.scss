@@ -1,4 +1,7 @@
+// MaterialTheme
 @use 'material-custom';
+// Datepicker用のCSS
+@import '~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css';
 
 html {
   font-size: 62.5%;
