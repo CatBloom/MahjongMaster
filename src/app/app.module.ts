@@ -35,6 +35,7 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
 
 // pipes
 import { JapanesePipe } from './shared/pipes/japanese.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
