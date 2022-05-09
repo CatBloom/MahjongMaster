@@ -23,7 +23,7 @@ import { TableComponent } from './shared/components/table/table.component';
 import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
 import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
-import { LeagueListComponent } from './shared/components/league-list/league-list.component';
+import { LeagueListComponent } from './pages/shared/components/league-list/league-list.component';
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';

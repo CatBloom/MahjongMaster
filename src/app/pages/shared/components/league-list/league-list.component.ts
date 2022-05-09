@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LeagueDataset } from '../../interfaces/league';
+import { LeagueDataset } from '../../../../shared/interfaces/league';
 
 @Component({
   selector: 'app-league-list',
