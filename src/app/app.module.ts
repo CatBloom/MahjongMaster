@@ -21,7 +21,7 @@ import { RuleListComponent } from './pages/shared/components/rule-list/rule-list
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
 import { TableComponent } from './pages/shared/components/table/table.component';
 import { PieChartComponent } from './pages/shared/components/pie-chart/pie-chart.component';
-import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
+import { LineChartComponent } from './pages/shared/components/line-chart/line-chart.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
 import { LeagueListComponent } from './pages/shared/components/league-list/league-list.component';
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
