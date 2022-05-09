@@ -9,6 +9,23 @@
       <mat-label>大会説明</mat-label>
       <textarea matInput placeholder="" value="" formControlName="leagueManual" maxlength="100"></textarea>
     </mat-form-field>
+    <mat-form-field class="league__input" appearance="outline">
+      <mat-label>大会期間</mat-label>
+      <!-- 整形データを表示するため非表示 -->
+      <ng-container>
+        <input
+          matInput
+          style="display: none"
+          [owlDateTime]="dt1"
+          [selectMode]="'range'"
+          formControlName="leagueDate"
+          readonly
+      /></ng-container>
+      <!-- 整形データ -->
+      <input matInput readonly formControlName="leagueDisplayDate" />
+      <mat-datepicker-toggle matSuffix [owlDateTimeTrigger]="dt1"></mat-datepicker-toggle>
+      <owl-date-time [pickerMode]="'dialog'" [hour12Timer]="true" #dt1></owl-date-time>
+    </mat-form-field>
     <div class="league__radio">
       <mat-radio-group formControlName="rulesRadio">
         <mat-radio-button value="mahjongsoulRules">雀魂公式ルール</mat-radio-button>
