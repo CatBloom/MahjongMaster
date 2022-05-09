@@ -16,7 +16,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { AddLeagueComponent } from './pages/add-league/add-league.component';
 import { AddLeagueDialogComponent } from './pages/add-league/add-league-dialog/add-league-dialog.component';
 import { AddResultComponent } from './pages/add-result/add-result.component';
-import { RulesComponent } from './shared/components/rules/rules.component';
+import { RulesComponent } from './pages/shared/components/rules/rules.component';
 import { RuleListComponent } from './pages/shared/components/rule-list/rule-list.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
 import { TableComponent } from './shared/components/table/table.component';
