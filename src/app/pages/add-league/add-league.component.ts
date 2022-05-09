@@ -83,6 +83,8 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     const newLeague: LeagueDialog = {
       leagueName: this.formGroup.get('leagueName')?.value,
       leagueManual: this.formGroup.get('leagueManual')?.value,
+      leagueStartDate: this.formGroup.get('leagueDate')?.value[0],
+      leagueFinishDate: this.formGroup.get('leagueDate')?.value[1],
       rules: this.rules,
     };
 
