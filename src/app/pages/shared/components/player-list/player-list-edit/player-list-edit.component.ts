@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PlayerDataset } from '../../../interfaces/player';
+import { PlayerDataset } from '../../../../../shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({

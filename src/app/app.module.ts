@@ -27,8 +27,8 @@ import { LeagueListComponent } from './pages/shared/components/league-list/leagu
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';
-import { PlayerListComponent } from './shared/components/player-list/player-list.component';
-import { PlayerListEditComponent } from './shared/components/player-list/player-list-edit/player-list-edit.component';
+import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
+import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
