@@ -19,7 +19,7 @@ import { AddResultComponent } from './pages/add-result/add-result.component';
 import { RulesComponent } from './pages/shared/components/rules/rules.component';
 import { RuleListComponent } from './pages/shared/components/rule-list/rule-list.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
-import { TableComponent } from './shared/components/table/table.component';
+import { TableComponent } from './pages/shared/components/table/table.component';
 import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
 import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
