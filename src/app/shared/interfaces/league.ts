@@ -3,6 +3,8 @@ import { Rules } from '../interfaces/rules';
 export interface League {
   leagueName: string;
   leagueManual?: string;
+  leagueStartDate?: Date;
+  leagueFinishDate?: Date;
 }
 export interface LeagueDataset extends League {
   leagueId: string;
@@ -10,5 +12,7 @@ export interface LeagueDataset extends League {
 export interface LeagueDialog {
   leagueName: string;
   leagueManual: string;
+  leagueStartDate: Date;
+  leagueFinishDate: Date;
   rules: Rules;
 }
