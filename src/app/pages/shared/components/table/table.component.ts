@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { PlayerResult, PlayerResultWrapper, LeagueResult } from '../../interfaces/result';
+import { PlayerResult, PlayerResultWrapper, LeagueResult } from '../../../../shared/interfaces/result';
 
 @Component({
   selector: 'app-table',

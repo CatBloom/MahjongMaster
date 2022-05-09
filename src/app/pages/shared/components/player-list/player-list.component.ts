@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlayerDataset } from '../../../shared/interfaces/player';
+import { PlayerDataset } from '../../../../shared/interfaces/player';
 
 @Component({
   selector: 'app-player-list',

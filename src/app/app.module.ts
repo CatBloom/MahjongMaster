@@ -16,19 +16,19 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { AddLeagueComponent } from './pages/add-league/add-league.component';
 import { AddLeagueDialogComponent } from './pages/add-league/add-league-dialog/add-league-dialog.component';
 import { AddResultComponent } from './pages/add-result/add-result.component';
-import { RulesComponent } from './shared/components/rules/rules.component';
-import { RuleListComponent } from './shared/components/rule-list/rule-list.component';
+import { RulesComponent } from './pages/shared/components/rules/rules.component';
+import { RuleListComponent } from './pages/shared/components/rule-list/rule-list.component';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
-import { TableComponent } from './shared/components/table/table.component';
-import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
-import { LineChartComponent } from './shared/components/line-chart/line-chart.component';
+import { TableComponent } from './pages/shared/components/table/table.component';
+import { PieChartComponent } from './pages/shared/components/pie-chart/pie-chart.component';
+import { LineChartComponent } from './pages/shared/components/line-chart/line-chart.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
-import { LeagueListComponent } from './shared/components/league-list/league-list.component';
+import { LeagueListComponent } from './pages/shared/components/league-list/league-list.component';
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';
-import { PlayerListComponent } from './shared/components/player-list/player-list.component';
-import { PlayerListEditComponent } from './shared/components/player-list/player-list-edit/player-list-edit.component';
+import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
+import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';

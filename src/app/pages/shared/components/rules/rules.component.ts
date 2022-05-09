@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Rules } from '../../interfaces/rules';
+import { Rules } from '../../../../shared/interfaces/rules';
+
 @Component({
   selector: 'app-rules',
   templateUrl: './rules.component.html',
