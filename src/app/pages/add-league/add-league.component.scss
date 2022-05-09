@@ -24,3 +24,8 @@ h2 {
     min-height: 10rem;
   }
 }
+
+// DatePicker用のstyle
+::ng-deep .owl-dt-container {
+  font-size: 1.5rem;
+}

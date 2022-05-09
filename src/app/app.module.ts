@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 
 // components
 import { AppComponent } from './app.component';
@@ -34,6 +35,7 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
 
 // pipes
 import { JapanesePipe } from './shared/pipes/japanese.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -68,8 +70,10 @@ import { JapanesePipe } from './shared/pipes/japanese.pipe';
     MaterialModule,
     NgChartsModule,
     FontAwesomeModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

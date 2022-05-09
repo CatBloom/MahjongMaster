@@ -17,6 +17,20 @@
       </mat-list-item>
       <mat-divider></mat-divider>
     </ng-container>
+    <ng-container *ngIf="data.leagueStartDate">
+      <mat-list-item>
+        <mat-label>大会開始日</mat-label>
+        {{ data.leagueStartDate | date: 'yyyy/MM/dd HH:mm ' }}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+    <ng-container *ngIf="data.leagueFinishDate">
+      <mat-list-item>
+        <mat-label>大会終了日</mat-label>
+        {{ data.leagueFinishDate | date: 'yyyy/MM/dd HH:mm' }}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
   </mat-list>
   <mat-label>ルール</mat-label>
   <app-rule-list [rules]="data.rules"></app-rule-list>
