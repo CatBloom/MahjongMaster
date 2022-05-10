@@ -2,35 +2,20 @@
 
 .table {
   width: 100%;
-
   &__header {
-    font-size: 2rem;
-    font-weight: 100;
-    width: 20%;
+    font-size: 1.5rem;
   }
-
   &__cell {
     a {
       color: var.$normalFontColor;
     }
   }
-
   &__element-row {
-    &:not(.expanded-row):hover {
+    &:hover {
       background: whitesmoke;
     }
-    &:not(.expanded-row):active {
+    &:active {
       background: #efefef;
     }
-    td {
-      border-bottom-width: 0;
-    }
-  }
-  &__detail {
-    overflow: hidden;
-    display: flex;
-  }
-  &__detail-row {
-    height: 0;
   }
 }

@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="table">
+<table mat-table [dataSource]="dataSource" class="table">
   <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
     <th class="table__header" mat-header-cell *matHeaderCellDef>
       {{ column | japanese }}
@@ -9,32 +9,12 @@
       </ng-container>
     </td>
   </ng-container>
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="table__detail" [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
-        <ng-container *ngIf="element.resultData">
-          <div>
-            {{ element.resultData[0].rank }}-{{ element.resultData[0].point }}{{ element.resultData[1].rank }}-{{
-              element.resultData[1].point
-            }}
-          </div>
-          <div>
-            {{ element.resultData[2].rank }}-{{ element.resultData[2].point }}{{ element.resultData[3].rank }}-{{
-              element.resultData[3].point
-            }}
-          </div>
-        </ng-container>
-      </div>
-    </td>
-  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr
     mat-row
     *matRowDef="let element; columns: columnsToDisplay"
     class="table__element-row"
-    [class.expanded-row]="expandedElement === element"
-    (click)="expandedElement = expandedElement === element ? null : element"
     (click)="element.playerId ? goPlayerResult(element.playerId) : null"
   ></tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table__detail-row"></tr>
 </table>
