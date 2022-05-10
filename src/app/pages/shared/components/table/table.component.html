@@ -9,12 +9,11 @@
       </ng-container>
     </td>
   </ng-container>
-
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr
     mat-row
     *matRowDef="let element; columns: columnsToDisplay"
     class="table__element-row"
-    (click)="element.playerId ? goPlayerResult(element.playerId) : null"
+    (click)="clickOption === 'playerLink' ? goPlayerResult(element.playerId) : null"
   ></tr>
 </table>
