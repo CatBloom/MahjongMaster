@@ -10,6 +10,8 @@ import { PlayerResultWrapper, LeagueResult } from '../../../../shared/interfaces
 export class TableComponent implements OnInit {
   @Input() columns!: string[];
   @Input() results!: PlayerResultWrapper[] | LeagueResult[];
+  @Input() clickOption?: 'playerLink' | 'select';
+
   dataSource = [{}];
   columnsToDisplay: string[] = [];
 
