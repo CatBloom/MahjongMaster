@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Rules } from '../../shared/interfaces/rules';
+import { PlayerDataset } from '../../shared/interfaces/player';
 import { RulesService } from '../../shared/services/rules.service';
 import { ResultService } from '../../shared/services/result.service';
 
@@ -26,6 +27,8 @@ export class AddResultComponent implements OnInit, OnDestroy {
     calcPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
     calcPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
   });
+
+  players: PlayerDataset[] = [];
 
   // 取得したルール
   rules: Rules = {
@@ -59,6 +62,30 @@ export class AddResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.getRules();
     this.pointSubscriptions();
+
+    // sampleData
+    this.players = [
+      {
+        leagueId: '01',
+        playerId: '01',
+        playerName: 'catBloom',
+      },
+      {
+        leagueId: '01',
+        playerId: '02',
+        playerName: 'sample02',
+      },
+      {
+        leagueId: '01',
+        playerId: '03',
+        playerName: 'sample03',
+      },
+      {
+        leagueId: '01',
+        playerId: '04',
+        playerName: 'sample04',
+      },
+    ];
   }
 
   ngOnDestroy(): void {

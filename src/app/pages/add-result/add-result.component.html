@@ -8,7 +8,11 @@
       <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName1" />
+          <mat-select formControlName="playerName1">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="result-grid__point">
@@ -30,7 +34,11 @@
       <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName2" />
+          <mat-select formControlName="playerName2">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="result-grid__point">
@@ -52,7 +60,11 @@
       <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName3" />
+          <mat-select formControlName="playerName3">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="result-grid__point">
@@ -74,7 +86,11 @@
       <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName4" />
+          <mat-select formControlName="playerName4">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="result-grid__point">
