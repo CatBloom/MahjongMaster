@@ -6,16 +6,14 @@ h2 {
 }
 
 .result {
+  width: 50%;
+  margin: auto;
   .result-grid {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 2rem;
-
     &__rank {
-      display: flex;
-      align-items: center;
-      min-width: 3rem;
       grid-column: 1 / 4;
       grid-row: 1 / 2;
     }
@@ -51,4 +49,10 @@ h2 {
 :host ::ng-deep .mat-form-field-wrapper {
   margin: 0 !important;
   padding: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .result {
+    width: 100%;
+  }
 }
