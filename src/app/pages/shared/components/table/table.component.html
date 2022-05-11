@@ -9,9 +9,35 @@
       *matCellDef="let element"
       [ngClass]="{ selectedColor: selection.isSelected(element) }"
     >
-      <ng-container>
-        {{ column === 'date' ? (element[column] | date: 'yyyy/MM/dd HH:mm') : element[column] }}
+      <ng-container *ngIf="column === 'result'; else elseContent" class="table-row-container">
+        <div class="table-row-container__content">
+          <div class="item">
+            <span>1位:</span
+            ><a routerLink="/player/{{ element.resultData[0].playerId }}">{{ element.resultData[0].playerName }}</a
+            >/{{ element.resultData[0].point }}/{{ element.resultData[0].calcPoint }}
+          </div>
+          <div class="item">
+            <span>2位:</span
+            ><a routerLink="/player/{{ element.resultData[1].playerId }}">{{ element.resultData[1].playerName }}</a
+            >/{{ element.resultData[1].point }}/{{ element.resultData[1].calcPoint }}
+          </div>
+        </div>
+        <div class="table-row-container__content">
+          <div class="item">
+            <span>3位:</span
+            ><a routerLink="/player/{{ element.resultData[2].playerId }}">{{ element.resultData[2].playerName }}</a
+            >/{{ element.resultData[2].point }}/{{ element.resultData[2].calcPoint }}
+          </div>
+          <div class="item">
+            <span>4位:</span
+            ><a routerLink="/player/{{ element.resultData[3].playerId }}">{{ element.resultData[3].playerName }}</a
+            >/{{ element.resultData[3].point }}/{{ element.resultData[3].calcPoint }}
+          </div>
+        </div>
       </ng-container>
+      <ng-template #elseContent>
+        {{ column === 'date' ? (element[column] | date: 'yyyy/MM/dd HH:mm') : element[column] }}
+      </ng-template>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

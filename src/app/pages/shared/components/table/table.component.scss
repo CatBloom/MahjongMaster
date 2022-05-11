@@ -19,6 +19,19 @@
     }
   }
 }
+
+.table-row-container {
+  display: flex;
+}
+.item {
+  display: inline-block;
+  min-width: 20rem;
+  a {
+    color: var.$primary;
+    text-decoration: none;
+  }
+}
+
 .mat-row.selectedBackground {
   background: var.$accent;
 }
