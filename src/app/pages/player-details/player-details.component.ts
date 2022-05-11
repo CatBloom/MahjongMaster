@@ -35,7 +35,7 @@ export class PlayerDetailsComponent implements OnInit {
     ];
     this.lineData = [1, 1, 3, 2, 4, 2, 3, 1, 4, 4];
     this.pieData = [10, 9, 8, 7];
-    this.tableColumns = ['result', 'date'];
+    this.tableColumns = ['rank', 'result', 'createDate'];
     this.tableData = [
       {
         rank: 1,
@@ -44,7 +44,7 @@ export class PlayerDetailsComponent implements OnInit {
         playerName: 'catBloom',
         point: 40000,
         calcPoint: 40,
-        date: new Date('Sat Apr 02 2022 22:00:00 GMT+0900 (日本標準時)'),
+        createDate: new Date('Sat Apr 02 2022 22:00:00 GMT+0900 (日本標準時)'),
         group: 1,
         resultData: [
           {
@@ -54,7 +54,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'catBloom',
             point: 40000,
             calcPoint: 40,
-            date: new Date('2020/02/02'),
+            createDate: new Date('2020/02/02'),
             group: 1,
           },
           {
@@ -64,7 +64,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'sample02',
             point: 30000,
             calcPoint: 30,
-            date: new Date('2020/02/02'),
+            createDate: new Date('2020/02/02'),
             group: 1,
           },
           {
@@ -74,7 +74,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'sample03',
             point: 20000,
             calcPoint: 20,
-            date: new Date('2020/02/02'),
+            createDate: new Date('2020/02/02'),
             group: 1,
           },
           {
@@ -84,7 +84,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'sample04',
             point: 10000,
             calcPoint: 10,
-            date: new Date('2020/02/02'),
+            createDate: new Date('2020/02/02'),
             group: 1,
           },
         ],
@@ -96,7 +96,7 @@ export class PlayerDetailsComponent implements OnInit {
         playerName: 'catBloom',
         point: 20000,
         calcPoint: 30,
-        date: new Date('Sat Apr 02 2022 23:00:00 GMT+0900 (日本標準時)'),
+        createDate: new Date('Sat Apr 02 2022 23:00:00 GMT+0900 (日本標準時)'),
         group: 2,
         resultData: [
           {
@@ -106,7 +106,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'sample04',
             point: 60000,
             calcPoint: 40,
-            date: new Date('2020/02/03'),
+            createDate: new Date('2020/02/03'),
             group: 2,
           },
           {
@@ -116,7 +116,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'catBloom',
             point: 25000,
             calcPoint: 30,
-            date: new Date('2020/02/03'),
+            createDate: new Date('2020/02/03'),
             group: 2,
           },
           {
@@ -126,7 +126,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'sample03',
             point: 20000,
             calcPoint: 20,
-            date: new Date('2020/02/03'),
+            createDate: new Date('2020/02/03'),
             group: 2,
           },
           {
@@ -136,7 +136,7 @@ export class PlayerDetailsComponent implements OnInit {
             playerName: 'sample02',
             point: -5000,
             calcPoint: 10,
-            date: new Date('2020/02/03'),
+            createDate: new Date('2020/02/03'),
             group: 2,
           },
         ],

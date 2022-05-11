@@ -20,7 +20,7 @@ export interface PlayerResult {
   playerName: string;
   point: number;
   calcPoint: number;
-  date: Date;
+  createDate: Date;
   group: number;
 }
 export interface PlayerResultWrapper extends PlayerResult {

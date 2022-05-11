@@ -13,7 +13,9 @@
         <app-table-result-row [result]="element"></app-table-result-row>
       </ng-container>
       <ng-template #elseContent>
-        {{ column === 'date' ? (element[column] | date: 'yyyy/MM/dd HH:mm') : element[column] }}
+        {{
+          column === 'date' || column === 'createDate' ? (element[column] | date: 'yyyy/MM/dd HH:mm') : element[column]
+        }}
       </ng-template>
     </td>
   </ng-container>
