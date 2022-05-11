@@ -1,26 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { PlayerResult, PlayerResultWrapper, LeagueResult } from '../../../../shared/interfaces/result';
+import { PlayerResultWrapper, LeagueResult } from '../../../../shared/interfaces/result';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
 })
 export class TableComponent implements OnInit {
   @Input() columns!: string[];
   @Input() results!: PlayerResultWrapper[] | LeagueResult[];
+  @Input() clickOption?: 'playerLink' | 'select';
+  @Output() clickEvent = new EventEmitter<PlayerResultWrapper>();
+
+  selection = new SelectionModel<PlayerResultWrapper>(false);
+
   dataSource = [{}];
   columnsToDisplay: string[] = [];
-  expandedElement?: PlayerResult | null;
 
   constructor(private router: Router) {}
 
@@ -31,5 +28,10 @@ export class TableComponent implements OnInit {
 
   goPlayerResult(playerId: string) {
     this.router.navigateByUrl(`/player/${playerId}`);
+  }
+
+  clickRow(element: PlayerResultWrapper) {
+    this.selection.select(element);
+    this.clickEvent.emit(element);
   }
 }

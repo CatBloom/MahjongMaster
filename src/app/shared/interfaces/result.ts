@@ -14,10 +14,13 @@ export interface Result {
 }
 
 export interface PlayerResult {
-  rank: string;
+  rank: number;
+  leagueId: string;
+  playerId: string;
+  playerName: string;
   point: number;
   calcPoint: number;
-  date: Date;
+  createDate: Date;
   group: number;
 }
 export interface PlayerResultWrapper extends PlayerResult {
