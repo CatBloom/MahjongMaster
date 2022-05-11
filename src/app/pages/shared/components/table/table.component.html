@@ -3,7 +3,12 @@
     <th class="table__header" mat-header-cell *matHeaderCellDef>
       {{ column | japanese }}
     </th>
-    <td class="table__cell" mat-cell *matCellDef="let element">
+    <td
+      class="table__cell"
+      mat-cell
+      *matCellDef="let element"
+      [ngClass]="{ selectedColor: selection.isSelected(element) }"
+    >
       <ng-container>
         {{ column === 'date' ? (element[column] | date: 'yyyy/MM/dd HH:mm') : element[column] }}
       </ng-container>
@@ -14,6 +19,8 @@
     mat-row
     *matRowDef="let element; columns: columnsToDisplay"
     class="table__element-row"
+    [ngClass]="{ selectedBackground: selection.isSelected(element) }"
+    (click)="clickOption === 'select' ? clickRow(element) : null"
     (click)="clickOption === 'playerLink' ? goPlayerResult(element.playerId) : null"
   ></tr>
 </table>
