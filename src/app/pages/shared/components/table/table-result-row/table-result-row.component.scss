@@ -1,0 +1,17 @@
+@use 'variable' as var;
+
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+  &__item {
+    width: 50%;
+    min-width: 20rem;
+    a {
+      color: var.$primary;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

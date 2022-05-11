@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PlayerResultWrapper } from '../../../../../shared/interfaces/result';
 
 @Component({
   selector: 'app-table-result-row',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-result-row.component.scss'],
 })
 export class TableResultRowComponent implements OnInit {
+  @Input() result!: PlayerResultWrapper;
   constructor() {}
 
   ngOnInit(): void {}
