@@ -29,6 +29,7 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
 import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
+import { TableResultRowComponent } from './pages/shared/components/table/table-result-row/table-result-row.component';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -59,6 +60,7 @@ import { DatePipe } from '@angular/common';
     AddPlayerComponent,
     PlayerListComponent,
     PlayerListEditComponent,
+    TableResultRowComponent,
   ],
   imports: [
     BrowserModule,
