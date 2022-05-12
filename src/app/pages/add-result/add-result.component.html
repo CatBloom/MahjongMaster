@@ -1,86 +1,108 @@
 <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
   <h2>成績登録</h2>
   <div class="result">
-    <div class="result__title"></div>
-    <div class="result__input">
-      <mat-label>1位</mat-label>
-      <div class="result__input--name">
+    <mat-label>1位</mat-label>
+    <div class="result-grid">
+      <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName1" />
+          <mat-select formControlName="playerName1">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-      <div class="result__input--point">
+      <div class="result-grid__point">
         <mat-form-field appearance="outline">
           <mat-label>点数</mat-label>
           <input matInput maxlength="6" formControlName="playerPoint1" [appReplace]="formGroup.get('playerPoint1')" />
         </mat-form-field>
       </div>
-      <div class="result__input--calc-point">
+      <div class="result-grid__calc-point">
         <mat-form-field appearance="outline">
           <input matInput readonly formControlName="calcPoint1" />
         </mat-form-field>
       </div>
     </div>
-    <div class="result__input">
-      <mat-label>2位</mat-label>
-      <div class="result__input--name">
+    <mat-label>2位</mat-label>
+    <div class="result-grid">
+      <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName2" />
+          <mat-select formControlName="playerName2">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-      <div class="result__input--point">
+      <div class="result-grid__point">
         <mat-form-field appearance="outline">
           <mat-label>点数</mat-label>
           <input matInput maxlength="6" formControlName="playerPoint2" [appReplace]="formGroup.get('playerPoint2')" />
         </mat-form-field>
       </div>
-      <div class="result__input--calc-point">
+      <div class="result-grid__calc-point">
         <mat-form-field appearance="outline">
           <input matInput readonly formControlName="calcPoint2" />
         </mat-form-field>
       </div>
     </div>
-    <div class="result__input">
-      <mat-label>3位</mat-label>
-      <div class="result__input--name">
+    <mat-label>3位</mat-label>
+    <div class="result-grid">
+      <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName3" />
+          <mat-select formControlName="playerName3">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-      <div class="result__input--point">
+      <div class="result-grid__point">
         <mat-form-field appearance="outline">
           <mat-label>点数</mat-label>
           <input matInput maxlength="6" formControlName="playerPoint3" [appReplace]="formGroup.get('playerPoint3')" />
         </mat-form-field>
       </div>
-      <div class="result__input--calc-point">
+      <div class="result-grid__calc-point">
         <mat-form-field appearance="outline">
           <input matInput readonly formControlName="calcPoint3" />
         </mat-form-field>
       </div>
     </div>
-    <div class="result__input">
-      <mat-label>4位</mat-label>
-      <div class="result__input--name">
+    <mat-label>4位</mat-label>
+    <div class="result-grid">
+      <div class="result-grid__name">
         <mat-form-field appearance="outline">
           <mat-label>名前</mat-label>
-          <input matInput formControlName="playerName4" />
+          <mat-select formControlName="playerName4">
+            <mat-option *ngFor="let player of players" [value]="player.playerId">
+              {{ player.playerName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-      <div class="result__input--point">
+      <div class="result-grid__point">
         <mat-form-field appearance="outline">
           <mat-label>点数</mat-label>
           <input matInput maxlength="6" formControlName="playerPoint4" [appReplace]="formGroup.get('playerPoint4')" />
         </mat-form-field>
       </div>
-      <div class="result__input--calc-point">
+      <div class="result-grid__calc-point">
         <mat-form-field appearance="outline">
           <input matInput readonly formControlName="calcPoint4" />
         </mat-form-field>
       </div>
     </div>
+    <div class="result-buttons">
+      <button class="result-buttons__button" mat-stroked-button color="accent">登録</button>
+      <button class="result-buttons__button" mat-stroked-button color="warn">リセット</button>
+    </div>
+  </div>
+  <div class="result-table">
+    <app-table [columns]="tableColumns" [results]="tableData" [clickOption]="'updateResultLink'"></app-table>
   </div>
 </form>

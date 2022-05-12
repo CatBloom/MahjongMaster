@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Rules } from '../../shared/interfaces/rules';
+import { PlayerDataset } from '../../shared/interfaces/player';
 import { RulesService } from '../../shared/services/rules.service';
 import { ResultService } from '../../shared/services/result.service';
+import { PlayerResultWrapper } from 'src/app/shared/interfaces/result';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-add-result',
@@ -27,6 +30,11 @@ export class AddResultComponent implements OnInit, OnDestroy {
     calcPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
   });
 
+  players: PlayerDataset[] = [];
+
+  tableColumns: string[] = [];
+  tableData: PlayerResultWrapper[] = [];
+
   // 取得したルール
   rules: Rules = {
     radioGame: '',
@@ -48,7 +56,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     inputUma4: 0,
   };
 
-  private subscriptions = new Subscription();
+  private onDestroy$ = new Subject();
 
   constructor(
     private rulesService: RulesService,
@@ -59,10 +67,152 @@ export class AddResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.getRules();
     this.pointSubscriptions();
+
+    // sampleData
+    this.players = [
+      {
+        leagueId: '01',
+        playerId: '01',
+        playerName: 'catBloom',
+      },
+      {
+        leagueId: '01',
+        playerId: '02',
+        playerName: 'sample02',
+      },
+      {
+        leagueId: '01',
+        playerId: '03',
+        playerName: 'sample03',
+      },
+      {
+        leagueId: '01',
+        playerId: '04',
+        playerName: 'sample04',
+      },
+    ];
+
+    this.tableColumns = ['result', 'createDate'];
+    this.tableData = [
+      {
+        resultId: '0001',
+        rank: 1,
+        leagueId: '01',
+        playerId: '01',
+        playerName: 'catBloom',
+        point: 40000,
+        calcPoint: 40,
+        createDate: new Date('Sat Apr 02 2022 22:00:00 GMT+0900 (日本標準時)'),
+        group: 1,
+        resultData: [
+          {
+            resultId: '0001',
+            rank: 1,
+            leagueId: '01',
+            playerId: '01',
+            playerName: 'catBloom',
+            point: 40000,
+            calcPoint: 40,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+          {
+            resultId: '0001',
+            rank: 2,
+            leagueId: '01',
+            playerId: '02',
+            playerName: 'sample02',
+            point: 30000,
+            calcPoint: 30,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+          {
+            resultId: '0001',
+            rank: 3,
+            leagueId: '01',
+            playerId: '03',
+            playerName: 'sample03',
+            point: 20000,
+            calcPoint: 20,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+          {
+            resultId: '0001',
+            rank: 4,
+            leagueId: '01',
+            playerId: '04',
+            playerName: 'sample04',
+            point: 10000,
+            calcPoint: 10,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+        ],
+      },
+      {
+        resultId: '0002',
+        rank: 2,
+        leagueId: '01',
+        playerId: '01',
+        playerName: 'catBloom',
+        point: 20000,
+        calcPoint: 30,
+        createDate: new Date('Sat Apr 02 2022 23:00:00 GMT+0900 (日本標準時)'),
+        group: 2,
+        resultData: [
+          {
+            resultId: '0002',
+            rank: 1,
+            leagueId: '01',
+            playerId: '04',
+            playerName: 'sample04',
+            point: 60000,
+            calcPoint: 40,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+          {
+            resultId: '0002',
+            rank: 2,
+            leagueId: '01',
+            playerId: '01',
+            playerName: 'catBloom',
+            point: 25000,
+            calcPoint: 30,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+          {
+            resultId: '0002',
+            rank: 3,
+            leagueId: '01',
+            playerId: '03',
+            playerName: 'sample03',
+            point: 20000,
+            calcPoint: 20,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+          {
+            resultId: '0002',
+            rank: 4,
+            leagueId: '01',
+            playerId: '02',
+            playerName: 'sample02',
+            point: -5000,
+            calcPoint: 10,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+        ],
+      },
+    ];
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.onDestroy$.next();
   }
 
   private getRules() {
@@ -96,8 +246,10 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   private pointSubscriptions() {
     // player1の点数を変換
-    this.subscriptions.add(
-      this.formGroup.get('playerPoint1')?.valueChanges.subscribe(() => {
+    this.formGroup
+      .get('playerPoint1')
+      ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+      .subscribe(() => {
         const point = Number(this.formGroup.get('playerPoint1')?.value);
         const topPrize = ((this.rules.inputReturnPoint - this.rules.inputStartPoint) * 4) / 1000;
         const setPoint = this.calcPoint(point, this.rules.inputUma1) + topPrize;
@@ -106,11 +258,12 @@ export class AddResultComponent implements OnInit, OnDestroy {
         } else {
           this.formGroup.get('calcPoint1')?.setValue(setPoint);
         }
-      })
-    );
+      });
     // player2の点数を変換
-    this.subscriptions.add(
-      this.formGroup.get('playerPoint2')?.valueChanges.subscribe(() => {
+    this.formGroup
+      .get('playerPoint2')
+      ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+      .subscribe(() => {
         const point = Number(this.formGroup.get('playerPoint2')?.value);
         const setPoint = this.calcPoint(point, this.rules.inputUma2);
         if (isNaN(setPoint)) {
@@ -118,11 +271,12 @@ export class AddResultComponent implements OnInit, OnDestroy {
         } else {
           this.formGroup.get('calcPoint2')?.setValue(setPoint);
         }
-      })
-    );
+      });
     // player3の点数を変換
-    this.subscriptions.add(
-      this.formGroup.get('playerPoint3')?.valueChanges.subscribe(() => {
+    this.formGroup
+      .get('playerPoint3')
+      ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+      .subscribe(() => {
         const point = Number(this.formGroup.get('playerPoint3')?.value);
         const setPoint = this.calcPoint(point, this.rules.inputUma3);
         if (isNaN(setPoint)) {
@@ -130,11 +284,12 @@ export class AddResultComponent implements OnInit, OnDestroy {
         } else {
           this.formGroup.get('calcPoint3')?.setValue(setPoint);
         }
-      })
-    );
+      });
     // player4の点数を変換
-    this.subscriptions.add(
-      this.formGroup.get('playerPoint4')?.valueChanges.subscribe(() => {
+    this.formGroup
+      .get('playerPoint4')
+      ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+      .subscribe(() => {
         const point = Number(this.formGroup.get('playerPoint4')?.value);
         const setPoint = this.calcPoint(point, this.rules.inputUma4);
         if (isNaN(setPoint)) {
@@ -142,7 +297,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
         } else {
           this.formGroup.get('calcPoint4')?.setValue(setPoint);
         }
-      })
-    );
+      });
   }
 }
