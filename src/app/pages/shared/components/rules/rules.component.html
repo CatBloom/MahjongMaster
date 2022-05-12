@@ -1,8 +1,8 @@
 <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
   <div class="rules">
     <div class="rules__title">基本ルール</div>
+    <mat-label>局数</mat-label>
     <div class="rules__radio">
-      <label for="">局数</label>
       <mat-radio-group formControlName="radioGame">
         <mat-radio-button value="1">4人東風戦</mat-radio-button>
         <mat-radio-button value="2">4人半荘戦</mat-radio-button>
@@ -10,23 +10,23 @@
         <mat-radio-button value="4">3人半荘戦</mat-radio-button>
       </mat-radio-group>
     </div>
+    <mat-label>赤ドラ</mat-label>
     <div class="rules__radio">
-      <label for="">赤ドラ</label>
       <mat-radio-group formControlName="radioDora">
         <mat-radio-button value="1">赤無し</mat-radio-button>
         <mat-radio-button value="2">赤ドラ3</mat-radio-button>
         <mat-radio-button value="3">赤ドラ4</mat-radio-button>
       </mat-radio-group>
     </div>
+    <mat-label>喰い断</mat-label>
     <div class="rules__radio">
-      <label for="">喰い断</label>
       <mat-radio-group formControlName="radioTanyao">
         <mat-radio-button value="1">有効</mat-radio-button>
         <mat-radio-button value="2">無効</mat-radio-button>
       </mat-radio-group>
     </div>
+    <mat-label>長考時間</mat-label>
     <div class="rules__radio">
-      <label for="">長考時間</label>
       <mat-radio-group formControlName="radioTime">
         <mat-radio-button value="1">3+5秒</mat-radio-button>
         <mat-radio-button value="2">5+10秒</mat-radio-button>
@@ -42,44 +42,44 @@
       </div>
     </div>
     <div [hidden]="!isAdvanced.value">
+      <mat-label>配給原点</mat-label>
       <div class="rules__input">
-        <label for="">配給原点</label>
         <mat-form-field appearance="outline">
           <input type="text" matInput formControlName="inputStartPoint" [appReplace]="inputStartPoint" />
         </mat-form-field>
       </div>
+      <mat-label>終局必要点数</mat-label>
       <div class="rules__input">
-        <label for="">終局必要点数</label>
         <mat-form-field appearance="outline">
           <input type="text" matInput formControlName="inputFinishPoint" [appReplace]="inputFinishPoint" />
         </mat-form-field>
       </div>
+      <mat-label>返し点</mat-label>
       <div class="rules__input">
-        <label for="">返し点</label>
         <mat-form-field appearance="outline">
           <input type="text" matInput formControlName="inputReturnPoint" [appReplace]="inputReturnPoint" />
         </mat-form-field>
       </div>
+      <mat-label>コールド</mat-label>
       <div class="rules__input">
-        <label for="">コールド</label>
         <mat-form-field appearance="outline">
           <input type="text" matInput formControlName="inputCalledPoint" [appReplace]="inputCalledPoint" />
         </mat-form-field>
       </div>
+      <mat-label for="">リーチ必要点数</mat-label>
       <div class="rules__input">
-        <label for="">リーチ必要点数</label>
         <mat-form-field appearance="outline">
           <input type="text" matInput formControlName="inputReachPoint" [appReplace]="inputReachPoint" />
         </mat-form-field>
       </div>
+      <mat-label>場棒点</mat-label>
       <div class="rules__input">
-        <label for="">場棒点</label>
         <mat-form-field appearance="outline">
           <input type="text" matInput formControlName="inputDeposit" [appReplace]="inputDeposit" />
         </mat-form-field>
       </div>
+      <mat-label>ノーテン罰符</mat-label>
       <div class="rules__input">
-        <label for="">ノーテン罰符</label>
         <mat-form-field appearance="outline">
           <mat-label>1人</mat-label>
           <input type="text" matInput formControlName="inputPenalty1" [appReplace]="inputPenalty1" />
@@ -93,8 +93,8 @@
           <input type="text" matInput formControlName="inputPenalty3" [appReplace]="inputPenalty3" />
         </mat-form-field>
       </div>
+      <mat-label>ウマ</mat-label>
       <div class="rules__input">
-        <label for="">ウマ</label>
         <mat-form-field appearance="outline">
           <mat-label>1位</mat-label>
           <input type="text" matInput formControlName="inputUma1" [appReplace]="inputUma1" />
