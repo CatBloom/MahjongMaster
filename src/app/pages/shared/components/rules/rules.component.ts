@@ -77,6 +77,46 @@ export class RulesComponent implements OnInit, OnDestroy {
     inputUma4: new FormControl(-10, [Validators.required, Validators.pattern(/^[\d-]+$/)]),
   });
 
+  get inputStartPoint() {
+    return this.formGroup.get('inputStartPoint') as FormControl;
+  }
+  get inputFinishPoint() {
+    return this.formGroup.get('inputFinishPoint') as FormControl;
+  }
+  get inputReturnPoint() {
+    return this.formGroup.get('inputReturnPoint') as FormControl;
+  }
+  get inputCalledPoint() {
+    return this.formGroup.get('inputCalledPoint') as FormControl;
+  }
+  get inputReachPoint() {
+    return this.formGroup.get('inputReachPoint') as FormControl;
+  }
+  get inputDeposit() {
+    return this.formGroup.get('inputDeposit') as FormControl;
+  }
+  get inputPenalty1() {
+    return this.formGroup.get('inputPenalty1') as FormControl;
+  }
+  get inputPenalty2() {
+    return this.formGroup.get('inputPenalty2') as FormControl;
+  }
+  get inputPenalty3() {
+    return this.formGroup.get('inputPenalty3') as FormControl;
+  }
+  get inputUma1() {
+    return this.formGroup.get('inputUma1') as FormControl;
+  }
+  get inputUma2() {
+    return this.formGroup.get('inputUma2') as FormControl;
+  }
+  get inputUma3() {
+    return this.formGroup.get('inputUma3') as FormControl;
+  }
+  get inputUma4() {
+    return this.formGroup.get('inputUma4') as FormControl;
+  }
+
   private subscriptions = new Subscription();
 
   constructor() {}

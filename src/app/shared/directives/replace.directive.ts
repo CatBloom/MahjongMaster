@@ -1,14 +1,14 @@
 import { Directive, Input, OnInit, OnDestroy } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[appReplace]',
 })
 export class ReplaceDirective implements OnInit, OnDestroy {
-  @Input() appReplace!: AbstractControl | null;
+  @Input() appReplace!: FormControl | null;
 
-  private formControl!: AbstractControl | null;
+  private formControl!: FormControl | null;
   private subscriptions = new Subscription();
 
   constructor() {}
