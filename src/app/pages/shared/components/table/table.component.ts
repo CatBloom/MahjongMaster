@@ -31,6 +31,6 @@ export class TableComponent implements OnInit {
 
   goUpdateResult(element: PlayerResultWrapper) {
     this.selection.select(element);
-    this.router.navigateByUrl(`/add-result/${element.leagueId}/${element.resultId}`);
+    this.router.navigateByUrl(`/result/update/${element.leagueId}/${element.resultId}`);
   }
 }
