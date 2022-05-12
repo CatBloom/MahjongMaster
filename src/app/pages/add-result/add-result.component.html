@@ -110,4 +110,7 @@
       <button class="result-buttons__button" mat-stroked-button color="warn">リセット</button>
     </div>
   </div>
+  <div class="result-table">
+    <app-table [columns]="tableColumns" [results]="tableData" [clickOption]="'updateResultLink'"></app-table>
+  </div>
 </form>

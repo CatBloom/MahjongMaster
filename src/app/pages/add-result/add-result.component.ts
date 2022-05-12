@@ -6,6 +6,7 @@ import { Rules } from '../../shared/interfaces/rules';
 import { PlayerDataset } from '../../shared/interfaces/player';
 import { RulesService } from '../../shared/services/rules.service';
 import { ResultService } from '../../shared/services/result.service';
+import { PlayerResultWrapper } from 'src/app/shared/interfaces/result';
 
 @Component({
   selector: 'app-add-result',
@@ -29,6 +30,9 @@ export class AddResultComponent implements OnInit, OnDestroy {
   });
 
   players: PlayerDataset[] = [];
+
+  tableColumns: string[] = [];
+  tableData: PlayerResultWrapper[] = [];
 
   // 取得したルール
   rules: Rules = {
@@ -84,6 +88,124 @@ export class AddResultComponent implements OnInit, OnDestroy {
         leagueId: '01',
         playerId: '04',
         playerName: 'sample04',
+      },
+    ];
+
+    this.tableColumns = ['result', 'createDate'];
+    this.tableData = [
+      {
+        resultId: '0001',
+        rank: 1,
+        leagueId: '01',
+        playerId: '01',
+        playerName: 'catBloom',
+        point: 40000,
+        calcPoint: 40,
+        createDate: new Date('Sat Apr 02 2022 22:00:00 GMT+0900 (日本標準時)'),
+        group: 1,
+        resultData: [
+          {
+            resultId: '0001',
+            rank: 1,
+            leagueId: '01',
+            playerId: '01',
+            playerName: 'catBloom',
+            point: 40000,
+            calcPoint: 40,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+          {
+            resultId: '0001',
+            rank: 2,
+            leagueId: '01',
+            playerId: '02',
+            playerName: 'sample02',
+            point: 30000,
+            calcPoint: 30,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+          {
+            resultId: '0001',
+            rank: 3,
+            leagueId: '01',
+            playerId: '03',
+            playerName: 'sample03',
+            point: 20000,
+            calcPoint: 20,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+          {
+            resultId: '0001',
+            rank: 4,
+            leagueId: '01',
+            playerId: '04',
+            playerName: 'sample04',
+            point: 10000,
+            calcPoint: 10,
+            createDate: new Date('2020/02/02'),
+            group: 1,
+          },
+        ],
+      },
+      {
+        resultId: '0002',
+        rank: 2,
+        leagueId: '01',
+        playerId: '01',
+        playerName: 'catBloom',
+        point: 20000,
+        calcPoint: 30,
+        createDate: new Date('Sat Apr 02 2022 23:00:00 GMT+0900 (日本標準時)'),
+        group: 2,
+        resultData: [
+          {
+            resultId: '0002',
+            rank: 1,
+            leagueId: '01',
+            playerId: '04',
+            playerName: 'sample04',
+            point: 60000,
+            calcPoint: 40,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+          {
+            resultId: '0002',
+            rank: 2,
+            leagueId: '01',
+            playerId: '01',
+            playerName: 'catBloom',
+            point: 25000,
+            calcPoint: 30,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+          {
+            resultId: '0002',
+            rank: 3,
+            leagueId: '01',
+            playerId: '03',
+            playerName: 'sample03',
+            point: 20000,
+            calcPoint: 20,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+          {
+            resultId: '0002',
+            rank: 4,
+            leagueId: '01',
+            playerId: '02',
+            playerName: 'sample02',
+            point: -5000,
+            calcPoint: 10,
+            createDate: new Date('2020/02/03'),
+            group: 2,
+          },
+        ],
       },
     ];
   }
