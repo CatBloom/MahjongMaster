@@ -10,7 +10,8 @@ import { AddPlayerComponent } from './pages/add-player/add-player.component';
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'add-league', component: AddLeagueComponent },
-  { path: 'add-result/:league-id', component: AddResultComponent },
+  { path: 'result/add/:league-id', component: AddResultComponent },
+  { path: 'result/update/:league-id/:result-id', component: AddResultComponent },
   { path: 'player/:player-id', component: PlayerDetailsComponent },
   { path: 'admin/my-league/:admin-name', component: AdminMyLeagueComponent },
   { path: 'league/:league-id', component: LeagueDetailsComponent },
