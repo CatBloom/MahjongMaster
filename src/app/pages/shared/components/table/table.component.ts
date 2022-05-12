@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayerResultWrapper, LeagueResult } from '../../../../shared/interfaces/result';
 
@@ -11,8 +11,7 @@ import { PlayerResultWrapper, LeagueResult } from '../../../../shared/interfaces
 export class TableComponent implements OnInit {
   @Input() columns!: string[];
   @Input() results!: PlayerResultWrapper[] | LeagueResult[];
-  @Input() clickOption?: 'playerLink' | 'select';
-  @Output() clickEvent = new EventEmitter<PlayerResultWrapper>();
+  @Input() clickOption?: 'playerLink' | 'updateResultLink';
 
   selection = new SelectionModel<PlayerResultWrapper>(false);
 
@@ -30,8 +29,8 @@ export class TableComponent implements OnInit {
     this.router.navigateByUrl(`/player/${playerId}`);
   }
 
-  clickRow(element: PlayerResultWrapper) {
+  goUpdateResult(element: PlayerResultWrapper) {
     this.selection.select(element);
-    this.clickEvent.emit(element);
+    this.router.navigateByUrl(`/add-result/${element.leagueId}/${element.resultId}`);
   }
 }

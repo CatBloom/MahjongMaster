@@ -25,7 +25,7 @@
     *matRowDef="let element; columns: columnsToDisplay"
     class="table__element-row"
     [ngClass]="{ selectedBackground: selection.isSelected(element) }"
-    (click)="clickOption === 'select' ? clickRow(element) : null"
+    (click)="clickOption === 'updateResultLink' ? goUpdateResult(element) : null"
     (click)="clickOption === 'playerLink' ? goPlayerResult(element.playerId) : null"
   ></tr>
 </table>
