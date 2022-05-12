@@ -3,12 +3,7 @@
     <th class="table__header" mat-header-cell *matHeaderCellDef>
       {{ column | japanese }}
     </th>
-    <td
-      class="table__cell"
-      mat-cell
-      *matCellDef="let element"
-      [ngClass]="{ selectedColor: selection.isSelected(element) }"
-    >
+    <td class="table__cell" mat-cell *matCellDef="let element">
       <ng-container *ngIf="column === 'result'; else elseContent">
         <app-table-result-row [result]="element"></app-table-result-row>
       </ng-container>
@@ -25,7 +20,7 @@
     *matRowDef="let element; columns: columnsToDisplay"
     class="table__element-row"
     [ngClass]="{ selectedBackground: selection.isSelected(element) }"
-    (click)="clickOption === 'select' ? clickRow(element) : null"
+    (click)="clickOption === 'updateResultLink' ? goUpdateResult(element) : null"
     (click)="clickOption === 'playerLink' ? goPlayerResult(element.playerId) : null"
   ></tr>
 </table>

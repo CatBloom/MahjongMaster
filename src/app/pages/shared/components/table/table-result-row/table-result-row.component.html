@@ -1,24 +1,32 @@
 <div class="result-container">
   <div class="result-container__item">
-    <span>1位:</span
-    ><a routerLink="/player/{{ result.resultData[0].playerId }}">{{ result.resultData[0].playerName }}</a
-    >/{{ result.resultData[0].point }}/{{ result.resultData[0].calcPoint }}
+    <a routerLink="/player/{{ result.resultData[0].playerId }}">
+      <span>1位:</span>{{ result.resultData[0].playerName }}/{{ result.resultData[0].point }}/{{
+        result.resultData[0].calcPoint
+      }}</a
+    >
   </div>
   <div class="result-container__item">
-    <span>2位:</span
-    ><a routerLink="/player/{{ result.resultData[1].playerId }}">{{ result.resultData[1].playerName }}</a
-    >/{{ result.resultData[1].point }}/{{ result.resultData[1].calcPoint }}
+    <a routerLink="/player/{{ result.resultData[1].playerId }}">
+      <span>2位:</span>{{ result.resultData[1].playerName }}/{{ result.resultData[1].point }}/{{
+        result.resultData[1].calcPoint
+      }}</a
+    >
   </div>
 </div>
 <div class="result-container">
   <div class="result-container__item">
-    <span>3位:</span
-    ><a routerLink="/player/{{ result.resultData[2].playerId }}">{{ result.resultData[2].playerName }}</a
-    >/{{ result.resultData[2].point }}/{{ result.resultData[2].calcPoint }}
+    <a routerLink="/player/{{ result.resultData[2].playerId }}">
+      <span>3位:</span>{{ result.resultData[2].playerName }}/{{ result.resultData[2].point }}/{{
+        result.resultData[2].calcPoint
+      }}</a
+    >
   </div>
   <div class="result-container__item">
-    <span>4位:</span
-    ><a routerLink="/player/{{ result.resultData[3].playerId }}">{{ result.resultData[3].playerName }}</a
-    >/{{ result.resultData[3].point }}/{{ result.resultData[3].calcPoint }}
+    <a routerLink="/player/{{ result.resultData[3].playerId }}">
+      <span>4位:</span>{{ result.resultData[3].playerName }}/{{ result.resultData[3].point }}/{{
+        result.resultData[3].calcPoint
+      }}</a
+    >
   </div>
 </div>

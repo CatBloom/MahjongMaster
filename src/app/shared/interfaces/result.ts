@@ -14,6 +14,7 @@ export interface Result {
 }
 
 export interface PlayerResult {
+  resultId: string;
   rank: number;
   leagueId: string;
   playerId: string;
