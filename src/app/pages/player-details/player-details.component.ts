@@ -38,6 +38,7 @@ export class PlayerDetailsComponent implements OnInit {
     this.tableColumns = ['rank', 'result', 'createDate'];
     this.tableData = [
       {
+        resultId: '0001',
         rank: 1,
         leagueId: '01',
         playerId: '01',
@@ -48,6 +49,7 @@ export class PlayerDetailsComponent implements OnInit {
         group: 1,
         resultData: [
           {
+            resultId: '0001',
             rank: 1,
             leagueId: '01',
             playerId: '01',
@@ -58,6 +60,7 @@ export class PlayerDetailsComponent implements OnInit {
             group: 1,
           },
           {
+            resultId: '0001',
             rank: 2,
             leagueId: '01',
             playerId: '02',
@@ -68,6 +71,7 @@ export class PlayerDetailsComponent implements OnInit {
             group: 1,
           },
           {
+            resultId: '0001',
             rank: 3,
             leagueId: '01',
             playerId: '03',
@@ -78,6 +82,7 @@ export class PlayerDetailsComponent implements OnInit {
             group: 1,
           },
           {
+            resultId: '0001',
             rank: 4,
             leagueId: '01',
             playerId: '04',
@@ -90,6 +95,7 @@ export class PlayerDetailsComponent implements OnInit {
         ],
       },
       {
+        resultId: '0002',
         rank: 2,
         leagueId: '01',
         playerId: '01',
@@ -100,6 +106,7 @@ export class PlayerDetailsComponent implements OnInit {
         group: 2,
         resultData: [
           {
+            resultId: '0002',
             rank: 1,
             leagueId: '01',
             playerId: '04',
@@ -110,6 +117,7 @@ export class PlayerDetailsComponent implements OnInit {
             group: 2,
           },
           {
+            resultId: '0002',
             rank: 2,
             leagueId: '01',
             playerId: '01',
@@ -120,6 +128,7 @@ export class PlayerDetailsComponent implements OnInit {
             group: 2,
           },
           {
+            resultId: '0002',
             rank: 3,
             leagueId: '01',
             playerId: '03',
@@ -130,6 +139,7 @@ export class PlayerDetailsComponent implements OnInit {
             group: 2,
           },
           {
+            resultId: '0002',
             rank: 4,
             leagueId: '01',
             playerId: '02',

@@ -31,7 +31,7 @@ export class ReplaceDirective implements OnInit, OnDestroy {
         if (!this.formControl) {
           return;
         }
-        const value: string = this.formControl.value;
+        const value = String(this.formControl.value);
         let newValue: string = value;
 
         // 全角数字を半角数字に変換
