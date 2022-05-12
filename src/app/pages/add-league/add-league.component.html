@@ -44,8 +44,6 @@
       <app-rules [rulesRadioValue]="formGroup.get('rulesRadio')?.value" (sendRules)="setRules($event)"></app-rules>
     </ng-container>
 
-    <div class="league__button" (click)="openDialog()">
-      <app-button [buttonText]="'大会登録'"></app-button>
-    </div>
+    <button class="league__button" (click)="openDialog()" mat-stroked-button color="accent">大会登録</button>
   </div>
 </form>
