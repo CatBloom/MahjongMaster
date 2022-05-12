@@ -1,6 +1,6 @@
 <mat-list class="rules-list">
+  <mat-label>局数</mat-label>
   <mat-list-item>
-    <mat-label>局数</mat-label>
     <ng-container [ngSwitch]="rules.radioGame">
       <ng-container *ngSwitchCase="'1'">4人東風戦</ng-container>
       <ng-container *ngSwitchCase="'2'">4人半荘戦</ng-container>
@@ -9,8 +9,8 @@
     </ng-container>
   </mat-list-item>
   <mat-divider></mat-divider>
+  <mat-label>ドラ</mat-label>
   <mat-list-item>
-    <mat-label>ドラ</mat-label>
     <ng-container [ngSwitch]="rules.radioDora">
       <ng-container *ngSwitchCase="'1'">赤無し</ng-container>
       <ng-container *ngSwitchCase="'2'">赤ドラ3</ng-container>
@@ -18,16 +18,16 @@
     </ng-container>
   </mat-list-item>
   <mat-divider></mat-divider>
+  <mat-label>喰い断</mat-label>
   <mat-list-item>
-    <mat-label>喰い断</mat-label>
     <ng-container [ngSwitch]="rules.radioTanyao">
       <ng-container *ngSwitchCase="'1'">有効</ng-container>
       <ng-container *ngSwitchCase="'2'">無効</ng-container>
     </ng-container>
   </mat-list-item>
   <mat-divider></mat-divider>
+  <mat-label>長考時間</mat-label>
   <mat-list-item>
-    <mat-label>長考時間</mat-label>
     <ng-container [ngSwitch]="rules.radioTime">
       <ng-container *ngSwitchCase="'1'">3+5秒</ng-container>
       <ng-container *ngSwitchCase="'2'">5+10秒</ng-container>
@@ -36,33 +36,39 @@
     </ng-container>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item><mat-label>配給原点</mat-label>{{ rules.inputStartPoint }}</mat-list-item>
+  <mat-label>配給原点</mat-label>
+  <mat-list-item>{{ rules.inputStartPoint }}</mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item><mat-label>終局必要点数</mat-label>{{ rules.inputFinishPoint }}</mat-list-item>
+  <mat-label>終局必要点数</mat-label>
+  <mat-list-item>{{ rules.inputFinishPoint }}</mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item><mat-label>返し点</mat-label>{{ rules.inputReturnPoint }}</mat-list-item>
+  <mat-label>返し点</mat-label>
+  <mat-list-item>{{ rules.inputReturnPoint }}</mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item><mat-label>コールド</mat-label>{{ rules.inputCalledPoint }}</mat-list-item>
+  <mat-label>コールド</mat-label>
+  <mat-list-item>{{ rules.inputCalledPoint }}</mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item><mat-label>リーチ必要点数</mat-label>{{ rules.inputReachPoint }}</mat-list-item>
+  <mat-label>リーチ必要点数</mat-label>
+  <mat-list-item>{{ rules.inputReachPoint }}</mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item><mat-label>ノーテン罰符</mat-label>{{ rules.inputDeposit }}</mat-list-item>
+  <mat-label>ノーテン罰符</mat-label>
+  <mat-list-item>{{ rules.inputDeposit }}</mat-list-item>
   <mat-divider></mat-divider>
+  <mat-label>ノーテン罰符</mat-label>
   <mat-list-item>
-    <mat-label>ノーテン罰符</mat-label>
     <div class="rule-container">
-      <div>1人:{{ rules.inputPenalty1 }}</div>
-      <div>2人:{{ rules.inputPenalty2 }}</div>
+      <div>1人:{{ rules.inputPenalty1 }}/</div>
+      <div>2人:{{ rules.inputPenalty2 }}/</div>
       <div>3人:{{ rules.inputPenalty3 }}</div>
     </div>
   </mat-list-item>
   <mat-divider></mat-divider>
+  <mat-label>ウマ</mat-label>
   <mat-list-item>
-    <mat-label>ウマ</mat-label>
     <div class="rule-container">
-      <div>1位:{{ rules.inputUma1 }}</div>
-      <div>2位:{{ rules.inputUma2 }}</div>
-      <div>3位:{{ rules.inputUma3 }}</div>
+      <div>1位:{{ rules.inputUma1 }}/</div>
+      <div>2位:{{ rules.inputUma2 }}/</div>
+      <div>3位:{{ rules.inputUma3 }}/</div>
       <div>4位:{{ rules.inputUma4 }}</div>
     </div>
   </mat-list-item>

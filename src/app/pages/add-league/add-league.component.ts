@@ -90,7 +90,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
 
     //Dialogを表示
     const dialogRef = this.matDialog.open(AddLeagueDialogComponent, {
-      width: '60%',
+      width: '80%',
       data: newLeague,
     });
 
