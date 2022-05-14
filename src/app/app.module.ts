@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 // components
 import { AppComponent } from './app.component';
@@ -30,6 +31,9 @@ import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
 import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
 import { TableResultRowComponent } from './pages/shared/components/table/table-result-row/table-result-row.component';
+
+// service
+import { MockWebApiService } from './shared/api/mock-web-api.service';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -74,6 +78,7 @@ import { DatePipe } from '@angular/common';
     FontAwesomeModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false }),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
