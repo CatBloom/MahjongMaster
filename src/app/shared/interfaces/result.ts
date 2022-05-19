@@ -7,32 +7,66 @@ export interface Result {
   playerPoint2: number;
   playerPoint3: number;
   playerPoint4: number;
-  calcPoint1: number;
-  calcPoint2: number;
-  calcPoint3: number;
-  calcPoint4: number;
 }
 
-export interface PlayerResult {
-  resultId: string;
-  rank: number;
-  leagueId: string;
-  playerId: string;
-  playerName: string;
-  point: number;
-  calcPoint: number;
+export interface ResultRequest extends Result {
+  leagueId: number;
+}
+
+export interface ResultResponse {
+  id: number;
+  leagueId: number;
   createDate: Date;
   group: number;
-}
-export interface PlayerResultWrapper extends PlayerResult {
-  resultData: PlayerResult[];
+  resultData: {
+    id: number;
+    leagueId: number;
+    rank: number;
+    playerId: number;
+    playerName: string;
+    point: number;
+    calcPoint: number;
+    group: number;
+  }[];
 }
 
-export interface LeagueResult {
-  rank: string;
-  playerId: string;
+export interface LeagueResultResponse {
+  id: number;
+  leagueId: number;
+  rank: number;
+  playerId: number;
   playerName: string;
-  totalGameCount: number;
-  totalCalcPoint: number;
+  playerGameCount: number;
+  playerCalcPoint: number;
   date: Date;
+}
+
+export interface PlayerResultResponse {
+  id: number;
+  leagueId: number;
+  playerId: number;
+  rank: number;
+  playerName: string;
+  createDate: Date;
+  group: number;
+  resultData: {
+    id: number;
+    leagueId: number;
+    rank: number;
+    playerId: number;
+    playerName: string;
+    point: number;
+    calcPoint: number;
+    group: number;
+  }[];
+}
+
+export interface LineData {
+  dateLabels: Date[];
+  ranks: number[];
+}
+
+export interface PieData {
+  dateLabels: string[];
+  ranks: number[];
 }
