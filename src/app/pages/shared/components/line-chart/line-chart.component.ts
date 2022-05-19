@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
+import { LineData } from 'src/app/shared/interfaces/result';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-line-chart',
@@ -7,8 +9,12 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit {
-  @Input() lineLabels!: string[];
-  @Input() lineData!: number[];
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  @Input() set lineData(data: LineData) {
+    this.lineChartData.datasets = [{ data: data.ranks }];
+    this.lineChartData.labels = data.dateLabels;
+    this.chart?.update();
+  }
   // datasets
   public lineChartData: ChartConfiguration['data'] = {
     labels: [],
@@ -60,8 +66,5 @@ export class LineChartComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.lineChartData.labels = this.lineLabels;
-    this.lineChartData.datasets = [{ data: this.lineData }];
-  }
+  ngOnInit(): void {}
 }

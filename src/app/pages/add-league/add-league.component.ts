@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rules } from '../../shared/interfaces/rules';
-import { LeagueDialog } from '../../shared/interfaces/league';
+import { LeagueRequest, LeagueDialog } from '../../shared/interfaces/league';
 import { LeagueService } from '../../shared/services/league.service';
 import { RulesService } from '../../shared/services/rules.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,18 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     leagueDisplayDate: new FormControl('', []),
     rulesRadio: new FormControl('', [Validators.required]),
   });
-
+  get leagueName() {
+    return this.formGroup.get('leagueName') as FormControl;
+  }
+  get leagueManual() {
+    return this.formGroup.get('leagueManual') as FormControl;
+  }
+  get leagueDate() {
+    return this.formGroup.get('leagueDate') as FormControl;
+  }
+  get leagueDisplayDate() {
+    return this.formGroup.get('leagueDisplayDate') as FormControl;
+  }
   // 取得したルール
   rules: Rules = {
     radioGame: '',
@@ -44,7 +55,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     inputUma3: 0,
     inputUma4: 0,
   };
-
+  leagueId$ = this.leagueService.leagueId$;
   private onDestroy$ = new Subject();
 
   constructor(
@@ -60,15 +71,37 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
       .get('leagueDate')
       ?.valueChanges.pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
-        const leagueDate: Array<Date> = this.formGroup.get('leagueDate')?.value;
+        const leagueDate: Array<Date> = this.leagueDate.value;
         const leagueStartDate = this.datePipe.transform(leagueDate[0], 'yyyy/MM/dd HH:mm');
         const leagueFinishDate = this.datePipe.transform(leagueDate[1], 'yyyy/MM/dd HH:mm');
-        this.formGroup.get('leagueDisplayDate')?.setValue(`${leagueStartDate}~${leagueFinishDate}`);
+        this.leagueDisplayDate.setValue(`${leagueStartDate}~${leagueFinishDate}`);
       });
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
+  }
+
+  postData() {
+    this.postLeague();
+    this.leagueId$.pipe(takeUntil(this.onDestroy$)).subscribe((leagueId: number) => {
+      this.postRules(leagueId);
+    });
+  }
+
+  postRules(leagueId: number) {
+    const newRules: Rules = this.rules;
+    this.rulesService.postRules(newRules, leagueId);
+  }
+
+  postLeague() {
+    const newleague: LeagueRequest = {
+      leagueName: this.leagueName.value,
+      leagueManual: this.leagueManual.value,
+      leagueStartDate: this.leagueDate.value[0],
+      leagueFinishDate: this.leagueDate.value[1],
+    };
+    this.leagueService.postLeague(newleague);
   }
 
   setRules(rules: Rules) {
@@ -79,25 +112,25 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     if (this.formGroup.invalid) {
       return;
     }
-
-    const newLeague: LeagueDialog = {
-      leagueName: this.formGroup.get('leagueName')?.value,
-      leagueManual: this.formGroup.get('leagueManual')?.value,
-      leagueStartDate: this.formGroup.get('leagueDate')?.value[0],
-      leagueFinishDate: this.formGroup.get('leagueDate')?.value[1],
+    const leagueDialog: LeagueDialog = {
+      leagueName: this.leagueName.value,
+      leagueManual: this.leagueManual.value,
+      leagueStartDate: this.leagueDate.value[0],
+      leagueFinishDate: this.leagueDate.value[1],
       rules: this.rules,
     };
-
     //Dialogを表示
     const dialogRef = this.matDialog.open(AddLeagueDialogComponent, {
       width: '80%',
-      data: newLeague,
+      data: leagueDialog,
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('true');
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((result) => {
+        if (result) {
+          this.postData();
+        }
+      });
   }
 }

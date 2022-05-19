@@ -17,3 +17,11 @@ export interface Rules {
   inputUma3: number;
   inputUma4: number;
 }
+
+export interface RulesRequest extends Rules {
+  leagueId: number;
+}
+
+export interface RulesResponse extends RulesRequest {
+  id: number;
+}

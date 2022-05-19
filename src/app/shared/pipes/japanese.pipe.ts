@@ -20,9 +20,9 @@ export class JapanesePipe implements PipeTransform {
         return (value = '登録日');
       case 'playerName':
         return (value = '名前');
-      case 'totalGameCount':
+      case 'playerGameCount':
         return (value = '対戦数');
-      case 'totalCalcPoint':
+      case 'playerCalcPoint':
         return (value = '合計点');
 
       default:

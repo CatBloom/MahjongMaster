@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LeagueDataset } from '../../../../shared/interfaces/league';
+import { LeagueResponse } from '../../../../shared/interfaces/league';
 
 @Component({
   selector: 'app-league-list',
@@ -7,7 +7,7 @@ import { LeagueDataset } from '../../../../shared/interfaces/league';
   styleUrls: ['./league-list.component.scss'],
 })
 export class LeagueListComponent implements OnInit {
-  @Input() leagueList!: LeagueDataset[];
+  @Input() leagueList!: LeagueResponse[];
 
   constructor() {}
 

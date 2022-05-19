@@ -8,6 +8,7 @@ import { Rules } from '../../../../shared/interfaces/rules';
 })
 export class RuleListComponent implements OnInit {
   @Input() rules!: Rules;
+
   constructor() {}
 
   ngOnInit(): void {}

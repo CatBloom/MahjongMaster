@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Rules } from '../../shared/interfaces/rules';
-import { PlayerDataset } from '../../shared/interfaces/player';
 import { RulesService } from '../../shared/services/rules.service';
 import { ResultService } from '../../shared/services/result.service';
-import { PlayerResultWrapper } from 'src/app/shared/interfaces/result';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
   selector: 'app-add-result',
@@ -15,10 +14,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./add-result.component.scss'],
 })
 export class AddResultComponent implements OnInit, OnDestroy {
-  players: PlayerDataset[] = [];
-  tableColumns: string[] = [];
-  tableData: PlayerResultWrapper[] = [];
-
   formGroup = new FormGroup({
     playerName1: new FormControl('', [Validators.required]),
     playerName2: new FormControl('', [Validators.required]),
@@ -33,8 +28,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
     calcPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
     calcPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
   });
-
-  // getter
   get playerName1() {
     return this.formGroup.get('playerName1') as FormControl;
   }
@@ -71,7 +64,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
   get calcPoint4() {
     return this.formGroup.get('calcPoint4') as FormControl;
   }
-
   // 取得したルール
   rules: Rules = {
     radioGame: '',
@@ -92,175 +84,59 @@ export class AddResultComponent implements OnInit, OnDestroy {
     inputUma3: 0,
     inputUma4: 0,
   };
-
+  result$ = this.resultService.allResult$;
+  rules$ = this.rulesService.rules$;
+  players$ = this.playerService.players$;
+  tableColumns: string[] = ['result', 'createDate'];
   private onDestroy$ = new Subject();
 
   constructor(
+    private playerService: PlayerService,
     private rulesService: RulesService,
     private resultService: ResultService,
     private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // this.getRules();
     this.pointSubscriptions();
-
-    // sampleData
-    this.players = [
-      {
-        leagueId: '01',
-        playerId: '01',
-        playerName: 'catBloom',
-      },
-      {
-        leagueId: '01',
-        playerId: '02',
-        playerName: 'sample02',
-      },
-      {
-        leagueId: '01',
-        playerId: '03',
-        playerName: 'sample03',
-      },
-      {
-        leagueId: '01',
-        playerId: '04',
-        playerName: 'sample04',
-      },
-    ];
-
-    this.tableColumns = ['result', 'createDate'];
-    this.tableData = [
-      {
-        resultId: '0001',
-        rank: 1,
-        leagueId: '01',
-        playerId: '01',
-        playerName: 'catBloom',
-        point: 40000,
-        calcPoint: 40,
-        createDate: new Date('Sat Apr 02 2022 22:00:00 GMT+0900 (日本標準時)'),
-        group: 1,
-        resultData: [
-          {
-            resultId: '0001',
-            rank: 1,
-            leagueId: '01',
-            playerId: '01',
-            playerName: 'catBloom',
-            point: 40000,
-            calcPoint: 40,
-            createDate: new Date('2020/02/02'),
-            group: 1,
-          },
-          {
-            resultId: '0001',
-            rank: 2,
-            leagueId: '01',
-            playerId: '02',
-            playerName: 'sample02',
-            point: 30000,
-            calcPoint: 30,
-            createDate: new Date('2020/02/02'),
-            group: 1,
-          },
-          {
-            resultId: '0001',
-            rank: 3,
-            leagueId: '01',
-            playerId: '03',
-            playerName: 'sample03',
-            point: 20000,
-            calcPoint: 20,
-            createDate: new Date('2020/02/02'),
-            group: 1,
-          },
-          {
-            resultId: '0001',
-            rank: 4,
-            leagueId: '01',
-            playerId: '04',
-            playerName: 'sample04',
-            point: 10000,
-            calcPoint: 10,
-            createDate: new Date('2020/02/02'),
-            group: 1,
-          },
-        ],
-      },
-      {
-        resultId: '0002',
-        rank: 2,
-        leagueId: '01',
-        playerId: '01',
-        playerName: 'catBloom',
-        point: 20000,
-        calcPoint: 30,
-        createDate: new Date('Sat Apr 02 2022 23:00:00 GMT+0900 (日本標準時)'),
-        group: 2,
-        resultData: [
-          {
-            resultId: '0002',
-            rank: 1,
-            leagueId: '01',
-            playerId: '04',
-            playerName: 'sample04',
-            point: 60000,
-            calcPoint: 40,
-            createDate: new Date('2020/02/03'),
-            group: 2,
-          },
-          {
-            resultId: '0002',
-            rank: 2,
-            leagueId: '01',
-            playerId: '01',
-            playerName: 'catBloom',
-            point: 25000,
-            calcPoint: 30,
-            createDate: new Date('2020/02/03'),
-            group: 2,
-          },
-          {
-            resultId: '0002',
-            rank: 3,
-            leagueId: '01',
-            playerId: '03',
-            playerName: 'sample03',
-            point: 20000,
-            calcPoint: 20,
-            createDate: new Date('2020/02/03'),
-            group: 2,
-          },
-          {
-            resultId: '0002',
-            rank: 4,
-            leagueId: '01',
-            playerId: '02',
-            playerName: 'sample02',
-            point: -5000,
-            calcPoint: 10,
-            createDate: new Date('2020/02/03'),
-            group: 2,
-          },
-        ],
-      },
-    ];
+    this.activeRoute.params
+      .pipe(
+        takeUntil(this.onDestroy$),
+        map((params: Params) => params['league-id']),
+        distinctUntilChanged()
+      )
+      .subscribe((leagueId) => {
+        this.playerService.getPlayerList(leagueId);
+        this.rulesService.getRules(leagueId);
+        this.resultService.getAllResult(leagueId);
+      });
+    this.activeRoute.params
+      .pipe(
+        takeUntil(this.onDestroy$),
+        map((params: Params) => params['result-id']),
+        distinctUntilChanged()
+      )
+      .subscribe((resultId) => {
+        if (resultId !== undefined) {
+          this.selectResult(resultId);
+        }
+      });
+    this.rules$.pipe(takeUntil(this.onDestroy$)).subscribe((rules: Rules) => {
+      this.rules = rules;
+    });
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
   }
 
-  private getRules() {
-    const leagueId = this.activeRoute.snapshot.paramMap.get('league-id');
-    if (!leagueId) {
-      return;
-    } else {
-      this.rulesService.getRules(leagueId).subscribe((rules) => {
-        this.rules = rules;
+  selectResult(resultId: number) {
+    this.result$.pipe(takeUntil(this.onDestroy$)).subscribe((data) => {
+      const selectData = data.find((element) => {
+        return element.id == resultId;
       });
-    }
+      this.playerName1.setValue(selectData?.resultData[0].playerId);
+    });
   }
 
   private pointCheck() {

@@ -1,8 +1,10 @@
-export interface Player {
-  leagueId: string;
+export interface PlayerRequest {
+  leagueId: number;
   playerName: string;
 }
 
-export interface PlayerDataset extends Player {
-  playerId: string;
+export interface PlayerResponse extends PlayerRequest {
+  id: number;
+  playerGameCount?: number;
+  playerCalcPoint?: number;
 }

@@ -53,10 +53,6 @@ export class RulesComponent implements OnInit, OnDestroy {
     inputUma3: -10,
     inputUma4: -20,
   };
-
-  // 詳細ルール表示用のフォームコントロール
-  isAdvanced = new FormControl(false);
-
   formGroup = new FormGroup({
     radioGame: new FormControl('', [Validators.required]),
     radioDora: new FormControl('', [Validators.required]),
@@ -76,7 +72,6 @@ export class RulesComponent implements OnInit, OnDestroy {
     inputUma3: new FormControl(-5, [Validators.required, Validators.pattern(/^[\d-]+$/)]),
     inputUma4: new FormControl(-10, [Validators.required, Validators.pattern(/^[\d-]+$/)]),
   });
-
   get inputStartPoint() {
     return this.formGroup.get('inputStartPoint') as FormControl;
   }
@@ -116,7 +111,8 @@ export class RulesComponent implements OnInit, OnDestroy {
   get inputUma4() {
     return this.formGroup.get('inputUma4') as FormControl;
   }
-
+  // 詳細ルール表示用のフォームコントロール
+  isAdvanced = new FormControl(false);
   private subscriptions = new Subscription();
 
   constructor() {}
