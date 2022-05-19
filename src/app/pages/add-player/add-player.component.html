@@ -1,14 +1,13 @@
 <h2>プレイヤー登録</h2>
 
-<form [formGroup]="formGroup" autocomplete="off" class="formGroup">
+<form [formGroup]="formGroup" autocomplete="off" class="formGroup" #form="ngForm">
   <div class="add-player">
     <mat-form-field class="add-player__input" appearance="outline">
       <mat-label>プレイヤー名</mat-label>
       <input matInput formControlName="playerName" maxlength="20" />
     </mat-form-field>
-    <button class="add-player__button" mat-stroked-button color="accent">追加</button>
+    <button class="add-player__button" mat-stroked-button color="accent" (click)="postPlayer()">追加</button>
   </div>
 </form>
 
-<app-player-list [players]="players"></app-player-list>
-<!-- <app-player-list *ngIf="players$ | async as players" [players]="players"></app-player-list> -->
+<app-player-list *ngIf="players$ | async as players" [players]="players"></app-player-list>

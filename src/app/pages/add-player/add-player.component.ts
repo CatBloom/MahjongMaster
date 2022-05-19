@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { PlayerDataset } from 'src/app/shared/interfaces/player';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
+import { PlayerRequest } from 'src/app/shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
@@ -9,51 +11,40 @@ import { PlayerService } from 'src/app/shared/services/player.service';
   templateUrl: './add-player.component.html',
   styleUrls: ['./add-player.component.scss'],
 })
-export class AddPlayerComponent implements OnInit {
+export class AddPlayerComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
     playerName: new FormControl('', [Validators.required]),
   });
-  players: PlayerDataset[] = [];
-  // players$ = this.playerService.players$;
+  get playerName() {
+    return this.formGroup.get('playerName') as FormControl;
+  }
+  players$ = this.playerService.players$;
+  private onDestroy$ = new Subject();
 
   constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // apiからデータを取得
-    // const leagueId = this.activeRoute.snapshot.paramMap.get('league-id');
-    // if (!leagueId) {
-    //   return;
-    // } else {
-    //   this.playerService.getPlayerList(leagueId);
-    // }
+    this.activeRoute.params
+      .pipe(
+        takeUntil(this.onDestroy$),
+        map((params: Params) => params['league-id']),
+        distinctUntilChanged()
+      )
+      .subscribe((leagueId) => {
+        this.playerService.getPlayerList(leagueId);
+      });
+  }
 
-    // sampleData
-    this.players = [
-      {
-        leagueId: '01',
-        playerId: '01',
-        playerName: 'catBloom',
-      },
-      {
-        leagueId: '01',
-        playerId: '02',
-        playerName: 'player2',
-      },
-      {
-        leagueId: '01',
-        playerId: '03',
-        playerName: 'player3',
-      },
-      {
-        leagueId: '01',
-        playerId: '04',
-        playerName: 'player4',
-      },
-      {
-        leagueId: '01',
-        playerId: '05',
-        playerName: 'player5',
-      },
-    ];
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+  }
+
+  postPlayer() {
+    const player: PlayerRequest = {
+      leagueId: Number(this.activeRoute.snapshot.paramMap.get('league-id')),
+      playerName: this.playerName.value,
+    };
+    this.playerService.postPlayer(player);
+    this.playerName.reset();
   }
 }

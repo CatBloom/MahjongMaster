@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PlayerDataset } from '../../../../../shared/interfaces/player';
+import { PlayerResponse } from '../../../../../shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
   styleUrls: ['./player-list-edit.component.scss'],
 })
 export class PlayerListEditComponent implements OnInit {
-  @Input() player!: PlayerDataset;
+  @Input() player!: PlayerResponse;
   isPlayerEdit = false;
   inputPlayer: FormControl = new FormControl();
 
@@ -22,24 +22,19 @@ export class PlayerListEditComponent implements OnInit {
     this.isPlayerEdit = true;
   }
 
-  onDeleteClick() {
-    const playerData: PlayerDataset = {
-      leagueId: this.player.leagueId,
-      playerId: this.player.playerId,
-      playerName: this.player.playerName,
-    };
-    this.playerSevice.deletePlayer(playerData);
+  deletePlayer() {
+    this.playerSevice.deletePlayer(this.player.leagueId, this.player.id);
     this.isPlayerEdit = false;
   }
 
-  onSaveClick() {
+  updatePlayer() {
     if (this.inputPlayer.value !== this.player.playerName) {
-      const editData: PlayerDataset = {
+      const updatePlayerData: PlayerResponse = {
+        id: this.player.id,
         leagueId: this.player.leagueId,
-        playerId: this.player.playerId,
         playerName: this.inputPlayer.value,
       };
-      this.playerSevice.updatePlayer(editData);
+      this.playerSevice.updatePlayer(updatePlayerData);
     }
     this.isPlayerEdit = false;
   }

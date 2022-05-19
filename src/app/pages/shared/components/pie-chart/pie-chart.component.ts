@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration } from 'chart.js';
+import { PieData } from 'src/app/shared/interfaces/result';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-pie-chart',
@@ -8,11 +10,16 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit {
-  @Input() pieData!: number[];
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  @Input() set pieData(data: PieData) {
+    this.pieChartData.labels = data.dateLabels;
+    this.pieChartData.datasets = [{ data: data.ranks }];
+    this.chart?.update();
+  }
 
   // datasets
   public pieChartData: ChartConfiguration['data'] = {
-    labels: ['1位', '2位', '3位', '4位'],
+    labels: [],
     datasets: [
       {
         data: [],
@@ -52,9 +59,10 @@ export class PieChartComponent implements OnInit {
             dataArr.map((data) => {
               sum += Number(data);
             });
-            const percentage: string = ':' + ((value * 100) / sum).toFixed(1) + '%';
-            return percentage ? label + percentage : label;
+            const percentage = ':' + ((value * 100) / sum).toFixed(1) + '%';
+            return value !== 0 ? label + percentage : null;
           }
+          return;
         },
       },
     },
@@ -64,7 +72,5 @@ export class PieChartComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.pieChartData.datasets = [{ data: this.pieData }];
-  }
+  ngOnInit(): void {}
 }

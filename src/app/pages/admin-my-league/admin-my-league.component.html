@@ -1,5 +1,5 @@
-<h2>my大会</h2>
+<h2>大会リスト</h2>
 
-<app-button [buttonText]="'新規大会登録'" [icon]="iconFileCirclePlus" [routerLink]="'/add-league'"></app-button>
+<app-button [buttonText]="'新規大会登録'" [icon]="iconFileCirclePlus" [routerLink]="'/league/add'"></app-button>
 
-<app-league-list [leagueList]="leagueList"></app-league-list>
+<app-league-list *ngIf="leagueList$ | async as leagueList" [leagueList]="leagueList"></app-league-list>
