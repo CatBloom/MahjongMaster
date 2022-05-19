@@ -2,28 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Player, PlayerDataset } from '../interfaces/player';
+import { PlayerRequest, PlayerResponse } from '../interfaces/player';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerService {
-  private readonly apiUrl = 'http://localhost:3000'; //バックエンドにアクセスするURL
-  private playersSubject = new BehaviorSubject<PlayerDataset[]>([]);
-
-  constructor(private http: HttpClient) {}
-
+  private readonly apiUrl = 'http://localhost:3000';
+  private readonly mockUrl = 'api/player';
+  private playerSubject = new BehaviorSubject<PlayerResponse>({} as PlayerResponse);
+  private playersSubject = new BehaviorSubject<PlayerResponse[]>([]);
+  get player$() {
+    return this.playerSubject.asObservable();
+  }
   get players$() {
     return this.playersSubject.asObservable();
   }
 
-  // playerListを取得
-  getPlayerList(leagueId: string): void {
+  constructor(private http: HttpClient) {}
+
+  //playerListを取得
+  getPlayerList(leagueId: number): void {
     this.http
-      .get<{ data: PlayerDataset[] }>(`${this.apiUrl}/${leagueId}`)
+      .get<PlayerResponse[]>(`${this.mockUrl}`)
       .pipe(
         map((res) => {
-          return res.data;
+          return res;
         })
       )
       .subscribe((players) => {
@@ -31,32 +35,57 @@ export class PlayerService {
       });
   }
 
-  // player登録
-  postPlayer(player: Player): void {
+  //playerを取得
+  getPlayer(leagueId: number, playerId: number): void {
     this.http
-      .post<{ data: PlayerDataset }>(`${this.apiUrl}`, player)
+      .get<PlayerResponse>(`${this.mockUrl}/${leagueId}`)
       .pipe(
         map((res) => {
-          return res.data;
+          return res;
         })
       )
-      .subscribe(
-        (player) => {
-          this.getPlayerList(player.leagueId);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      .subscribe((player) => {
+        this.playerSubject.next(player);
+      });
   }
 
-  // playerName更新
-  updatePlayer(editPlayerData: PlayerDataset): void {
-    this.http.put(`${this.apiUrl}`, editPlayerData).pipe();
+  //player登録
+  postPlayer(player: PlayerRequest): void {
+    this.http
+      .post<PlayerResponse>(`${this.mockUrl}`, player)
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      )
+      .subscribe((player) => {
+        this.playersSubject.next(this.playersSubject.getValue().concat(player));
+      });
   }
 
-  // player削除
-  deletePlayer(playerData: PlayerDataset): void {
-    this.http.delete(`${this.apiUrl}/${playerData.leagueId}/${playerData.playerId}`).pipe();
+  //playerName更新
+  updatePlayer(updatePlayerData: PlayerResponse): void {
+    this.http
+      .put<PlayerResponse>(`${this.mockUrl}`, updatePlayerData)
+      .pipe()
+      .subscribe((player) => {
+        this.playersSubject.next(
+          this.playersSubject.getValue().map((players) => {
+            if (players.id === player.id) {
+              return player;
+            } else {
+              return players;
+            }
+          })
+        );
+      });
+  }
+
+  //player削除(削除はresultが残っていたらErrorを返す)
+  deletePlayer(leagueId: number, playerId: number): void {
+    this.http
+      .delete(`${this.mockUrl}/${leagueId}/${playerId}`)
+      .pipe()
+      .subscribe(() => {});
   }
 }
