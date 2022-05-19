@@ -78,7 +78,7 @@ import { DatePipe } from '@angular/common';
     FontAwesomeModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false }),
+    HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
