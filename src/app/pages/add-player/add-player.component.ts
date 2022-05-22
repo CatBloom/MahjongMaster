@@ -42,6 +42,9 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
   }
 
   postPlayer() {
+    if (this.formGroup.invalid) {
+      return;
+    }
     const player: PlayerRequest = {
       leagueId: Number(this.activeRoute.snapshot.paramMap.get('league-id')),
       playerName: this.playerName.value,
