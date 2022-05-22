@@ -7,8 +7,7 @@
         <div class="result-grid__name">
           <mat-form-field appearance="outline">
             <mat-label>名前</mat-label>
-            <mat-select formControlName="playerName1">
-              <!-- <ng-container *ngIf="players$ | async as players"> -->
+            <mat-select formControlName="playerName1" [errorStateMatcher]="matcher">
               <mat-option *ngFor="let player of players" [value]="player.id">
                 {{ player.playerName }}
               </mat-option>
@@ -18,12 +17,18 @@
         <div class="result-grid__point">
           <mat-form-field appearance="outline">
             <mat-label>点数</mat-label>
-            <input matInput maxlength="6" formControlName="playerPoint1" [appReplace]="playerPoint1" />
+            <input
+              matInput
+              maxlength="6"
+              formControlName="playerPoint1"
+              [errorStateMatcher]="matcher"
+              [appReplace]="playerPoint1"
+            />
           </mat-form-field>
         </div>
         <div class="result-grid__calc-point">
           <mat-form-field appearance="outline">
-            <input matInput readonly formControlName="calcPoint1" />
+            <input matInput readonly formControlName="calcPoint1" [errorStateMatcher]="matcher" />
           </mat-form-field>
         </div>
       </div>
@@ -32,7 +37,7 @@
         <div class="result-grid__name">
           <mat-form-field appearance="outline">
             <mat-label>名前</mat-label>
-            <mat-select formControlName="playerName2">
+            <mat-select formControlName="playerName2" [errorStateMatcher]="matcher">
               <mat-option *ngFor="let player of players" [value]="player.id">
                 {{ player.playerName }}
               </mat-option>
@@ -42,12 +47,18 @@
         <div class="result-grid__point">
           <mat-form-field appearance="outline">
             <mat-label>点数</mat-label>
-            <input matInput maxlength="6" formControlName="playerPoint2" [appReplace]="playerPoint2" />
+            <input
+              matInput
+              maxlength="6"
+              formControlName="playerPoint2"
+              [errorStateMatcher]="matcher"
+              [appReplace]="playerPoint2"
+            />
           </mat-form-field>
         </div>
         <div class="result-grid__calc-point">
           <mat-form-field appearance="outline">
-            <input matInput readonly formControlName="calcPoint2" />
+            <input matInput readonly formControlName="calcPoint2" [errorStateMatcher]="matcher" />
           </mat-form-field>
         </div>
       </div>
@@ -56,7 +67,7 @@
         <div class="result-grid__name">
           <mat-form-field appearance="outline">
             <mat-label>名前</mat-label>
-            <mat-select formControlName="playerName3">
+            <mat-select formControlName="playerName3" [errorStateMatcher]="matcher">
               <mat-option *ngFor="let player of players" [value]="player.id">
                 {{ player.playerName }}
               </mat-option>
@@ -66,12 +77,18 @@
         <div class="result-grid__point">
           <mat-form-field appearance="outline">
             <mat-label>点数</mat-label>
-            <input matInput maxlength="6" formControlName="playerPoint3" [appReplace]="playerPoint3" />
+            <input
+              matInput
+              maxlength="6"
+              formControlName="playerPoint3"
+              [errorStateMatcher]="matcher"
+              [appReplace]="playerPoint3"
+            />
           </mat-form-field>
         </div>
         <div class="result-grid__calc-point">
           <mat-form-field appearance="outline">
-            <input matInput readonly formControlName="calcPoint3" />
+            <input matInput readonly formControlName="calcPoint3" [errorStateMatcher]="matcher" />
           </mat-form-field>
         </div>
       </div>
@@ -80,7 +97,7 @@
         <div class="result-grid__name">
           <mat-form-field appearance="outline">
             <mat-label>名前</mat-label>
-            <mat-select formControlName="playerName4">
+            <mat-select formControlName="playerName4" [errorStateMatcher]="matcher">
               <mat-option *ngFor="let player of players" [value]="player.id">
                 {{ player.playerName }}
               </mat-option>
@@ -90,12 +107,18 @@
         <div class="result-grid__point">
           <mat-form-field appearance="outline">
             <mat-label>点数</mat-label>
-            <input matInput maxlength="6" formControlName="playerPoint4" [appReplace]="playerPoint4" />
+            <input
+              matInput
+              maxlength="6"
+              formControlName="playerPoint4"
+              [errorStateMatcher]="matcher"
+              [appReplace]="playerPoint4"
+            />
           </mat-form-field>
         </div>
         <div class="result-grid__calc-point">
           <mat-form-field appearance="outline">
-            <input matInput readonly formControlName="calcPoint4" />
+            <input matInput readonly formControlName="calcPoint4" [errorStateMatcher]="matcher" />
           </mat-form-field>
         </div>
       </div>

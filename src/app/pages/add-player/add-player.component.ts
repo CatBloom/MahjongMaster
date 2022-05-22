@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { PlayerRequest } from 'src/app/shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
+import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
 
 @Component({
   selector: 'app-add-player',
@@ -19,6 +20,7 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
     return this.formGroup.get('playerName') as FormControl;
   }
   players$ = this.playerService.players$;
+  matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject();
 
   constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}

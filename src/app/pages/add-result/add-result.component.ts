@@ -7,6 +7,7 @@ import { ResultService } from '../../shared/services/result.service';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { PlayerService } from 'src/app/shared/services/player.service';
+import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
 
 @Component({
   selector: 'app-add-result',
@@ -88,6 +89,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   rules$ = this.rulesService.rules$;
   players$ = this.playerService.players$;
   tableColumns: string[] = ['result', 'createDate'];
+  matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject();
 
   constructor(
