@@ -3,11 +3,11 @@
   <div class="league">
     <mat-form-field class="league__input" appearance="outline">
       <mat-label>大会名</mat-label>
-      <input matInput formControlName="leagueName" maxlength="40" />
+      <input matInput formControlName="leagueName" [errorStateMatcher]="matcher" maxlength="40" />
     </mat-form-field>
     <mat-form-field class="league__input" appearance="outline">
       <mat-label>大会説明</mat-label>
-      <textarea matInput formControlName="leagueManual" maxlength="100"></textarea>
+      <textarea matInput formControlName="leagueManual" [errorStateMatcher]="matcher" maxlength="100"></textarea>
     </mat-form-field>
     <mat-form-field class="league__input" appearance="outline">
       <mat-label>大会期間</mat-label>
@@ -22,7 +22,7 @@
           readonly
       /></ng-container>
       <!-- 整形データ -->
-      <input matInput readonly formControlName="leagueDisplayDate" />
+      <input matInput readonly formControlName="leagueDisplayDate" [errorStateMatcher]="matcher" />
       <mat-datepicker-toggle matSuffix [owlDateTimeTrigger]="dt1"></mat-datepicker-toggle>
       <owl-date-time [pickerMode]="'dialog'" [hour12Timer]="true" #dt1></owl-date-time>
     </mat-form-field>

@@ -4,7 +4,7 @@
   <div class="add-player">
     <mat-form-field class="add-player__input" appearance="outline">
       <mat-label>プレイヤー名</mat-label>
-      <input matInput formControlName="playerName" maxlength="20" />
+      <input matInput formControlName="playerName" [errorStateMatcher]="matcher" maxlength="20" />
     </mat-form-field>
     <button class="add-player__button" mat-stroked-button color="accent" (click)="postPlayer()">追加</button>
   </div>

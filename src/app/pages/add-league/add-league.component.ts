@@ -9,6 +9,7 @@ import { AddLeagueDialogComponent } from '../add-league/add-league-dialog/add-le
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
 
 @Component({
   selector: 'app-add-league',
@@ -56,6 +57,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     inputUma4: 0,
   };
   leagueId$ = this.leagueService.leagueId$;
+  matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject();
 
   constructor(
