@@ -125,7 +125,9 @@
     </ng-container>
 
     <div class="result-buttons">
-      <button class="result-buttons__button" mat-stroked-button color="accent">登録</button>
+      <button class="result-buttons__button" [disabled]="formGroup.invalid" mat-stroked-button color="accent">
+        登録
+      </button>
       <button class="result-buttons__button" mat-stroked-button color="warn">リセット</button>
     </div>
   </div>
