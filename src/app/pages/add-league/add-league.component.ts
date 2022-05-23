@@ -23,6 +23,25 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     leagueDate: new FormControl('', []),
     leagueDisplayDate: new FormControl('', []),
     rulesRadio: new FormControl('', [Validators.required]),
+    rulesGroup: new FormGroup({
+      radioGame: new FormControl('', [Validators.required]),
+      radioDora: new FormControl('', [Validators.required]),
+      radioTanyao: new FormControl('', [Validators.required]),
+      radioTime: new FormControl('', [Validators.required]),
+      inputStartPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputFinishPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputReturnPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputCalledPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputReachPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputDeposit: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputPenalty1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputPenalty2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputPenalty3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputUma1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputUma2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputUma3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      inputUma4: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+    }),
   });
   get leagueName() {
     return this.formGroup.get('leagueName') as FormControl;
@@ -36,26 +55,14 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   get leagueDisplayDate() {
     return this.formGroup.get('leagueDisplayDate') as FormControl;
   }
+  get rulesRadio() {
+    return this.formGroup.get('rulesRadio') as FormControl;
+  }
+  get rulesGroup() {
+    return this.formGroup.get('rulesGroup') as FormGroup;
+  }
   // 取得したルール
-  rules: Rules = {
-    radioGame: '',
-    radioDora: '',
-    radioTanyao: '',
-    radioTime: '',
-    inputStartPoint: 0,
-    inputFinishPoint: 0,
-    inputReturnPoint: 0,
-    inputCalledPoint: 0,
-    inputReachPoint: 0,
-    inputDeposit: 0,
-    inputPenalty1: 0,
-    inputPenalty2: 0,
-    inputPenalty3: 0,
-    inputUma1: 0,
-    inputUma2: 0,
-    inputUma3: 0,
-    inputUma4: 0,
-  };
+  rules: Rules = this.rulesGroup.value;
   leagueId$ = this.leagueService.leagueId$;
   matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject();
@@ -69,15 +76,16 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // 日付整形用
-    this.formGroup
-      .get('leagueDate')
-      ?.valueChanges.pipe(takeUntil(this.onDestroy$))
-      .subscribe(() => {
-        const leagueDate: Array<Date> = this.leagueDate.value;
-        const leagueStartDate = this.datePipe.transform(leagueDate[0], 'yyyy/MM/dd HH:mm');
-        const leagueFinishDate = this.datePipe.transform(leagueDate[1], 'yyyy/MM/dd HH:mm');
-        this.leagueDisplayDate.setValue(`${leagueStartDate}~${leagueFinishDate}`);
-      });
+    this.leagueDate.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+      const leagueDate: Array<Date> = this.leagueDate.value;
+      const leagueStartDate = this.datePipe.transform(leagueDate[0], 'yyyy/MM/dd HH:mm');
+      const leagueFinishDate = this.datePipe.transform(leagueDate[1], 'yyyy/MM/dd HH:mm');
+      this.leagueDisplayDate.setValue(`${leagueStartDate}~${leagueFinishDate}`);
+    });
+    // rules取得
+    this.rulesGroup.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+      this.rules = this.rulesGroup.value;
+    });
   }
 
   ngOnDestroy(): void {
@@ -92,7 +100,10 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   }
 
   postRules(leagueId: number) {
-    const newRules: Rules = this.rules;
+    const newRules: Rules =
+      this.rules.radioGame === '1' || this.rules.radioGame === '2'
+        ? this.rules
+        : { ...this.rules, inputPenalty3: 0, inputUma4: 0 };
     this.rulesService.postRules(newRules, leagueId);
   }
 
@@ -106,21 +117,22 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     this.leagueService.postLeague(newleague);
   }
 
-  setRules(rules: Rules) {
-    this.rules = rules;
-  }
-
   openDialog() {
     if (this.formGroup.invalid) {
       return;
     }
+
     const leagueDialog: LeagueDialog = {
       leagueName: this.leagueName.value,
       leagueManual: this.leagueManual.value,
       leagueStartDate: this.leagueDate.value[0],
       leagueFinishDate: this.leagueDate.value[1],
-      rules: this.rules,
+      rules:
+        this.rules.radioGame === '1' || this.rules.radioGame === '2'
+          ? this.rules
+          : { ...this.rules, inputPenalty3: 0, inputUma4: 0 },
     };
+
     //Dialogを表示
     const dialogRef = this.matDialog.open(AddLeagueDialogComponent, {
       width: '80%',
