@@ -42,6 +42,11 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
 import { JapanesePipe } from './shared/pipes/japanese.pipe';
 import { DatePipe } from '@angular/common';
 
+// firebase
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +84,8 @@ import { DatePipe } from '@angular/common';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
