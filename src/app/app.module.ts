@@ -31,6 +31,7 @@ import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
 import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
 import { TableResultRowComponent } from './pages/shared/components/table/table-result-row/table-result-row.component';
+import { TopComponent } from './pages/top/top.component';
 
 // service
 import { MockWebApiService } from './shared/api/mock-web-api.service';
@@ -70,6 +71,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     PlayerListComponent,
     PlayerListEditComponent,
     TableResultRowComponent,
+    TopComponent,
   ],
   imports: [
     BrowserModule,

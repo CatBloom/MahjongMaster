@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TopComponent } from './pages/top/top.component';
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
 import { AddLeagueComponent } from './pages/add-league/add-league.component';
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
@@ -8,7 +9,8 @@ import { PlayerDetailsComponent } from './pages/player-details/player-details.co
 import { AddResultComponent } from './pages/add-result/add-result.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'top', pathMatch: 'full' },
+  { path: 'top', component: TopComponent },
   { path: 'league', component: AdminMyLeagueComponent },
   { path: 'league/add', component: AddLeagueComponent },
   { path: 'league/:league-id', component: LeagueDetailsComponent },
