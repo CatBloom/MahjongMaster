@@ -53,6 +53,7 @@ export class AuthService {
   logout() {
     signOut(this.auth);
     this.userSubject$.next(null);
+    this.snack.openSnackBer('ログアウトしました', 'x');
     this.router.navigateByUrl('/top');
   }
 
