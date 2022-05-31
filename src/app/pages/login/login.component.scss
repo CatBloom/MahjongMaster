@@ -1,0 +1,36 @@
+@use 'variable' as var;
+@use 'mixin' as mixin;
+
+.login {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+  h2 {
+    @include mixin.title;
+  }
+}
+
+.login-inputs {
+  &__input {
+    width: 100%;
+  }
+}
+
+.login-buttons {
+  margin-top: 2rem;
+  &__button {
+    margin-top: 1rem;
+    p {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    button {
+      width: 100%;
+    }
+  }
+}
+
+:host::ng-deep .mat-form-field-wrapper {
+  margin-top: 0 !important;
+  padding: 0;
+}

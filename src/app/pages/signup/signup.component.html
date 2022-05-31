@@ -1,0 +1,29 @@
+<div class="signup">
+  <h2>新規アカウント登録</h2>
+  <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
+    <div class="signup-inputs">
+      <mat-form-field class="signup-inputs__input" appearance="outline">
+        <mat-label>メールアドレス</mat-label>
+        <input matInput type="email" formControlName="userMail" />
+      </mat-form-field>
+      <mat-form-field class="signup-inputs__input" appearance="outline">
+        <mat-label>名前</mat-label>
+        <input matInput type="text" formControlName="userName" />
+      </mat-form-field>
+      <mat-form-field class="signup-inputs__input" appearance="outline">
+        <mat-label>パスワード</mat-label>
+        <input matInput type="password" formControlName="userPassword" />
+      </mat-form-field>
+      <mat-error *ngIf="userPassword.errors?.['minlength']">6文字以上入力してください</mat-error>
+    </div>
+    <div class="signup-buttons">
+      <div class="signup-buttons__button">
+        <button mat-flat-button color="primary" (click)="signUp()">新規登録</button>
+      </div>
+      <div class="signup-buttons__button">
+        <p>すでにアカウントをお持ちの場合</p>
+        <button mat-stroked-button color="accent" routerLink="/login">ログイン</button>
+      </div>
+    </div>
+  </form>
+</div>
