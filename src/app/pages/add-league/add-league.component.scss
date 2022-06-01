@@ -1,14 +1,14 @@
 @use 'variable' as var;
 @use 'mixin' as mixin;
 
-h2 {
-  @include mixin.title;
-}
-
 .league {
   width: 70%;
   margin: auto;
   text-align: center;
+  h2 {
+    @include mixin.title;
+    text-align: left;
+  }
   &__input {
     width: 100%;
   }
@@ -30,7 +30,7 @@ h2 {
   font-size: 1.5rem;
 }
 
-::ng-deep .mat-form-field-wrapper {
+:host ::ng-deep .mat-form-field-wrapper {
   margin-top: 0 !important;
   padding: 0;
 }
