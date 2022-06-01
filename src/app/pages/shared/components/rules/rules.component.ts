@@ -2,8 +2,6 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Rules } from '../../../../shared/interfaces/rules';
-import { MahjongSoulRules, TenhouRules } from '../../constants/const-rules';
 
 @Component({
   selector: 'app-rules',
@@ -12,10 +10,6 @@ import { MahjongSoulRules, TenhouRules } from '../../constants/const-rules';
 })
 export class RulesComponent implements OnInit, OnDestroy {
   @Input() formGroup!: FormGroup;
-  // 雀魂公式ルール
-  mahjongsoulRules: Rules = MahjongSoulRules;
-  // 天鳳公式ルール
-  tenhouRules: Rules = TenhouRules;
 
   get rulesGroup() {
     return this.formGroup.get('rulesGroup') as FormGroup;
@@ -73,11 +67,6 @@ export class RulesComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.setRules();
-    this.rulesRadio.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      this.rulesGroup.reset();
-      this.setRules();
-    });
     // 4人麻雀と3人麻雀で必須項目を切り替える
     this.radioGame.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
       if (this.radioGame.value === '1' || this.radioGame.value === '2') {
@@ -92,18 +81,5 @@ export class RulesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
-  }
-
-  // 固定ルールをセットする関数
-  setRules() {
-    if (this.rulesRadio.value !== 'custom') {
-      const rulesName = this.rulesRadio.value;
-      for (const control in this.rulesGroup.controls) {
-        this.rulesGroup.get(control)?.setValue((this as never)[rulesName][control]);
-      }
-      this.rulesGroup.disable();
-    } else {
-      this.rulesGroup.enable();
-    }
   }
 }
