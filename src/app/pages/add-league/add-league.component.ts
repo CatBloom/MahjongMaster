@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
+import { MahjongSoulRules, TenhouRules } from '../shared/constants/const-rules';
 
 @Component({
   selector: 'app-add-league',
@@ -61,6 +62,10 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   get rulesGroup() {
     return this.formGroup.get('rulesGroup') as FormGroup;
   }
+  get radioGame() {
+    return this.rulesGroup.get('radioGame') as FormControl;
+  }
+
   // 取得したルール
   rules: Rules = this.rulesGroup.value;
   leagueId$ = this.leagueService.leagueId$;
@@ -82,14 +87,32 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
       const leagueFinishDate = this.datePipe.transform(leagueDate[1], 'yyyy/MM/dd HH:mm');
       this.leagueDisplayDate.setValue(`${leagueStartDate}~${leagueFinishDate}`);
     });
-    // rules取得
-    this.rulesGroup.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      this.rules = this.rulesGroup.value;
+    // rulesRadio変更時の処理
+    this.rulesRadio.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe((rulesRadioValue) => {
+      this.setRules(rulesRadioValue);
     });
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
+  }
+
+  // 固定ルールをセットする関数
+  setRules(rulesRadioValue: string) {
+    this.rulesGroup.reset();
+    switch (rulesRadioValue) {
+      case 'custom':
+        this.rulesGroup.enable();
+        break;
+      case 'mahjongsoulRules':
+        this.rulesGroup.setValue(MahjongSoulRules);
+        this.rulesGroup.disable();
+        break;
+      case 'tenhouRules':
+        this.rulesGroup.setValue(TenhouRules);
+        this.rulesGroup.disable();
+        break;
+    }
   }
 
   postData() {
@@ -101,9 +124,9 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
 
   postRules(leagueId: number) {
     const newRules: Rules =
-      this.rules.radioGame === '1' || this.rules.radioGame === '2'
-        ? this.rules
-        : { ...this.rules, inputPenalty3: 0, inputUma4: 0 };
+      this.radioGame.value === '1' || this.radioGame.value === '2'
+        ? this.rulesGroup.value
+        : { ...this.rulesGroup.value, inputPenalty3: 0, inputUma4: 0 };
     this.rulesService.postRules(newRules, leagueId);
   }
 
@@ -128,9 +151,9 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
       leagueStartDate: this.leagueDate.value[0],
       leagueFinishDate: this.leagueDate.value[1],
       rules:
-        this.rules.radioGame === '1' || this.rules.radioGame === '2'
-          ? this.rules
-          : { ...this.rules, inputPenalty3: 0, inputUma4: 0 },
+        this.radioGame.value === '1' || this.radioGame.value === '2'
+          ? this.rulesGroup.value
+          : { ...this.rulesGroup.value, inputPenalty3: 0, inputUma4: 0 },
     };
 
     //Dialogを表示
