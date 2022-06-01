@@ -31,6 +31,9 @@ import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
 import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
 import { TableResultRowComponent } from './pages/shared/components/table/table-result-row/table-result-row.component';
+import { TopComponent } from './pages/top/top.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 // service
 import { MockWebApiService } from './shared/api/mock-web-api.service';
@@ -41,6 +44,11 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
 // pipes
 import { JapanesePipe } from './shared/pipes/japanese.pipe';
 import { DatePipe } from '@angular/common';
+
+// firebase
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -65,6 +73,9 @@ import { DatePipe } from '@angular/common';
     PlayerListComponent,
     PlayerListEditComponent,
     TableResultRowComponent,
+    TopComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +90,8 @@ import { DatePipe } from '@angular/common';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

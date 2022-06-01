@@ -1,0 +1,24 @@
+<div class="login">
+  <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
+    <h2>ログイン</h2>
+    <div class="login-inputs">
+      <mat-form-field class="login-inputs__input" appearance="outline">
+        <mat-label>メールアドレス</mat-label>
+        <input matInput type="email" formControlName="userMail" />
+      </mat-form-field>
+      <mat-form-field class="login-inputs__input" appearance="outline">
+        <mat-label>パスワード</mat-label>
+        <input matInput type="password" formControlName="userPassword" />
+      </mat-form-field>
+    </div>
+    <div class="login-buttons">
+      <div class="login-buttons__button">
+        <button mat-flat-button color="primary" (click)="login()">ログイン</button>
+      </div>
+      <div class="login-buttons__button">
+        <p>アカウントをお持ちでない方はこちら</p>
+        <button mat-stroked-button color="accent" routerLink="/signup">新規登録</button>
+      </div>
+    </div>
+  </form>
+</div>

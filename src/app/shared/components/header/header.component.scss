@@ -1,3 +1,5 @@
+@use 'variable' as var;
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -9,4 +11,16 @@ span {
 .mat-toolbar-single-row {
   position: fixed;
   z-index: 2;
+}
+
+.header-session-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  height: 100%;
+  font-size: 1.5rem;
+  &:hover {
+    background-color: darken(var.$primary, 10%);
+  }
 }

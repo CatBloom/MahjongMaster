@@ -1,0 +1,36 @@
+@use 'variable' as var;
+@use 'mixin' as mixin;
+
+.signup {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+  h2 {
+    @include mixin.title;
+  }
+}
+
+.signup-inputs {
+  &__input {
+    width: 100%;
+  }
+}
+
+.signup-buttons {
+  margin-top: 2rem;
+  &__button {
+    margin-top: 1rem;
+    p {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    button {
+      width: 100%;
+    }
+  }
+}
+
+:host::ng-deep .mat-form-field-wrapper {
+  margin-top: 0 !important;
+  padding: 0;
+}
