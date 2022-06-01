@@ -28,15 +28,8 @@ export class AuthService {
   signUp(user: UserSignup) {
     createUserWithEmailAndPassword(this.auth, user.userMail, user.userPassword)
       .then((result) => {
-        updateProfile(result.user, { displayName: user.userName })
-          .then(() => {
-            //アカウント登録後にログインをする
-            const userLogin: UserLogin = { userMail: user.userMail, userPassword: user.userPassword };
-            this.login(userLogin);
-          })
-          .catch(() => {
-            this.snack.openSnackBer('Error', 'x');
-          });
+        this.addUserName(result.user, user.userName);
+        this.login(user);
       })
       .catch(() => this.snack.openSnackBer('Error', 'x'));
   }
@@ -55,6 +48,12 @@ export class AuthService {
     this.userSubject$.next(null);
     this.snack.openSnackBer('ログアウトしました', 'x');
     this.router.navigateByUrl('/top');
+  }
+
+  addUserName(user: User, userName: string) {
+    updateProfile(user, { displayName: userName })
+      .then(() => {})
+      .catch(() => this.snack.openSnackBer('Error', 'x'));
   }
 
   getAuthState() {
