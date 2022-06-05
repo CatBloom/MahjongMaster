@@ -1,17 +1,18 @@
+@use 'variable' as var;
 @use 'mixin' as mixin;
+
 .footer {
   height: 100%;
-  background-color: rgb(116, 117, 118);
+  background-color: var.$footerBackgroundColor;
   font-size: 1.5rem;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  color: #ffffff;
-
+  color: var.$deepFontColor;
   a {
-    color: #ffffff;
+    color: var.$deepFontColor;
     text-decoration: none;
     &:hover {
       text-decoration: underline;

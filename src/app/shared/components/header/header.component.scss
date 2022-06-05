@@ -19,7 +19,7 @@ span {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: white;
+  color: var.$deepFontColor;
   height: 100%;
   font-size: 1.5rem;
   &:hover {
