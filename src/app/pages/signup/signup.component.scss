@@ -10,10 +10,9 @@
   }
 }
 
-.signup-inputs {
-  &__input {
-    width: 100%;
-  }
+.signup-grid {
+  gap: 1rem;
+  display: grid;
 }
 
 .signup-buttons {
@@ -28,9 +27,4 @@
       width: 100%;
     }
   }
-}
-
-:host::ng-deep .mat-form-field-wrapper {
-  margin-top: 0 !important;
-  padding: 0;
 }

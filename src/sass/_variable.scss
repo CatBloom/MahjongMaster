@@ -6,7 +6,8 @@ $accent: mat.get-color-from-palette(mat.define-palette(mat.$teal-palette));
 $warn: mat.get-color-from-palette(mat.define-palette(mat.$red-palette));
 
 // color
-$backgroundColor: #ffffff;
+$backgroundColor: rgb(240, 241, 245);
+$mainBackgroundColor: #ffffff;
 
 // font-color
 $normalFontColor: #333333;

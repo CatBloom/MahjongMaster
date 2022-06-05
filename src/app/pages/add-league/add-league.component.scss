@@ -2,15 +2,8 @@
 @use 'mixin' as mixin;
 
 .league {
-  width: 70%;
-  margin: auto;
-  text-align: center;
   h2 {
     @include mixin.title;
-    text-align: left;
-  }
-  &__input {
-    width: 100%;
   }
   &__radio {
     margin-top: 2rem;
@@ -25,18 +18,7 @@
   }
 }
 
-// DatePicker用のstyle
-::ng-deep .owl-dt-container {
-  font-size: 1.5rem;
-}
-
-:host ::ng-deep .mat-form-field-wrapper {
-  margin-top: 0 !important;
-  padding: 0;
-}
-
-@media screen and (max-width: 1000px) {
-  .league {
-    width: 100%;
-  }
+.league-grid {
+  display: grid;
+  gap: 1rem;
 }

@@ -1,8 +1,13 @@
-<app-header></app-header>
 <div class="container">
-  <div class="main">
-    <router-outlet></router-outlet>
+  <div class="grid">
+    <div class="grid__header">
+      <app-header></app-header>
+    </div>
+    <div class="grid__main">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="grid__footer">
+      <footer></footer>
+    </div>
   </div>
 </div>
-<!-- 開発用:削除予定 -->
-<footer class="footer"></footer>

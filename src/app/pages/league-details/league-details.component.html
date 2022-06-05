@@ -1,4 +1,4 @@
-<ng-container *ngIf="league$ | async as league">
+<div class="league-details" *ngIf="league$ | async as league">
   <h2>{{ league.leagueName }}</h2>
   <ng-container>
     <div class="league-buttons">
@@ -15,27 +15,26 @@
       </button>
     </div>
   </ng-container>
-  <div class="league-details">
-    <p class="league-details__title">大会期間</p>
-    <mat-divider></mat-divider>
-    <p>
-      {{ league.leagueStartDate | date: 'yyyy/MM/dd HH:mm' }} ~
-      {{ league.leagueFinishDate | date: 'yyyy/MM/dd HH:mm' }}
-    </p>
-    <p class="league-details__title">大会説明</p>
-    <mat-divider></mat-divider>
-    <p class="league-details__content" *ngIf="league$ | async as league">{{ league.leagueManual }}</p>
-    <p class="league-details__title">
-      ルール
-      <mat-slide-toggle (change)="isRules = isRules === false ? true : false"></mat-slide-toggle>
-    </p>
-    <mat-divider></mat-divider>
-    <ng-container *ngIf="isRules">
-      <app-rule-list *ngIf="rules$ | async as rules" [rules]="rules"></app-rule-list>
-    </ng-container>
-  </div>
 
-  <div class="material league-table">
+  <p class="league-details__title">大会期間</p>
+  <mat-divider></mat-divider>
+  <p>
+    {{ league.leagueStartDate | date: 'yyyy/MM/dd HH:mm' }} ~
+    {{ league.leagueFinishDate | date: 'yyyy/MM/dd HH:mm' }}
+  </p>
+  <p class="league-details__title">大会説明</p>
+  <mat-divider></mat-divider>
+  <p class="league-details__content" *ngIf="league$ | async as league">{{ league.leagueManual }}</p>
+  <p class="league-details__title">
+    ルール
+    <mat-slide-toggle (change)="isRules = isRules === false ? true : false"></mat-slide-toggle>
+  </p>
+  <mat-divider></mat-divider>
+  <ng-container *ngIf="isRules">
+    <app-rule-list *ngIf="rules$ | async as rules" [rules]="rules"></app-rule-list>
+  </ng-container>
+
+  <div class="league-table">
     <app-table
       *ngIf="leagueResult$ | async as leagueResult"
       [columns]="tableColumns"
@@ -43,4 +42,4 @@
       [clickOption]="'playerLink'"
     ></app-table>
   </div>
-</ng-container>
+</div>

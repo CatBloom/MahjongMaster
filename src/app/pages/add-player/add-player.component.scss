@@ -1,8 +1,10 @@
 @use 'variable' as var;
 @use 'mixin' as mixin;
 
-h2 {
-  @include mixin.title;
+.player {
+  h2 {
+    @include mixin.title;
+  }
 }
 
 .add-player {
@@ -11,15 +13,10 @@ h2 {
   flex-direction: row;
   gap: 1rem;
   &__input {
-    width: 70%;
+    width: 80%;
   }
   &__button {
-    width: 10%;
+    width: 8rem;
     font-size: 2rem;
   }
-}
-
-:host ::ng-deep .mat-form-field-wrapper {
-  margin: 0 !important;
-  padding: 0;
 }

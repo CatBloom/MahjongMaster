@@ -1,13 +1,10 @@
 @use 'variable' as var;
 @use 'mixin' as mixin;
 
-h2 {
-  @include mixin.title;
-}
-
 .result {
-  width: 50%;
-  margin: auto;
+  h2 {
+    @include mixin.title;
+  }
   .result-grid {
     display: grid;
     gap: 0.5rem;
@@ -25,6 +22,9 @@ h2 {
       grid-row: 2 / 3;
       background-color: rgb(241, 241, 241);
     }
+    mat-form-field {
+      width: 100%;
+    }
   }
   .result-buttons {
     display: flex;
@@ -40,19 +40,4 @@ h2 {
 .result-table {
   margin-top: 2rem;
   @include mixin.material;
-}
-
-::ng-deep.mat-form-field {
-  width: 100%;
-}
-
-:host ::ng-deep .mat-form-field-wrapper {
-  margin: 0 !important;
-  padding: 0;
-}
-
-@media screen and (max-width: 1000px) {
-  .result {
-    width: 100%;
-  }
 }
