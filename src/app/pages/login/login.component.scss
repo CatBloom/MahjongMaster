@@ -10,10 +10,9 @@
   }
 }
 
-.login-inputs {
-  &__input {
-    width: 100%;
-  }
+.login-grid {
+  gap: 1rem;
+  display: grid;
 }
 
 .login-buttons {
@@ -28,9 +27,4 @@
       width: 100%;
     }
   }
-}
-
-:host::ng-deep .mat-form-field-wrapper {
-  margin-top: 0 !important;
-  padding: 0;
 }

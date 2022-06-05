@@ -1,6 +1,6 @@
-<form [formGroup]="formGroup" autocomplete="off" class="formGroup">
+<div class="result">
   <h2>成績登録</h2>
-  <div class="result">
+  <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
     <ng-container *ngIf="players$ | async as players">
       <mat-label>1位</mat-label>
       <div class="result-grid">
@@ -130,13 +130,14 @@
       </button>
       <button class="result-buttons__button" mat-stroked-button color="warn">リセット</button>
     </div>
-  </div>
-  <div class="result-table">
-    <app-table
-      *ngIf="result$ | async as result"
-      [columns]="tableColumns"
-      [results]="result"
-      [clickOption]="'updateResultLink'"
-    ></app-table>
-  </div>
-</form>
+
+    <div class="result-table">
+      <app-table
+        *ngIf="result$ | async as result"
+        [columns]="tableColumns"
+        [results]="result"
+        [clickOption]="'updateResultLink'"
+      ></app-table>
+    </div>
+  </form>
+</div>
