@@ -1,13 +1,50 @@
+@use 'variable' as var;
+@use 'mixin' as mixin;
+
 .container {
-  min-height: 100%;
-  min-width: 375px;
-  margin: auto;
-  width: 70%;
-  .main {
-    padding-top: 7.5rem;
+  background-color: var.$backgroundColor;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 2fr 1fr;
+  &__header {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    height: 64px;
+  }
+  &__main {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    background-color: var.$mainBackgroundColor;
+    min-height: 80vh;
+    padding: 2rem;
+    margin: 1rem;
+    @include mixin.material;
+  }
+  &__footer {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
   }
 }
-.footer {
-  // 開発用:削除予定
-  height: 5rem;
+
+// mat-form-fieldのカスタム
+::ng-deep .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0;
+}
+
+// DatePicker用のstyle
+::ng-deep .owl-dt-container {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid {
+    &__main {
+      grid-column: 1 / 4;
+      grid-row: 2 / 3;
+    }
+  }
 }
