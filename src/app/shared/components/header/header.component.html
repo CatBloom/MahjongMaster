@@ -4,7 +4,4 @@
   <button class="header-session-button" *ngIf="(user$ | async) === null" routerLink="/login">ログイン</button>
   <button class="header-session-button" *ngIf="user$ | async" (click)="logout()">ログアウト</button>
   <button class="header-session-button" routerLink="/signup">アカウント作成</button>
-  <button mat-icon-button class="icon favorite-icon" aria-label="Icon-button with heart icon">
-    <fa-icon [icon]="iconTwitter" size="2x"></fa-icon>
-  </button>
 </mat-toolbar>

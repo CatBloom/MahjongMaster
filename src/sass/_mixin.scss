@@ -9,3 +9,9 @@
   @include mat.elevation(2);
   border-radius: 0.5rem;
 }
+
+@mixin center {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}

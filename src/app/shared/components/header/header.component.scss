@@ -1,4 +1,5 @@
 @use 'variable' as var;
+@use '@angular/material' as mat;
 
 .spacer {
   flex: 1 1 auto;
@@ -11,6 +12,7 @@ span {
 .mat-toolbar-single-row {
   position: fixed;
   z-index: 2;
+  @include mat.elevation(4);
 }
 
 .header-session-button {
