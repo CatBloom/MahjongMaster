@@ -14,6 +14,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 // components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 import { AddLeagueComponent } from './pages/add-league/add-league.component';
 import { AddLeagueDialogComponent } from './pages/add-league/add-league-dialog/add-league-dialog.component';
 import { AddResultComponent } from './pages/add-result/add-result.component';
@@ -54,6 +55,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
     AddLeagueComponent,
     AddLeagueDialogComponent,
     AddResultComponent,
