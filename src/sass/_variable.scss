@@ -5,12 +5,13 @@ $primary: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette));
 $accent: mat.get-color-from-palette(mat.define-palette(mat.$teal-palette));
 $warn: mat.get-color-from-palette(mat.define-palette(mat.$red-palette));
 
-// color
+// backgroundcolor
 $backgroundColor: rgb(240, 241, 245);
 $mainBackgroundColor: #ffffff;
+$footerBackgroundColor: rgb(116, 117, 118);
 
 // font-color
 $normalFontColor: #333333;
-$hoverFontColor: #ffffff;
+$deepFontColor: #ffffff;
 $titleFontColor: darken($primary, 10%);
 $subTitleFontColor: darken($accent, 10%);
