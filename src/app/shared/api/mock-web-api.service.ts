@@ -76,6 +76,7 @@ export class MockWebApiService implements InMemoryDbService {
           playerName: 'catBloom',
           playerGameCount: 34,
           playerCalcPoint: 200.5,
+          playerAverage: 2.3,
         },
         {
           id: 2,
@@ -83,6 +84,7 @@ export class MockWebApiService implements InMemoryDbService {
           playerName: 'player2',
           playerGameCount: 34,
           playerCalcPoint: 190.5,
+          playerAverage: 2.4,
         },
         {
           id: 3,
@@ -90,6 +92,7 @@ export class MockWebApiService implements InMemoryDbService {
           playerName: 'player3',
           playerGameCount: 34,
           playerCalcPoint: -15,
+          playerAverage: 2.6,
         },
         {
           id: 4,
@@ -97,6 +100,7 @@ export class MockWebApiService implements InMemoryDbService {
           playerName: 'player4',
           playerGameCount: 34,
           playerCalcPoint: -15,
+          playerAverage: 2.7,
         },
       ],
       result: [

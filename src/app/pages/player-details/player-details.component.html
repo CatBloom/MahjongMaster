@@ -2,23 +2,28 @@
   <h2>{{ player.playerName }}</h2>
 
   <div class="player-grid">
-    <div class="material grid-item__total-game">
+    <div class="material player-grid__total-game">
       <p class="player-grid__title">対戦回数</p>
       <mat-divider></mat-divider>
       <p class="player-grid__contents">{{ player.playerGameCount }}</p>
     </div>
-    <div class="material grid-item__total-point">
+    <div class="material player-grid__total-point">
       <p class="player-grid__title">合計得点</p>
       <mat-divider></mat-divider>
       <p class="player-grid__contents">{{ player.playerCalcPoint }}</p>
     </div>
-    <div class="material grid-item__line">
+    <div class="material player-grid__total-average">
+      <p class="player-grid__title">平均着順</p>
+      <mat-divider></mat-divider>
+      <p class="player-grid__contents">{{ player.playerAverage }}</p>
+    </div>
+    <div class="material player-grid__line">
       <app-line-chart *ngIf="lineData$ | async as lineData" [lineData]="lineData"></app-line-chart>
     </div>
-    <div class="material grid-item__pie">
+    <div class="material player-grid__pie">
       <app-pie-chart *ngIf="pieData$ | async as pieData" [pieData]="pieData"></app-pie-chart>
     </div>
-    <div class="material grid-item__table">
+    <div class="material player-grid__table">
       <app-table
         *ngIf="playerResult$ | async as playerResult"
         [columns]="tableColumns"

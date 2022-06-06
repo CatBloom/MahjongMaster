@@ -1,32 +1,28 @@
 <div class="result-container">
   <div class="result-container__item">
     <a routerLink="/player/{{ result.resultData[0].leagueId }}/{{ result.resultData[0].playerId }}">
-      <span>1位:</span>{{ result.resultData[0].playerName }}/{{ result.resultData[0].point }}/{{
-        result.resultData[0].calcPoint
-      }}</a
-    >
+      <span class="result-container__item--name">1位:{{ result.resultData[0].playerName }}</span>
+      <span>【{{ result.resultData[0].point }},{{ result.resultData[0].calcPoint }}】</span>
+    </a>
   </div>
   <div class="result-container__item">
     <a routerLink="/player/{{ result.resultData[1].leagueId }}/{{ result.resultData[1].playerId }}">
-      <span>2位:</span>{{ result.resultData[1].playerName }}/{{ result.resultData[1].point }}/{{
-        result.resultData[1].calcPoint
-      }}</a
-    >
+      <span class="result-container__item--name">2位:{{ result.resultData[1].playerName }}</span>
+      <span>【{{ result.resultData[1].point }},{{ result.resultData[1].calcPoint }}】</span>
+    </a>
   </div>
 </div>
 <div class="result-container">
   <div class="result-container__item">
     <a routerLink="/player/{{ result.resultData[2].leagueId }}/{{ result.resultData[2].playerId }}">
-      <span>3位:</span>{{ result.resultData[2].playerName }}/{{ result.resultData[2].point }}/{{
-        result.resultData[2].calcPoint
-      }}</a
-    >
+      <span class="result-container__item--name">3位:{{ result.resultData[2].playerName }}</span>
+      <span>【{{ result.resultData[2].point }},{{ result.resultData[2].calcPoint }}】</span>
+    </a>
   </div>
   <div class="result-container__item">
     <a routerLink="/player/{{ result.resultData[3].leagueId }}/{{ result.resultData[3].playerId }}">
-      <span>4位:</span>{{ result.resultData[3].playerName }}/{{ result.resultData[3].point }}/{{
-        result.resultData[3].calcPoint
-      }}</a
-    >
+      <span class="result-container__item--name">4位:{{ result.resultData[3].playerName }}</span
+      ><span>【{{ result.resultData[3].point }},{{ result.resultData[3].calcPoint }}】</span>
+    </a>
   </div>
 </div>
