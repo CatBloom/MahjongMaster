@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LeagueResultResponse } from '../../shared/interfaces/result';
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { RulesService } from 'src/app/shared/services/rules.service';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -15,7 +14,7 @@ export class LeagueDetailsComponent implements OnInit, OnDestroy {
   league$ = this.leagueService.league$;
   rules$ = this.rulesService.rules$;
   leagueResult$ = this.resultService.leagueResult$;
-  tableColumns: string[] = ['rank', 'playerName', 'playerGameCount', 'playerCalcPoint', 'date'];
+  tableColumns: string[] = ['rank', 'playerName', 'playerGameCount', 'playerCalcPoint'];
   isRules = false;
   private onDestroy$ = new Subject();
 
