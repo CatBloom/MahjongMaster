@@ -3,6 +3,7 @@
 
 .container {
   background-color: var.$backgroundColor;
+  min-width: 375px;
 }
 
 .grid {
