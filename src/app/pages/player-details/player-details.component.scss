@@ -61,16 +61,16 @@ h2 {
   .player-grid {
     &__line {
       grid-column: 1 / 4;
-      grid-row: 2 / 4;
+      grid-row: 2 / 3;
     }
     &__pie {
       grid-column: 1 / 4;
-      grid-row: 4 / 5;
+      grid-row: 3 / 4;
       width: 100%;
     }
     &__table {
       grid-column: 1 / 4;
-      grid-row: 5 / 6;
+      grid-row: 4 / 5;
     }
   }
 }
