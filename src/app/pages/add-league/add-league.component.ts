@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
-import { MahjongSoulRules, TenhouRules } from '../shared/constants/const-rules';
+import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../shared/constants/const-rules';
 
 @Component({
   selector: 'app-add-league',
@@ -101,8 +101,9 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   setRules(rulesRadioValue: string) {
     this.rulesGroup.reset();
     switch (rulesRadioValue) {
-      case 'custom':
-        this.rulesGroup.enable();
+      case 'mleagueRules':
+        this.rulesGroup.setValue(MLeagueRules);
+        this.rulesGroup.disable();
         break;
       case 'mahjongsoulRules':
         this.rulesGroup.setValue(MahjongSoulRules);
@@ -111,6 +112,9 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
       case 'tenhouRules':
         this.rulesGroup.setValue(TenhouRules);
         this.rulesGroup.disable();
+        break;
+      case 'custom':
+        this.rulesGroup.enable();
         break;
     }
   }
