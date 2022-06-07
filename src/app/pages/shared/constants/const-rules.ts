@@ -40,3 +40,23 @@ export const TenhouRules: Rules = {
   inputUma3: -10,
   inputUma4: -20,
 };
+// Mリーグ公式ルール
+export const MLeagueRules: Rules = {
+  radioGame: '2',
+  radioDora: '2',
+  radioTanyao: '1',
+  radioTime: '4',
+  inputStartPoint: 25000,
+  inputFinishPoint: 0,
+  inputReturnPoint: 30000,
+  inputCalledPoint: 0,
+  inputReachPoint: 1000,
+  inputDeposit: 300,
+  inputPenalty1: 1000,
+  inputPenalty2: 1500,
+  inputPenalty3: 3000,
+  inputUma1: 30,
+  inputUma2: 10,
+  inputUma3: -10,
+  inputUma4: -30,
+};
