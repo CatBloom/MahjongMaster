@@ -1,14 +1,10 @@
 @use 'variable' as var;
 @use 'mixin' as mixin;
 
-h2 {
-  @include mixin.title;
-}
-
-.player-name {
-  color: var.$titleFontColor;
-  margin-top: 2rem;
-  font-size: 2.5rem;
+.player-details {
+  h2 {
+    @include mixin.title;
+  }
 }
 
 .player-grid {

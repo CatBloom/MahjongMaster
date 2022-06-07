@@ -1,6 +1,5 @@
-<ng-container *ngIf="player$ | async as player">
+<div class="player-details" *ngIf="player$ | async as player">
   <h2>{{ player.playerName }}</h2>
-
   <div class="player-grid">
     <div class="material player-grid__total-game">
       <p class="player-grid__title">対戦回数</p>
@@ -31,4 +30,4 @@
       ></app-table>
     </div>
   </div>
-</ng-container>
+</div>
