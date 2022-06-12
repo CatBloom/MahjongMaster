@@ -2,8 +2,6 @@
 @use 'mixin' as mixin;
 
 .login {
-  width: 70%;
-  margin: auto;
   text-align: center;
   h2 {
     @include mixin.title;
