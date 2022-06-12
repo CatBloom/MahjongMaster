@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { UserSignup, UserLogin } from '../interfaces/user';
 import { SnackService } from '../services/snack.service';
 import { BehaviorSubject } from 'rxjs';
+import { SpinnerService } from '../services/spinner.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,31 +24,51 @@ export class AuthService {
     return this.userSubject$.asObservable();
   }
 
-  constructor(@Optional() private auth: Auth, private router: Router, private snack: SnackService) {}
+  constructor(
+    @Optional() private auth: Auth,
+    private router: Router,
+    private snack: SnackService,
+    private spinner: SpinnerService
+  ) {}
 
   signUp(user: UserSignup) {
+    this.spinner.showSpinner();
     createUserWithEmailAndPassword(this.auth, user.userMail, user.userPassword)
       .then((result) => {
         this.addUserName(result.user, user.userName);
+      })
+      .then(() => {
         this.login(user);
       })
-      .catch(() => this.snack.openSnackBer('Error', 'x'));
+      .catch(() => this.snack.openSnackBer('Error', 'x'))
+      .finally(() => {
+        this.spinner.hideSpinner();
+      });
   }
 
   login(user: UserLogin) {
+    this.spinner.showSpinner();
     signInWithEmailAndPassword(this.auth, user.userMail, user.userPassword)
       .then((result) => {
         this.userSubject$.next(result.user);
         this.router.navigateByUrl('/league');
       })
-      .catch(() => this.snack.openSnackBer('Error', 'x'));
+      .catch(() => this.snack.openSnackBer('Error', 'x'))
+      .finally(() => {
+        this.spinner.hideSpinner();
+      });
   }
 
   logout() {
-    signOut(this.auth);
-    this.userSubject$.next(null);
-    this.snack.openSnackBer('ログアウトしました', 'x');
-    this.router.navigateByUrl('/top');
+    signOut(this.auth)
+      .then(() => {
+        this.userSubject$.next(null);
+        this.snack.openSnackBer('ログアウトしました', 'x');
+        this.router.navigateByUrl('/top');
+      })
+      .catch(() => {
+        this.snack.openSnackBer('Error', 'x');
+      });
   }
 
   addUserName(user: User, userName: string) {
