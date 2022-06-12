@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -45,6 +45,9 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
 // pipes
 import { JapanesePipe } from './shared/pipes/japanese.pipe';
 import { DatePipe } from '@angular/common';
+
+// interceptor
+import { SpinnerInterceptor } from './shared/interceptor/spinner.interceptor';
 
 // firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -95,7 +98,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
