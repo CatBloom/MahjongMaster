@@ -35,6 +35,7 @@ import { TableResultRowComponent } from './pages/shared/components/table/table-r
 import { TopComponent } from './pages/top/top.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { MenuListComponent } from './shared/components/menu-list/menu-list.component';
 
 // service
 import { MockWebApiService } from './shared/api/mock-web-api.service';
@@ -81,6 +82,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     TopComponent,
     LoginComponent,
     SignupComponent,
+    MenuListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 @use 'variable' as var;
 @use '@angular/material' as mat;
+@use 'mixin' as mixin;
 
 .spacer {
   flex: 1 1 auto;
@@ -18,12 +19,6 @@
 }
 
 .header-session-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: var.$deepFontColor;
-  height: 100%;
-  font-size: 1.5rem;
   &:hover {
     background-color: darken(var.$primary, 10%);
   }

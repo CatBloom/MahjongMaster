@@ -1,7 +1,14 @@
 <mat-toolbar color="primary">
-  <a class="header-title" routerLink="/"> TitleLogo</a>
+  <a class="header-title" routerLink="/">TitleLogo</a>
   <span class="spacer"></span>
-  <button class="header-session-button" *ngIf="(user$ | async) === null" routerLink="/login">ログイン</button>
-  <button class="header-session-button" *ngIf="user$ | async" (click)="logout()">ログアウト</button>
-  <button class="header-session-button" routerLink="/signup">アカウント作成</button>
+  <ng-template #elseUser>
+    <button class="header-session-button" mat-button routerLink="/signup">アカウント作成</button>
+    <button class="header-session-button" mat-button routerLink="/login">ログイン</button>
+  </ng-template>
+  <button *ngIf="user$ | async as user; else elseUser" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+    <mat-menu #menu="matMenu">
+      <app-menu-list [userName]="user.displayName"></app-menu-list>
+    </mat-menu>
+  </button>
 </mat-toolbar>

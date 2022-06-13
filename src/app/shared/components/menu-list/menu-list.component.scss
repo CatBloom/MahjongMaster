@@ -1,0 +1,10 @@
+@use 'variable' as var;
+@use 'mixin' as mixin;
+
+.menu-list {
+  mat-label {
+    @include mixin.center;
+    padding-bottom: 1rem;
+    color: var.$primary;
+  }
+}
