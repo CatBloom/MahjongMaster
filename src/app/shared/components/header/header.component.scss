@@ -5,13 +5,15 @@
   flex: 1 1 auto;
 }
 
-span {
-  font-size: 3rem;
+.header-title {
+  text-decoration: none;
+  color: var.$deepFontColor;
+  font-size: 2.5rem;
 }
 
 .mat-toolbar-single-row {
   position: fixed;
-  z-index: 2;
+  z-index: 1000;
   @include mat.elevation(4);
 }
 

@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span></span>
+  <a class="header-title" routerLink="/"> TitleLogo</a>
   <span class="spacer"></span>
   <button class="header-session-button" *ngIf="(user$ | async) === null" routerLink="/login">ログイン</button>
   <button class="header-session-button" *ngIf="user$ | async" (click)="logout()">ログアウト</button>
