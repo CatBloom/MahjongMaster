@@ -1,18 +1,10 @@
 @use 'variable' as var;
 
-.league-list {
-  .league-list-item {
-    list-style-type: none;
+.league-list-item {
+  a {
     font-size: 2rem;
-
-    a {
-      text-decoration: none;
-      color: var.$normalFontColor;
-      font-size: 2rem;
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    text-decoration: none;
+    color: var.$normalFontColor;
+    width: 100%;
   }
 }
