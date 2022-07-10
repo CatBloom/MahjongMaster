@@ -9,7 +9,7 @@ import { MaterialModule } from './material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 // components
 import { AppComponent } from './app.component';
@@ -38,7 +38,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { MenuListComponent } from './shared/components/menu-list/menu-list.component';
 
 // service
-import { MockWebApiService } from './shared/api/mock-web-api.service';
+// import { MockWebApiService } from './shared/api/mock-web-api.service';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -96,7 +96,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     FontAwesomeModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
+    // HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
