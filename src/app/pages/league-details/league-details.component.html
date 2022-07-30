@@ -1,5 +1,5 @@
 <div class="league-details" *ngIf="league$ | async as league">
-  <h2>{{ league.leagueName }}</h2>
+  <h2>{{ league.name }}</h2>
   <ng-container>
     <div class="league-buttons">
       <button
@@ -10,28 +10,30 @@
       >
         プレイヤー追加
       </button>
-      <button class="league-buttons__button" mat-stroked-button color="accent" routerLink="/result/add/{{ league.id }}">
+      <button class="league-buttons__button" mat-stroked-button color="accent" routerLink="/game/add/{{ league.id }}">
         成績追加
       </button>
     </div>
   </ng-container>
 
-  <p class="league-details__title">大会期間</p>
-  <mat-divider></mat-divider>
-  <p>
-    {{ league.leagueStartDate | date: 'yyyy/MM/dd HH:mm' }} ~
-    {{ league.leagueFinishDate | date: 'yyyy/MM/dd HH:mm' }}
-  </p>
+  <ng-container *ngIf="league.startAt">
+    <p class="league-details__title">大会期間</p>
+    <mat-divider></mat-divider>
+    <p>
+      {{ league.startAt | date: 'yyyy/MM/dd HH:mm' }} ~
+      {{ league.finishAt | date: 'yyyy/MM/dd HH:mm' }}
+    </p>
+  </ng-container>
   <p class="league-details__title">大会説明</p>
   <mat-divider></mat-divider>
-  <p class="league-details__content" *ngIf="league$ | async as league">{{ league.leagueManual }}</p>
+  <p class="league-details__content">{{ league.manual }}</p>
   <p class="league-details__title">
     ルール
     <mat-slide-toggle (change)="isRules = isRules === false ? true : false"></mat-slide-toggle>
   </p>
   <mat-divider></mat-divider>
   <ng-container *ngIf="isRules">
-    <app-rule-list *ngIf="rules$ | async as rules" [rules]="rules"></app-rule-list>
+    <app-rule-list [rules]="league.rules"></app-rule-list>
   </ng-container>
 
   <div class="league-table">
@@ -39,7 +41,7 @@
       *ngIf="leagueResult$ | async as leagueResult"
       [columns]="tableColumns"
       [results]="leagueResult"
-      [clickOption]="'playerLink'"
+      (rowClickEvent)="tableRowClick($event)"
     ></app-table>
   </div>
 </div>

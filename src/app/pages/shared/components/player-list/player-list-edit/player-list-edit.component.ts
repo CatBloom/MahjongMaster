@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PlayerResponse } from '../../../../../shared/interfaces/player';
+import { PlayerRequest, PlayerResponse } from '../../../../../shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
 
 @Component({
@@ -18,21 +18,21 @@ export class PlayerListEditComponent implements OnInit {
   ngOnInit(): void {}
 
   onEditClick() {
-    this.inputPlayer.setValue(this.player.playerName);
+    this.inputPlayer.setValue(this.player.name);
     this.isPlayerEdit = true;
   }
 
   deletePlayer() {
-    this.playerSevice.deletePlayer(this.player.leagueId, this.player.id);
+    this.playerSevice.deletePlayer(this.player.id);
     this.isPlayerEdit = false;
   }
 
   updatePlayer() {
-    if (this.inputPlayer.value !== this.player.playerName) {
-      const updatePlayerData: PlayerResponse = {
+    if (this.inputPlayer.value !== this.player.name) {
+      const updatePlayerData: PlayerRequest = {
         id: this.player.id,
         leagueId: this.player.leagueId,
-        playerName: this.inputPlayer.value,
+        name: this.inputPlayer.value,
       };
       this.playerSevice.updatePlayer(updatePlayerData);
     }

@@ -1,18 +1,21 @@
-import { Rules } from '../interfaces/rules';
+import { Rules } from './rules';
 
 export interface LeagueRequest {
-  leagueName: string;
-  leagueManual?: string;
-  leagueStartDate?: Date;
-  leagueFinishDate?: Date;
+  id?: string;
+  name: string;
+  manual?: string;
+  startAt?: string;
+  finishAt?: string;
+  uid: string;
+  rules: Rules;
 }
 export interface LeagueResponse extends LeagueRequest {
-  id: number;
+  id: string;
 }
 export interface LeagueDialog {
-  leagueName: string;
-  leagueManual: string;
-  leagueStartDate: Date;
-  leagueFinishDate: Date;
+  name: string;
+  manual: string;
+  startAt: Date;
+  finishAt: Date;
   rules: Rules;
 }

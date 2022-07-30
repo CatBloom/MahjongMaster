@@ -47,6 +47,9 @@ export class PieChartComponent implements OnInit {
         },
       },
       datalabels: {
+        align: 'end',
+        anchor: 'center',
+        offset: -5,
         font: {
           weight: 'bold',
           size: 15,
@@ -59,8 +62,8 @@ export class PieChartComponent implements OnInit {
             dataArr.map((data) => {
               sum += Number(data);
             });
-            const percentage = ':' + ((value * 100) / sum).toFixed(1) + '%';
-            return value !== 0 ? label + percentage : null;
+            const percentage = ((value * 100) / sum).toFixed(1) + '%';
+            return value !== 0 ? label + '\n' + percentage : null;
           }
           return;
         },

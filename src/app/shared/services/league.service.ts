@@ -1,69 +1,71 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { LeagueRequest, LeagueResponse } from '../interfaces/league';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeagueService {
-  private readonly apiUrl = 'http://localhost:3000';
-  private readonly mockUrl = 'api/league';
-  private leagueSubject = new BehaviorSubject<LeagueResponse>({} as LeagueResponse);
+  private readonly apiUrl = 'http://localhost:8080/api/v1/league';
+
   private leagueListSubject = new BehaviorSubject<LeagueResponse[]>([]);
-  private leagueIdSubject = new Subject<number>();
-  get league$() {
-    return this.leagueSubject.asObservable();
-  }
+  private leagueSubject = new BehaviorSubject<LeagueResponse>({} as LeagueResponse);
+
   get leagueList$() {
     return this.leagueListSubject.asObservable();
   }
-  get leagueId$() {
-    return this.leagueIdSubject.asObservable();
+  get league$() {
+    return this.leagueSubject.asObservable();
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: Router) {}
 
   //大会リストを取得
-  getLeagueList(): void {
+  getLeagueList(uid: string): void {
     this.http
-      .get<LeagueResponse[]>(this.mockUrl)
-      .pipe(
-        map((res) => {
-          return res;
-        })
-      )
-      .subscribe((leagueList) => {
-        this.leagueListSubject.next(leagueList);
+      .get<LeagueResponse[]>(`${this.apiUrl}/list/${uid}`)
+      .pipe()
+      .subscribe((res) => {
+        this.leagueListSubject.next(res);
       });
   }
 
   //大会の取得
-  getLeague(leagueId: number): void {
+  getLeague(id: string): void {
     this.http
-      .get<LeagueResponse>(`${this.mockUrl}/${leagueId}`)
-      .pipe(
-        map((res) => {
-          return res;
-        })
-      )
-      .subscribe((league) => {
-        this.leagueSubject.next(league);
+      .get<LeagueResponse>(`${this.apiUrl}/${id}`)
+      .pipe()
+      .subscribe((res) => {
+        this.leagueSubject.next(res);
       });
   }
 
   //大会を登録
   postLeague(newleague: LeagueRequest): void {
     this.http
-      .post<LeagueResponse>(`${this.mockUrl}`, newleague)
-      .pipe(
-        map((res) => {
-          return res;
-        })
-      )
-      .subscribe((league) => {
-        this.leagueIdSubject.next(league.id);
+      .post<LeagueResponse>(`${this.apiUrl}`, newleague)
+      .pipe()
+      .subscribe(() => {
+        this.route.navigateByUrl('league');
       });
+  }
+
+  //大会更新
+  updateLeague(league: LeagueRequest): void {
+    const id = league.id;
+    this.http
+      .put<LeagueResponse>(`${this.apiUrl}/${id}`, league)
+      .pipe()
+      .subscribe(() => {});
+  }
+
+  //大会削除
+  deleteLeague(id: number): void {
+    this.http
+      .delete(`${this.apiUrl}/${id}`)
+      .pipe()
+      .subscribe(() => {});
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlayerResultResponse } from '../../../../../shared/interfaces/result';
+import { GameResponse } from 'src/app/shared/interfaces/game';
 
 @Component({
   selector: 'app-table-result-row',
@@ -7,7 +7,7 @@ import { PlayerResultResponse } from '../../../../../shared/interfaces/result';
   styleUrls: ['./table-result-row.component.scss'],
 })
 export class TableResultRowComponent implements OnInit {
-  @Input() result!: PlayerResultResponse;
+  @Input() result!: GameResponse;
 
   constructor() {}
 

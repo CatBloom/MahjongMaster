@@ -4,17 +4,17 @@
     <div class="signup-grid">
       <mat-form-field class="signup-grid__input" appearance="outline">
         <mat-label>メールアドレス</mat-label>
-        <input matInput type="email" formControlName="userMail" />
+        <input matInput type="email" formControlName="mail" />
       </mat-form-field>
       <mat-form-field class="signup-grid__input" appearance="outline">
         <mat-label>名前</mat-label>
-        <input matInput type="text" formControlName="userName" />
+        <input matInput type="text" formControlName="name" />
       </mat-form-field>
       <mat-form-field class="signup-grid__input" appearance="outline">
         <mat-label>パスワード</mat-label>
-        <input matInput type="password" formControlName="userPassword" />
+        <input matInput type="password" formControlName="password" />
       </mat-form-field>
-      <mat-error *ngIf="userPassword.errors?.['minlength']">6文字以上入力してください</mat-error>
+      <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
     </div>
     <div class="signup-buttons">
       <div class="signup-buttons__button">

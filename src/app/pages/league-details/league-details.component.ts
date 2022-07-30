@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LeagueService } from 'src/app/shared/services/league.service';
-import { RulesService } from 'src/app/shared/services/rules.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { distinctUntilChanged, takeUntil, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ResultService } from 'src/app/shared/services/result.service';
+import { LeagueResultResponse } from 'src/app/shared/interfaces/result';
 @Component({
   selector: 'app-league-details',
   templateUrl: './league-details.component.html',
@@ -12,17 +12,16 @@ import { ResultService } from 'src/app/shared/services/result.service';
 })
 export class LeagueDetailsComponent implements OnInit, OnDestroy {
   league$ = this.leagueService.league$;
-  rules$ = this.rulesService.rules$;
   leagueResult$ = this.resultService.leagueResult$;
-  tableColumns: string[] = ['rank', 'playerName', 'playerGameCount', 'playerCalcPoint'];
+  tableColumns: string[] = ['rank', 'name', 'totalGame', 'totalCalcPoint'];
   isRules = false;
   private onDestroy$ = new Subject();
 
   constructor(
     private leagueService: LeagueService,
-    private rulesService: RulesService,
     private resultService: ResultService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,12 +33,17 @@ export class LeagueDetailsComponent implements OnInit, OnDestroy {
       )
       .subscribe((leagueId) => {
         this.leagueService.getLeague(leagueId);
-        this.rulesService.getRules(leagueId);
         this.resultService.getLeagueResult(leagueId);
       });
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
+  }
+
+  tableRowClick(rowData: LeagueResultResponse) {
+    const lid = rowData.leagueId;
+    const pid = rowData.playerId;
+    this.router.navigateByUrl(`/player/${lid}/${pid}`);
   }
 }

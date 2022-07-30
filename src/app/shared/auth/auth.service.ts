@@ -20,7 +20,7 @@ import { SpinnerService } from '../services/spinner.service';
 export class AuthService {
   private userSubject$ = new BehaviorSubject<User | null>(null);
 
-  get userSubject() {
+  get user() {
     return this.userSubject$.asObservable();
   }
 
@@ -33,9 +33,9 @@ export class AuthService {
 
   signUp(user: UserSignup) {
     this.spinner.showSpinner();
-    createUserWithEmailAndPassword(this.auth, user.userMail, user.userPassword)
+    createUserWithEmailAndPassword(this.auth, user.mail, user.password)
       .then((result) => {
-        this.addUserName(result.user, user.userName);
+        this.addUserName(result.user, user.name);
       })
       .then(() => {
         this.login(user);
@@ -48,7 +48,7 @@ export class AuthService {
 
   login(user: UserLogin) {
     this.spinner.showSpinner();
-    signInWithEmailAndPassword(this.auth, user.userMail, user.userPassword)
+    signInWithEmailAndPassword(this.auth, user.mail, user.password)
       .then((result) => {
         this.userSubject$.next(result.user);
         this.router.navigateByUrl('/league');
@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   getAuthState() {
-    return new Promise((resolve) => {
+    return new Promise<User | null>((resolve) => {
       const unsubscribe = onAuthStateChanged(this.auth, (user) => {
         this.userSubject$.next(user);
         resolve(user);

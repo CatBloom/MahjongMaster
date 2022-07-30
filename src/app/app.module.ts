@@ -9,7 +9,7 @@ import { MaterialModule } from './material.module';
 import { NgChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 // components
 import { AppComponent } from './app.component';
@@ -38,7 +38,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { MenuListComponent } from './shared/components/menu-list/menu-list.component';
 
 // service
-import { MockWebApiService } from './shared/api/mock-web-api.service';
+// import { MockWebApiService } from './shared/api/mock-web-api.service';
 
 // directives
 import { ReplaceDirective } from './shared/directives/replace.directive';
@@ -49,6 +49,7 @@ import { DatePipe } from '@angular/common';
 
 // interceptor
 import { SpinnerInterceptor } from './shared/interceptor/spinner.interceptor';
+import { TokenInterceptor } from './shared/interceptor/token.interceptor';
 
 // firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -96,11 +97,15 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     FontAwesomeModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
+    // HttpClientInMemoryWebApiModule.forRoot(MockWebApiService, { dataEncapsulation: false, put204: false }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [DatePipe, { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }],
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
