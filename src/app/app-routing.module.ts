@@ -21,8 +21,8 @@ const routes: Routes = [
   { path: 'league/:league-id', component: LeagueDetailsComponent },
   { path: 'player/edit/:league-id', component: AddPlayerComponent, canActivate: [AuthGuard] },
   { path: 'player/:league-id/:player-id', component: PlayerDetailsComponent },
-  { path: 'result/add/:league-id', component: AddResultComponent, canActivate: [AuthGuard] },
-  { path: 'result/update/:league-id/:result-id', component: AddResultComponent, canActivate: [AuthGuard] },
+  { path: 'game/add/:league-id', component: AddResultComponent, canActivate: [AuthGuard] },
+  { path: 'game/update/:league-id/:game-id', component: AddResultComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
