@@ -1,27 +1,20 @@
 export interface Rules {
-  radioGame: string;
-  radioDora: string;
-  radioTanyao: string;
-  radioTime: string;
-  inputStartPoint: number;
-  inputFinishPoint: number;
-  inputReturnPoint: number;
-  inputCalledPoint: number;
-  inputReachPoint: number;
-  inputDeposit: number;
-  inputPenalty1: number;
-  inputPenalty2: number;
-  inputPenalty3: number;
-  inputUma1: number;
-  inputUma2: number;
-  inputUma3: number;
-  inputUma4: number;
-}
-
-export interface RulesRequest extends Rules {
-  leagueId: number;
-}
-
-export interface RulesResponse extends RulesRequest {
-  id: number;
+  gameType: string;
+  gameName: string;
+  playerCount: number;
+  dora: string;
+  tanyao: string;
+  startPoint: number;
+  finishPoint: number;
+  returnPoint: number;
+  calledPoint: number;
+  reachPoint: number;
+  deposit: number;
+  penalty1: number;
+  penalty2: number;
+  penalty3: number;
+  uma1: number;
+  uma2: number;
+  uma3: number;
+  uma4: number;
 }

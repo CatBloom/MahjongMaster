@@ -1,10 +1,10 @@
 export interface UserSignup {
-  userMail: string;
-  userName: string;
-  userPassword: string;
+  mail: string;
+  name: string;
+  password: string;
 }
 
 export interface UserLogin {
-  userMail: string;
-  userPassword: string;
+  mail: string;
+  password: string;
 }
