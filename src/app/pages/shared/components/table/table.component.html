@@ -2,13 +2,11 @@
   <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
     <th class="table__header" mat-header-cell *matHeaderCellDef>{{ column | japanese }}</th>
     <td class="table__cell" mat-cell *matCellDef="let element">
-      <ng-container *ngIf="column === 'result'; else elseContent">
+      <ng-container *ngIf="column === 'results'; else elseContent">
         <app-table-result-row [result]="element"></app-table-result-row>
       </ng-container>
       <ng-template #elseContent>
-        {{
-          column === 'date' || column === 'createDate' ? (element[column] | date: 'yyyy/MM/dd HH:mm') : element[column]
-        }}
+        {{ column === 'date' || column === 'createdAt' ? (element[column] | date: 'yy/MM/dd HH:mm') : element[column] }}
       </ng-template>
     </td>
   </ng-container>
@@ -18,7 +16,7 @@
     *matRowDef="let element; columns: columnsToDisplay"
     class="table__element-row"
     [ngClass]="{ selectedBackground: selection.isSelected(element) }"
-    (click)="clickOption === 'updateResultLink' ? goUpdateResult(element) : null"
-    (click)="clickOption === 'playerLink' ? goPlayerResult(element) : null"
+    (click)="rowClick(element)"
   ></tr>
 </table>
+<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOption"></mat-paginator>

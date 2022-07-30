@@ -17,47 +17,50 @@ export class RulesComponent implements OnInit, OnDestroy {
   get rulesRadio() {
     return this.formGroup.get('rulesRadio') as FormControl;
   }
-  get radioGame() {
-    return this.rulesGroup.get('radioGame') as FormControl;
+  get gameType() {
+    return this.rulesGroup.get('gameType') as FormControl;
   }
-  get inputStartPoint() {
-    return this.rulesGroup.get('inputStartPoint') as FormControl;
+  get dora() {
+    return this.rulesGroup.get('dora') as FormControl;
   }
-  get inputFinishPoint() {
-    return this.rulesGroup.get('inputFinishPoint') as FormControl;
+  get startPoint() {
+    return this.rulesGroup.get('startPoint') as FormControl;
   }
-  get inputReturnPoint() {
-    return this.rulesGroup.get('inputReturnPoint') as FormControl;
+  get finishPoint() {
+    return this.rulesGroup.get('finishPoint') as FormControl;
   }
-  get inputCalledPoint() {
-    return this.rulesGroup.get('inputCalledPoint') as FormControl;
+  get returnPoint() {
+    return this.rulesGroup.get('returnPoint') as FormControl;
   }
-  get inputReachPoint() {
-    return this.rulesGroup.get('inputReachPoint') as FormControl;
+  get calledPoint() {
+    return this.rulesGroup.get('calledPoint') as FormControl;
   }
-  get inputDeposit() {
-    return this.rulesGroup.get('inputDeposit') as FormControl;
+  get reachPoint() {
+    return this.rulesGroup.get('reachPoint') as FormControl;
   }
-  get inputPenalty1() {
-    return this.rulesGroup.get('inputPenalty1') as FormControl;
+  get deposit() {
+    return this.rulesGroup.get('deposit') as FormControl;
   }
-  get inputPenalty2() {
-    return this.rulesGroup.get('inputPenalty2') as FormControl;
+  get penalty1() {
+    return this.rulesGroup.get('penalty1') as FormControl;
   }
-  get inputPenalty3() {
-    return this.rulesGroup.get('inputPenalty3') as FormControl;
+  get penalty2() {
+    return this.rulesGroup.get('penalty2') as FormControl;
   }
-  get inputUma1() {
-    return this.rulesGroup.get('inputUma1') as FormControl;
+  get penalty3() {
+    return this.rulesGroup.get('penalty3') as FormControl;
   }
-  get inputUma2() {
-    return this.rulesGroup.get('inputUma2') as FormControl;
+  get uma1() {
+    return this.rulesGroup.get('uma1') as FormControl;
   }
-  get inputUma3() {
-    return this.rulesGroup.get('inputUma3') as FormControl;
+  get uma2() {
+    return this.rulesGroup.get('uma2') as FormControl;
   }
-  get inputUma4() {
-    return this.rulesGroup.get('inputUma4') as FormControl;
+  get uma3() {
+    return this.rulesGroup.get('uma3') as FormControl;
+  }
+  get uma4() {
+    return this.rulesGroup.get('uma4') as FormControl;
   }
 
   // 詳細ルール表示用のフォームコントロール
@@ -68,13 +71,13 @@ export class RulesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // 4人麻雀と3人麻雀で必須項目を切り替える
-    this.radioGame.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      if (this.radioGame.value === '1' || this.radioGame.value === '2') {
-        this.inputPenalty3.setErrors({ require: true });
-        this.inputUma4.setErrors({ require: true });
-      } else if (this.radioGame.value === '3' || this.radioGame.value === '4') {
-        this.inputPenalty3.setErrors(null);
-        this.inputUma4.setErrors(null);
+    this.gameType.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+      if (this.gameType.value === '1' || this.gameType.value === '2') {
+        this.penalty3.setErrors({ require: true });
+        this.uma4.setErrors({ require: true });
+      } else if (this.gameType.value === '3' || this.gameType.value === '4') {
+        this.penalty3.setErrors(null);
+        this.uma4.setErrors(null);
       }
     });
   }

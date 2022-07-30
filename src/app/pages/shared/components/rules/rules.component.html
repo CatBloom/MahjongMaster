@@ -3,7 +3,7 @@
     <div class="rules__title">基本ルール</div>
     <mat-label>局数</mat-label>
     <div class="rules__radio">
-      <mat-radio-group formControlName="radioGame">
+      <mat-radio-group formControlName="gameType">
         <mat-radio-button value="1">4人東風戦</mat-radio-button>
         <mat-radio-button value="2">4人半荘戦</mat-radio-button>
         <mat-radio-button value="3">3人東風戦</mat-radio-button>
@@ -12,29 +12,17 @@
     </div>
     <mat-label>赤ドラ</mat-label>
     <div class="rules__radio">
-      <mat-radio-group formControlName="radioDora">
-        <mat-radio-button value="1">赤無し</mat-radio-button>
-        <mat-radio-button value="2">赤ドラ3</mat-radio-button>
-        <mat-radio-button value="3">赤ドラ4</mat-radio-button>
-      </mat-radio-group>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="dora" [appReplace]="dora" />
+      </mat-form-field>
     </div>
     <mat-label>喰い断</mat-label>
     <div class="rules__radio">
-      <mat-radio-group formControlName="radioTanyao">
+      <mat-radio-group formControlName="tanyao">
         <mat-radio-button value="1">有効</mat-radio-button>
-        <mat-radio-button value="2">無効</mat-radio-button>
+        <mat-radio-button value="0">無効</mat-radio-button>
       </mat-radio-group>
     </div>
-    <mat-label>長考時間</mat-label>
-    <div class="rules__radio">
-      <mat-radio-group formControlName="radioTime">
-        <mat-radio-button value="1">3+5秒</mat-radio-button>
-        <mat-radio-button value="2">5+10秒</mat-radio-button>
-        <mat-radio-button value="3">5+20秒</mat-radio-button>
-        <mat-radio-button value="4">60+0秒</mat-radio-button>
-      </mat-radio-group>
-    </div>
-
     <div class="rules__title">
       詳細ルール
       <div class="rules__toggle">
@@ -45,71 +33,71 @@
       <mat-label>配給原点</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="inputStartPoint" [appReplace]="inputStartPoint" />
+          <input type="text" matInput formControlName="startPoint" [appReplace]="startPoint" />
         </mat-form-field>
       </div>
       <mat-label>終局必要点数</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="inputFinishPoint" [appReplace]="inputFinishPoint" />
+          <input type="text" matInput formControlName="finishPoint" [appReplace]="finishPoint" />
         </mat-form-field>
       </div>
       <mat-label>返し点</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="inputReturnPoint" [appReplace]="inputReturnPoint" />
+          <input type="text" matInput formControlName="returnPoint" [appReplace]="returnPoint" />
         </mat-form-field>
       </div>
       <mat-label>コールド</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="inputCalledPoint" [appReplace]="inputCalledPoint" />
+          <input type="text" matInput formControlName="calledPoint" [appReplace]="calledPoint" />
         </mat-form-field>
       </div>
       <mat-label for="">リーチ必要点数</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="inputReachPoint" [appReplace]="inputReachPoint" />
+          <input type="text" matInput formControlName="reachPoint" [appReplace]="reachPoint" />
         </mat-form-field>
       </div>
       <mat-label>場棒点</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="inputDeposit" [appReplace]="inputDeposit" />
+          <input type="text" matInput formControlName="deposit" [appReplace]="deposit" />
         </mat-form-field>
       </div>
       <mat-label>ノーテン罰符</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
           <mat-label>1人</mat-label>
-          <input type="text" matInput formControlName="inputPenalty1" [appReplace]="inputPenalty1" />
+          <input type="text" matInput formControlName="penalty1" [appReplace]="penalty1" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>2人</mat-label>
-          <input type="text" matInput formControlName="inputPenalty2" [appReplace]="inputPenalty2" />
+          <input type="text" matInput formControlName="penalty2" [appReplace]="penalty2" />
         </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="radioGame.value === '1' || radioGame.value === '2'">
+        <mat-form-field appearance="outline" *ngIf="gameType.value === '1' || gameType.value === '2'">
           <mat-label>3人</mat-label>
-          <input type="text" matInput formControlName="inputPenalty3" [appReplace]="inputPenalty3" />
+          <input type="text" matInput formControlName="penalty3" [appReplace]="penalty3" />
         </mat-form-field>
       </div>
       <mat-label>ウマ</mat-label>
       <div class="rules__input">
         <mat-form-field appearance="outline">
           <mat-label>1位</mat-label>
-          <input type="text" matInput formControlName="inputUma1" [appReplace]="inputUma1" />
+          <input type="text" matInput formControlName="uma1" [appReplace]="uma1" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>2位</mat-label>
-          <input type="text" matInput formControlName="inputUma2" [appReplace]="inputUma2" />
+          <input type="text" matInput formControlName="uma2" [appReplace]="uma2" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>3位</mat-label>
-          <input type="text" matInput formControlName="inputUma3" [appReplace]="inputUma3" />
+          <input type="text" matInput formControlName="uma3" [appReplace]="uma3" />
         </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="radioGame.value === '1' || radioGame.value === '2'">
+        <mat-form-field appearance="outline" *ngIf="gameType.value === '1' || gameType.value === '2'">
           <mat-label>4位</mat-label>
-          <input type="text" matInput formControlName="inputUma4" [appReplace]="inputUma4" />
+          <input type="text" matInput formControlName="uma4" [appReplace]="uma4" />
         </mat-form-field>
       </div>
     </div>

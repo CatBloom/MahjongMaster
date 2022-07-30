@@ -10,18 +10,18 @@ import { AuthService } from '../../shared/auth/auth.service';
 })
 export class SignupComponent implements OnInit {
   formGroup = new FormGroup({
-    userMail: new FormControl('', [Validators.required, Validators.email]),
-    userName: new FormControl('', [Validators.required]),
-    userPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    mail: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-  get userMail() {
-    return this.formGroup.get('userMail') as FormControl;
+  get mail() {
+    return this.formGroup.get('mail') as FormControl;
   }
-  get userName() {
-    return this.formGroup.get('userName') as FormControl;
+  get name() {
+    return this.formGroup.get('name') as FormControl;
   }
-  get userPassword() {
-    return this.formGroup.get('userPassword') as FormControl;
+  get password() {
+    return this.formGroup.get('password') as FormControl;
   }
 
   constructor(private authService: AuthService) {}
@@ -33,9 +33,9 @@ export class SignupComponent implements OnInit {
       return;
     }
     const user: UserSignup = {
-      userMail: this.userMail.value,
-      userName: this.userName.value,
-      userPassword: this.userPassword.value,
+      mail: this.mail.value.trim(),
+      name: this.name.value.trim(),
+      password: this.password.value.trim(),
     };
     this.authService.signUp(user);
   }

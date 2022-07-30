@@ -8,7 +8,7 @@ export class JapanesePipe implements PipeTransform {
     switch (value) {
       case 'rank':
         return (value = '順位');
-      case 'result':
+      case 'results':
         return (value = '成績');
       case 'point':
         return (value = '点数');
@@ -16,13 +16,13 @@ export class JapanesePipe implements PipeTransform {
         return (value = '順位点');
       case 'date':
         return (value = '日付');
-      case 'createDate':
+      case 'createdAt':
         return (value = '登録日');
-      case 'playerName':
+      case 'name':
         return (value = '名前');
-      case 'playerGameCount':
+      case 'totalGame':
         return (value = '対戦数');
-      case 'playerCalcPoint':
+      case 'totalCalcPoint':
         return (value = '合計点');
 
       default:

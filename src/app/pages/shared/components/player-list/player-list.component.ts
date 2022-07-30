@@ -7,7 +7,7 @@ import { PlayerResponse } from '../../../../shared/interfaces/player';
   styleUrls: ['./player-list.component.scss'],
 })
 export class PlayerListComponent implements OnInit {
-  @Input() players!: PlayerResponse[];
+  @Input() playerList!: PlayerResponse[];
 
   constructor() {}
 

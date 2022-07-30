@@ -5,28 +5,28 @@
     <ng-container>
       <mat-label>大会名</mat-label>
       <mat-list-item>
-        {{ data.leagueName }}
+        {{ data.name }}
       </mat-list-item>
       <mat-divider></mat-divider>
     </ng-container>
-    <ng-container *ngIf="data.leagueManual">
+    <ng-container *ngIf="data.manual">
       <mat-label>大会説明</mat-label>
       <mat-list-item>
-        {{ data.leagueManual }}
+        {{ data.manual }}
       </mat-list-item>
       <mat-divider></mat-divider>
     </ng-container>
-    <ng-container *ngIf="data.leagueStartDate">
+    <ng-container *ngIf="data.startAt">
       <mat-label>大会開始日</mat-label>
       <mat-list-item>
-        {{ data.leagueStartDate | date: 'yyyy/MM/dd HH:mm ' }}
+        {{ data.startAt | date: 'yyyy/MM/dd HH:mm ' }}
       </mat-list-item>
       <mat-divider></mat-divider>
     </ng-container>
-    <ng-container *ngIf="data.leagueFinishDate">
+    <ng-container *ngIf="data.finishAt">
       <mat-label>大会終了日</mat-label>
       <mat-list-item>
-        {{ data.leagueFinishDate | date: 'yyyy/MM/dd HH:mm' }}
+        {{ data.finishAt | date: 'yyyy/MM/dd HH:mm' }}
       </mat-list-item>
       <mat-divider></mat-divider>
     </ng-container>

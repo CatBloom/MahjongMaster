@@ -1,28 +1,36 @@
 <div class="result-container">
   <div class="result-container__item">
-    <a routerLink="/player/{{ result.resultData[0].leagueId }}/{{ result.resultData[0].playerId }}">
-      <span class="result-container__item--name">1位:{{ result.resultData[0].playerName }}</span>
-      <span>【{{ result.resultData[0].point }},{{ result.resultData[0].calcPoint }}】</span>
+    <a routerLink="/player/{{ result.leagueId }}/{{ result.results[0].playerId }}">
+      <span class="result-container__item--name"
+        >{{ result.results[0].rank }}位:{{ result.results[0].playerName }}
+      </span>
+      <span>【{{ result.results[0].point }},{{ result.results[0].calcPoint }}】</span>
     </a>
   </div>
   <div class="result-container__item">
-    <a routerLink="/player/{{ result.resultData[1].leagueId }}/{{ result.resultData[1].playerId }}">
-      <span class="result-container__item--name">2位:{{ result.resultData[1].playerName }}</span>
-      <span>【{{ result.resultData[1].point }},{{ result.resultData[1].calcPoint }}】</span>
+    <a routerLink="/player/{{ result.leagueId }}/{{ result.results[1].playerId }}">
+      <span class="result-container__item--name"
+        >{{ result.results[1].rank }}位:{{ result.results[1].playerName }}
+      </span>
+      <span>【{{ result.results[1].point }},{{ result.results[1].calcPoint }}】</span>
     </a>
   </div>
 </div>
 <div class="result-container">
   <div class="result-container__item">
-    <a routerLink="/player/{{ result.resultData[2].leagueId }}/{{ result.resultData[2].playerId }}">
-      <span class="result-container__item--name">3位:{{ result.resultData[2].playerName }}</span>
-      <span>【{{ result.resultData[2].point }},{{ result.resultData[2].calcPoint }}】</span>
+    <a routerLink="/player/{{ result.leagueId }}/{{ result.results[2].playerId }}">
+      <span class="result-container__item--name"
+        >{{ result.results[2].rank }}位:{{ result.results[2].playerName }}
+      </span>
+      <span>【{{ result.results[2].point }},{{ result.results[2].calcPoint }}】</span>
     </a>
   </div>
   <div class="result-container__item">
-    <a routerLink="/player/{{ result.resultData[3].leagueId }}/{{ result.resultData[3].playerId }}">
-      <span class="result-container__item--name">4位:{{ result.resultData[3].playerName }}</span
-      ><span>【{{ result.resultData[3].point }},{{ result.resultData[3].calcPoint }}】</span>
+    <a routerLink="/player/{{ result.leagueId }}/{{ result.results[3].playerId }}">
+      <span class="result-container__item--name"
+        >{{ result.results[3].rank }}位:{{ result.results[3].playerName }}
+      </span>
+      <span>【{{ result.results[3].point }},{{ result.results[3].calcPoint }}】</span>
     </a>
   </div>
 </div>

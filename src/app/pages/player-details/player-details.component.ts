@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { ResultService } from 'src/app/shared/services/result.service';
 
@@ -11,7 +11,7 @@ import { ResultService } from 'src/app/shared/services/result.service';
   styleUrls: ['./player-details.component.scss'],
 })
 export class PlayerDetailsComponent implements OnInit, OnDestroy {
-  tableColumns: string[] = ['rank', 'result', 'createDate'];
+  tableColumns: string[] = ['results', 'createdAt'];
   player$ = this.playerService.player$;
   playerResult$ = this.resultService.playerResult$;
   lineData$ = this.resultService.lineData$;
@@ -25,10 +25,17 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.activeRoute.params.pipe(takeUntil(this.onDestroy$), distinctUntilChanged()).subscribe((prams) => {
-      this.playerService.getPlayer(prams['league-id'], prams['player-id']);
-      this.resultService.getPlayerResult(prams['league-id'], prams['player-id']);
-    });
+    this.activeRoute.params
+      .pipe(
+        takeUntil(this.onDestroy$),
+        distinctUntilChanged(),
+        map((params: Params) => params['player-id'])
+      )
+      .subscribe((playerId) => {
+        this.resultService.getPlayerResult(playerId);
+        this.resultService.getPieData(playerId);
+        this.resultService.getLineData(playerId);
+      });
   }
 
   ngOnDestroy(): void {

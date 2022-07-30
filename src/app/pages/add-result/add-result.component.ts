@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Rules } from '../../shared/interfaces/rules';
-import { RulesService } from '../../shared/services/rules.service';
-import { ResultService } from '../../shared/services/result.service';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
+import { GameRequest, GameResponse, GamePlayers, GameResult } from 'src/app/shared/interfaces/game';
+import { LeagueService } from 'src/app/shared/services/league.service';
+import { GameService } from 'src/app/shared/services/game.service';
 
 @Component({
   selector: 'app-add-result',
@@ -15,191 +16,288 @@ import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
   styleUrls: ['./add-result.component.scss'],
 })
 export class AddResultComponent implements OnInit, OnDestroy {
-  formGroup = new FormGroup({
-    playerName1: new FormControl('', [Validators.required]),
-    playerName2: new FormControl('', [Validators.required]),
-    playerName3: new FormControl('', [Validators.required]),
-    playerName4: new FormControl('', [Validators.required]),
-    playerPoint1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-    playerPoint2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-    playerPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-    playerPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-    calcPoint1: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
-    calcPoint2: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
-    calcPoint3: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
-    calcPoint4: new FormControl('', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]),
-  });
-  get playerName1() {
-    return this.formGroup.get('playerName1') as FormControl;
+  formGroup = new FormGroup({});
+
+  get resultArray() {
+    return this.formGroup.get('resultArray') as FormArray;
   }
-  get playerName2() {
-    return this.formGroup.get('playerName2') as FormControl;
-  }
-  get playerName3() {
-    return this.formGroup.get('playerName3') as FormControl;
-  }
-  get playerName4() {
-    return this.formGroup.get('playerName4') as FormControl;
-  }
-  get playerPoint1() {
-    return this.formGroup.get('playerPoint1') as FormControl;
-  }
-  get playerPoint2() {
-    return this.formGroup.get('playerPoint2') as FormControl;
-  }
-  get playerPoint3() {
-    return this.formGroup.get('playerPoint3') as FormControl;
-  }
-  get playerPoint4() {
-    return this.formGroup.get('playerPoint4') as FormControl;
-  }
-  get calcPoint1() {
-    return this.formGroup.get('calcPoint1') as FormControl;
-  }
-  get calcPoint2() {
-    return this.formGroup.get('calcPoint2') as FormControl;
-  }
-  get calcPoint3() {
-    return this.formGroup.get('calcPoint3') as FormControl;
-  }
-  get calcPoint4() {
-    return this.formGroup.get('calcPoint4') as FormControl;
-  }
-  // 取得したルール
-  rules: Rules = {
-    radioGame: '',
-    radioDora: '',
-    radioTanyao: '',
-    radioTime: '',
-    inputStartPoint: 0,
-    inputFinishPoint: 0,
-    inputReturnPoint: 0,
-    inputCalledPoint: 0,
-    inputReachPoint: 0,
-    inputDeposit: 0,
-    inputPenalty1: 0,
-    inputPenalty2: 0,
-    inputPenalty3: 0,
-    inputUma1: 0,
-    inputUma2: 0,
-    inputUma3: 0,
-    inputUma4: 0,
-  };
-  result$ = this.resultService.allResult$;
-  rules$ = this.rulesService.rules$;
-  players$ = this.playerService.players$;
-  tableColumns: string[] = ['result', 'createDate'];
+  //form作成時の初期値を保存
+  formInitValue = [];
+  //登録or更新
+  formType: string | null = null;
+  //取得したルール
+  rules: Rules = {} as Rules;
+  //取得したゲーム
+
+  league$ = this.leagueService.league$;
+  game$ = this.gameService.game$;
+  gameList$ = this.gameService.gameList$;
+  playerList$ = this.playerService.playerList$;
+  tableColumns: string[] = ['results', 'createdAt'];
   matcher = new MyErrorStateMatcher();
+  private game: GameResponse = {} as GameResponse;
+  private umaArray: number[] = [];
   private onDestroy$ = new Subject();
 
   constructor(
+    private leagueService: LeagueService,
     private playerService: PlayerService,
-    private rulesService: RulesService,
-    private resultService: ResultService,
-    private activeRoute: ActivatedRoute
-  ) {}
+    private gameService: GameService,
+    private activeRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    this.formGroup = this.fb.group({
+      resultArray: this.fb.array([]),
+    });
+  }
 
   ngOnInit(): void {
-    this.pointSubscriptions();
     this.activeRoute.params
       .pipe(
         takeUntil(this.onDestroy$),
         map((params: Params) => params['league-id']),
         distinctUntilChanged()
       )
-      .subscribe((leagueId) => {
+      .subscribe((leagueId: string) => {
+        this.leagueService.getLeague(leagueId);
         this.playerService.getPlayerList(leagueId);
-        this.rulesService.getRules(leagueId);
-        this.resultService.getAllResult(leagueId);
+        this.gameService.getGameList(leagueId);
       });
+
     this.activeRoute.params
       .pipe(
         takeUntil(this.onDestroy$),
-        map((params: Params) => params['result-id']),
+        map((params: Params) => params['game-id']),
         distinctUntilChanged()
       )
-      .subscribe((resultId) => {
-        if (resultId !== undefined) {
-          this.selectResult(resultId);
+      .subscribe((gameId) => {
+        if (gameId !== undefined) {
+          this.gameService.getGame(gameId);
+          this.formType = 'put';
+        } else {
+          this.formType = null;
         }
       });
-    this.rules$.pipe(takeUntil(this.onDestroy$)).subscribe((rules: Rules) => {
-      this.rules = rules;
+
+    //ゲームを取得
+    this.game$.pipe(takeUntil(this.onDestroy$)).subscribe((game) => {
+      if (game.id) {
+        this.game = game;
+        this.setValue(game);
+      }
     });
+
+    //リーグルールを取得
+    this.league$
+      .pipe(
+        takeUntil(this.onDestroy$),
+        //idを比較し、同値の場合subscribeしない
+        distinctUntilChanged((pre, cur) => {
+          // pre === curでは比較できない
+          return pre.id === cur.id;
+        })
+      )
+      .subscribe((league) => {
+        if (league.rules) {
+          this.rules = league.rules;
+          this.createUmaArray();
+          this.initFormCreate();
+          this.pointSubscriptions();
+        }
+      });
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
   }
 
-  selectResult(resultId: number) {
-    this.result$.pipe(takeUntil(this.onDestroy$)).subscribe((data) => {
-      const selectData = data.find((element) => {
-        return element.id == resultId;
-      });
-      this.playerName1.setValue(selectData?.resultData[0].playerId);
-    });
+  //form作成
+  initFormCreate() {
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      this.resultArray.push(
+        this.fb.group({
+          rank: [i + 1, [Validators.required]],
+          id: ['', [Validators.required]],
+          point: ['', [Validators.required, Validators.pattern(/^[\d-]+$/)]],
+          calcPoint: ['', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]],
+        })
+      );
+    }
+    //reset用formの初期値を保存する
+    this.formInitValue = this.formGroup.value;
   }
 
-  private pointCheck() {
-    const point1 = Number(this.playerPoint1.value);
-    const point2 = Number(this.playerPoint2.value);
-    const point3 = Number(this.playerPoint3.value);
-    const point4 = Number(this.playerPoint4.value);
-    if (point1 + point2 + point3 + point4 === this.rules.inputStartPoint * 4) {
-      console.log('ok');
-      return true;
-    } else {
-      console.log('error');
-      return false;
+  //formリセット
+  resetForm() {
+    this.formGroup.reset(this.formInitValue);
+  }
+
+  setValue(game: GameResponse) {
+    //Todo 更新時の処理をtemplateで行いたいがselectBoxに値が入らないため関数で行う
+    for (let i = 0; i < this.resultArray.length; i++) {
+      this.resultArray.controls[i].get('id')?.setValue(game.results[i].playerId);
+      this.resultArray.controls[i].get('point')?.setValue(game.results[i].point);
+      this.resultArray.controls[i].get('calcPoint')?.setValue(game.results[i].calcPoint);
     }
   }
 
-  private calcPoint(point: number, uma: number) {
-    return (point - this.rules.inputReturnPoint) / 1000 + uma;
+  submitGame() {
+    if (!this.formType) {
+      this.postGame();
+    } else {
+      this.putGame();
+    }
   }
 
+  //game登録
+  postGame() {
+    if (this.formGroup.invalid || this.checkValidation()) {
+      return;
+    }
+
+    const result: GameResult[] = [];
+
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      result.push({
+        rank: this.resultArray.controls[i].get('rank')?.value,
+        playerId: this.resultArray.controls[i].get('id')?.value,
+        point: Number(this.resultArray.controls[i].get('point')?.value),
+      });
+    }
+
+    const players: GamePlayers[] = [];
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      players.push({
+        id: this.resultArray.controls[i].get('id')?.value,
+      });
+    }
+
+    const games: GameRequest = {
+      leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
+      results: result,
+      players: players,
+      rules: this.rules,
+    };
+
+    this.gameService.postGame(games);
+  }
+
+  //game更新
+  putGame() {
+    if (this.formGroup.invalid || this.checkValidation()) {
+      return;
+    }
+
+    const result: GameResult[] = [];
+
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      result.push({
+        id: this.game.results[i].id,
+        rank: this.resultArray.controls[i].get('rank')?.value,
+        playerId: this.resultArray.controls[i].get('id')?.value,
+        point: Number(this.resultArray.controls[i].get('point')?.value),
+        calcPoint: Number(this.resultArray.controls[i].get('calcPoint')?.value),
+        gameId: this.game.results[i].gameId,
+      });
+    }
+
+    const players: GamePlayers[] = [];
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      players.push({
+        id: this.resultArray.controls[i].get('id')?.value,
+        gameId: this.game.id,
+      });
+    }
+
+    const games: GameRequest = {
+      id: Number(this.activeRoute.snapshot.paramMap.get('game-id')),
+      leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
+      results: result,
+      players: players,
+      rules: this.rules,
+    };
+
+    this.gameService.updateGame(games);
+  }
+
+  //Validation
+  private checkValidation(): boolean {
+    //playerの重複を検索
+    for (let i = 0; i < this.resultArray.controls.length; i++) {
+      const cur = this.resultArray.controls[i].get('id')?.value;
+      for (let j = 0; j < this.resultArray.controls.length; j++) {
+        if (i !== j) {
+          if (cur === this.resultArray.controls[j].get('id')?.value) {
+            return true;
+          }
+        }
+      }
+    }
+
+    // const point1 = Number(this.resultArray.controls[0].get('point')?.value);
+    // const point2 = Number(this.resultArray.controls[1].get('point')?.value);
+    // const point3 = Number(this.resultArray.controls[2].get('point')?.value);
+    // const point4 = Number(this.resultArray.controls[3].get('point')?.value);
+
+    // if (point1 + point2 + point3 + point4 !== this.rules.startPoint * this.rules.playerCount) {
+    //   return true;
+    // }
+    //Todo 大きさの順番を比較
+    // if (point1 < point2 || point2 < point3 || point3 < point4) {
+    //   return false;
+    // }
+
+    return false;
+  }
+
+  setTestData() {
+    const user: number[] = [1, 2, 3, 4, 5, 6, 7];
+    const point: number[] = [40000, 30000, 20000, 10000];
+    for (let i = 0; i < user.length; i++) {
+      const r = Math.floor(Math.random() * (i + 1));
+      const tmp = user[i];
+      user[i] = user[r];
+      user[r] = tmp;
+    }
+
+    for (let i = 0; i < this.resultArray.controls.length; i++) {
+      this.resultArray.controls[i].get('id')?.setValue(user[i]);
+      this.resultArray.controls[i].get('point')?.setValue(point[i]);
+    }
+  }
+
+  //uma配列を作成
+  private createUmaArray() {
+    if (this.rules.playerCount === 4) {
+      this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3, this.rules.uma4];
+    } else {
+      this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3];
+    }
+  }
+
+  //point自動計算用
   private pointSubscriptions() {
-    // player1の点数を変換
-    this.playerPoint1.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      const point = Number(this.playerPoint1.value);
-      const topPrize = ((this.rules.inputReturnPoint - this.rules.inputStartPoint) * 4) / 1000;
-      const setPoint = this.calcPoint(point, this.rules.inputUma1) + topPrize;
-      if (isNaN(setPoint)) {
-        this.calcPoint1.setValue('');
-      } else {
-        this.calcPoint1.setValue(setPoint);
-      }
-    });
-    // player2の点数を変換
-    this.playerPoint2.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      const point = Number(this.playerPoint2.value);
-      const setPoint = this.calcPoint(point, this.rules.inputUma2);
-      if (isNaN(setPoint)) {
-        this.calcPoint2.setValue('');
-      } else {
-        this.calcPoint2.setValue(setPoint);
-      }
-    });
-    // player3の点数を変換
-    this.playerPoint3.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      const point = Number(this.playerPoint3.value);
-      const setPoint = this.calcPoint(point, this.rules.inputUma3);
-      if (isNaN(setPoint)) {
-        this.calcPoint3.setValue('');
-      } else {
-        this.calcPoint3.setValue(setPoint);
-      }
-    });
-    // player4の点数を変換
-    this.playerPoint4.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      const point = Number(this.playerPoint4.value);
-      const setPoint = this.calcPoint(point, this.rules.inputUma4);
-      if (isNaN(setPoint)) {
-        this.calcPoint4.setValue('');
-      } else {
-        this.calcPoint4.setValue(setPoint);
-      }
-    });
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      this.resultArray.controls[i]
+        .get('point')
+        ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+        .subscribe(() => {
+          const point = Number(this.resultArray.controls[i].get('point')?.value);
+          const topPrize = (this.rules.returnPoint - this.rules.startPoint) * this.rules.playerCount;
+          const calcPoint = point - this.rules.returnPoint + this.umaArray[i] * 1000;
+
+          if (isNaN(calcPoint) || this.resultArray.controls[i].get('point')?.value === '') {
+            this.resultArray.controls[i].get('calcPoint')?.setValue('');
+          } else {
+            if (i === 0) {
+              const setPoint = Math.floor(((calcPoint + topPrize) / 1000) * 10) / 10;
+              this.resultArray.controls[i].get('calcPoint')?.setValue(setPoint);
+            } else {
+              const setPoint = Math.floor((calcPoint / 1000) * 10) / 10;
+              this.resultArray.controls[i].get('calcPoint')?.setValue(setPoint);
+            }
+          }
+        });
+    }
   }
 }
