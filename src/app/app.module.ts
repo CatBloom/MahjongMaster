@@ -49,6 +49,7 @@ import { DatePipe } from '@angular/common';
 
 // interceptor
 import { SpinnerInterceptor } from './shared/interceptor/spinner.interceptor';
+import { TokenInterceptor } from './shared/interceptor/token.interceptor';
 
 // firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -100,7 +101,11 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  providers: [DatePipe, { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }],
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
