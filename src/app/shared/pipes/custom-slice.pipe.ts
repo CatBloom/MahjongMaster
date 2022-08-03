@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'customSlice',
 })
 export class CustomSlicePipe implements PipeTransform {
+  //valueと表示制限する半角文字数を引数とする
   transform(value: unknown, arg: number) {
     if (typeof value !== 'string' || !value) {
       return value;
@@ -18,6 +19,7 @@ export class CustomSlicePipe implements PipeTransform {
         newValue += value[i];
       }
     }
+    //制限する文字数より長い場合、"..."を付ける
     return len > arg ? newValue + '...' : value;
   }
 }
