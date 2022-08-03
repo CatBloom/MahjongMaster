@@ -45,6 +45,7 @@ import { ReplaceDirective } from './shared/directives/replace.directive';
 
 // pipes
 import { JapanesePipe } from './shared/pipes/japanese.pipe';
+import { CustomSlicePipe } from './shared/pipes/custom-slice.pipe';
 import { DatePipe } from '@angular/common';
 
 // interceptor
@@ -84,6 +85,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     LoginComponent,
     SignupComponent,
     MenuListComponent,
+    CustomSlicePipe,
   ],
   imports: [
     BrowserModule,
