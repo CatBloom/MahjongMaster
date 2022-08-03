@@ -6,7 +6,11 @@
         <app-table-result-row [result]="element"></app-table-result-row>
       </ng-container>
       <ng-template #elseContent>
-        {{ column === 'date' || column === 'createdAt' ? (element[column] | date: 'yy/MM/dd HH:mm') : element[column] }}
+        {{
+          column === 'date' || column === 'createdAt'
+            ? (element[column] | date: 'yy/MM/dd HH:mm')
+            : (element[column] | customSlice: 10)
+        }}
       </ng-template>
     </td>
   </ng-container>
