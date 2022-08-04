@@ -25,4 +25,13 @@ export class ReplaceDirective implements OnInit {
 
     this.elemRef.nativeElement.value = newValue;
   }
+
+  @HostListener('blur') onBlur(): void {
+    const initValue = this.elemRef.nativeElement.value;
+    let newValue: string = initValue;
+    //3桁以上の場合、下二桁を00に置き換える
+    newValue = initValue.length >= 3 ? newValue.slice(0, initValue.length - 2) + '00' : newValue;
+
+    this.elemRef.nativeElement.value = newValue;
+  }
 }

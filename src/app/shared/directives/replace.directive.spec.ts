@@ -59,4 +59,12 @@ describe('ReplaceDirective', () => {
     fixture.detectChanges();
     expect(input.value).toEqual('-12345');
   });
+
+  it('Replace last two number 00', () => {
+    const input = de.nativeElement as HTMLInputElement;
+    input.value = '12345';
+    input.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+    expect(input.value).toEqual('12300');
+  });
 });
