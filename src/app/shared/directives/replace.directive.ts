@@ -1,53 +1,37 @@
-import { Directive, Input, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, AbstractControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
-
+import { Directive, OnInit, HostListener, ElementRef } from '@angular/core';
 @Directive({
   selector: '[appReplace]',
 })
-export class ReplaceDirective implements OnInit, OnDestroy {
-  @Input() appReplace!: FormControl | AbstractControl | null;
+export class ReplaceDirective implements OnInit {
+  constructor(private elemRef: ElementRef<HTMLInputElement>) {}
 
-  private formControl!: FormControl | AbstractControl | null;
-  private subscriptions = new Subscription();
+  ngOnInit(): void {}
 
-  constructor() {}
+  @HostListener('input') onInput(): void {
+    const initValue = this.elemRef.nativeElement.value;
+    let newValue: string = initValue;
+    //全角数字を半角数字に変換
+    newValue = newValue.replace(/[０-９]/g, (s) => {
+      return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+    });
+    //数字とハイフン以外の文字を除去
+    newValue = newValue.replace(/[^\d-]/g, '');
+    //先頭以外の-を除去
+    newValue = newValue.replace(/(?<!^)-/g, '');
+    //先頭が-直後の0を除去
+    newValue = newValue.replace(/^(-)0+/g, '$1');
+    //先頭が0で2桁以上の数字は先頭の0を除去
+    newValue = newValue.replace(/^0+(\d+)/g, '$1');
 
-  ngOnInit(): void {
-    this.formControl = this.appReplace;
-    this.replaceHulfNumber();
+    this.elemRef.nativeElement.value = newValue;
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-  }
+  @HostListener('blur') onBlur(): void {
+    const initValue = this.elemRef.nativeElement.value;
+    let newValue: string = initValue;
+    //3桁以上の場合、下二桁を00に置き換える
+    newValue = initValue.length >= 3 ? newValue.slice(0, initValue.length - 2) + '00' : newValue;
 
-  private replaceHulfNumber() {
-    if (!this.formControl) {
-      return;
-    }
-    this.subscriptions.add(
-      this.formControl.valueChanges.subscribe(() => {
-        if (!this.formControl) {
-          return;
-        }
-        const value = String(this.formControl.value);
-        let newValue: string = value;
-
-        // 全角数字を半角数字に変換
-        newValue = newValue.replace(/[０-９]/g, (s) => {
-          return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
-        });
-        // 数字以外の文字を空文字に変換
-        newValue = newValue.replace(/[^\d-]/g, '');
-        // 0が先頭で2桁以上の場合、0を省く
-        newValue = newValue.replace(/^0([\d]{1,})/g, '$1');
-        // -が先頭で2桁以上の場合、0と-を省く
-        newValue = newValue.replace(/^-([-0]{1,})/g, '$1');
-        if (value !== newValue) {
-          this.formControl.setValue(newValue);
-        }
-      })
-    );
+    this.elemRef.nativeElement.value = newValue;
   }
 }
