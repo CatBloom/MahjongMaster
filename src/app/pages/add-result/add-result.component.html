@@ -19,13 +19,7 @@
             <div class="result-grid__point">
               <mat-form-field appearance="outline">
                 <mat-label>点数</mat-label>
-                <input
-                  matInput
-                  maxlength="6"
-                  formControlName="point"
-                  [errorStateMatcher]="matcher"
-                  [appReplace]="resultArray.controls[i].get('point')"
-                />
+                <input matInput maxlength="6" formControlName="point" [errorStateMatcher]="matcher" appReplace />
               </mat-form-field>
             </div>
             <div class="result-grid__calc-point">

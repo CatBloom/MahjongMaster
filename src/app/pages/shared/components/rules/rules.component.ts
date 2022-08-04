@@ -14,32 +14,8 @@ export class RulesComponent implements OnInit, OnDestroy {
   get rulesGroup() {
     return this.formGroup.get('rulesGroup') as FormGroup;
   }
-  get rulesRadio() {
-    return this.formGroup.get('rulesRadio') as FormControl;
-  }
   get gameType() {
     return this.rulesGroup.get('gameType') as FormControl;
-  }
-  get dora() {
-    return this.rulesGroup.get('dora') as FormControl;
-  }
-  get startPoint() {
-    return this.rulesGroup.get('startPoint') as FormControl;
-  }
-  get finishPoint() {
-    return this.rulesGroup.get('finishPoint') as FormControl;
-  }
-  get returnPoint() {
-    return this.rulesGroup.get('returnPoint') as FormControl;
-  }
-  get calledPoint() {
-    return this.rulesGroup.get('calledPoint') as FormControl;
-  }
-  get reachPoint() {
-    return this.rulesGroup.get('reachPoint') as FormControl;
-  }
-  get deposit() {
-    return this.rulesGroup.get('deposit') as FormControl;
   }
   get penalty1() {
     return this.rulesGroup.get('penalty1') as FormControl;
