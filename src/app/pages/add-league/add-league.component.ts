@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
 import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../shared/constants/const-rules';
-import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
   selector: 'app-add-league',
@@ -66,18 +65,10 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   get gameType() {
     return this.rulesGroup.get('gameType') as FormControl;
   }
-
-  user$ = this.auth.user;
   matcher = new MyErrorStateMatcher();
-  private uid = '';
   private onDestroy$ = new Subject();
 
-  constructor(
-    private leagueService: LeagueService,
-    private auth: AuthService,
-    private matDialog: MatDialog,
-    private datePipe: DatePipe
-  ) {}
+  constructor(private leagueService: LeagueService, private matDialog: MatDialog, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     // 日付整形用
@@ -90,13 +81,6 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     // rulesRadio変更時の処理
     this.rulesRadio.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe((rulesRadioValue) => {
       this.setRules(rulesRadioValue);
-    });
-
-    this.user$.pipe(takeUntil(this.onDestroy$)).subscribe((user) => {
-      if (!user) {
-        return;
-      }
-      this.uid = user.uid;
     });
   }
 
@@ -173,7 +157,6 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
       manual: this.manual.value.trim(),
       startAt: !this.date.value[0] ? '' : this.date.value[0],
       finishAt: !this.date.value[1] ? '' : this.date.value[1],
-      uid: this.uid,
       rules: newRules,
     };
     this.leagueService.postLeague(newleague);

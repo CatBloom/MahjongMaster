@@ -6,11 +6,14 @@ export interface LeagueRequest {
   manual?: string;
   startAt?: string;
   finishAt?: string;
-  uid: string;
   rules: Rules;
 }
 export interface LeagueResponse extends LeagueRequest {
   id: string;
+  uids?: {
+    uid: string;
+    leagueId: string;
+  }[];
 }
 export interface LeagueDialog {
   name: string;
