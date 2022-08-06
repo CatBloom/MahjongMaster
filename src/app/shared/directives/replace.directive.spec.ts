@@ -60,11 +60,19 @@ describe('ReplaceDirective', () => {
     expect(input.value).toEqual('-12345');
   });
 
-  it('Replace last two number 00', () => {
+  it('Replace last two number 00 no.1', () => {
     const input = de.nativeElement as HTMLInputElement;
     input.value = '12345';
     input.dispatchEvent(new Event('blur'));
     fixture.detectChanges();
     expect(input.value).toEqual('12300');
+  });
+
+  it('Replace last two number 00 no.2', () => {
+    const input = de.nativeElement as HTMLInputElement;
+    input.value = '-10';
+    input.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+    expect(input.value).toEqual('-10');
   });
 });
