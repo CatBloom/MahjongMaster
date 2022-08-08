@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
@@ -20,5 +19,12 @@ describe('SearchComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('@Output test', () => {
+    component.search.setValue('test');
+    component.sendValue.subscribe((value) => {
+      expect(value).toBe('test');
+    });
   });
 });
