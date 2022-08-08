@@ -1,4 +1,5 @@
 import { OnInit, Component } from '@angular/core';
+import { LeagueService } from 'src/app/shared/services/league.service';
 
 @Component({
   selector: 'app-top',
@@ -6,7 +7,12 @@ import { OnInit, Component } from '@angular/core';
   styleUrls: ['./top.component.scss'],
 })
 export class TopComponent implements OnInit {
-  constructor() {}
+  search$ = this.leagueService.leagueSearchSubject$;
+  constructor(private leagueService: LeagueService) {}
 
   ngOnInit(): void {}
+
+  leagueSearch(value: string) {
+    this.leagueService.searchLeague(value);
+  }
 }
