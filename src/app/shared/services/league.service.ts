@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { LeagueRequest, LeagueResponse } from '../interfaces/league';
 import { Router } from '@angular/router';
@@ -9,10 +9,15 @@ import { Router } from '@angular/router';
 })
 export class LeagueService {
   private readonly apiUrl = 'http://localhost:8080/api/v1/league';
+  private skipHttpClient: HttpClient;
 
+  private leagueSearchSubject = new BehaviorSubject<LeagueResponse[]>([]);
   private leagueListSubject = new BehaviorSubject<LeagueResponse[]>([]);
   private leagueSubject = new BehaviorSubject<LeagueResponse>({} as LeagueResponse);
 
+  get leagueSearchSubject$() {
+    return this.leagueSearchSubject.asObservable();
+  }
   get leagueList$() {
     return this.leagueListSubject.asObservable();
   }
@@ -20,7 +25,23 @@ export class LeagueService {
     return this.leagueSubject.asObservable();
   }
 
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(private http: HttpClient, private route: Router, httpBackend: HttpBackend) {
+    this.skipHttpClient = new HttpClient(httpBackend);
+  }
+
+  searchLeague(name: string) {
+    if (!name || name.length < 3) {
+      this.leagueSearchSubject.next([]);
+      return;
+    }
+    const url = encodeURI(name.trim());
+    this.skipHttpClient
+      .get<LeagueResponse[]>(`${this.apiUrl}/search/${url}`)
+      .pipe()
+      .subscribe((res) => {
+        this.leagueSearchSubject.next(res);
+      });
+  }
 
   //大会リストを取得
   getLeagueList(uid: string): void {
