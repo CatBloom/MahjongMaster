@@ -43,14 +43,19 @@ export class LeagueService {
       });
   }
 
-  //大会リストを取得
-  getLeagueList(uid: string): void {
+  //tokenから大会リストを取得
+  getLeagueList(): void {
     this.http
-      .get<LeagueResponse[]>(`${this.apiUrl}/list/${uid}`)
+      .get<LeagueResponse[]>(`${this.apiUrl}/list`)
       .pipe()
-      .subscribe((res) => {
-        this.leagueListSubject.next(res);
-      });
+      .subscribe(
+        (res) => {
+          this.leagueListSubject.next(res);
+        },
+        () => {
+          this.leagueListSubject.next([]);
+        }
+      );
   }
 
   //大会の取得
