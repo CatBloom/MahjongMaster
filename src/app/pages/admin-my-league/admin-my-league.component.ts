@@ -19,13 +19,7 @@ export class AdminMyLeagueComponent implements OnInit, OnDestroy {
   constructor(private leagueService: LeagueService, private auth: AuthService) {}
 
   ngOnInit(): void {
-    this.user$.pipe(distinctUntilChanged(), takeUntil(this.onDestroy$)).subscribe((user) => {
-      if (!user) {
-        return;
-      } else {
-        this.leagueService.getLeagueList(user.uid);
-      }
-    });
+    this.leagueService.getLeagueList();
   }
 
   ngOnDestroy(): void {
