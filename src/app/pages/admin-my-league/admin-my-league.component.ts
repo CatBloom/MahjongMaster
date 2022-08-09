@@ -1,8 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faFileCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { Subject } from 'rxjs';
-import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
-import { AuthService } from 'src/app/shared/auth/auth.service';
 import { LeagueService } from 'src/app/shared/services/league.service';
 
 @Component({
@@ -10,25 +7,12 @@ import { LeagueService } from 'src/app/shared/services/league.service';
   templateUrl: './admin-my-league.component.html',
   styleUrls: ['./admin-my-league.component.scss'],
 })
-export class AdminMyLeagueComponent implements OnInit, OnDestroy {
+export class AdminMyLeagueComponent implements OnInit {
   iconFileCirclePlus = faFileCirclePlus;
   leagueList$ = this.leagueService.leagueList$;
-  user$ = this.auth.user;
-  private onDestroy$ = new Subject();
-
-  constructor(private leagueService: LeagueService, private auth: AuthService) {}
+  constructor(private leagueService: LeagueService) {}
 
   ngOnInit(): void {
-    this.user$.pipe(distinctUntilChanged(), takeUntil(this.onDestroy$)).subscribe((user) => {
-      if (!user) {
-        return;
-      } else {
-        this.leagueService.getLeagueList(user.uid);
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.leagueService.getLeagueList();
   }
 }
