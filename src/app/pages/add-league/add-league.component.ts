@@ -27,17 +27,10 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
       gameType: new FormControl('', [Validators.required]),
       gameName: new FormControl('', [Validators.required]),
       playerCount: new FormControl('', [Validators.required]),
-      dora: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       tanyao: new FormControl('', [Validators.required]),
+      dora: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       startPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      finishPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       returnPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      calledPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      reachPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      deposit: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      penalty1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      penalty2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      penalty3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       uma1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       uma2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       uma3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
@@ -90,19 +83,17 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
 
   // 固定ルールをセットする関数
   setRules(rulesRadioValue: string) {
+    this.rulesGroup.reset();
     switch (rulesRadioValue) {
       case 'mleagueRules':
-        this.rulesGroup.reset();
         this.rulesGroup.setValue(MLeagueRules);
         this.rulesGroup.disable();
         break;
       case 'mahjongsoulRules':
-        this.rulesGroup.reset();
         this.rulesGroup.setValue(MahjongSoulRules);
         this.rulesGroup.disable();
         break;
       case 'tenhouRules':
-        this.rulesGroup.reset();
         this.rulesGroup.setValue(TenhouRules);
         this.rulesGroup.disable();
         break;
@@ -130,14 +121,12 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
         newRules = this.rulesGroup.value;
         newRules.gameName = '3人東風戦';
         newRules.playerCount = 3;
-        newRules.penalty3 = 0;
         newRules.uma4 = 0;
         return newRules;
       case '4':
         newRules = this.rulesGroup.value;
         newRules.gameName = '3人半荘戦';
         newRules.playerCount = 3;
-        newRules.penalty3 = 0;
         newRules.uma4 = 0;
         return newRules;
       default:

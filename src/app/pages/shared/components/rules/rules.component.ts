@@ -17,15 +17,6 @@ export class RulesComponent implements OnInit, OnDestroy {
   get gameType() {
     return this.rulesGroup.get('gameType') as FormControl;
   }
-  get penalty1() {
-    return this.rulesGroup.get('penalty1') as FormControl;
-  }
-  get penalty2() {
-    return this.rulesGroup.get('penalty2') as FormControl;
-  }
-  get penalty3() {
-    return this.rulesGroup.get('penalty3') as FormControl;
-  }
   get uma1() {
     return this.rulesGroup.get('uma1') as FormControl;
   }
@@ -49,10 +40,8 @@ export class RulesComponent implements OnInit, OnDestroy {
     // 4人麻雀と3人麻雀で必須項目を切り替える
     this.gameType.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
       if (this.gameType.value === '1' || this.gameType.value === '2') {
-        this.penalty3.setErrors({ require: true });
         this.uma4.setErrors({ require: true });
       } else if (this.gameType.value === '3' || this.gameType.value === '4') {
-        this.penalty3.setErrors(null);
         this.uma4.setErrors(null);
       }
     });
