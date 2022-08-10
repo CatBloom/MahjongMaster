@@ -25,8 +25,6 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     rulesRadio: new FormControl('', [Validators.required]),
     rulesGroup: new FormGroup({
       gameType: new FormControl('', [Validators.required]),
-      gameName: new FormControl('', [Validators.required]),
-      playerCount: new FormControl('', [Validators.required]),
       tanyao: new FormControl('', [Validators.required]),
       dora: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       startPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
@@ -86,15 +84,15 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     this.rulesGroup.reset();
     switch (rulesRadioValue) {
       case 'mleagueRules':
-        this.rulesGroup.setValue(MLeagueRules);
+        this.rulesGroup.patchValue(MLeagueRules);
         this.rulesGroup.disable();
         break;
       case 'mahjongsoulRules':
-        this.rulesGroup.setValue(MahjongSoulRules);
+        this.rulesGroup.patchValue(MahjongSoulRules);
         this.rulesGroup.disable();
         break;
       case 'tenhouRules':
-        this.rulesGroup.setValue(TenhouRules);
+        this.rulesGroup.patchValue(TenhouRules);
         this.rulesGroup.disable();
         break;
       case 'custom':
@@ -105,10 +103,15 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
 
   //formからrulesを作成する
   createRules(): Rules | null {
-    let newRules: Rules;
+    let newRules: Rules = this.rulesGroup.value;
+    newRules.startPoint = Number(this.rulesGroup.get('startPoint')?.value);
+    newRules.returnPoint = Number(this.rulesGroup.get('returnPoint')?.value);
+    newRules.uma1 = Number(this.rulesGroup.get('uma1')?.value);
+    newRules.uma2 = Number(this.rulesGroup.get('uma2')?.value);
+    newRules.uma3 = Number(this.rulesGroup.get('uma3')?.value);
+    newRules.uma4 = Number(this.rulesGroup.get('uma4')?.value);
     switch (this.gameType.value) {
       case '1':
-        newRules = this.rulesGroup.value;
         newRules.gameName = '4人東風戦';
         newRules.playerCount = 4;
         return newRules;
@@ -121,13 +124,13 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
         newRules = this.rulesGroup.value;
         newRules.gameName = '3人東風戦';
         newRules.playerCount = 3;
-        newRules.uma4 = 0;
+        newRules.uma4 = null;
         return newRules;
       case '4':
         newRules = this.rulesGroup.value;
         newRules.gameName = '3人半荘戦';
         newRules.playerCount = 3;
-        newRules.uma4 = 0;
+        newRules.uma4 = null;
         return newRules;
       default:
         return null;

@@ -268,10 +268,10 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   //uma配列を作成
   private createUmaArray() {
-    if (this.rules.playerCount === 4) {
-      this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3, this.rules.uma4];
-    } else {
+    if (!this.rules.uma4) {
       this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3];
+    } else {
+      this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3, this.rules.uma4];
     }
   }
 
