@@ -3,12 +3,12 @@
 .rules {
   display: flex;
   flex-flow: column;
-  text-align: left;
-
   &__title {
-    margin-top: 1.5rem;
-    font-size: 2rem;
-    color: var.$subTitleFontColor;
+    padding-top: 2rem;
+  }
+  &__name {
+    padding: 0.5rem 0;
+    display: block;
   }
   &__radio {
     display: flex;
@@ -18,30 +18,12 @@
       min-width: 15rem;
     }
   }
-  &__input {
+  &__input-uma {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     .mat-form-field {
-      width: 50%;
-      min-width: 20rem;
-    }
-  }
-  &__toggle {
-    display: inline;
-    font-size: 1rem;
-  }
-}
-
-:host ::ng-deep .mat-form-field-wrapper {
-  margin-top: 0 !important;
-  padding: 0;
-}
-
-@media screen and (max-width: 600px) {
-  .rules {
-    &__input {
-      .mat-form-field {
-        width: 100%;
-        min-width: 20rem;
-      }
+      min-width: 15%;
     }
   }
 }
