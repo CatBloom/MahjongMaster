@@ -5,16 +5,16 @@
   <mat-label>喰い断</mat-label>
   <mat-list-item>
     <ng-container [ngSwitch]="rules.tanyao">
-      <ng-container *ngSwitchCase="'1'">有効</ng-container>
-      <ng-container *ngSwitchCase="'0'">無効</ng-container>
+      <ng-container *ngSwitchCase="'1'">あり</ng-container>
+      <ng-container *ngSwitchCase="'0'">なし</ng-container>
     </ng-container>
   </mat-list-item>
   <mat-divider></mat-divider>
   <mat-label>後付け</mat-label>
   <mat-list-item>
     <ng-container [ngSwitch]="rules.back">
-      <ng-container *ngSwitchCase="'1'">有効</ng-container>
-      <ng-container *ngSwitchCase="'0'">無効</ng-container>
+      <ng-container *ngSwitchCase="'1'">あり</ng-container>
+      <ng-container *ngSwitchCase="'0'">なし</ng-container>
     </ng-container>
   </mat-list-item>
   <mat-divider></mat-divider>
