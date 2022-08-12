@@ -85,16 +85,16 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     this.rulesGroup.reset();
     switch (rulesRadioValue) {
       case 'mleagueRules':
-        this.rulesGroup.patchValue(MLeagueRules);
         this.rulesGroup.disable();
+        this.rulesGroup.patchValue(MLeagueRules);
         break;
       case 'mahjongsoulRules':
-        this.rulesGroup.patchValue(MahjongSoulRules);
         this.rulesGroup.disable();
+        this.rulesGroup.patchValue(MahjongSoulRules);
         break;
       case 'tenhouRules':
-        this.rulesGroup.patchValue(TenhouRules);
         this.rulesGroup.disable();
+        this.rulesGroup.patchValue(TenhouRules);
         break;
       case 'custom':
         this.rulesGroup.enable();
