@@ -26,6 +26,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     rulesGroup: new FormGroup({
       gameType: new FormControl('', [Validators.required]),
       tanyao: new FormControl('', [Validators.required]),
+      back: new FormControl('', [Validators.required]),
       dora: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       startPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
       returnPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),

@@ -3,6 +3,7 @@ export interface Rules {
   gameName: string;
   playerCount: number;
   tanyao: string;
+  back: string;
   dora: number;
   startPoint: number;
   returnPoint: number;
