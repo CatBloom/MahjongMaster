@@ -15,10 +15,3 @@ export interface LeagueResponse extends LeagueRequest {
     leagueId: string;
   }[];
 }
-export interface LeagueDialog {
-  name: string;
-  manual: string;
-  startAt: Date;
-  finishAt: Date;
-  rules: Rules;
-}

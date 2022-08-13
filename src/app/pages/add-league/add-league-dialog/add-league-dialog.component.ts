@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { LeagueDialog } from '../../../shared/interfaces/league';
+import { LeagueRequest } from '../../../shared/interfaces/league';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./add-league-dialog.component.scss'],
 })
 export class AddLeagueDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: LeagueDialog) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: LeagueRequest) {}
 
   ngOnInit(): void {}
 }

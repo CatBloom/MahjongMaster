@@ -1,44 +1,31 @@
 <mat-list class="rules-list">
-  <mat-label>局数</mat-label>
-  <mat-list-item>{{ rules.gameName }}</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-label>赤ドラ</mat-label>
-  <mat-list-item>{{ rules.dora }}枚</mat-list-item>
+  <mat-label>対局</mat-label>
+  <mat-list-item>{{ rules.playerCount }}人{{ rules.gameType }}</mat-list-item>
   <mat-divider></mat-divider>
   <mat-label>喰い断</mat-label>
   <mat-list-item>
     <ng-container [ngSwitch]="rules.tanyao">
-      <ng-container *ngSwitchCase="'1'">有効</ng-container>
-      <ng-container *ngSwitchCase="'0'">無効</ng-container>
+      <ng-container *ngSwitchCase="true">あり</ng-container>
+      <ng-container *ngSwitchCase="false">なし</ng-container>
     </ng-container>
   </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-label>後付け</mat-label>
+  <mat-list-item>
+    <ng-container [ngSwitch]="rules.back">
+      <ng-container *ngSwitchCase="true">あり</ng-container>
+      <ng-container *ngSwitchCase="false">なし</ng-container>
+    </ng-container>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-label>赤ドラ</mat-label>
+  <mat-list-item>{{ rules.dora }}枚</mat-list-item>
   <mat-divider></mat-divider>
   <mat-label>配給原点</mat-label>
   <mat-list-item>{{ rules.startPoint }}</mat-list-item>
   <mat-divider></mat-divider>
-  <mat-label>終局必要点数</mat-label>
-  <mat-list-item>{{ rules.finishPoint }}</mat-list-item>
-  <mat-divider></mat-divider>
   <mat-label>返し点</mat-label>
   <mat-list-item>{{ rules.returnPoint }}</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-label>コールド</mat-label>
-  <mat-list-item>{{ rules.calledPoint }}</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-label>リーチ必要点数</mat-label>
-  <mat-list-item>{{ rules.reachPoint }}</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-label>本場点</mat-label>
-  <mat-list-item>{{ rules.deposit }}</mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-label>ノーテン罰符</mat-label>
-  <mat-list-item>
-    <div class="rule-container">
-      <div>1人【{{ rules.penalty1 }}】</div>
-      <div>2人【{{ rules.penalty2 }}】</div>
-      <div *ngIf="rules.playerCount === 4">3人【{{ rules.penalty3 }}】</div>
-    </div>
-  </mat-list-item>
   <mat-divider></mat-divider>
   <mat-label>ウマ</mat-label>
   <mat-list-item>
