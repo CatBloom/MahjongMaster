@@ -25,7 +25,7 @@
       <span>【{{ result.results[2].point }},{{ result.results[2].calcPoint }}】</span>
     </a>
   </div>
-  <div class="result-container__item">
+  <div class="result-container__item" *ngIf="result.results[3]">
     <a routerLink="/player/{{ result.leagueId }}/{{ result.results[3].playerId }}">
       <span class="result-container__item--name"
         >{{ result.results[3].rank }}位:{{ result.results[3].playerName | customSlice: 10 }}
