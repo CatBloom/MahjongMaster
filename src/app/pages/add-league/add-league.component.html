@@ -23,13 +23,13 @@
             readonly
         /></ng-container>
         <!-- 整形データ -->
-        <input matInput readonly formControlName="displayDate" [errorStateMatcher]="matcher" />
+        <input matInput readonly [formControl]="displayDate" [errorStateMatcher]="matcher" />
         <mat-datepicker-toggle matSuffix [owlDateTimeTrigger]="dt1"></mat-datepicker-toggle>
         <owl-date-time [pickerMode]="'dialog'" [hour12Timer]="true" #dt1></owl-date-time>
       </mat-form-field>
     </div>
     <div class="league__radio">
-      <mat-radio-group formControlName="rulesRadio">
+      <mat-radio-group [formControl]="rulesRadio">
         <mat-radio-button value="mleagueRules">Mリーグルール</mat-radio-button>
         <mat-radio-button value="mahjongsoulRules">雀魂半荘ルール</mat-radio-button>
         <mat-radio-button value="tenhouRules">天鳳半荘ルール</mat-radio-button>
@@ -46,7 +46,7 @@
       mat-stroked-button
       color="accent"
       [disabled]="formGroup.invalid"
-      (click)="openDialog()"
+      (click)="postLeague()"
     >
       大会登録
     </button>
