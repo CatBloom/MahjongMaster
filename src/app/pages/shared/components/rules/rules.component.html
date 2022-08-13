@@ -1,27 +1,32 @@
 <div class="rules">
   <form [formGroup]="rulesGroup" autocomplete="off" class="formGroup">
     <h2 class="rules__title">大会ルール</h2>
+    <mat-label class="rules__name">人数</mat-label>
+    <div class="rules__radio">
+      <mat-radio-group formControlName="playerCount">
+        <mat-radio-button [value]="4">4人麻雀 </mat-radio-button>
+        <mat-radio-button [value]="3">3人麻雀</mat-radio-button>
+      </mat-radio-group>
+    </div>
     <mat-label class="rules__name">局数</mat-label>
     <div class="rules__radio">
       <mat-radio-group formControlName="gameType">
-        <mat-radio-button value="1">4人東風戦</mat-radio-button>
-        <mat-radio-button value="2">4人半荘戦</mat-radio-button>
-        <mat-radio-button value="3">3人東風戦</mat-radio-button>
-        <mat-radio-button value="4">3人半荘戦</mat-radio-button>
+        <mat-radio-button value="東風戦">東風戦</mat-radio-button>
+        <mat-radio-button value="半荘戦">半荘戦</mat-radio-button>
       </mat-radio-group>
     </div>
     <mat-label class="rules__name">喰い断</mat-label>
     <div class="rules__radio">
       <mat-radio-group formControlName="tanyao">
-        <mat-radio-button value="1">あり</mat-radio-button>
-        <mat-radio-button value="0">なし</mat-radio-button>
+        <mat-radio-button [value]="true">あり</mat-radio-button>
+        <mat-radio-button [value]="false">なし</mat-radio-button>
       </mat-radio-group>
     </div>
     <mat-label class="rules__name">後付け</mat-label>
     <div class="rules__radio">
       <mat-radio-group formControlName="back">
-        <mat-radio-button value="1">あり</mat-radio-button>
-        <mat-radio-button value="0">なし</mat-radio-button>
+        <mat-radio-button [value]="true">あり</mat-radio-button>
+        <mat-radio-button [value]="false">なし</mat-radio-button>
       </mat-radio-group>
     </div>
     <mat-label class="rules__name">赤ドラ</mat-label>
@@ -60,7 +65,7 @@
         <mat-label>3位</mat-label>
         <input type="text" matInput formControlName="uma3" appReplace />
       </mat-form-field>
-      <mat-form-field appearance="outline" *ngIf="gameType.value !== '3' && gameType.value !== '4'">
+      <mat-form-field appearance="outline" *ngIf="playerCount.value !== 3">
         <mat-label>4位</mat-label>
         <input type="text" matInput formControlName="uma4" appReplace />
       </mat-form-field>

@@ -1,9 +1,8 @@
 export interface Rules {
-  gameType: string;
-  gameName: string;
   playerCount: number;
-  tanyao: string;
-  back: string;
+  gameType: string;
+  tanyao: boolean;
+  back: boolean;
   dora: number;
   startPoint: number;
   returnPoint: number;

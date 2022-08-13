@@ -2,11 +2,10 @@ import { Rules } from '../../../shared/interfaces/rules';
 
 // 雀魂公式ルール
 export const MahjongSoulRules: Rules = {
-  gameType: '2',
-  gameName: '4人麻雀半荘',
   playerCount: 4,
-  tanyao: '1',
-  back: '1',
+  gameType: '半荘戦',
+  tanyao: true,
+  back: true,
   dora: 3,
   startPoint: 25000,
   returnPoint: 25000,
@@ -17,11 +16,10 @@ export const MahjongSoulRules: Rules = {
 };
 // 天鳳公式ルール
 export const TenhouRules: Rules = {
-  gameType: '2',
-  gameName: '4人麻雀半荘',
   playerCount: 4,
-  tanyao: '1',
-  back: '1',
+  gameType: '半荘戦',
+  tanyao: true,
+  back: true,
   dora: 3,
   startPoint: 25000,
   returnPoint: 30000,
@@ -32,11 +30,10 @@ export const TenhouRules: Rules = {
 };
 // Mリーグ公式ルール
 export const MLeagueRules: Rules = {
-  gameType: '2',
-  gameName: '4人麻雀半荘',
   playerCount: 4,
-  tanyao: '1',
-  back: '1',
+  gameType: '半荘戦',
+  tanyao: true,
+  back: true,
   dora: 3,
   startPoint: 25000,
   returnPoint: 30000,

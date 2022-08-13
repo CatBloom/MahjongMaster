@@ -15,8 +15,8 @@ export class RulesComponent implements OnInit, OnDestroy {
   get rulesGroup() {
     return this.formGroup.get('rulesGroup') as FormGroup;
   }
-  get gameType() {
-    return this.rulesGroup.get('gameType') as FormControl;
+  get playerCount() {
+    return this.rulesGroup.get('playerCount') as FormControl;
   }
 
   private onDestroy$ = new Subject();
@@ -25,10 +25,9 @@ export class RulesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // 4人麻雀と3人麻雀で必須項目を切り替える
-    this.gameType.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      if (this.gameType.value === '1' || this.gameType.value === '2') {
-        this.rulesGroup.get('uma4')?.setErrors({ require: true });
-      } else if (this.gameType.value === '3' || this.gameType.value === '4') {
+    this.playerCount.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
+      this.rulesGroup.get('uma4')?.setErrors({ require: true });
+      if (value === 3) {
         this.rulesGroup.get('uma4')?.setErrors(null);
       }
     });
