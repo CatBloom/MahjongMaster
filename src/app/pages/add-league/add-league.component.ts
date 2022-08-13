@@ -52,7 +52,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   // ルール選択ラジオボタンのformControl
   rulesRadio = new UntypedFormControl('');
   matcher = new MyErrorStateMatcher();
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(private leagueService: LeagueService, private matDialog: MatDialog, private datePipe: DatePipe) {}
 
@@ -71,7 +71,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   // 固定ルールをセットする関数

@@ -37,7 +37,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   matcher = new MyErrorStateMatcher();
   private game: GameResponse = {} as GameResponse;
   private umaArray: number[] = [];
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(
     private leagueService: LeagueService,
@@ -108,7 +108,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   //form作成

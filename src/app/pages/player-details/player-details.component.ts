@@ -16,7 +16,7 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   playerResult$ = this.resultService.playerResult$;
   lineData$ = this.resultService.lineData$;
   pieData$ = this.resultService.pieData$;
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(
     private playerService: PlayerService,
@@ -39,6 +39,6 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 }

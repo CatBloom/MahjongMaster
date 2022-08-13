@@ -21,7 +21,7 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
   }
   playerList$ = this.playerService.playerList$;
   matcher = new MyErrorStateMatcher();
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}
 
@@ -38,7 +38,7 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   postPlayer() {

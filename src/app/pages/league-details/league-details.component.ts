@@ -15,7 +15,7 @@ export class LeagueDetailsComponent implements OnInit, OnDestroy {
   leagueResult$ = this.resultService.leagueResult$;
   tableColumns: string[] = ['rank', 'name', 'totalGame', 'totalCalcPoint'];
   isRules = false;
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(
     private leagueService: LeagueService,
@@ -38,7 +38,7 @@ export class LeagueDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   tableRowClick(rowData: LeagueResultResponse) {

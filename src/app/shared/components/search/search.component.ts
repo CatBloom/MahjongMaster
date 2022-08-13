@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Output() sendValue = new EventEmitter<string>();
 
   search: UntypedFormControl = new UntypedFormControl('');
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor() {}
 
@@ -37,6 +37,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 }

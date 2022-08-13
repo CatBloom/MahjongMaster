@@ -19,7 +19,7 @@ export class RulesComponent implements OnInit, OnDestroy {
     return this.rulesGroup.get('playerCount') as UntypedFormControl;
   }
 
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor() {}
 
@@ -34,6 +34,6 @@ export class RulesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 }
