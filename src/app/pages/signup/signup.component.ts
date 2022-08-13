@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserSignup } from 'src/app/shared/interfaces/user';
 import { AuthService } from '../../shared/auth/auth.service';
 
@@ -9,19 +9,19 @@ import { AuthService } from '../../shared/auth/auth.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  formGroup = new FormGroup({
-    mail: new FormControl('', [Validators.required, Validators.email]),
-    name: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  formGroup = new UntypedFormGroup({
+    mail: new UntypedFormControl('', [Validators.required, Validators.email]),
+    name: new UntypedFormControl('', [Validators.required]),
+    password: new UntypedFormControl('', [Validators.required, Validators.minLength(6)]),
   });
   get mail() {
-    return this.formGroup.get('mail') as FormControl;
+    return this.formGroup.get('mail') as UntypedFormControl;
   }
   get name() {
-    return this.formGroup.get('name') as FormControl;
+    return this.formGroup.get('name') as UntypedFormControl;
   }
   get password() {
-    return this.formGroup.get('password') as FormControl;
+    return this.formGroup.get('password') as UntypedFormControl;
   }
 
   constructor(private authService: AuthService) {}

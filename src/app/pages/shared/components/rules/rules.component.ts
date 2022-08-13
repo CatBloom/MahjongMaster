@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -9,14 +9,14 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./rules.component.scss'],
 })
 export class RulesComponent implements OnInit, OnDestroy {
-  @Input() formGroup!: FormGroup;
+  @Input() formGroup!: UntypedFormGroup;
   doraCount = [...Array(21).keys()];
 
   get rulesGroup() {
-    return this.formGroup.get('rulesGroup') as FormGroup;
+    return this.formGroup.get('rulesGroup') as UntypedFormGroup;
   }
   get playerCount() {
-    return this.rulesGroup.get('playerCount') as FormControl;
+    return this.rulesGroup.get('playerCount') as UntypedFormControl;
   }
 
   private onDestroy$ = new Subject();

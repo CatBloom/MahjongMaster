@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserLogin } from 'src/app/shared/interfaces/user';
 import { AuthService } from '../../shared/auth/auth.service';
 
@@ -9,15 +9,15 @@ import { AuthService } from '../../shared/auth/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  formGroup = new FormGroup({
-    mail: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+  formGroup = new UntypedFormGroup({
+    mail: new UntypedFormControl('', [Validators.required, Validators.email]),
+    password: new UntypedFormControl('', [Validators.required]),
   });
   get mail() {
-    return this.formGroup.get('mail') as FormControl;
+    return this.formGroup.get('mail') as UntypedFormControl;
   }
   get password() {
-    return this.formGroup.get('password') as FormControl;
+    return this.formGroup.get('password') as UntypedFormControl;
   }
 
   constructor(private authService: AuthService) {}

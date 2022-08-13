@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { PlayerRequest, PlayerResponse } from '../../../../../shared/interfaces/player';
 import { PlayerService } from 'src/app/shared/services/player.service';
 
@@ -11,7 +11,7 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 export class PlayerListEditComponent implements OnInit {
   @Input() player!: PlayerResponse;
   isPlayerEdit = false;
-  inputPlayer: FormControl = new FormControl();
+  inputPlayer: UntypedFormControl = new UntypedFormControl();
 
   constructor(private playerSevice: PlayerService) {}
 

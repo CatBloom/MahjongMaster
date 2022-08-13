@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Rules } from '../../shared/interfaces/rules';
 import { LeagueRequest } from '../../shared/interfaces/league';
 import { LeagueService } from '../../shared/services/league.service';
@@ -17,40 +17,40 @@ import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../shared/constants
   styleUrls: ['./add-league.component.scss'],
 })
 export class AddLeagueComponent implements OnInit, OnDestroy {
-  formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    manual: new FormControl('', []),
-    date: new FormControl('', []),
-    rulesGroup: new FormGroup({
-      playerCount: new FormControl('', [Validators.required]),
-      gameType: new FormControl('', [Validators.required]),
-      tanyao: new FormControl('', [Validators.required]),
-      back: new FormControl('', [Validators.required]),
-      dora: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      startPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      returnPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma4: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+  formGroup = new UntypedFormGroup({
+    name: new UntypedFormControl('', [Validators.required]),
+    manual: new UntypedFormControl('', []),
+    date: new UntypedFormControl('', []),
+    rulesGroup: new UntypedFormGroup({
+      playerCount: new UntypedFormControl('', [Validators.required]),
+      gameType: new UntypedFormControl('', [Validators.required]),
+      tanyao: new UntypedFormControl('', [Validators.required]),
+      back: new UntypedFormControl('', [Validators.required]),
+      dora: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      startPoint: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      returnPoint: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      uma1: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      uma2: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      uma3: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      uma4: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
     }),
   });
   get name() {
-    return this.formGroup.get('name') as FormControl;
+    return this.formGroup.get('name') as UntypedFormControl;
   }
   get manual() {
-    return this.formGroup.get('manual') as FormControl;
+    return this.formGroup.get('manual') as UntypedFormControl;
   }
   get date() {
-    return this.formGroup.get('date') as FormControl;
+    return this.formGroup.get('date') as UntypedFormControl;
   }
   get rulesGroup() {
-    return this.formGroup.get('rulesGroup') as FormGroup;
+    return this.formGroup.get('rulesGroup') as UntypedFormGroup;
   }
   // 整形データ用のformControl
-  displayDate = new FormControl('');
+  displayDate = new UntypedFormControl('');
   // ルール選択ラジオボタンのformControl
-  rulesRadio = new FormControl('');
+  rulesRadio = new UntypedFormControl('');
   matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject();
 

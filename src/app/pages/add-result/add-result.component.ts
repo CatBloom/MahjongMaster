@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Rules } from '../../shared/interfaces/rules';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
@@ -16,10 +16,10 @@ import { GameService } from 'src/app/shared/services/game.service';
   styleUrls: ['./add-result.component.scss'],
 })
 export class AddResultComponent implements OnInit, OnDestroy {
-  formGroup = new FormGroup({});
+  formGroup = new UntypedFormGroup({});
 
   get resultArray() {
-    return this.formGroup.get('resultArray') as FormArray;
+    return this.formGroup.get('resultArray') as UntypedFormArray;
   }
   //form作成時の初期値を保存
   formInitValue = [];
@@ -44,7 +44,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     private playerService: PlayerService,
     private gameService: GameService,
     private activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.formGroup = this.fb.group({
       resultArray: this.fb.array([]),

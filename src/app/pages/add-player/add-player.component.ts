@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
@@ -13,11 +13,11 @@ import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
   styleUrls: ['./add-player.component.scss'],
 })
 export class AddPlayerComponent implements OnInit, OnDestroy {
-  formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+  formGroup = new UntypedFormGroup({
+    name: new UntypedFormControl('', [Validators.required]),
   });
   get name() {
-    return this.formGroup.get('name') as FormControl;
+    return this.formGroup.get('name') as UntypedFormControl;
   }
   playerList$ = this.playerService.playerList$;
   matcher = new MyErrorStateMatcher();
