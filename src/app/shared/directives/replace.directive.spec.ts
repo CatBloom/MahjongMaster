@@ -44,7 +44,15 @@ describe('ReplaceDirective', () => {
     expect(input.value).toEqual('102');
   });
 
-  it('Remove initial - except -', () => {
+  it('Remove initial - except - no.1', () => {
+    const input = de.nativeElement as HTMLInputElement;
+    input.value = '12-34--5';
+    input.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    expect(input.value).toEqual('12345');
+  });
+
+  it('Remove initial - except - no.2', () => {
     const input = de.nativeElement as HTMLInputElement;
     input.value = '--12-34--5';
     input.dispatchEvent(new Event('input'));
