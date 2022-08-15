@@ -1,5 +1,5 @@
 import { OnInit, Component, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { of, Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() auto!: MatAutocomplete;
   @Output() sendValue = new EventEmitter<string>();
 
-  search: UntypedFormControl = new UntypedFormControl('');
+  search: FormControl = new FormControl('', { nonNullable: true });
   private onDestroy$ = new Subject<boolean>();
 
   constructor() {}

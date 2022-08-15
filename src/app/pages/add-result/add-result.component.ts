@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Rules } from '../../shared/interfaces/rules';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
@@ -16,13 +16,10 @@ import { GameService } from 'src/app/shared/services/game.service';
   styleUrls: ['./add-result.component.scss'],
 })
 export class AddResultComponent implements OnInit, OnDestroy {
-  formGroup = new UntypedFormGroup({});
-
+  formGroup: FormGroup;
   get resultArray() {
-    return this.formGroup.get('resultArray') as UntypedFormArray;
+    return this.formGroup.get('resultArray') as FormArray;
   }
-  //form作成時の初期値を保存
-  formInitValue = [];
   //登録or更新
   formType: string | null = null;
   //取得したルール
@@ -44,7 +41,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     private playerService: PlayerService,
     private gameService: GameService,
     private activeRoute: ActivatedRoute,
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder
   ) {
     this.formGroup = this.fb.group({
       resultArray: this.fb.array([]),
@@ -115,7 +112,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   initFormCreate() {
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.resultArray.push(
-        this.fb.group({
+        this.fb.nonNullable.group({
           rank: [i + 1, [Validators.required]],
           id: ['', [Validators.required]],
           point: ['', [Validators.required, Validators.pattern(/^[\d-]+$/)]],
@@ -123,13 +120,11 @@ export class AddResultComponent implements OnInit, OnDestroy {
         })
       );
     }
-    //reset用formの初期値を保存する
-    this.formInitValue = this.formGroup.value;
   }
 
   //formリセット
   resetForm() {
-    this.formGroup.reset(this.formInitValue);
+    this.formGroup.reset();
   }
 
   setValue(game: GameResponse) {
@@ -156,7 +151,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const result: GameResult[] = [];
-
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         rank: this.resultArray.controls[i].get('rank')?.value,
@@ -189,7 +183,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const result: GameResult[] = [];
-
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         id: this.game.results[i].id,

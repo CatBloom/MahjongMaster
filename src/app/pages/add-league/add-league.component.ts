@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rules } from '../../shared/interfaces/rules';
 import { LeagueRequest } from '../../shared/interfaces/league';
 import { LeagueService } from '../../shared/services/league.service';
@@ -17,40 +17,44 @@ import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../shared/constants
   styleUrls: ['./add-league.component.scss'],
 })
 export class AddLeagueComponent implements OnInit, OnDestroy {
-  formGroup = new UntypedFormGroup({
-    name: new UntypedFormControl('', [Validators.required]),
-    manual: new UntypedFormControl('', []),
-    date: new UntypedFormControl('', []),
-    rulesGroup: new UntypedFormGroup({
-      playerCount: new UntypedFormControl('', [Validators.required]),
-      gameType: new UntypedFormControl('', [Validators.required]),
-      tanyao: new UntypedFormControl('', [Validators.required]),
-      back: new UntypedFormControl('', [Validators.required]),
-      dora: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      startPoint: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      returnPoint: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma1: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma2: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma3: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma4: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+  formGroup = new FormGroup({
+    name: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern(/[\S]/)],
+    }),
+    manual: new FormControl<string>('', { nonNullable: true }),
+    date: new FormControl<string[]>([''], { nonNullable: true }),
+    rulesGroup: new FormGroup({
+      playerCount: new FormControl<number>(0, { validators: [Validators.required] }),
+      gameType: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+      tanyao: new FormControl<boolean>(true, { validators: [Validators.required] }),
+      back: new FormControl<boolean>(true, { validators: [Validators.required] }),
+      dora: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      startPoint: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      returnPoint: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma1: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma2: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma3: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma4: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
     }),
   });
+
   get name() {
-    return this.formGroup.get('name') as UntypedFormControl;
+    return this.formGroup.get('name') as FormControl<string>;
   }
   get manual() {
-    return this.formGroup.get('manual') as UntypedFormControl;
+    return this.formGroup.get('manual') as FormControl<string>;
   }
   get date() {
-    return this.formGroup.get('date') as UntypedFormControl;
+    return this.formGroup.get('date') as FormControl<string[]>;
   }
   get rulesGroup() {
-    return this.formGroup.get('rulesGroup') as UntypedFormGroup;
+    return this.formGroup.get('rulesGroup') as FormGroup;
   }
   // 整形データ用のformControl
-  displayDate = new UntypedFormControl('');
+  displayDate = new FormControl<string>('', { nonNullable: true });
   // ルール選択ラジオボタンのformControl
-  rulesRadio = new UntypedFormControl('');
+  rulesRadio = new FormControl<string>('', { nonNullable: true });
   matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject<boolean>();
 
@@ -59,7 +63,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // 日付整形用
     this.date.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      const date: Array<Date> = this.date.value;
+      const date: Array<string> = this.date.value;
       const startDate = this.datePipe.transform(date[0], 'yyyy/MM/dd HH:mm');
       const finishDate = this.datePipe.transform(date[1], 'yyyy/MM/dd HH:mm');
       this.displayDate.setValue(`${startDate}~${finishDate}`);
@@ -99,12 +103,12 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   //formからrulesを作成する
   createRules(): Rules {
     const newRules: Rules = this.rulesGroup.value;
-    newRules.playerCount = Number(this.rulesGroup.get('playerCount')?.value);
-    newRules.startPoint = Number(this.rulesGroup.get('startPoint')?.value);
-    newRules.returnPoint = Number(this.rulesGroup.get('returnPoint')?.value);
-    newRules.uma1 = Number(this.rulesGroup.get('uma1')?.value);
-    newRules.uma2 = Number(this.rulesGroup.get('uma2')?.value);
-    newRules.uma3 = Number(this.rulesGroup.get('uma3')?.value);
+    newRules.playerCount = this.rulesGroup.get('playerCount')?.value;
+    newRules.startPoint = this.rulesGroup.get('startPoint')?.value;
+    newRules.returnPoint = this.rulesGroup.get('returnPoint')?.value;
+    newRules.uma1 = this.rulesGroup.get('uma1')?.value;
+    newRules.uma2 = this.rulesGroup.get('uma2')?.value;
+    newRules.uma3 = this.rulesGroup.get('uma3')?.value;
     if (this.rulesGroup.get('playerCount')?.value === 4) {
       newRules.uma4 = Number(this.rulesGroup.get('uma4')?.value);
     } else {
