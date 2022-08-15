@@ -13,8 +13,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   @Input() auto!: MatAutocomplete;
   @Output() sendValue = new EventEmitter<string>();
 
-  search: FormControl = new FormControl('');
-  private onDestroy$ = new Subject();
+  search: FormControl = new FormControl('', { nonNullable: true });
+  private onDestroy$ = new Subject<boolean>();
 
   constructor() {}
 
@@ -37,6 +37,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 }

@@ -16,13 +16,10 @@ import { GameService } from 'src/app/shared/services/game.service';
   styleUrls: ['./add-result.component.scss'],
 })
 export class AddResultComponent implements OnInit, OnDestroy {
-  formGroup = new FormGroup({});
-
+  formGroup: FormGroup;
   get resultArray() {
     return this.formGroup.get('resultArray') as FormArray;
   }
-  //form作成時の初期値を保存
-  formInitValue = [];
   //登録or更新
   formType: string | null = null;
   //取得したルール
@@ -37,7 +34,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   matcher = new MyErrorStateMatcher();
   private game: GameResponse = {} as GameResponse;
   private umaArray: number[] = [];
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(
     private leagueService: LeagueService,
@@ -108,14 +105,14 @@ export class AddResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   //form作成
   initFormCreate() {
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.resultArray.push(
-        this.fb.group({
+        this.fb.nonNullable.group({
           rank: [i + 1, [Validators.required]],
           id: ['', [Validators.required]],
           point: ['', [Validators.required, Validators.pattern(/^[\d-]+$/)]],
@@ -123,13 +120,11 @@ export class AddResultComponent implements OnInit, OnDestroy {
         })
       );
     }
-    //reset用formの初期値を保存する
-    this.formInitValue = this.formGroup.value;
   }
 
   //formリセット
   resetForm() {
-    this.formGroup.reset(this.formInitValue);
+    this.formGroup.reset();
   }
 
   setValue(game: GameResponse) {
@@ -156,7 +151,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const result: GameResult[] = [];
-
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         rank: this.resultArray.controls[i].get('rank')?.value,
@@ -189,7 +183,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const result: GameResult[] = [];
-
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         id: this.game.results[i].id,

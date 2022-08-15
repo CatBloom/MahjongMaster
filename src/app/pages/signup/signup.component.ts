@@ -10,9 +10,12 @@ import { AuthService } from '../../shared/auth/auth.service';
 })
 export class SignupComponent implements OnInit {
   formGroup = new FormGroup({
-    mail: new FormControl('', [Validators.required, Validators.email]),
-    name: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    mail: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
   });
   get mail() {
     return this.formGroup.get('mail') as FormControl;

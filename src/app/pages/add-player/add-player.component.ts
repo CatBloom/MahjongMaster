@@ -14,14 +14,14 @@ import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
 })
 export class AddPlayerComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/[\S]/)]),
   });
   get name() {
     return this.formGroup.get('name') as FormControl;
   }
   playerList$ = this.playerService.playerList$;
   matcher = new MyErrorStateMatcher();
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}
 
@@ -38,15 +38,13 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   postPlayer() {
     if (this.formGroup.invalid) {
       return;
     }
-
-    //Todo input空白時にErrorを返す
 
     const player: PlayerRequest = {
       leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),

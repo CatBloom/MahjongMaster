@@ -18,48 +18,52 @@ import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../shared/constants
 })
 export class AddLeagueComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    manual: new FormControl('', []),
-    date: new FormControl('', []),
+    name: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern(/[\S]/)],
+    }),
+    manual: new FormControl<string>('', { nonNullable: true }),
+    date: new FormControl<string[]>([''], { nonNullable: true }),
     rulesGroup: new FormGroup({
-      playerCount: new FormControl('', [Validators.required]),
-      gameType: new FormControl('', [Validators.required]),
-      tanyao: new FormControl('', [Validators.required]),
-      back: new FormControl('', [Validators.required]),
-      dora: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      startPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      returnPoint: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma1: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma2: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma3: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
-      uma4: new FormControl('', [Validators.required, Validators.pattern(/^[\d-]+$/)]),
+      playerCount: new FormControl<number>(0, { validators: [Validators.required] }),
+      gameType: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+      tanyao: new FormControl<boolean>(true, { validators: [Validators.required] }),
+      back: new FormControl<boolean>(true, { validators: [Validators.required] }),
+      dora: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      startPoint: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      returnPoint: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma1: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma2: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma3: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      uma4: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
     }),
   });
+
   get name() {
-    return this.formGroup.get('name') as FormControl;
+    return this.formGroup.get('name') as FormControl<string>;
   }
   get manual() {
-    return this.formGroup.get('manual') as FormControl;
+    return this.formGroup.get('manual') as FormControl<string>;
   }
   get date() {
-    return this.formGroup.get('date') as FormControl;
+    return this.formGroup.get('date') as FormControl<string[]>;
   }
   get rulesGroup() {
     return this.formGroup.get('rulesGroup') as FormGroup;
   }
   // 整形データ用のformControl
-  displayDate = new FormControl('');
+  displayDate = new FormControl<string>('', { nonNullable: true });
   // ルール選択ラジオボタンのformControl
-  rulesRadio = new FormControl('');
+  rulesRadio = new FormControl<string>('', { nonNullable: true });
   matcher = new MyErrorStateMatcher();
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<boolean>();
 
   constructor(private leagueService: LeagueService, private matDialog: MatDialog, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     // 日付整形用
     this.date.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-      const date: Array<Date> = this.date.value;
+      const date: Array<string> = this.date.value;
       const startDate = this.datePipe.transform(date[0], 'yyyy/MM/dd HH:mm');
       const finishDate = this.datePipe.transform(date[1], 'yyyy/MM/dd HH:mm');
       this.displayDate.setValue(`${startDate}~${finishDate}`);
@@ -71,7 +75,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.onDestroy$.next();
+    this.onDestroy$.next(true);
   }
 
   // 固定ルールをセットする関数
@@ -99,12 +103,12 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   //formからrulesを作成する
   createRules(): Rules {
     const newRules: Rules = this.rulesGroup.value;
-    newRules.playerCount = Number(this.rulesGroup.get('playerCount')?.value);
-    newRules.startPoint = Number(this.rulesGroup.get('startPoint')?.value);
-    newRules.returnPoint = Number(this.rulesGroup.get('returnPoint')?.value);
-    newRules.uma1 = Number(this.rulesGroup.get('uma1')?.value);
-    newRules.uma2 = Number(this.rulesGroup.get('uma2')?.value);
-    newRules.uma3 = Number(this.rulesGroup.get('uma3')?.value);
+    newRules.playerCount = this.rulesGroup.get('playerCount')?.value;
+    newRules.startPoint = this.rulesGroup.get('startPoint')?.value;
+    newRules.returnPoint = this.rulesGroup.get('returnPoint')?.value;
+    newRules.uma1 = this.rulesGroup.get('uma1')?.value;
+    newRules.uma2 = this.rulesGroup.get('uma2')?.value;
+    newRules.uma3 = this.rulesGroup.get('uma3')?.value;
     if (this.rulesGroup.get('playerCount')?.value === 4) {
       newRules.uma4 = Number(this.rulesGroup.get('uma4')?.value);
     } else {
