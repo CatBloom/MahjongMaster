@@ -17,7 +17,12 @@ export class ReplaceDirective implements OnInit {
     //数字とハイフン以外の文字を除去
     newValue = newValue.replace(/[^\d-]/g, '');
     //先頭以外の-を除去
-    newValue = newValue.replace(/(?<!^)-/g, '');
+    if (newValue.slice(0, 1) === '-') {
+      newValue = newValue.replace(/-/g, '');
+      newValue = '-' + newValue;
+    } else {
+      newValue = newValue.replace(/-/g, '');
+    }
     //先頭が-直後の0を除去
     newValue = newValue.replace(/^(-)0+/g, '$1');
     //先頭が0で2桁以上の数字は先頭の0を除去
