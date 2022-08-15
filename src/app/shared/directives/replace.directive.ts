@@ -14,6 +14,8 @@ export class ReplaceDirective implements OnInit {
     newValue = newValue.replace(/[０-９]/g, (s) => {
       return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
     });
+    //半角ハイフンに似た要素を半角ハイフンに変換
+    newValue = newValue.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
     //数字とハイフン以外の文字を除去
     newValue = newValue.replace(/[^\d-]/g, '');
     //先頭以外の-を除去

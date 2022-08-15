@@ -20,12 +20,20 @@ describe('ReplaceDirective', () => {
     de = fixture.debugElement.query(By.directive(ReplaceDirective));
   });
 
-  it('Convert full-width characters to half-width characters', () => {
+  it('Convert full-width numbers to half-width numbers', () => {
     const input = de.nativeElement as HTMLInputElement;
     input.value = '１２３４';
     input.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     expect(input.value).toEqual('1234');
+  });
+
+  it('Convert hyphen characters to half-width hyphen', () => {
+    const input = de.nativeElement as HTMLInputElement;
+    input.value = '-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━';
+    input.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    expect(input.value).toEqual('-');
   });
 
   it('Remove non number', () => {
@@ -44,7 +52,7 @@ describe('ReplaceDirective', () => {
     expect(input.value).toEqual('102');
   });
 
-  it('Remove initial - except - no.1', () => {
+  it('Remove hyphen except initial hyphen no.1', () => {
     const input = de.nativeElement as HTMLInputElement;
     input.value = '12-34--5';
     input.dispatchEvent(new Event('input'));
@@ -52,7 +60,7 @@ describe('ReplaceDirective', () => {
     expect(input.value).toEqual('12345');
   });
 
-  it('Remove initial - except - no.2', () => {
+  it('Remove hyphen except initial hyphen no.2', () => {
     const input = de.nativeElement as HTMLInputElement;
     input.value = '--12-34--5';
     input.dispatchEvent(new Event('input'));
@@ -60,7 +68,7 @@ describe('ReplaceDirective', () => {
     expect(input.value).toEqual('-12345');
   });
 
-  it('Remove initial - after 0 ', () => {
+  it('Remove 0 after initial hyphen', () => {
     const input = de.nativeElement as HTMLInputElement;
     input.value = '-0012345';
     input.dispatchEvent(new Event('input'));
