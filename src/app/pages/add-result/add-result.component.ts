@@ -278,8 +278,9 @@ export class AddResultComponent implements OnInit, OnDestroy {
           const point = Number(this.resultArray.controls[i].get('point')?.value);
           const topPrize = (this.rules.returnPoint - this.rules.startPoint) * this.rules.playerCount;
           const calcPoint = point - this.rules.returnPoint + this.umaArray[i] * 1000;
-
-          if (isNaN(calcPoint) || this.resultArray.controls[i].get('point')?.value === '') {
+          if (isNaN(calcPoint)) {
+            return;
+          } else if (this.resultArray.controls[i].get('point')?.value === '') {
             this.resultArray.controls[i].get('calcPoint')?.setValue('');
           } else {
             if (i === 0) {
