@@ -158,6 +158,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
         rank: this.resultArray.controls[i].get('rank')?.value,
         playerId: this.resultArray.controls[i].get('id')?.value,
         point: Number(this.resultArray.controls[i].get('point')?.value),
+        calcPoint: Number(this.resultArray.controls[i].get('calcPoint')?.value),
       });
     }
 
@@ -172,7 +173,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
       leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
       results: result,
       players: players,
-      rules: this.rules,
     };
     this.gameService.postGame(games);
   }
@@ -208,7 +208,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
       leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
       results: result,
       players: players,
-      rules: this.rules,
     };
 
     this.gameService.updateGame(games);
