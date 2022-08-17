@@ -34,6 +34,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   matcher = new MyErrorStateMatcher();
   private game: GameResponse = {} as GameResponse;
   private umaArray: number[] = [];
+  private pointSubscriptionsDestroy$ = new Subject<boolean>();
   private onDestroy$ = new Subject<boolean>();
 
   constructor(
@@ -106,6 +107,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
+    this.pointSubscriptionsDestroy$.next(true);
   }
 
   //form作成
@@ -113,10 +115,10 @@ export class AddResultComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.resultArray.push(
         this.fb.nonNullable.group({
-          rank: [i + 1, [Validators.required]],
+          rank: [{ value: i + 1, disabled: true }, [Validators.required]],
           id: ['', [Validators.required]],
           point: ['', [Validators.required, Validators.pattern(/^[\d-]+$/)]],
-          calcPoint: ['', [Validators.required, Validators.pattern(/^[\d\-.]+$/)]],
+          calcPoint: [{ value: '', disabled: true }, [Validators.required, Validators.pattern(/^[\d\-.]+$/)]],
         })
       );
     }
@@ -172,7 +174,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
       players: players,
       rules: this.rules,
     };
-
     this.gameService.postGame(games);
   }
 
@@ -259,6 +260,23 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
   }
 
+  autoCalcPointCheck(check: boolean) {
+    this.resultArray.reset();
+    if (!check) {
+      for (const control of this.resultArray.controls) {
+        control.get('rank')?.enable();
+        control.get('calcPoint')?.enable();
+      }
+      this.pointSubscriptionsDestroy$.next(true);
+    } else {
+      for (const control of this.resultArray.controls) {
+        control.get('rank')?.disable();
+        control.get('calcPoint')?.disable();
+      }
+      this.pointSubscriptions();
+    }
+  }
+
   //uma配列を作成
   private createUmaArray() {
     if (!this.rules.uma4) {
@@ -273,7 +291,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.resultArray.controls[i]
         .get('point')
-        ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+        ?.valueChanges.pipe(takeUntil(this.pointSubscriptionsDestroy$))
         .subscribe(() => {
           const point = Number(this.resultArray.controls[i].get('point')?.value);
           const topPrize = (this.rules.returnPoint - this.rules.startPoint) * this.rules.playerCount;

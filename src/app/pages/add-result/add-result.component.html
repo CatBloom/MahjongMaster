@@ -1,13 +1,25 @@
 <div class="result">
   <h2>{{ !formType ? '成績登録' : '成績修正' }}</h2>
+  <section>
+    <mat-checkbox [checked]="true" (change)="autoCalcPointCheck($event.checked)">自動計算</mat-checkbox>
+  </section>
   <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
     <ng-container *ngIf="playerList$ | async as playerList">
       <ng-container formArrayName="resultArray">
         <ng-container *ngFor="let result of resultArray.controls; let i = index" [formGroupName]="i">
-          <mat-label>{{ i + 1 }}位</mat-label>
           <div class="result-grid">
+            <div class="result-grid__rank">
+              <mat-form-field>
+                <mat-label>ランク</mat-label>
+                <mat-select formControlName="rank" [errorStateMatcher]="matcher">
+                  <mat-option *ngFor="let _ of resultArray.controls; index as i" [value]="i + 1">
+                    {{ i + 1 }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="result-grid__name">
-              <mat-form-field appearance="outline">
+              <mat-form-field>
                 <mat-label>名前</mat-label>
                 <mat-select formControlName="id" [errorStateMatcher]="matcher">
                   <mat-option *ngFor="let player of playerList" [value]="player.id">
@@ -24,7 +36,8 @@
             </div>
             <div class="result-grid__calc-point">
               <mat-form-field appearance="outline">
-                <input matInput readonly formControlName="calcPoint" [errorStateMatcher]="matcher" />
+                <mat-label>順位点</mat-label>
+                <input matInput formControlName="calcPoint" [errorStateMatcher]="matcher" appReplace />
               </mat-form-field>
             </div>
           </div>
