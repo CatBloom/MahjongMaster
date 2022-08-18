@@ -33,7 +33,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
   tableColumns: string[] = ['results', 'createdAt'];
   matcher = new MyErrorStateMatcher();
   private game: GameResponse = {} as GameResponse;
-  private umaArray: number[] = [];
   private pointSubscriptionsDestroy$ = new Subject<boolean>();
   private onDestroy$ = new Subject<boolean>();
 
@@ -98,7 +97,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
       .subscribe((league) => {
         if (league.rules) {
           this.rules = league.rules;
-          this.createUmaArray();
           this.initFormCreate();
           this.pointSubscriptions();
         }
@@ -277,16 +275,19 @@ export class AddResultComponent implements OnInit, OnDestroy {
   }
 
   //uma配列を作成
-  private createUmaArray() {
+  private createUmaArray(): number[] {
+    let umaArray: Array<number>;
     if (!this.rules.uma4) {
-      this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3];
+      umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3];
     } else {
-      this.umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3, this.rules.uma4];
+      umaArray = [this.rules.uma1, this.rules.uma2, this.rules.uma3, this.rules.uma4];
     }
+    return umaArray;
   }
 
   //point自動計算用
   private pointSubscriptions() {
+    const umaArray = this.createUmaArray();
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.resultArray.controls[i]
         .get('point')
@@ -294,7 +295,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           const point = Number(this.resultArray.controls[i].get('point')?.value);
           const topPrize = (this.rules.returnPoint - this.rules.startPoint) * this.rules.playerCount;
-          const calcPoint = point - this.rules.returnPoint + this.umaArray[i] * 1000;
+          const calcPoint = point - this.rules.returnPoint + umaArray[i] * 1000;
           if (isNaN(calcPoint)) {
             return;
           } else if (this.resultArray.controls[i].get('point')?.value === '') {
