@@ -241,22 +241,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  setTestData() {
-    const user: number[] = [1, 2, 3, 4, 5, 6, 7];
-    const point: number[] = [40000, 30000, 20000, 10000];
-    for (let i = 0; i < user.length; i++) {
-      const r = Math.floor(Math.random() * (i + 1));
-      const tmp = user[i];
-      user[i] = user[r];
-      user[r] = tmp;
-    }
-
-    for (let i = 0; i < this.resultArray.controls.length; i++) {
-      this.resultArray.controls[i].get('id')?.setValue(user[i]);
-      this.resultArray.controls[i].get('point')?.setValue(point[i]);
-    }
-  }
-
   autoCalcPointCheck(check: boolean) {
     this.resultArray.reset();
     if (!check) {
