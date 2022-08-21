@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Rules } from '../../shared/interfaces/rules';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -24,7 +24,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
   formType: string | null = null;
   //取得したルール
   rules: Rules = {} as Rules;
-  //取得したゲーム
 
   league$ = this.leagueService.league$;
   game$ = this.gameService.game$;
@@ -40,6 +39,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     private leagueService: LeagueService,
     private playerService: PlayerService,
     private gameService: GameService,
+    private router: Router,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {
@@ -202,13 +202,21 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const games: GameRequest = {
-      id: Number(this.activeRoute.snapshot.paramMap.get('game-id')),
+      id: this.game.id,
       leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
       results: result,
       players: players,
     };
 
     this.gameService.updateGame(games);
+  }
+
+  deleteGame() {
+    if (!this.game.id) {
+      return;
+    }
+    const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
+    this.gameService.deleteGame(this.game.id, leagueId);
   }
 
   //Validation
@@ -239,6 +247,10 @@ export class AddResultComponent implements OnInit, OnDestroy {
     // }
 
     return false;
+  }
+
+  tableRowClick(game: GameRequest) {
+    this.router.navigateByUrl(`/game/update/${game.leagueId}/${game.id}`);
   }
 
   autoCalcPointCheck(check: boolean) {

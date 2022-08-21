@@ -55,11 +55,21 @@
       >
         {{ !formType ? '登録' : '更新' }}
       </button>
-      <button class="result-buttons__button" (click)="resetForm()" mat-stroked-button color="warn">リセット</button>
+      <ng-container *ngIf="!formType">
+        <button class="result-buttons__button" (click)="resetForm()" mat-stroked-button color="warn">リセット</button>
+      </ng-container>
+      <ng-container *ngIf="formType === 'put'">
+        <button class="result-buttons__button" (click)="deleteGame()" mat-stroked-button color="warn">削除</button>
+      </ng-container>
     </div>
 
     <div class="result-table">
-      <app-table *ngIf="gameList$ | async as gameList" [columns]="tableColumns" [results]="gameList"></app-table>
+      <app-table
+        *ngIf="gameList$ | async as gameList"
+        (rowClickEvent)="tableRowClick($event)"
+        [columns]="tableColumns"
+        [results]="gameList"
+      ></app-table>
     </div>
   </form>
 </div>
