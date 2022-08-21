@@ -77,5 +77,16 @@
         [results]="gameList"
       ></app-table>
     </div>
+    <ng-container *ngIf="formType === 'put'">
+      <button
+        type="button"
+        class="result-buttons__button--put"
+        mat-stroked-button
+        color="primary"
+        (click)="goPostPage()"
+      >
+        成績登録に戻る
+      </button>
+    </ng-container>
   </form>
 </div>
