@@ -1,13 +1,31 @@
 <div class="result">
   <h2>{{ !formType ? '成績登録' : '成績修正' }}</h2>
+  <div class="result__option">
+    <section>
+      <mat-checkbox [checked]="true" (change)="autoCalcPointCheck($event.checked)">自動計算</mat-checkbox>
+    </section>
+    <mat-form-field appearance="outline">
+      <mat-label>合計点チェック</mat-label>
+      <input matInput readonly [formControl]="totalCheck" />
+    </mat-form-field>
+  </div>
   <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
     <ng-container *ngIf="playerList$ | async as playerList">
       <ng-container formArrayName="resultArray">
         <ng-container *ngFor="let result of resultArray.controls; let i = index" [formGroupName]="i">
-          <mat-label>{{ i + 1 }}位</mat-label>
           <div class="result-grid">
+            <div class="result-grid__rank">
+              <mat-form-field>
+                <mat-label>ランク</mat-label>
+                <mat-select formControlName="rank" [errorStateMatcher]="matcher">
+                  <mat-option *ngFor="let _ of resultArray.controls; index as i" [value]="i + 1">
+                    {{ i + 1 }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="result-grid__name">
-              <mat-form-field appearance="outline">
+              <mat-form-field>
                 <mat-label>名前</mat-label>
                 <mat-select formControlName="id" [errorStateMatcher]="matcher">
                   <mat-option *ngFor="let player of playerList" [value]="player.id">
@@ -24,7 +42,8 @@
             </div>
             <div class="result-grid__calc-point">
               <mat-form-field appearance="outline">
-                <input matInput readonly formControlName="calcPoint" [errorStateMatcher]="matcher" />
+                <mat-label>順位点</mat-label>
+                <input matInput formControlName="calcPoint" [errorStateMatcher]="matcher" appReplace />
               </mat-form-field>
             </div>
           </div>
@@ -42,12 +61,32 @@
       >
         {{ !formType ? '登録' : '更新' }}
       </button>
-      <button class="result-buttons__button" (click)="resetForm()" mat-stroked-button color="warn">リセット</button>
-      <button class="result-buttons__button" (click)="setTestData()" mat-stroked-button color="primary">テスト</button>
+      <ng-container *ngIf="!formType">
+        <button class="result-buttons__button" (click)="resetForm()" mat-stroked-button color="warn">リセット</button>
+      </ng-container>
+      <ng-container *ngIf="formType === 'put'">
+        <button class="result-buttons__button" (click)="deleteGame()" mat-stroked-button color="warn">削除</button>
+      </ng-container>
     </div>
 
     <div class="result-table">
-      <app-table *ngIf="gameList$ | async as gameList" [columns]="tableColumns" [results]="gameList"></app-table>
+      <app-table
+        *ngIf="gameList$ | async as gameList"
+        (rowClickEvent)="tableRowClick($event)"
+        [columns]="tableColumns"
+        [results]="gameList"
+      ></app-table>
     </div>
+    <ng-container *ngIf="formType === 'put'">
+      <button
+        type="button"
+        class="result-buttons__button--put"
+        mat-stroked-button
+        color="primary"
+        (click)="goPostPage()"
+      >
+        成績登録に戻る
+      </button>
+    </ng-container>
   </form>
 </div>

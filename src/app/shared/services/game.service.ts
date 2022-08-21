@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { GameResponse, GameRequest } from '../interfaces/game';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class GameService {
     return this.gameSubject.asObservable();
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: Router) {}
 
   //ゲームリストを取得
   getGameList(leagueId: string): void {
@@ -38,6 +39,7 @@ export class GameService {
       .pipe()
       .subscribe((res) => {
         this.gameSubject.next(res);
+        this.gameListSubject.next([res]);
       });
   }
 
@@ -46,7 +48,10 @@ export class GameService {
     this.http
       .post<GameResponse>(`${this.apiUrl}`, game)
       .pipe()
-      .subscribe(() => {});
+      .subscribe((res) => {
+        this.gameListSubject.getValue().unshift(res);
+        this.gameListSubject.next([...this.gameListSubject.getValue()]);
+      });
   }
 
   //ゲーム更新
@@ -55,14 +60,35 @@ export class GameService {
     this.http
       .put<GameResponse>(`${this.apiUrl}/${id}`, game)
       .pipe()
-      .subscribe(() => {});
+      .subscribe((res) => {
+        this.gameListSubject.next(
+          this.gameListSubject.getValue().map((game) => {
+            if (game.id === res.id) {
+              return res;
+            } else {
+              return game;
+            }
+          })
+        );
+        this.route.navigateByUrl(`/game/add/${res.leagueId}`);
+      });
   }
 
   //ゲーム削除
-  deleteGame(id: number): void {
+  deleteGame(id: number, leagueId: string): void {
     this.http
-      .delete(`${this.apiUrl}/${id}`)
+      .delete<GameResponse>(`${this.apiUrl}/${id}`)
       .pipe()
-      .subscribe(() => {});
+      .subscribe((res) => {
+        const newArray = this.gameListSubject.getValue().filter((game) => {
+          if (game.id !== res.id) {
+            return game;
+          } else {
+            return null;
+          }
+        });
+        this.gameListSubject.next(newArray);
+        this.route.navigateByUrl(`/game/add/${leagueId}`);
+      });
   }
 }
