@@ -5,6 +5,10 @@
   h2 {
     @include mixin.title;
   }
+  &__option {
+    display: flex;
+    justify-content: space-between;
+  }
   .result-grid {
     display: grid;
     margin-top: 1rem;

@@ -1,8 +1,14 @@
 <div class="result">
   <h2>{{ !formType ? '成績登録' : '成績修正' }}</h2>
-  <section>
-    <mat-checkbox [checked]="true" (change)="autoCalcPointCheck($event.checked)">自動計算</mat-checkbox>
-  </section>
+  <div class="result__option">
+    <section>
+      <mat-checkbox [checked]="true" (change)="autoCalcPointCheck($event.checked)">自動計算</mat-checkbox>
+    </section>
+    <mat-form-field appearance="outline">
+      <mat-label>合計点チェック</mat-label>
+      <input matInput readonly [formControl]="totalCheck" />
+    </mat-form-field>
+  </div>
   <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
     <ng-container *ngIf="playerList$ | async as playerList">
       <ng-container formArrayName="resultArray">

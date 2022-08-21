@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Rules } from '../../shared/interfaces/rules';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
@@ -31,6 +31,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   playerList$ = this.playerService.playerList$;
   tableColumns: string[] = ['results', 'createdAt'];
   matcher = new MyErrorStateMatcher();
+  totalCheck = new FormControl<number | string>(0, { nonNullable: true });
   private game: GameResponse = {} as GameResponse;
   private pointSubscriptionsDestroy$ = new Subject<boolean>();
   private onDestroy$ = new Subject<boolean>();
@@ -99,6 +100,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
           this.rules = league.rules;
           this.initFormCreate();
           this.pointSubscriptions();
+          this.totalPointSubscription();
         }
       });
   }
@@ -300,6 +302,28 @@ export class AddResultComponent implements OnInit, OnDestroy {
               this.resultArray.controls[i].get('calcPoint')?.setValue(setPoint);
             }
           }
+        });
+    }
+  }
+
+  private totalPointSubscription() {
+    for (let i = 0; i < this.rules.playerCount; i++) {
+      this.resultArray.controls[i]
+        .get('point')
+        ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+        .subscribe(() => {
+          let totalPoint = 0;
+          this.resultArray.controls.forEach((control) => {
+            const point = Number(control.get('point')?.value);
+            if (isNaN(point)) {
+              return;
+            } else {
+              totalPoint = totalPoint + point;
+            }
+          });
+          this.rules.startPoint * this.rules.playerCount === totalPoint
+            ? this.totalCheck.setValue(`✅ ${Math.floor(totalPoint)}`)
+            : this.totalCheck.setValue(`❌ ${Math.floor(totalPoint)}`);
         });
     }
   }
