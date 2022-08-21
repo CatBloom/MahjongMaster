@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" class="table">
+<table #table mat-table [dataSource]="dataSource" class="table">
   <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
     <th class="table__header" mat-header-cell *matHeaderCellDef>{{ column | japanese }}</th>
     <td class="table__cell" mat-cell *matCellDef="let element">
@@ -23,4 +23,6 @@
     (click)="rowClick(element)"
   ></tr>
 </table>
-<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOption"></mat-paginator>
+<div [hidden]="len < 11">
+  <mat-paginator hidePageSize [pageSize]="10"></mat-paginator>
+</div>
