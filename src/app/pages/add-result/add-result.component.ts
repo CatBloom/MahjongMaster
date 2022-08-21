@@ -9,6 +9,7 @@ import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
 import { GameRequest, GameResponse, GamePlayers, GameResult } from 'src/app/shared/interfaces/game';
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { GameService } from 'src/app/shared/services/game.service';
+import { SnackService } from 'src/app/shared/services/snack.service';
 
 @Component({
   selector: 'app-add-result',
@@ -40,6 +41,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     private leagueService: LeagueService,
     private playerService: PlayerService,
     private gameService: GameService,
+    private snackService: SnackService,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -219,30 +221,39 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   //Validation
   private checkValidation(): boolean {
-    //playerの重複を検索
-    for (let i = 0; i < this.resultArray.controls.length; i++) {
-      const cur = this.resultArray.controls[i].get('id')?.value;
-      for (let j = 0; j < this.resultArray.controls.length; j++) {
-        if (i !== j) {
-          if (cur === this.resultArray.controls[j].get('id')?.value) {
-            return true;
-          }
-        }
+    let totalPoint = 0;
+    let prevPoint: number | null = null;
+    let isCheckPoint = false;
+    const playerArray: number[] = [];
+    this.resultArray.controls.forEach((control) => {
+      totalPoint += Number(control.get('point')?.value);
+      playerArray.push(control.get('id')?.value);
+
+      if (!prevPoint) {
+        prevPoint = Number(control.get('point')?.value);
+      } else {
+        prevPoint >= Number(control.get('point')?.value)
+          ? (prevPoint = Number(control.get('point')?.value))
+          : (isCheckPoint = true);
       }
+    });
+
+    //合計点チェック
+    if (totalPoint !== this.rules.startPoint * this.rules.playerCount) {
+      this.snackService.openSnackBer('合計点が一致しません', '✖️');
+      return true;
     }
-
-    // const point1 = Number(this.resultArray.controls[0].get('point')?.value);
-    // const point2 = Number(this.resultArray.controls[1].get('point')?.value);
-    // const point3 = Number(this.resultArray.controls[2].get('point')?.value);
-    // const point4 = Number(this.resultArray.controls[3].get('point')?.value);
-
-    // if (point1 + point2 + point3 + point4 !== this.rules.startPoint * this.rules.playerCount) {
-    //   return true;
-    // }
-    //Todo 大きさの順番を比較
-    // if (point1 < point2 || point2 < point3 || point3 < point4) {
-    //   return false;
-    // }
+    //playerの重複チェック
+    const test = new Set(playerArray);
+    if (test.size !== playerArray.length) {
+      this.snackService.openSnackBer('playerが重複しています', '✖️');
+      return true;
+    }
+    //点数の大きさ順をチェック
+    if (isCheckPoint) {
+      this.snackService.openSnackBer('不正な点数があります', '✖️');
+      return true;
+    }
 
     return false;
   }
