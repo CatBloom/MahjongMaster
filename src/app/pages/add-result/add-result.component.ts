@@ -252,7 +252,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
   }
 
   autoCalcPointCheck(check: boolean) {
-    this.resultArray.reset();
     if (!check) {
       for (const control of this.resultArray.controls) {
         control.get('rank')?.enable();
@@ -261,6 +260,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
       this.pointSubscriptionsDestroy$.next(true);
     } else {
       for (const control of this.resultArray.controls) {
+        control.get('rank')?.reset();
         control.get('rank')?.disable();
         control.get('calcPoint')?.disable();
       }
