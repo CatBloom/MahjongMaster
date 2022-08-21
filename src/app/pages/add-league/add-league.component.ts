@@ -103,12 +103,12 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
   //formからrulesを作成する
   createRules(): Rules {
     const newRules: Rules = this.rulesGroup.value;
-    newRules.playerCount = this.rulesGroup.get('playerCount')?.value;
-    newRules.startPoint = this.rulesGroup.get('startPoint')?.value;
-    newRules.returnPoint = this.rulesGroup.get('returnPoint')?.value;
-    newRules.uma1 = this.rulesGroup.get('uma1')?.value;
-    newRules.uma2 = this.rulesGroup.get('uma2')?.value;
-    newRules.uma3 = this.rulesGroup.get('uma3')?.value;
+    newRules.playerCount = Number(this.rulesGroup.get('playerCount')?.value);
+    newRules.startPoint = Number(this.rulesGroup.get('startPoint')?.value);
+    newRules.returnPoint = Number(this.rulesGroup.get('returnPoint')?.value);
+    newRules.uma1 = Number(this.rulesGroup.get('uma1')?.value);
+    newRules.uma2 = Number(this.rulesGroup.get('uma2')?.value);
+    newRules.uma3 = Number(this.rulesGroup.get('uma3')?.value);
     if (this.rulesGroup.get('playerCount')?.value === 4) {
       newRules.uma4 = Number(this.rulesGroup.get('uma4')?.value);
     } else {
