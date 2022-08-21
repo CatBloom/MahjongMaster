@@ -151,6 +151,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const result: GameResult[] = [];
+    const players: GamePlayers[] = [];
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         rank: this.resultArray.controls[i].get('rank')?.value,
@@ -158,10 +159,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
         point: Number(this.resultArray.controls[i].get('point')?.value),
         calcPoint: Number(this.resultArray.controls[i].get('calcPoint')?.value),
       });
-    }
-
-    const players: GamePlayers[] = [];
-    for (let i = 0; i < this.rules.playerCount; i++) {
       players.push({
         id: this.resultArray.controls[i].get('id')?.value,
       });
@@ -173,6 +170,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
       players: players,
     };
     this.gameService.postGame(games);
+    this.formGroup.reset();
   }
 
   //game更新
@@ -182,6 +180,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     }
 
     const result: GameResult[] = [];
+    const players: GamePlayers[] = [];
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         id: this.game.results[i].id,
@@ -191,10 +190,6 @@ export class AddResultComponent implements OnInit, OnDestroy {
         calcPoint: Number(this.resultArray.controls[i].get('calcPoint')?.value),
         gameId: this.game.results[i].gameId,
       });
-    }
-
-    const players: GamePlayers[] = [];
-    for (let i = 0; i < this.rules.playerCount; i++) {
       players.push({
         id: this.resultArray.controls[i].get('id')?.value,
         gameId: this.game.id,
