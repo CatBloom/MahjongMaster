@@ -132,6 +132,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   setValue(game: GameResponse) {
     //Todo 更新時の処理をtemplateで行いたいがselectBoxに値が入らないため関数で行う
     for (let i = 0; i < this.resultArray.length; i++) {
+      this.resultArray.controls[i].get('rank')?.setValue(game.results[i].rank);
       this.resultArray.controls[i].get('id')?.setValue(game.results[i].playerId);
       this.resultArray.controls[i].get('point')?.setValue(game.results[i].point);
       this.resultArray.controls[i].get('calcPoint')?.setValue(game.results[i].calcPoint);
