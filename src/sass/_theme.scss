@@ -1,10 +1,6 @@
 @use '@angular/material/theming' as theme;
 @use '@angular/material' as mat;
 
-$my-primary: mat.define-palette(mat.$indigo-palette);
-$my-accent: mat.define-palette(mat.$teal-palette);
-$my-warn: mat.define-palette(mat.$red-palette);
-
 $custom-typography: mat.define-typography-config(
   $font-family: '"Noto Sans JP",monospace',
   $display-4: mat.define-typography-level(112px, 123px, 300, $letter-spacing: -0.05em),
@@ -21,14 +17,34 @@ $custom-typography: mat.define-typography-config(
   $button: mat.define-typography-level(15px, 15px, 500),
 );
 
-$my-theme: mat.define-light-theme(
+$light-primary: mat.define-palette(mat.$gray-palette, 800);
+$light-accent: mat.define-palette(mat.$teal-palette);
+$light-warn: mat.define-palette(mat.$red-palette);
+$dark-primary: mat.define-palette(mat.$gray-palette, 50);
+$dark-accent: mat.define-palette(mat.$teal-palette);
+$dark-warn: mat.define-palette(mat.$red-palette);
+
+$light-theme: mat.define-light-theme(
   (
     color: (
-      primary: $my-primary,
-      accent: $my-accent,
-      warn: $my-warn,
+      primary: $light-primary,
+      accent: $light-accent,
+      warn: $light-warn,
     ),
   )
 );
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn,
+    ),
+  )
+);
+
 @include mat.core($custom-typography);
-@include mat.all-component-themes($my-theme);
+@include mat.all-component-themes($light-theme);
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+}

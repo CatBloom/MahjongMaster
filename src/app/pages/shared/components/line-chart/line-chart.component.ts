@@ -51,6 +51,7 @@ export class LineChartComponent implements OnInit {
         min: 0.5,
         max: 4.4,
         ticks: {
+          color: 'rgb(125, 125, 125)',
           stepSize: 1,
           callback: function (ticks) {
             if (ticks === 0.5 || ticks === 4.4) {

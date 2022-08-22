@@ -56,7 +56,7 @@
         class="result-buttons__button"
         (click)="submitGame()"
         [disabled]="formGroup.invalid"
-        mat-stroked-button
+        mat-raised-button
         color="accent"
       >
         {{ !formType ? '登録' : '更新' }}
@@ -65,7 +65,7 @@
         <button class="result-buttons__button" (click)="resetForm()" mat-stroked-button color="warn">リセット</button>
       </ng-container>
       <ng-container *ngIf="formType === 'put'">
-        <button class="result-buttons__button" (click)="deleteGame()" mat-stroked-button color="warn">削除</button>
+        <button class="result-buttons__button" (click)="deleteGame()" mat-raised-button color="warn">削除</button>
       </ng-container>
     </div>
 

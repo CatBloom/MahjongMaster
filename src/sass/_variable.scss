@@ -1,17 +1,17 @@
 @use '@angular/material' as mat;
-
+@use 'theme' as theme;
 // material-color
-$primary: mat.get-color-from-palette(mat.define-palette(mat.$indigo-palette));
-$accent: mat.get-color-from-palette(mat.define-palette(mat.$teal-palette));
-$warn: mat.get-color-from-palette(mat.define-palette(mat.$red-palette));
+$light-primary: mat.get-color-from-palette(theme.$light-primary);
+$light-accent: mat.get-color-from-palette(theme.$light-accent);
+$light-warn: mat.get-color-from-palette(theme.$light-warn);
+$dark-primary: mat.get-color-from-palette(theme.$dark-primary);
+$dark-accent: mat.get-color-from-palette(theme.$dark-accent);
+$dark-warn: mat.get-color-from-palette(theme.$dark-warn);
 
-// backgroundcolor
-$backgroundColor: rgb(240, 241, 245);
-$mainBackgroundColor: #ffffff;
-$footerBackgroundColor: rgb(116, 117, 118);
+// background-color
+$light-background-color: #ffffff;
+$dark-background-color: rgb(60, 60, 60);
 
 // font-color
-$normalFontColor: #333333;
-$deepFontColor: #ffffff;
-$titleFontColor: darken($primary, 10%);
-$subTitleFontColor: darken($accent, 10%);
+$light-font-color: rgba(0, 0, 0, 0.87);
+$dark-font-color: white;

@@ -1,6 +1,3 @@
-@use 'variable' as var;
-@use 'mixin' as mixin;
-
-h2 {
-  @include mixin.title;
+button {
+  width: 100%;
 }

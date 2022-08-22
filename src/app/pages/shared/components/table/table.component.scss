@@ -1,22 +1,27 @@
-@use 'variable' as var;
-
 .table {
   width: 100%;
   &__header {
-    font-size: 1.5rem;
     min-width: 4rem;
   }
   &__element-row {
-    color: var.$normalFontColor;
     &:hover {
-      background: whitesmoke;
+      background: rgb(140, 140, 140);
     }
     &:active {
-      background: #efefef;
+      background: rgb(125, 125, 125);
+    }
+  }
+  &__cell {
+    p {
+      padding-right: 0.5rem;
     }
   }
 }
 
+:host ::ng-deep .mat-paginator-range-label {
+  display: none !important;
+}
+
 .selectedBackground {
-  background: whitesmoke;
+  background: rgb(115, 115, 115);
 }
