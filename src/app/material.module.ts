@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -42,6 +43,7 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [],
   exports: [
     DragDropModule,
+    OverlayModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
