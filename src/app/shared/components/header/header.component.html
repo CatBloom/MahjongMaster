@@ -1,14 +1,17 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <a class="header-title" routerLink="/">TitleLogo</a>
   <span class="spacer"></span>
+  <mat-slide-toggle class="header-toggle" [formControl]="toggle"> </mat-slide-toggle>
   <ng-template #elseUser>
-    <button class="header-session-button" mat-button routerLink="/signup">アカウント作成</button>
-    <button class="header-session-button" mat-button routerLink="/login">ログイン</button>
+    <div class="header-session-button">
+      <button class="header-session-button__signup" mat-button routerLink="/signup">アカウント作成</button>
+      <button class="header-session-button__login" mat-button routerLink="/login">ログイン</button>
+    </div>
   </ng-template>
   <button *ngIf="user$ | async as user; else elseUser" mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>account_circle</mat-icon>
     <mat-menu #menu="matMenu">
-      <app-menu-list [userName]="user.displayName"></app-menu-list>
+      <app-menu-list></app-menu-list>
     </mat-menu>
   </button>
 </mat-toolbar>

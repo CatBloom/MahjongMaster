@@ -1,9 +1,13 @@
-<div class="container">
+<div
+  class="container mat-app-background"
+  *ngIf="theme$ | async as theme"
+  [class.dark-theme]="theme === 'dark' ? true : false"
+>
   <div class="grid">
     <div class="grid__header">
-      <app-header></app-header>
+      <app-header [toggleCheck]="theme === 'dark' ? true : false"></app-header>
     </div>
-    <main class="grid__main-container">
+    <main class="grid__main-container" [class.grid__main-container--dark]="theme === 'dark' ? true : false">
       <div *ngIf="isSpinner | async" class="grid__main-spinner">
         <mat-spinner></mat-spinner>
       </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentChecked, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from './shared/auth/auth.service';
 import { SpinnerService } from './shared/services/spinner.service';
+import { ThemeService } from './shared/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,22 @@ import { SpinnerService } from './shared/services/spinner.service';
 export class AppComponent implements OnInit, AfterContentChecked {
   title = 'title';
   isSpinner = this.spinner.isSpinner$;
+  theme$ = this.theme.theme$;
 
   constructor(
     private authService: AuthService,
     private spinner: SpinnerService,
+    private theme: ThemeService,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.authService.getAuthState();
+    if (localStorage.getItem('theme') === 'dark') {
+      this.theme.switchTheme(true);
+    } else {
+      this.theme.switchTheme(false);
+    }
   }
 
   // Error Ng100の対策
