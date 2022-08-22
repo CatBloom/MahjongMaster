@@ -9,6 +9,7 @@ import {
   PieResponse,
   LineResponse,
 } from '../interfaces/result';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class ResultService {
     return this.pieDataSubject.asObservable();
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private datePipe: DatePipe) {}
 
   //大会成績を取得
   getLeagueResult(leagueId: string): void {
@@ -85,7 +86,7 @@ export class ResultService {
 
     result.map((result) => {
       lineData.ranks.push(result.rank);
-      lineData.dateLabels.push(result.createdAt);
+      lineData.dateLabels.push(String(this.datePipe.transform(result.createdAt, 'yyyy/MM/dd HH:mm')));
     });
 
     this.lineDataSubject.next(lineData);
