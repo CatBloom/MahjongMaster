@@ -27,7 +27,6 @@ import { LineChartComponent } from './pages/shared/components/line-chart/line-ch
 import { AdminMyLeagueComponent } from './pages/admin-my-league/admin-my-league.component';
 import { LeagueListComponent } from './pages/shared/components/league-list/league-list.component';
 import { LeagueDetailsComponent } from './pages/league-details/league-details.component';
-import { ButtonComponent } from './shared/components/button/button.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayerListComponent } from './pages/shared/components/player-list/player-list.component';
 import { PlayerListEditComponent } from './pages/shared/components/player-list/player-list-edit/player-list-edit.component';
@@ -77,7 +76,6 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     AdminMyLeagueComponent,
     LeagueListComponent,
     LeagueDetailsComponent,
-    ButtonComponent,
     AddPlayerComponent,
     PlayerListComponent,
     PlayerListEditComponent,
