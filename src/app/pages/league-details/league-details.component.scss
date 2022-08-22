@@ -1,17 +1,8 @@
-@use 'variable' as var;
 @use 'mixin' as mixin;
 
 .league-details {
-  h2 {
-    @include mixin.title;
-  }
   &__title {
-    color: var.$subTitleFontColor;
-    font-size: 2rem;
     margin-top: 1rem;
-  }
-  &__content {
-    font-size: 1.5rem;
   }
 }
 

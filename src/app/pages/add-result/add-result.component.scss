@@ -1,10 +1,6 @@
-@use 'variable' as var;
 @use 'mixin' as mixin;
 
 .result {
-  h2 {
-    @include mixin.title;
-  }
   &__option {
     display: flex;
     justify-content: space-between;

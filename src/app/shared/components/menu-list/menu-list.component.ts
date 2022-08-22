@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
@@ -7,8 +7,6 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./menu-list.component.scss'],
 })
 export class MenuListComponent implements OnInit {
-  @Input() userName!: string | null;
-
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}

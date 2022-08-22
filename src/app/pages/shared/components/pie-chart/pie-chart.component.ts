@@ -33,6 +33,9 @@ export class PieChartComponent implements OnInit {
     maintainAspectRatio: false,
     plugins: {
       legend: {
+        labels: {
+          color: 'rgb(125, 125, 125)',
+        },
         display: true,
         position: 'top',
         onClick: function () {
@@ -47,9 +50,10 @@ export class PieChartComponent implements OnInit {
         },
       },
       datalabels: {
+        color: 'rgb(90, 90, 90)',
         align: 'end',
         anchor: 'center',
-        offset: -5,
+        offset: 0,
         font: {
           weight: 'bold',
           size: 15,

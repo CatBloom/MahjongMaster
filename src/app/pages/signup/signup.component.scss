@@ -1,11 +1,5 @@
-@use 'variable' as var;
-@use 'mixin' as mixin;
-
 .signup {
   text-align: center;
-  h2 {
-    @include mixin.title;
-  }
 }
 
 .signup-grid {
@@ -18,7 +12,6 @@
   &__button {
     margin-top: 1rem;
     p {
-      font-size: 1.5rem;
       margin: 0;
     }
     button {
