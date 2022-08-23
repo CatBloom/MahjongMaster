@@ -18,7 +18,7 @@ export class TableComponent implements OnInit {
     if (data) {
       this.len = data.length;
     }
-    this.dataSource.data = [...data];
+    this.dataSource.data = data;
     this.dataSource.paginator = this.paginator;
   }
   @Output() rowClickEvent = new EventEmitter<any>();
