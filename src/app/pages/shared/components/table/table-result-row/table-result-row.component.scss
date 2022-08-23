@@ -6,7 +6,7 @@
     min-width: 7rem;
     flex: 1;
     &--name {
-      min-width: 7rem;
+      width: 10rem;
       display: inline-flex;
     }
     a {
@@ -17,4 +17,9 @@
       }
     }
   }
+}
+
+span {
+  width: 7rem;
+  display: inline-block;
 }
