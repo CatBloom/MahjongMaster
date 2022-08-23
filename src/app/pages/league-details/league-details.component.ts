@@ -13,7 +13,7 @@ import { LeagueResultResponse } from 'src/app/shared/interfaces/result';
 export class LeagueDetailsComponent implements OnInit, OnDestroy {
   league$ = this.leagueService.league$;
   leagueResult$ = this.resultService.leagueResult$;
-  tableColumns: string[] = ['rank', 'name', 'totalGame', 'totalCalcPoint'];
+  tableColumns: string[] = ['rank', 'name', 'totalGame', 'totalCalcPoint', 'averageRank'];
   isRules = false;
   private onDestroy$ = new Subject<boolean>();
 

@@ -7,6 +7,7 @@ export interface LeagueResultResponse {
   totalGame: number;
   totalPoint: number;
   calcTotalPoint: number;
+  averageRank: number;
   leagueId: string;
 }
 
