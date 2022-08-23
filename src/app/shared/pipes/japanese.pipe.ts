@@ -20,10 +20,12 @@ export class JapanesePipe implements PipeTransform {
         return (value = '登録日');
       case 'name':
         return (value = '名前');
+      case 'averageRank':
+        return (value = '平均着順');
       case 'totalGame':
         return (value = '対戦数');
       case 'totalCalcPoint':
-        return (value = '合計点');
+        return (value = '合計得点');
 
       default:
         return value;
