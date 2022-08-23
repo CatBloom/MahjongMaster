@@ -1,6 +1,6 @@
-<table #table mat-table [dataSource]="dataSource" class="table">
+<table #table mat-table matSort [dataSource]="dataSource" class="table">
   <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
-    <th class="table__header" mat-header-cell *matHeaderCellDef>{{ column | japanese }}</th>
+    <th class="table__header" mat-header-cell *matHeaderCellDef mat-sort-header>{{ column | japanese }}</th>
     <td class="table__cell" mat-cell *matCellDef="let element">
       <ng-container *ngIf="column === 'results'; else elseContent">
         <app-table-result-row [result]="element"></app-table-result-row>
