@@ -4,6 +4,7 @@ import { LeagueResultResponse } from '../../../../shared/interfaces/result';
 import { GameResponse } from 'src/app/shared/interfaces/game';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-table',
@@ -13,6 +14,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 export class TableComponent implements OnInit {
   @ViewChild('table') table!: MatTable<LeagueResultResponse[] | GameResponse[]>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   @Input() columns!: string[];
   @Input() set results(data: LeagueResultResponse[] | GameResponse[]) {
     if (data) {
@@ -20,6 +22,7 @@ export class TableComponent implements OnInit {
     }
     this.dataSource.data = data;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   @Output() rowClickEvent = new EventEmitter<any>();
 
@@ -32,6 +35,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.columnsToDisplay = this.columns;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   rowClick(element: any) {
