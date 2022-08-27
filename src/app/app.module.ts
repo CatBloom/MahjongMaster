@@ -52,6 +52,7 @@ import { DatePipe } from '@angular/common';
 // interceptor
 import { SpinnerInterceptor } from './shared/interceptor/spinner.interceptor';
 import { TokenInterceptor } from './shared/interceptor/token.interceptor';
+import { NoticeInterceptor } from './shared/interceptor/notice.interceptor';
 
 // firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -109,6 +110,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: NoticeInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
