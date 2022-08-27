@@ -36,6 +36,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { MenuListComponent } from './shared/components/menu-list/menu-list.component';
 import { SearchComponent } from './shared/components/search/search.component';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 // service
 // import { MockWebApiService } from './shared/api/mock-web-api.service';
@@ -86,6 +87,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     MenuListComponent,
     CustomSlicePipe,
     SearchComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
