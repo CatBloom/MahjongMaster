@@ -10,6 +10,8 @@ import { GameRequest, GameResponse, GamePlayers, GameResult } from 'src/app/shar
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { GameService } from 'src/app/shared/services/game.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-add-result',
@@ -44,7 +46,8 @@ export class AddResultComponent implements OnInit, OnDestroy {
     private snackService: SnackService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private matDialog: MatDialog
   ) {
     this.formGroup = this.fb.group({
       resultArray: this.fb.array([]),
@@ -215,8 +218,21 @@ export class AddResultComponent implements OnInit, OnDestroy {
     if (!this.game.id) {
       return;
     }
-    const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-    this.gameService.deleteGame(this.game.id, leagueId);
+    const dialogRef = this.matDialog.open(DialogComponent, {
+      data: {
+        status: '削除',
+        color: 'warn',
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((result) => {
+        if (result) {
+          const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
+          this.gameService.deleteGame(this.game.id, leagueId);
+        }
+      });
   }
 
   //Validation
