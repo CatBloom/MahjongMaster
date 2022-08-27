@@ -1,0 +1,9 @@
+<div class="dialog">
+  <p class="dialog__status">本当に{{ data.status }}してよろしいですか？</p>
+  <p class="dialog__text" *ngIf="data.text">{{ data.text }}</p>
+
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="null">Cancel</button>
+    <button mat-button [color]="data.color" [mat-dialog-close]="true" cdkFocusInitial>{{ data.status }}</button>
+  </mat-dialog-actions>
+</div>
