@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { LeagueRequest, LeagueResponse } from '../interfaces/league';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeagueService {
   private readonly apiUrl = 'http://localhost:8080/api/v1/league';
-  private skipHttpClient: HttpClient;
 
   private leagueSearchSubject = new BehaviorSubject<LeagueResponse[]>([]);
   private leagueListSubject = new BehaviorSubject<LeagueResponse[]>([]);
@@ -25,10 +24,17 @@ export class LeagueService {
     return this.leagueSubject.asObservable();
   }
 
-  constructor(private http: HttpClient, private route: Router, httpBackend: HttpBackend) {
-    this.skipHttpClient = new HttpClient(httpBackend);
-  }
+  //検索時はinterceptorを介さないためhttpBackendを使用
+  private skipHttpClient: HttpClient = new HttpClient(this.httpBackend);
 
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private httpBackend: HttpBackend
+  ) {}
+
+  //大会検索用
   searchLeague(name: string) {
     if (!name || name.length < 3) {
       this.leagueSearchSubject.next([]);
@@ -48,14 +54,9 @@ export class LeagueService {
     this.http
       .get<LeagueResponse[]>(`${this.apiUrl}/list`)
       .pipe()
-      .subscribe(
-        (res) => {
-          this.leagueListSubject.next(res);
-        },
-        () => {
-          this.leagueListSubject.next([]);
-        }
-      );
+      .subscribe((res) => {
+        this.leagueListSubject.next(res);
+      });
   }
 
   //大会の取得
@@ -88,10 +89,16 @@ export class LeagueService {
   }
 
   //大会削除
-  deleteLeague(id: number): void {
+  deleteLeague(id: string): void {
     this.http
       .delete(`${this.apiUrl}/${id}`)
       .pipe()
       .subscribe(() => {});
+  }
+
+  //リーグIDをURLから取得する関数
+  getLeagueIdByURL() {
+    const leagueId = this.activatedRoute.children[0].snapshot.paramMap.get('league-id');
+    return !leagueId ? '' : leagueId;
   }
 }
