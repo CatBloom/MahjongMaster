@@ -1,4 +1,3 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { LeagueResultResponse } from '../../../../shared/interfaces/result';
 import { GameResponse } from 'src/app/shared/interfaces/game';
@@ -16,6 +15,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() columns!: string[];
+  @Input() clickOption?: boolean = false;
   @Input() set results(data: LeagueResultResponse[] | GameResponse[]) {
     if (data) {
       this.len = data.length;
@@ -28,7 +28,6 @@ export class TableComponent implements OnInit {
 
   len = 0;
   dataSource = new MatTableDataSource<LeagueResultResponse | GameResponse>();
-  selection = new SelectionModel<unknown>(false);
   columnsToDisplay: string[] = [];
   constructor() {}
 

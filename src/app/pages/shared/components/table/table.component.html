@@ -20,8 +20,7 @@
   <tr
     mat-row
     *matRowDef="let element; columns: columnsToDisplay"
-    class="table__element-row"
-    [ngClass]="{ selectedBackground: selection.isSelected(element) }"
+    [class.table__element-row]="clickOption ? true : false"
     (click)="rowClick(element)"
   ></tr>
 </table>
