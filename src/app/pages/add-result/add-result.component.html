@@ -74,6 +74,7 @@
         *ngIf="gameList$ | async as gameList"
         (rowClickEvent)="tableRowClick($event)"
         [columns]="tableColumns"
+        [clickOption]="!this.formType ? true : false"
         [results]="gameList"
       ></app-table>
     </div>

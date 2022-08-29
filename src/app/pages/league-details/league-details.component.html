@@ -35,6 +35,7 @@
     <app-table
       *ngIf="leagueResult$ | async as leagueResult"
       [columns]="tableColumns"
+      [clickOption]="true"
       [results]="leagueResult"
       (rowClickEvent)="tableRowClick($event)"
     ></app-table>
