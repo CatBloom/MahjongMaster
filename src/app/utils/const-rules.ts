@@ -1,4 +1,4 @@
-import { Rules } from '../../../shared/interfaces/rules';
+import { Rules } from '../interfaces/rules';
 
 // 雀魂公式ルール
 export const MahjongSoulRules: Rules = {

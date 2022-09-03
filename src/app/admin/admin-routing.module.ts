@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminMyLeagueComponent } from '../pages/admin-my-league/admin-my-league.component';
-import { AddLeagueComponent } from '../pages/add-league/add-league.component';
-import { AddPlayerComponent } from '../pages/add-player/add-player.component';
-import { AddResultComponent } from '../pages/add-result/add-result.component';
-import { AuthGuard } from '../shared/guard/auth.guard';
+import { AdminMyLeagueComponent } from './admin-my-league/admin-my-league.component';
+import { AddLeagueComponent } from './add-league/add-league.component';
+import { AddPlayerComponent } from './add-player/add-player.component';
+import { AddResultComponent } from './add-result/add-result.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'league', pathMatch: 'full' },

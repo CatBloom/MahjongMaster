@@ -1,7 +1,7 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration } from 'chart.js';
-import { PieData } from 'src/app/shared/interfaces/result';
+import { PieData } from '../../../interfaces/result';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({

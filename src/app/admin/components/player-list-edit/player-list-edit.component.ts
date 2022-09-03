@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PlayerRequest, PlayerResponse } from '../../../../../shared/interfaces/player';
-import { PlayerService } from 'src/app/shared/services/player.service';
+import { PlayerRequest, PlayerResponse } from '../../../interfaces/player';
+import { PlayerService } from '../../../services/player.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { Subject, takeUntil } from 'rxjs';

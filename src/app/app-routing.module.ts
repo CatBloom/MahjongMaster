@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TopComponent } from './pages/top/top.component';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { AuthGuard } from './shared/guard/auth.guard';
+import { TopComponent } from './core/top/top.component';
+import { LoginComponent } from './core/login/login.component';
+import { SignupComponent } from './core/signup/signup.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'top', pathMatch: 'full' },

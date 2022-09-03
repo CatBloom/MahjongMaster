@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faFileCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { LeagueService } from 'src/app/shared/services/league.service';
+import { LeagueService } from '../../services/league.service';
 
 @Component({
   selector: 'app-admin-my-league',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GameResponse } from 'src/app/shared/interfaces/game';
+import { GameResponse } from '../../../interfaces/game';
 
 @Component({
   selector: 'app-table-result-row',

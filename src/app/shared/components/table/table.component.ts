@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { LeagueResultResponse } from '../../../../shared/interfaces/result';
-import { GameResponse } from 'src/app/shared/interfaces/game';
+import { LeagueResultResponse } from '../../../interfaces/result';
+import { GameResponse } from '../../../interfaces/game';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';

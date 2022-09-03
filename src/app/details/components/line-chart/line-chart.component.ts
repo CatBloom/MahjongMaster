@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
-import { LineData } from 'src/app/shared/interfaces/result';
+import { LineData } from '../../../interfaces/result';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({

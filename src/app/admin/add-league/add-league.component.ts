@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Rules } from '../../shared/interfaces/rules';
-import { LeagueRequest } from '../../shared/interfaces/league';
-import { LeagueService } from '../../shared/services/league.service';
+import { Rules } from '../../interfaces/rules';
+import { LeagueRequest } from '../../interfaces/league';
+import { LeagueService } from '../../services/league.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddLeagueDialogComponent } from '../add-league/add-league-dialog/add-league-dialog.component';
+import { AddLeagueDialogComponent } from '../components/add-league-dialog/add-league-dialog.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
-import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../shared/constants/const-rules';
+import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
+import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../../utils/const-rules';
 
 @Component({
   selector: 'app-add-league',

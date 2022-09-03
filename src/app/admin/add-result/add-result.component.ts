@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Rules } from '../../shared/interfaces/rules';
+import { Rules } from '../../interfaces/rules';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { PlayerService } from 'src/app/shared/services/player.service';
-import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
-import { GameRequest, GameResponse, GamePlayers, GameResult } from 'src/app/shared/interfaces/game';
-import { LeagueService } from 'src/app/shared/services/league.service';
-import { GameService } from 'src/app/shared/services/game.service';
-import { SnackService } from 'src/app/shared/services/snack.service';
+import { PlayerService } from '../../services/player.service';
+import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
+import { GameRequest, GameResponse, GamePlayers, GameResult } from '../../interfaces/game';
+import { LeagueService } from '../../services/league.service';
+import { GameService } from '../../services/game.service';
+import { SnackService } from '../../services/snack.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 

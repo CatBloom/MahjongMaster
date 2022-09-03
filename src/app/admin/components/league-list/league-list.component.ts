@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LeagueResponse } from '../../../../shared/interfaces/league';
+import { LeagueResponse } from '../../../interfaces/league';
 
 @Component({
   selector: 'app-league-list',

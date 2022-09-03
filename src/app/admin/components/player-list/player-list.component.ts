@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlayerResponse } from '../../../../shared/interfaces/player';
+import { PlayerResponse } from '../../../interfaces/player';
 
 @Component({
   selector: 'app-player-list',

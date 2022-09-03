@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
-import { PlayerRequest } from 'src/app/shared/interfaces/player';
-import { PlayerService } from 'src/app/shared/services/player.service';
-import { MyErrorStateMatcher } from 'src/app/shared/utils/error-state-matcher';
+import { PlayerRequest } from '../../interfaces/player';
+import { PlayerService } from '../../services/player.service';
+import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 
 @Component({
   selector: 'app-add-player',

@@ -7,15 +7,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 // components
 import { AppComponent } from './app.component';
-import { TopComponent } from './pages/top/top.component';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
+import { TopComponent } from './core/top/top.component';
+import { LoginComponent } from './core/login/login.component';
+import { SignupComponent } from './core/signup/signup.component';
 // pipes
 import { DatePipe } from '@angular/common';
 // interceptor
-import { SpinnerInterceptor } from './shared/interceptor/spinner.interceptor';
-import { TokenInterceptor } from './shared/interceptor/token.interceptor';
-import { NoticeInterceptor } from './shared/interceptor/notice.interceptor';
+import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
+import { TokenInterceptor } from './interceptor/token.interceptor';
+import { NoticeInterceptor } from './interceptor/notice.interceptor';
 // firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';

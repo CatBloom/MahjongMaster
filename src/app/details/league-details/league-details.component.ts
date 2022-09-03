@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LeagueService } from 'src/app/shared/services/league.service';
+import { LeagueService } from '../../services/league.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { distinctUntilChanged, takeUntil, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ResultService } from 'src/app/shared/services/result.service';
-import { LeagueResultResponse } from 'src/app/shared/interfaces/result';
+import { ResultService } from '../../services/result.service';
+import { LeagueResultResponse } from '../../interfaces/result';
 @Component({
   selector: 'app-league-details',
   templateUrl: './league-details.component.html',

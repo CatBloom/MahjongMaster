@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { LeagueRequest } from '../../../shared/interfaces/league';
+import { LeagueRequest } from '../../../interfaces/league';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

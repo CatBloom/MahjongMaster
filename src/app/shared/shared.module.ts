@@ -11,9 +11,9 @@ import { FooterComponent } from '../shared/components/footer/footer.component';
 import { MenuListComponent } from '../shared/components/menu-list/menu-list.component';
 import { SearchComponent } from '../shared/components/search/search.component';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
-import { RuleListComponent } from '../pages/shared/components/rule-list/rule-list.component';
-import { TableComponent } from '../pages/shared/components/table/table.component';
-import { TableResultRowComponent } from '../pages/shared/components/table/table-result-row/table-result-row.component';
+import { RuleListComponent } from '../shared/components/rule-list/rule-list.component';
+import { TableComponent } from '../shared/components/table/table.component';
+import { TableResultRowComponent } from '../shared/components/table-result-row/table-result-row.component';
 //pipe
 import { JapanesePipe } from '../shared/pipes/japanese.pipe';
 import { CustomSlicePipe } from '../shared/pipes/custom-slice.pipe';

@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
-import { PlayerService } from 'src/app/shared/services/player.service';
-import { ResultService } from 'src/app/shared/services/result.service';
+import { PlayerService } from '../../services/player.service';
+import { ResultService } from '../../services/result.service';
 
 @Component({
   selector: 'app-player-details',
