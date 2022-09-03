@@ -4,6 +4,8 @@
 .footer {
   height: 100%;
   background-color: var.$light-primary;
+  position: relative;
+  z-index: 1000;
 }
 
 .footer-grid {
