@@ -1,0 +1,28 @@
+<div class="player-list-item">
+  <div class="player-list-item__name">
+    <ng-container *ngIf="!isPlayerEdit">
+      <a routerLink="/details/{{ player.leagueId }}/{{ player.id }}">
+        {{ player.name }}
+      </a>
+    </ng-container>
+    <ng-container *ngIf="isPlayerEdit">
+      <input class="player-list-item__input" type="text" [formControl]="inputPlayer" />
+    </ng-container>
+  </div>
+  <div class="player-list-item__button">
+    <ng-container *ngIf="!isPlayerEdit">
+      <button mat-stroked-button (click)="onEditClick()" color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="isPlayerEdit">
+      <button mat-stroked-button (click)="updatePlayer()" color="accent">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button mat-stroked-button (click)="deletePlayer()" color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+  <mat-divider></mat-divider>
+</div>

@@ -1,0 +1,36 @@
+<div class="result-container">
+  <div class="result-container__item">
+    <a routerLink="/details/{{ result.leagueId }}/{{ result.results[0].playerId }}">
+      <span class="result-container__item--name">
+        {{ result.results[0].rank }}位:{{ result.results[0].playerName | customSlice: 10 }}
+      </span>
+      <span>【{{ result.results[0].point }},{{ result.results[0].calcPoint }}】</span>
+    </a>
+  </div>
+  <div class="result-container__item">
+    <a routerLink="/details/{{ result.leagueId }}/{{ result.results[1].playerId }}">
+      <span class="result-container__item--name"
+        >{{ result.results[1].rank }}位:{{ result.results[1].playerName | customSlice: 10 }}
+      </span>
+      <span>【{{ result.results[1].point }},{{ result.results[1].calcPoint }}】</span>
+    </a>
+  </div>
+</div>
+<div class="result-container">
+  <div class="result-container__item">
+    <a routerLink="/details/{{ result.leagueId }}/{{ result.results[2].playerId }}">
+      <span class="result-container__item--name">
+        {{ result.results[2].rank }}位:{{ result.results[2].playerName | customSlice: 10 }}
+      </span>
+      <span>【{{ result.results[2].point }},{{ result.results[2].calcPoint }}】</span>
+    </a>
+  </div>
+  <div class="result-container__item" *ngIf="result.results[3]">
+    <a routerLink="/details/{{ result.leagueId }}/{{ result.results[3].playerId }}">
+      <span class="result-container__item--name">
+        {{ result.results[3].rank }}位:{{ result.results[3].playerName | customSlice: 10 }}
+      </span>
+      <span>【{{ result.results[3].point }},{{ result.results[3].calcPoint }}】</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+@use 'mixin' as mixin;
+
+.league-details {
+  &__title {
+    margin-top: 1rem;
+  }
+}
+
+.league-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  &__button {
+    width: 20rem;
+  }
+}
+
+.league-table {
+  margin-top: 4rem;
+  @include mixin.material;
+}
