@@ -2,10 +2,20 @@
   <h2>{{ league.name }}</h2>
   <ng-container>
     <div class="league-buttons">
-      <button class="league-buttons__button" mat-raised-button color="accent" routerLink="/player/edit/{{ league.id }}">
+      <button
+        class="league-buttons__button"
+        mat-raised-button
+        color="accent"
+        routerLink="/admin/player/edit/{{ league.id }}"
+      >
         プレイヤー追加
       </button>
-      <button class="league-buttons__button" mat-raised-button color="accent" routerLink="/game/add/{{ league.id }}">
+      <button
+        class="league-buttons__button"
+        mat-raised-button
+        color="accent"
+        routerLink="/admin/game/add/{{ league.id }}"
+      >
         成績追加
       </button>
     </div>

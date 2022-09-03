@@ -5,7 +5,7 @@
 <!--Todo オートコンプリートのコンポーネントを分離する -->
 <mat-autocomplete #auto="matAutocomplete">
   <ng-container *ngIf="search$ | async as league">
-    <mat-option *ngFor="let l of league" routerLink="/league/{{ l.id }}">
+    <mat-option *ngFor="let l of league" routerLink="/details/{{ l.id }}">
       {{ l.name }}
     </mat-option>
   </ng-container>

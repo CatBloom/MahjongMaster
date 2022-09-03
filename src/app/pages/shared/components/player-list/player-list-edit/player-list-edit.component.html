@@ -1,7 +1,7 @@
 <div class="player-list-item">
   <div class="player-list-item__name">
     <ng-container *ngIf="!isPlayerEdit">
-      <a routerLink="/player/{{ player.leagueId }}/{{ player.id }}">
+      <a routerLink="/details/{{ player.leagueId }}/{{ player.id }}">
         {{ player.name }}
       </a>
     </ng-container>

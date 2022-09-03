@@ -44,6 +44,6 @@ export class LeagueDetailsComponent implements OnInit, OnDestroy {
   tableRowClick(rowData: LeagueResultResponse) {
     const lid = rowData.leagueId;
     const pid = rowData.playerId;
-    this.router.navigateByUrl(`/player/${lid}/${pid}`);
+    this.router.navigateByUrl(`/details/${lid}/${pid}`);
   }
 }

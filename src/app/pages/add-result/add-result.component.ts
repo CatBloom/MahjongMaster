@@ -276,11 +276,11 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   goPostPage() {
     const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-    this.router.navigateByUrl(`/game/add/${leagueId}`);
+    this.router.navigateByUrl(`/admin/game/add/${leagueId}`);
   }
 
   tableRowClick(game: GameRequest) {
-    this.router.navigateByUrl(`/game/update/${game.leagueId}/${game.id}`);
+    this.router.navigateByUrl(`/admin/game/update/${game.leagueId}/${game.id}`);
   }
 
   autoCalcPointCheck(check: boolean) {
