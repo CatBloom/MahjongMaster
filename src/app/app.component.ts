@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentChecked, ChangeDetectorRef } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './services/auth.service';
 import { SpinnerService } from './services/spinner.service';
 import { ThemeService } from './services/theme.service';
 
