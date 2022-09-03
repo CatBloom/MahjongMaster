@@ -4,7 +4,7 @@ import { Rules } from '../../interfaces/rules';
 import { LeagueRequest } from '../../interfaces/league';
 import { LeagueService } from '../../services/league.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddLeagueDialogComponent } from '../components/add-league-dialog/add-league-dialog.component';
+import { LeagueDialogComponent } from '../components/league-dialog/league-dialog.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
@@ -12,11 +12,11 @@ import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 import { MahjongSoulRules, TenhouRules, MLeagueRules } from '../../utils/const-rules';
 
 @Component({
-  selector: 'app-add-league',
-  templateUrl: './add-league.component.html',
-  styleUrls: ['./add-league.component.scss'],
+  selector: 'app-league',
+  templateUrl: './league.component.html',
+  styleUrls: ['./league.component.scss'],
 })
-export class AddLeagueComponent implements OnInit, OnDestroy {
+export class LeagueComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
     name: new FormControl<string>('', {
       nonNullable: true,
@@ -131,7 +131,7 @@ export class AddLeagueComponent implements OnInit, OnDestroy {
     };
 
     //Dialogを表示
-    const dialogRef = this.matDialog.open(AddLeagueDialogComponent, {
+    const dialogRef = this.matDialog.open(LeagueDialogComponent, {
       width: '80%',
       data: newleague,
     });

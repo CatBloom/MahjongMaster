@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminMyLeagueComponent } from './admin-my-league.component';
+import { MyLeagueComponent } from './my-league.component';
 
-describe('AdminMyLeagueComponent', () => {
-  let component: AdminMyLeagueComponent;
-  let fixture: ComponentFixture<AdminMyLeagueComponent>;
+describe('MyLeagueComponent', () => {
+  let component: MyLeagueComponent;
+  let fixture: ComponentFixture<MyLeagueComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminMyLeagueComponent],
+      declarations: [MyLeagueComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminMyLeagueComponent);
+    fixture = TestBed.createComponent(MyLeagueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLeagueDialogComponent } from './add-league-dialog.component';
+import { LeagueDialogComponent } from './league-dialog.component';
 
-describe('AddLeagueDialogComponent', () => {
-  let component: AddLeagueDialogComponent;
-  let fixture: ComponentFixture<AddLeagueDialogComponent>;
+describe('LeagueDialogComponent', () => {
+  let component: LeagueDialogComponent;
+  let fixture: ComponentFixture<LeagueDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddLeagueDialogComponent],
+      declarations: [LeagueDialogComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddLeagueDialogComponent);
+    fixture = TestBed.createComponent(LeagueDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

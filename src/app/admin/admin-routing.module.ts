@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminMyLeagueComponent } from './admin-my-league/admin-my-league.component';
-import { AddLeagueComponent } from './add-league/add-league.component';
-import { AddPlayerComponent } from './add-player/add-player.component';
-import { AddResultComponent } from './add-result/add-result.component';
+import { MyLeagueComponent } from './my-league/my-league.component';
+import { LeagueComponent } from './league/league.component';
+import { PlayerComponent } from './player/player.component';
+import { GameComponent } from './game/game.component';
 import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'league', pathMatch: 'full' },
-  { path: 'league', component: AdminMyLeagueComponent, canActivate: [AuthGuard] },
-  { path: 'league/add', component: AddLeagueComponent, canActivate: [AuthGuard] },
-  { path: 'player/edit/:league-id', component: AddPlayerComponent, canActivate: [AuthGuard] },
-  { path: 'game/add/:league-id', component: AddResultComponent, canActivate: [AuthGuard] },
-  { path: 'game/update/:league-id/:game-id', component: AddResultComponent, canActivate: [AuthGuard] },
+  { path: 'league', component: MyLeagueComponent, canActivate: [AuthGuard] },
+  { path: 'league/add', component: LeagueComponent, canActivate: [AuthGuard] },
+  { path: 'player/edit/:league-id', component: PlayerComponent, canActivate: [AuthGuard] },
+  { path: 'game/add/:league-id', component: GameComponent, canActivate: [AuthGuard] },
+  { path: 'game/update/:league-id/:game-id', component: GameComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

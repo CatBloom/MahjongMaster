@@ -27,7 +27,7 @@ export class NoticeInterceptor implements HttpInterceptor {
       }),
       catchError((err) => {
         this.snack.openSnackBer('エラーが発生しました.', '✖️');
-        this.router.navigateByUrl(`/league`);
+        this.router.navigateByUrl(`/admin/league`);
         return throwError(() => err);
       })
     );

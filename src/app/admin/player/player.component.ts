@@ -8,11 +8,11 @@ import { PlayerService } from '../../services/player.service';
 import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 
 @Component({
-  selector: 'app-add-player',
-  templateUrl: './add-player.component.html',
-  styleUrls: ['./add-player.component.scss'],
+  selector: 'app-player',
+  templateUrl: './player.component.html',
+  styleUrls: ['./player.component.scss'],
 })
-export class AddPlayerComponent implements OnInit, OnDestroy {
+export class PlayerComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/[\S]/)]),
   });

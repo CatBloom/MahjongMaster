@@ -4,11 +4,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-rules',
-  templateUrl: './rules.component.html',
-  styleUrls: ['./rules.component.scss'],
+  selector: 'app-rules-form',
+  templateUrl: './rules-form.component.html',
+  styleUrls: ['./rules-form.component.scss'],
 })
-export class RulesComponent implements OnInit, OnDestroy {
+export class RulesFormComponent implements OnInit, OnDestroy {
   @Input() formGroup!: FormGroup;
   doraCount = [...Array(21).keys()];
 

@@ -14,14 +14,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-add-result',
-  templateUrl: './add-result.component.html',
-  styleUrls: ['./add-result.component.scss'],
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss'],
 })
-export class AddResultComponent implements OnInit, OnDestroy {
+export class GameComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
-  get resultArray() {
-    return this.formGroup.get('resultArray') as FormArray;
+  get gameArray() {
+    return this.formGroup.get('gameArray') as FormArray;
   }
   //登録or更新
   formType: string | null = null;
@@ -50,7 +50,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog
   ) {
     this.formGroup = this.fb.group({
-      resultArray: this.fb.array([]),
+      gameArray: this.fb.array([]),
     });
   }
 
@@ -118,7 +118,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
   //form作成
   initFormCreate() {
     for (let i = 0; i < this.rules.playerCount; i++) {
-      this.resultArray.push(
+      this.gameArray.push(
         this.fb.nonNullable.group({
           rank: [{ value: i + 1, disabled: true }, [Validators.required]],
           id: ['', [Validators.required]],
@@ -136,11 +136,11 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   setValue(game: GameResponse) {
     //Todo 更新時の処理をtemplateで行いたいがselectBoxに値が入らないため関数で行う
-    for (let i = 0; i < this.resultArray.length; i++) {
-      this.resultArray.controls[i].get('rank')?.setValue(game.results[i].rank);
-      this.resultArray.controls[i].get('id')?.setValue(game.results[i].playerId);
-      this.resultArray.controls[i].get('point')?.setValue(game.results[i].point);
-      this.resultArray.controls[i].get('calcPoint')?.setValue(game.results[i].calcPoint);
+    for (let i = 0; i < this.gameArray.length; i++) {
+      this.gameArray.controls[i].get('rank')?.setValue(game.results[i].rank);
+      this.gameArray.controls[i].get('id')?.setValue(game.results[i].playerId);
+      this.gameArray.controls[i].get('point')?.setValue(game.results[i].point);
+      this.gameArray.controls[i].get('calcPoint')?.setValue(game.results[i].calcPoint);
     }
   }
 
@@ -162,13 +162,13 @@ export class AddResultComponent implements OnInit, OnDestroy {
     const players: GamePlayers[] = [];
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
-        rank: this.resultArray.controls[i].get('rank')?.value,
-        playerId: this.resultArray.controls[i].get('id')?.value,
-        point: Number(this.resultArray.controls[i].get('point')?.value),
-        calcPoint: Number(this.resultArray.controls[i].get('calcPoint')?.value),
+        rank: this.gameArray.controls[i].get('rank')?.value,
+        playerId: this.gameArray.controls[i].get('id')?.value,
+        point: Number(this.gameArray.controls[i].get('point')?.value),
+        calcPoint: Number(this.gameArray.controls[i].get('calcPoint')?.value),
       });
       players.push({
-        id: this.resultArray.controls[i].get('id')?.value,
+        id: this.gameArray.controls[i].get('id')?.value,
       });
     }
 
@@ -192,14 +192,14 @@ export class AddResultComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.rules.playerCount; i++) {
       result.push({
         id: this.game.results[i].id,
-        rank: this.resultArray.controls[i].get('rank')?.value,
-        playerId: this.resultArray.controls[i].get('id')?.value,
-        point: Number(this.resultArray.controls[i].get('point')?.value),
-        calcPoint: Number(this.resultArray.controls[i].get('calcPoint')?.value),
+        rank: this.gameArray.controls[i].get('rank')?.value,
+        playerId: this.gameArray.controls[i].get('id')?.value,
+        point: Number(this.gameArray.controls[i].get('point')?.value),
+        calcPoint: Number(this.gameArray.controls[i].get('calcPoint')?.value),
         gameId: this.game.results[i].gameId,
       });
       players.push({
-        id: this.resultArray.controls[i].get('id')?.value,
+        id: this.gameArray.controls[i].get('id')?.value,
         gameId: this.game.id,
       });
     }
@@ -241,7 +241,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
     let prevPoint: number | null = null;
     let isCheckPoint = false;
     const playerArray: number[] = [];
-    this.resultArray.controls.forEach((control) => {
+    this.gameArray.controls.forEach((control) => {
       totalPoint += Number(control.get('point')?.value);
       playerArray.push(control.get('id')?.value);
 
@@ -276,7 +276,7 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   goPostPage() {
     const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-    this.router.navigateByUrl(`/admin/game/add/${leagueId}`);
+    this.router.navigateByUrl(`/admin/game//${leagueId}`);
   }
 
   tableRowClick(game: GameRequest) {
@@ -285,13 +285,13 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   autoCalcPointCheck(check: boolean) {
     if (!check) {
-      for (const control of this.resultArray.controls) {
+      for (const control of this.gameArray.controls) {
         control.get('rank')?.enable();
         control.get('calcPoint')?.enable();
       }
       this.pointSubscriptionsDestroy$.next(true);
     } else {
-      for (const control of this.resultArray.controls) {
+      for (const control of this.gameArray.controls) {
         control.get('rank')?.reset();
         control.get('rank')?.disable();
         control.get('calcPoint')?.disable();
@@ -315,24 +315,24 @@ export class AddResultComponent implements OnInit, OnDestroy {
   private pointSubscriptions() {
     const umaArray = this.createUmaArray();
     for (let i = 0; i < this.rules.playerCount; i++) {
-      this.resultArray.controls[i]
+      this.gameArray.controls[i]
         .get('point')
         ?.valueChanges.pipe(takeUntil(this.pointSubscriptionsDestroy$))
         .subscribe(() => {
-          const point = Number(this.resultArray.controls[i].get('point')?.value);
+          const point = Number(this.gameArray.controls[i].get('point')?.value);
           const topPrize = (this.rules.returnPoint - this.rules.startPoint) * this.rules.playerCount;
           const calcPoint = point - this.rules.returnPoint + umaArray[i] * 1000;
           if (isNaN(calcPoint)) {
             return;
-          } else if (this.resultArray.controls[i].get('point')?.value === '') {
-            this.resultArray.controls[i].get('calcPoint')?.setValue('');
+          } else if (this.gameArray.controls[i].get('point')?.value === '') {
+            this.gameArray.controls[i].get('calcPoint')?.setValue('');
           } else {
             if (i === 0) {
               const setPoint = Math.floor(((calcPoint + topPrize) / 1000) * 10) / 10;
-              this.resultArray.controls[i].get('calcPoint')?.setValue(setPoint);
+              this.gameArray.controls[i].get('calcPoint')?.setValue(setPoint);
             } else {
               const setPoint = Math.floor((calcPoint / 1000) * 10) / 10;
-              this.resultArray.controls[i].get('calcPoint')?.setValue(setPoint);
+              this.gameArray.controls[i].get('calcPoint')?.setValue(setPoint);
             }
           }
         });
@@ -341,12 +341,12 @@ export class AddResultComponent implements OnInit, OnDestroy {
 
   private totalPointSubscription() {
     for (let i = 0; i < this.rules.playerCount; i++) {
-      this.resultArray.controls[i]
+      this.gameArray.controls[i]
         .get('point')
         ?.valueChanges.pipe(takeUntil(this.onDestroy$))
         .subscribe(() => {
           let totalPoint = 0;
-          this.resultArray.controls.forEach((control) => {
+          this.gameArray.controls.forEach((control) => {
             const point = Number(control.get('point')?.value);
             if (isNaN(point)) {
               return;

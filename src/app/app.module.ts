@@ -13,9 +13,9 @@ import { SignupComponent } from './core/signup/signup.component';
 // pipes
 import { DatePipe } from '@angular/common';
 // interceptor
-import { SpinnerInterceptor } from './interceptor/spinner.interceptor';
-import { TokenInterceptor } from './interceptor/token.interceptor';
-import { NoticeInterceptor } from './interceptor/notice.interceptor';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { NoticeInterceptor } from './interceptors/notice.interceptor';
 // firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
