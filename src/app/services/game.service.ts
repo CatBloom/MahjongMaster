@@ -70,7 +70,7 @@ export class GameService {
             }
           })
         );
-        this.route.navigateByUrl(`/game/add/${res.leagueId}`);
+        this.route.navigateByUrl(`/admin/game/edit/${res.leagueId}`);
       });
   }
 
@@ -88,7 +88,7 @@ export class GameService {
           }
         });
         this.gameListSubject.next(newArray);
-        this.route.navigateByUrl(`/game/add/${leagueId}`);
+        this.route.navigateByUrl(`/admin/game/edit/${leagueId}`);
       });
   }
 }

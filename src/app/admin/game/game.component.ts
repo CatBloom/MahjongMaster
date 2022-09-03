@@ -276,11 +276,11 @@ export class GameComponent implements OnInit, OnDestroy {
 
   goPostPage() {
     const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-    this.router.navigateByUrl(`/admin/game//${leagueId}`);
+    this.router.navigateByUrl(`/admin/game/edit/${leagueId}`);
   }
 
   tableRowClick(game: GameRequest) {
-    this.router.navigateByUrl(`/admin/game/update/${game.leagueId}/${game.id}`);
+    this.router.navigateByUrl(`/admin/game/edit/${game.leagueId}/${game.id}`);
   }
 
   autoCalcPointCheck(check: boolean) {

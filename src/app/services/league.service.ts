@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { LeagueRequest, LeagueResponse } from '../interfaces/league';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +27,7 @@ export class LeagueService {
   //検索時はinterceptorを介さないためhttpBackendを使用
   private skipHttpClient: HttpClient = new HttpClient(this.httpBackend);
 
-  constructor(
-    private http: HttpClient,
-    private route: Router,
-    private activatedRoute: ActivatedRoute,
-    private httpBackend: HttpBackend
-  ) {}
+  constructor(private http: HttpClient, private route: Router, private httpBackend: HttpBackend) {}
 
   //大会検索用
   searchLeague(name: string) {
@@ -94,11 +89,5 @@ export class LeagueService {
       .delete(`${this.apiUrl}/${id}`)
       .pipe()
       .subscribe(() => {});
-  }
-
-  //リーグIDをURLから取得する関数
-  getLeagueIdByURL() {
-    const leagueId = this.activatedRoute.children[0].snapshot.paramMap.get('league-id');
-    return !leagueId ? '' : leagueId;
   }
 }
