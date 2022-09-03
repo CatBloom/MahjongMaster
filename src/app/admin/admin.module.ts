@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { AddLeagueComponent } from '../pages/add-league/add-league.component';
+import { AddLeagueDialogComponent } from '../pages/add-league/add-league-dialog/add-league-dialog.component';
+import { AddResultComponent } from '../pages/add-result/add-result.component';
+import { RulesComponent } from '../pages/shared/components/rules/rules.component';
+import { AdminMyLeagueComponent } from '../pages/admin-my-league/admin-my-league.component';
+import { LeagueListComponent } from '../pages/shared/components/league-list/league-list.component';
+import { AddPlayerComponent } from '../pages/add-player/add-player.component';
+import { PlayerListComponent } from '../pages/shared/components/player-list/player-list.component';
+import { PlayerListEditComponent } from '../pages/shared/components/player-list/player-list-edit/player-list-edit.component';
+import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
+@NgModule({
+  declarations: [
+    AddLeagueComponent,
+    AddLeagueDialogComponent,
+    AddResultComponent,
+    RulesComponent,
+    AdminMyLeagueComponent,
+    LeagueListComponent,
+    AddPlayerComponent,
+    PlayerListComponent,
+    PlayerListEditComponent,
+  ],
+  imports: [CommonModule, AdminRoutingModule, OwlDateTimeModule, OwlNativeDateTimeModule, SharedModule],
+})
+export class AdminModule {}
