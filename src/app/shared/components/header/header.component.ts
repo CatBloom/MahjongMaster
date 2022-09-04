@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() set toggleCheck(toggleCheck: boolean) {
     this.toggle.setValue(toggleCheck);
   }
-  user$ = this.authService.user;
+  user$ = this.authService.user$;
   toggle = new FormControl<boolean>(false, { nonNullable: true });
   onDestroy$ = new Subject<boolean>();
 

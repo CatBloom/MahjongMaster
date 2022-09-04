@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LeagueDetailsComponent implements OnInit, OnDestroy {
   league$ = this.leagueService.league$;
-  user$ = this.authService.user;
+  user$ = this.authService.user$;
   leagueResult$ = this.resultService.leagueResult$;
   tableColumns: string[] = ['rank', 'name', 'totalGame', 'totalCalcPoint', 'averageRank'];
   isRules = false;
