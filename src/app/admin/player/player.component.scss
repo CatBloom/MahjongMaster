@@ -1,10 +1,21 @@
+.player-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.move-buttons {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+
 .add-player {
   justify-content: center;
   display: flex;
   flex-direction: row;
   gap: 1rem;
   &__input {
-    width: 80%;
+    width: 100%;
   }
   &__button {
     width: 8rem;

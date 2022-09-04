@@ -45,6 +45,17 @@
   }
 }
 
+.game-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.move-buttons {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+
 .game-table {
   margin-top: 2rem;
   @include mixin.material;

@@ -1,5 +1,16 @@
 <div class="game">
-  <h2>{{ !formType ? '成績登録' : '成績修正' }}</h2>
+  <div class="game-header-container">
+    <h2>{{ !formType ? '成績登録' : '成績修正' }}</h2>
+    <div class="move-buttons">
+      <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage('details')">
+        大会成績
+      </button>
+      <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage('player')">
+        プレイヤー登録
+      </button>
+    </div>
+  </div>
+
   <div class="game__option">
     <section>
       <mat-checkbox [checked]="true" (change)="autoCalcPointCheck($event.checked)">自動計算</mat-checkbox>
@@ -79,7 +90,13 @@
       ></app-table>
     </div>
     <ng-container *ngIf="formType === 'put'">
-      <button type="button" class="game-buttons__button--put" mat-stroked-button color="primary" (click)="goPostPage()">
+      <button
+        type="button"
+        class="game-buttons__button--put"
+        mat-stroked-button
+        color="primary"
+        (click)="movePage('post')"
+      >
         成績登録に戻る
       </button>
     </ng-container>

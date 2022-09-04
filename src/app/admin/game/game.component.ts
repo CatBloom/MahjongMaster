@@ -274,9 +274,19 @@ export class GameComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  goPostPage() {
-    const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-    this.router.navigateByUrl(`/admin/game/edit/${leagueId}`);
+  movePage(value: string) {
+    const id = String(this.activeRoute.snapshot.paramMap.get('league-id'));
+    switch (value) {
+      case 'player':
+        this.router.navigateByUrl(`/admin/player/edit/${id}`);
+        break;
+      case 'details':
+        this.router.navigateByUrl(`/details/${id}`);
+        break;
+      case 'post':
+        this.router.navigateByUrl(`/admin/game/edit/${id}`);
+        break;
+    }
   }
 
   tableRowClick(game: GameRequest) {

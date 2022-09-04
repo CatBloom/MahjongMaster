@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { PlayerRequest } from '../../interfaces/player';
@@ -23,7 +23,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject<boolean>();
 
-  constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute) {}
+  constructor(private playerService: PlayerService, private activeRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.activeRoute.params
@@ -52,5 +52,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
     };
     this.playerService.postPlayer(player);
     this.name.reset();
+  }
+
+  movePage(value: string) {
+    const id = String(this.activeRoute.snapshot.paramMap.get('league-id'));
+    switch (value) {
+      case 'game':
+        this.router.navigateByUrl(`/admin/game/edit/${id}`);
+        break;
+      case 'details':
+        this.router.navigateByUrl(`/details/${id}`);
+        break;
+    }
   }
 }
