@@ -5,6 +5,7 @@ import { distinctUntilChanged, takeUntil, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ResultService } from '../../services/result.service';
 import { LeagueResultResponse } from '../../interfaces/result';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-league-details',
   templateUrl: './league-details.component.html',
@@ -12,12 +13,14 @@ import { LeagueResultResponse } from '../../interfaces/result';
 })
 export class LeagueDetailsComponent implements OnInit, OnDestroy {
   league$ = this.leagueService.league$;
+  user$ = this.authService.user;
   leagueResult$ = this.resultService.leagueResult$;
   tableColumns: string[] = ['rank', 'name', 'totalGame', 'totalCalcPoint', 'averageRank'];
   isRules = false;
   private onDestroy$ = new Subject<boolean>();
 
   constructor(
+    private authService: AuthService,
     private leagueService: LeagueService,
     private resultService: ResultService,
     private activeRoute: ActivatedRoute,

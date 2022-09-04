@@ -6,13 +6,15 @@
   }
 }
 
-.league-buttons {
+.details-header-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  &__button {
-    width: 20rem;
-  }
+  justify-content: space-between;
+}
+
+.move-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .league-table {
