@@ -1,5 +1,10 @@
 <div class="player-details" *ngIf="playerResult$ | async as playerResult">
-  <h2>{{ playerResult.name }}</h2>
+  <div class="details-header-container">
+    <h2>{{ playerResult.name }}</h2>
+    <div class="move-buttons">
+      <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage()">大会成績</button>
+    </div>
+  </div>
   <div class="player-grid">
     <div class="material player-grid__total-game">
       <p class="player-grid__title">対戦回数</p>

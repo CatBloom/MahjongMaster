@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { PlayerService } from '../../services/player.service';
@@ -21,7 +21,8 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private playerService: PlayerService,
     private resultService: ResultService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,5 +41,10 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
+  }
+
+  movePage() {
+    const id = String(this.activeRoute.snapshot.paramMap.get('league-id'));
+    this.router.navigateByUrl(`/details/${id}`);
   }
 }
