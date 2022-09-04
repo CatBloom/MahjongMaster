@@ -18,10 +18,10 @@ import { SpinnerService } from '../services/spinner.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject$ = new BehaviorSubject<User | null>(null);
+  private userSubject = new BehaviorSubject<User | null>(null);
 
-  get user() {
-    return this.userSubject$.asObservable();
+  get user$() {
+    return this.userSubject.asObservable();
   }
 
   constructor(
@@ -50,7 +50,7 @@ export class AuthService {
     this.spinner.showSpinner();
     signInWithEmailAndPassword(this.auth, user.mail, user.password)
       .then((result) => {
-        this.userSubject$.next(result.user);
+        this.userSubject.next(result.user);
         this.router.navigateByUrl('/admin/league');
       })
       .catch(() => this.snack.openSnackBer('Error', 'x'))
@@ -62,7 +62,7 @@ export class AuthService {
   logout() {
     signOut(this.auth)
       .then(() => {
-        this.userSubject$.next(null);
+        this.userSubject.next(null);
         this.snack.openSnackBer('ログアウトしました', 'x');
         this.router.navigateByUrl('/top');
       })
@@ -80,7 +80,7 @@ export class AuthService {
   getAuthState() {
     return new Promise<User | null>((resolve) => {
       const unsubscribe = onAuthStateChanged(this.auth, (user) => {
-        this.userSubject$.next(user);
+        this.userSubject.next(user);
         resolve(user);
         unsubscribe();
       });
