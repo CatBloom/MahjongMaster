@@ -42,32 +42,32 @@
     <mat-label class="rules__name">配給原点</mat-label>
     <div class="rules__input">
       <mat-form-field appearance="outline">
-        <input type="text" matInput formControlName="startPoint" appReplace />
+        <input type="number" matInput formControlName="startPoint" appReplace maxlength="6" />
       </mat-form-field>
     </div>
     <mat-label class="rules__name">返し点</mat-label>
     <div class="rules__input">
       <mat-form-field appearance="outline">
-        <input type="text" matInput formControlName="returnPoint" appReplace />
+        <input type="number" matInput formControlName="returnPoint" appReplace maxlength="6" />
       </mat-form-field>
     </div>
     <mat-label class="rules__name">ウマ</mat-label>
     <div class="rules__input-uma">
       <mat-form-field appearance="outline">
         <mat-label>1位</mat-label>
-        <input type="text" matInput formControlName="uma1" appReplace />
+        <input type="number" matInput formControlName="uma1" appReplace maxlength="3" />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>2位</mat-label>
-        <input type="text" matInput formControlName="uma2" appReplace />
+        <input type="number" matInput formControlName="uma2" appReplace maxlength="3" />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>3位</mat-label>
-        <input type="text" matInput formControlName="uma3" appReplace />
+        <input type="number" matInput formControlName="uma3" appReplace maxlength="3" />
       </mat-form-field>
       <mat-form-field appearance="outline" *ngIf="playerCount.value !== 3">
         <mat-label>4位</mat-label>
-        <input type="text" matInput formControlName="uma4" appReplace />
+        <input type="number" matInput formControlName="uma4" appReplace maxlength="3" />
       </mat-form-field>
     </div>
   </form>

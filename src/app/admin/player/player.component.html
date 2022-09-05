@@ -15,7 +15,7 @@
     <div class="add-player">
       <mat-form-field class="add-player__input" appearance="outline">
         <mat-label>プレイヤー名</mat-label>
-        <input matInput formControlName="name" [errorStateMatcher]="matcher" maxlength="20" />
+        <input matInput formControlName="name" [errorStateMatcher]="matcher" />
       </mat-form-field>
       <button
         class="add-player__button"
@@ -27,6 +27,7 @@
         追加
       </button>
     </div>
+    <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
   </form>
 
   <app-player-list *ngIf="playerList$ | async as playerList" [playerList]="playerList"></app-player-list>

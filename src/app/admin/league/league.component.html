@@ -4,12 +4,15 @@
     <div class="league-grid">
       <mat-form-field class="league-grid__input" appearance="outline">
         <mat-label>大会名</mat-label>
-        <input matInput formControlName="name" [errorStateMatcher]="matcher" maxlength="40" />
+        <input matInput formControlName="name" [errorStateMatcher]="matcher" />
       </mat-form-field>
+      <mat-error *ngIf="name.errors?.['minlength']">5文字以上入力してください</mat-error>
+      <mat-error *ngIf="name.errors?.['maxlength']">30文字以下で入力してください</mat-error>
       <mat-form-field class="league-grid__input" appearance="outline">
         <mat-label>大会説明</mat-label>
-        <textarea matInput formControlName="manual" [errorStateMatcher]="matcher" maxlength="100"></textarea>
+        <textarea matInput formControlName="manual" [errorStateMatcher]="matcher"></textarea>
       </mat-form-field>
+      <mat-error *ngIf="manual.errors?.['maxlength']">100文字以下で入力してください</mat-error>
       <mat-form-field class="league-grid__input" appearance="outline">
         <mat-label>大会期間</mat-label>
         <!-- 整形データを表示するため非表示 -->
@@ -40,7 +43,8 @@
     <ng-container *ngIf="rulesRadio.value">
       <app-rules-form [formGroup]="formGroup"></app-rules-form>
     </ng-container>
-
+    <mat-error *ngIf="pointError">配給原点/返し点は5桁-6桁で入力してください</mat-error>
+    <mat-error *ngIf="umaError">ウマの合計を0点に合わせてください </mat-error>
     <button
       class="league__button"
       mat-raised-button

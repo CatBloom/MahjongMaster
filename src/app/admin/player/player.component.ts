@@ -14,7 +14,7 @@ import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 })
 export class PlayerComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(/[\S]/)]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/[\S]/), Validators.maxLength(10)]),
   });
   get name() {
     return this.formGroup.get('name') as FormControl;

@@ -48,13 +48,27 @@
             <div class="game-grid__point">
               <mat-form-field appearance="outline">
                 <mat-label>点数</mat-label>
-                <input matInput maxlength="6" formControlName="point" [errorStateMatcher]="matcher" appReplace />
+                <input
+                  matInput
+                  type="number"
+                  formControlName="point"
+                  [errorStateMatcher]="matcher"
+                  appReplace
+                  maxlength="6"
+                />
               </mat-form-field>
             </div>
             <div class="game-grid__calc-point">
               <mat-form-field appearance="outline">
                 <mat-label>順位点</mat-label>
-                <input matInput formControlName="calcPoint" [errorStateMatcher]="matcher" appReplace />
+                <input
+                  matInput
+                  type="number"
+                  formControlName="calcPoint"
+                  [errorStateMatcher]="matcher"
+                  appReplace
+                  maxlength="4"
+                />
               </mat-form-field>
             </div>
           </div>

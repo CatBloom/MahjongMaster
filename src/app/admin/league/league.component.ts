@@ -20,22 +20,34 @@ export class LeagueComponent implements OnInit, OnDestroy {
   formGroup = new FormGroup({
     name: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/[\S]/)],
+      validators: [Validators.required, Validators.pattern(/[\S]/), Validators.minLength(5), Validators.maxLength(30)],
     }),
-    manual: new FormControl<string>('', { nonNullable: true }),
+    manual: new FormControl<string>('', { nonNullable: true, validators: Validators.maxLength(100) }),
     date: new FormControl<string[]>([''], { nonNullable: true }),
     rulesGroup: new FormGroup({
       playerCount: new FormControl<number>(0, { validators: [Validators.required] }),
       gameType: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
       tanyao: new FormControl<boolean>(true, { validators: [Validators.required] }),
       back: new FormControl<boolean>(true, { validators: [Validators.required] }),
-      dora: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
-      startPoint: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
-      returnPoint: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
-      uma1: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
-      uma2: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
-      uma3: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
-      uma4: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d-]+$/)] }),
+      dora: new FormControl<number>(0, { validators: [Validators.required, Validators.pattern(/^[\d]+$/)] }),
+      startPoint: new FormControl<number>(0, {
+        validators: [Validators.required, Validators.pattern(/^[\d-]+$/)],
+      }),
+      returnPoint: new FormControl<number>(0, {
+        validators: [Validators.required, Validators.pattern(/^[\d-]+$/)],
+      }),
+      uma1: new FormControl<number>(0, {
+        validators: [Validators.required, Validators.pattern(/^[\d-]+$/)],
+      }),
+      uma2: new FormControl<number>(0, {
+        validators: [Validators.required, Validators.pattern(/^[\d-]+$/)],
+      }),
+      uma3: new FormControl<number>(0, {
+        validators: [Validators.required, Validators.pattern(/^[\d-]+$/)],
+      }),
+      uma4: new FormControl<number>(0, {
+        validators: [Validators.required, Validators.pattern(/^[\d-]+$/)],
+      }),
     }),
   });
 
@@ -55,6 +67,10 @@ export class LeagueComponent implements OnInit, OnDestroy {
   displayDate = new FormControl<string>('', { nonNullable: true });
   // ルール選択ラジオボタンのformControl
   rulesRadio = new FormControl<string>('', { nonNullable: true });
+  // ポイントエラー
+  pointError = false;
+  // ウマエラー
+  umaError = false;
   matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject<boolean>();
 
@@ -117,8 +133,35 @@ export class LeagueComponent implements OnInit, OnDestroy {
     return newRules;
   }
 
+  // Validation
+  private checkValidation(): boolean {
+    const startPoint = String(this.rulesGroup.get('startPoint')?.value);
+    const returnPoint = String(this.rulesGroup.get('returnPoint')?.value);
+    const uma1 = Number(this.rulesGroup.get('uma1')?.value);
+    const uma2 = Number(this.rulesGroup.get('uma2')?.value);
+    const uma3 = Number(this.rulesGroup.get('uma3')?.value);
+    const uma4 = Number(this.rulesGroup.get('uma4')?.value);
+
+    // pointの長さチェック
+    if (startPoint.length < 5 || returnPoint.length < 5) {
+      this.pointError = true;
+      return true;
+    } else {
+      this.pointError = false;
+    }
+    // umaの合計チェック
+    if (uma1 + uma2 + uma3 + uma4 !== 0) {
+      this.umaError = true;
+      return true;
+    } else {
+      this.umaError = false;
+    }
+
+    return false;
+  }
+
   postLeague() {
-    if (this.formGroup.invalid) {
+    if (this.formGroup.invalid || this.checkValidation()) {
       return;
     }
 
