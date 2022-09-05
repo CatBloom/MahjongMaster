@@ -28,6 +28,7 @@ export class RulesFormComponent implements OnInit, OnDestroy {
     this.playerCount.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
       this.rulesGroup.get('uma4')?.setErrors({ require: true });
       if (value === 3) {
+        this.rulesGroup.get('uma4')?.setValue('');
         this.rulesGroup.get('uma4')?.setErrors(null);
       }
     });
