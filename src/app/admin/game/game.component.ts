@@ -334,7 +334,7 @@ export class GameComponent implements OnInit, OnDestroy {
           const calcPoint = point - this.rules.returnPoint + umaArray[i] * 1000;
           if (isNaN(calcPoint)) {
             return;
-          } else if (this.gameArray.controls[i].get('point')?.value === '') {
+          } else if (!this.gameArray.controls[i].get('point')?.value) {
             this.gameArray.controls[i].get('calcPoint')?.setValue('');
           } else {
             if (i === 0) {

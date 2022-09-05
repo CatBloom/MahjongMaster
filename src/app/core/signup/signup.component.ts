@@ -11,10 +11,13 @@ import { AuthService } from '../../services/auth.service';
 export class SignupComponent implements OnInit {
   formGroup = new FormGroup({
     mail: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    name: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern(/[\S]/), Validators.minLength(3), Validators.maxLength(10)],
+    }),
     password: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(6)],
+      validators: [Validators.required, Validators.pattern(/[\S]/), Validators.minLength(6), Validators.maxLength(32)],
     }),
   });
   get mail() {
