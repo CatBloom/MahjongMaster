@@ -1,34 +1,36 @@
-<div class="player-details" *ngIf="playerResult$ | async as playerResult">
-  <div class="details-header-container">
-    <h2>{{ playerResult.name }}</h2>
-    <div class="move-buttons">
-      <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage()">大会成績</button>
+<mat-card>
+  <div class="player-details" *ngIf="playerResult$ | async as playerResult">
+    <div class="details-header-container">
+      <h2>{{ playerResult.name }}</h2>
+      <div class="move-buttons">
+        <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage()">大会成績</button>
+      </div>
+    </div>
+    <div class="player-grid">
+      <div class="material player-grid__total-game">
+        <p class="player-grid__title">対戦回数</p>
+        <mat-divider></mat-divider>
+        <p class="player-grid__contents">{{ playerResult.totalGame }}</p>
+      </div>
+      <div class="material player-grid__total-point">
+        <p class="player-grid__title">合計得点</p>
+        <mat-divider></mat-divider>
+        <p class="player-grid__contents">{{ playerResult.totalCalcPoint }}</p>
+      </div>
+      <div class="material player-grid__total-average">
+        <p class="player-grid__title">平均着順</p>
+        <mat-divider></mat-divider>
+        <p class="player-grid__contents">{{ playerResult.averageRank }}</p>
+      </div>
+      <div class="material player-grid__line">
+        <app-line-chart *ngIf="lineData$ | async as lineData" [lineData]="lineData"></app-line-chart>
+      </div>
+      <div class="material player-grid__pie">
+        <app-pie-chart *ngIf="pieData$ | async as pieData" [pieData]="pieData"></app-pie-chart>
+      </div>
+      <div class="material player-grid__table">
+        <app-table [columns]="tableColumns" [results]="playerResult.games"></app-table>
+      </div>
     </div>
   </div>
-  <div class="player-grid">
-    <div class="material player-grid__total-game">
-      <p class="player-grid__title">対戦回数</p>
-      <mat-divider></mat-divider>
-      <p class="player-grid__contents">{{ playerResult.totalGame }}</p>
-    </div>
-    <div class="material player-grid__total-point">
-      <p class="player-grid__title">合計得点</p>
-      <mat-divider></mat-divider>
-      <p class="player-grid__contents">{{ playerResult.totalCalcPoint }}</p>
-    </div>
-    <div class="material player-grid__total-average">
-      <p class="player-grid__title">平均着順</p>
-      <mat-divider></mat-divider>
-      <p class="player-grid__contents">{{ playerResult.averageRank }}</p>
-    </div>
-    <div class="material player-grid__line">
-      <app-line-chart *ngIf="lineData$ | async as lineData" [lineData]="lineData"></app-line-chart>
-    </div>
-    <div class="material player-grid__pie">
-      <app-pie-chart *ngIf="pieData$ | async as pieData" [pieData]="pieData"></app-pie-chart>
-    </div>
-    <div class="material player-grid__table">
-      <app-table [columns]="tableColumns" [results]="playerResult.games"></app-table>
-    </div>
-  </div>
-</div>
+</mat-card>

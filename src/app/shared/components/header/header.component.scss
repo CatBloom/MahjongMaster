@@ -16,7 +16,7 @@
   z-index: 1000;
   height: 50px;
   color: var.$dark-font-color;
-  background-color: var.$light-primary;
+  background-color: var.$dark-background-color;
   @include mat.elevation(4);
 }
 

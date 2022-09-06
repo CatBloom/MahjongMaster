@@ -1,33 +1,35 @@
-<div class="signup">
-  <h2>新規アカウント登録</h2>
-  <form [formGroup]="formGroup" class="formGroup">
-    <div class="signup-grid">
-      <mat-form-field class="signup-grid__input" appearance="outline">
-        <mat-label>メールアドレス</mat-label>
-        <input matInput type="email" autocomplete="email" formControlName="mail" />
-      </mat-form-field>
-      <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
-      <mat-form-field class="signup-grid__input" appearance="outline">
-        <mat-label>名前</mat-label>
-        <input matInput type="text" autocomplete="username" formControlName="name" />
-      </mat-form-field>
-      <mat-error *ngIf="name.errors?.['minlength']">3文字以上入力してください</mat-error>
-      <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
-      <mat-form-field class="signup-grid__input" appearance="outline">
-        <mat-label>パスワード</mat-label>
-        <input matInput type="password" autocomplete="new-password" formControlName="password" />
-      </mat-form-field>
-      <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
-      <mat-error *ngIf="password.errors?.['maxlength']">32文字以下で入力してください</mat-error>
-    </div>
-    <div class="signup-buttons">
-      <div class="signup-buttons__button">
-        <button mat-raised-button color="accent" (click)="signUp()" [disabled]="formGroup.invalid">新規登録</button>
+<mat-card>
+  <div class="signup">
+    <h2>新規アカウント登録</h2>
+    <form [formGroup]="formGroup" class="formGroup">
+      <div class="signup-grid">
+        <mat-form-field class="signup-grid__input" appearance="outline">
+          <mat-label>メールアドレス</mat-label>
+          <input matInput type="email" autocomplete="email" formControlName="mail" />
+        </mat-form-field>
+        <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
+        <mat-form-field class="signup-grid__input" appearance="outline">
+          <mat-label>名前</mat-label>
+          <input matInput type="text" autocomplete="username" formControlName="name" />
+        </mat-form-field>
+        <mat-error *ngIf="name.errors?.['minlength']">3文字以上入力してください</mat-error>
+        <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
+        <mat-form-field class="signup-grid__input" appearance="outline">
+          <mat-label>パスワード</mat-label>
+          <input matInput type="password" autocomplete="new-password" formControlName="password" />
+        </mat-form-field>
+        <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
+        <mat-error *ngIf="password.errors?.['maxlength']">32文字以下で入力してください</mat-error>
       </div>
-      <div class="signup-buttons__button">
-        <p>すでにアカウントをお持ちの場合</p>
-        <button type="button" mat-stroked-button color="primary" routerLink="/login">ログイン</button>
+      <div class="signup-buttons">
+        <div class="signup-buttons__button">
+          <button mat-raised-button color="accent" (click)="signUp()" [disabled]="formGroup.invalid">新規登録</button>
+        </div>
+        <div class="signup-buttons__button">
+          <p>すでにアカウントをお持ちの場合</p>
+          <button type="button" mat-stroked-button color="primary" routerLink="/login">ログイン</button>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</mat-card>

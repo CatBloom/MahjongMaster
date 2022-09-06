@@ -6,39 +6,31 @@
 }
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1000px 1fr;
+  grid-template-columns: 1fr 800px 1fr;
   &__header {
     grid-column: 1 / 4;
     grid-row: 1 / 2;
     height: 50px;
   }
-  &__main-container {
+  &__main {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    background-color: var.$light-background-color;
     min-height: 80vh;
-    margin: 1rem;
-    @include mixin.material;
-    position: relative;
-    &--dark {
-      background-color: var.$dark-background-color;
-    }
-  }
-  &__main-spinner {
-    @include mixin.center;
-    background: rgba(200, 200, 200, 0.95);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-  }
-  &__main-contents {
-    padding: 1rem;
+    margin: 2rem 1rem;
   }
   &__footer {
     grid-column: 1 / 4;
     grid-row: 3 / 4;
   }
+}
+
+.spinner {
+  @include mixin.center;
+  background: rgba(200, 200, 200, 0.95);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }
 
 // mat-form-fieldのカスタム
@@ -47,10 +39,10 @@
   padding: 0;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
   .grid {
     grid-template-columns: 1fr 3fr 1fr;
-    &__main-container {
+    &__main {
       grid-column: 1 / 4;
       grid-row: 2 / 3;
     }
