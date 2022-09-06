@@ -1,58 +1,60 @@
-<div class="league">
-  <h2>新規大会登録</h2>
-  <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
-    <div class="league-grid">
-      <mat-form-field class="league-grid__input" appearance="outline">
-        <mat-label>大会名</mat-label>
-        <input matInput formControlName="name" [errorStateMatcher]="matcher" />
-      </mat-form-field>
-      <mat-error *ngIf="name.errors?.['minlength']">5文字以上入力してください</mat-error>
-      <mat-error *ngIf="name.errors?.['maxlength']">30文字以下で入力してください</mat-error>
-      <mat-form-field class="league-grid__input" appearance="outline">
-        <mat-label>大会説明</mat-label>
-        <textarea matInput formControlName="manual" [errorStateMatcher]="matcher"></textarea>
-      </mat-form-field>
-      <mat-error *ngIf="manual.errors?.['maxlength']">100文字以下で入力してください</mat-error>
-      <mat-form-field class="league-grid__input" appearance="outline">
-        <mat-label>大会期間</mat-label>
-        <!-- 整形データを表示するため非表示 -->
-        <ng-container>
-          <input
-            matInput
-            style="display: none"
-            [owlDateTime]="dt1"
-            [selectMode]="'range'"
-            formControlName="date"
-            readonly
-        /></ng-container>
-        <!-- 整形データ -->
-        <input matInput readonly [formControl]="displayDate" [errorStateMatcher]="matcher" />
-        <mat-datepicker-toggle matSuffix [owlDateTimeTrigger]="dt1"></mat-datepicker-toggle>
-        <owl-date-time [pickerMode]="'dialog'" [hour12Timer]="true" #dt1></owl-date-time>
-      </mat-form-field>
-    </div>
-    <div class="league__radio">
-      <mat-radio-group [formControl]="rulesRadio">
-        <mat-radio-button value="mleagueRules">Mリーグルール</mat-radio-button>
-        <mat-radio-button value="mahjongsoulRules">雀魂半荘ルール</mat-radio-button>
-        <mat-radio-button value="tenhouRules">天鳳半荘ルール</mat-radio-button>
-        <mat-radio-button value="custom">カスタムルール</mat-radio-button>
-      </mat-radio-group>
-    </div>
+<mat-card>
+  <div class="league">
+    <h2>新規大会登録</h2>
+    <form [formGroup]="formGroup" autocomplete="off" class="formGroup">
+      <div class="league-grid">
+        <mat-form-field class="league-grid__input" appearance="outline">
+          <mat-label>大会名</mat-label>
+          <input matInput formControlName="name" [errorStateMatcher]="matcher" />
+        </mat-form-field>
+        <mat-error *ngIf="name.errors?.['minlength']">5文字以上入力してください</mat-error>
+        <mat-error *ngIf="name.errors?.['maxlength']">30文字以下で入力してください</mat-error>
+        <mat-form-field class="league-grid__input" appearance="outline">
+          <mat-label>大会説明</mat-label>
+          <textarea matInput formControlName="manual" [errorStateMatcher]="matcher"></textarea>
+        </mat-form-field>
+        <mat-error *ngIf="manual.errors?.['maxlength']">100文字以下で入力してください</mat-error>
+        <mat-form-field class="league-grid__input" appearance="outline">
+          <mat-label>大会期間</mat-label>
+          <!-- 整形データを表示するため非表示 -->
+          <ng-container>
+            <input
+              matInput
+              style="display: none"
+              [owlDateTime]="dt1"
+              [selectMode]="'range'"
+              formControlName="date"
+              readonly
+          /></ng-container>
+          <!-- 整形データ -->
+          <input matInput readonly [formControl]="displayDate" [errorStateMatcher]="matcher" />
+          <mat-datepicker-toggle matSuffix [owlDateTimeTrigger]="dt1"></mat-datepicker-toggle>
+          <owl-date-time [pickerMode]="'dialog'" [hour12Timer]="true" #dt1></owl-date-time>
+        </mat-form-field>
+      </div>
+      <div class="league__radio">
+        <mat-radio-group [formControl]="rulesRadio">
+          <mat-radio-button value="mleagueRules">Mリーグルール</mat-radio-button>
+          <mat-radio-button value="mahjongsoulRules">雀魂半荘ルール</mat-radio-button>
+          <mat-radio-button value="tenhouRules">天鳳半荘ルール</mat-radio-button>
+          <mat-radio-button value="custom">カスタムルール</mat-radio-button>
+        </mat-radio-group>
+      </div>
 
-    <ng-container *ngIf="rulesRadio.value">
-      <app-rules-form [formGroup]="formGroup"></app-rules-form>
-    </ng-container>
-    <mat-error *ngIf="pointError">配給原点/返し点は5桁-6桁で入力してください</mat-error>
-    <mat-error *ngIf="umaError">ウマの合計を0点に合わせてください </mat-error>
-    <button
-      class="league__button"
-      mat-raised-button
-      color="accent"
-      [disabled]="formGroup.invalid"
-      (click)="postLeague()"
-    >
-      大会登録
-    </button>
-  </form>
-</div>
+      <ng-container *ngIf="rulesRadio.value">
+        <app-rules-form [formGroup]="formGroup"></app-rules-form>
+      </ng-container>
+      <mat-error *ngIf="pointError">配給原点/返し点は5桁-6桁で入力してください</mat-error>
+      <mat-error *ngIf="umaError">ウマの合計を0点に合わせてください </mat-error>
+      <button
+        class="league__button"
+        mat-raised-button
+        color="accent"
+        [disabled]="formGroup.invalid"
+        (click)="postLeague()"
+      >
+        大会登録
+      </button>
+    </form>
+  </div>
+</mat-card>

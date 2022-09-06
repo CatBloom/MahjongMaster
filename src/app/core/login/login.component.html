@@ -1,25 +1,27 @@
-<div class="login">
-  <h2>ログイン</h2>
-  <form [formGroup]="formGroup" class="formGroup">
-    <div class="login-grid">
-      <mat-form-field class="login-grid__input" appearance="outline">
-        <mat-label>メールアドレス</mat-label>
-        <input matInput type="email" autocomplete="email" formControlName="mail" />
-      </mat-form-field>
-      <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
-      <mat-form-field class="login-grid__input" appearance="outline">
-        <mat-label>パスワード</mat-label>
-        <input matInput type="password" autocomplete="current-password" formControlName="password" />
-      </mat-form-field>
-    </div>
-    <div class="login-buttons">
-      <div class="login-buttons__button">
-        <button mat-raised-button color="accent" [disabled]="formGroup.invalid" (click)="login()">ログイン</button>
+<mat-card>
+  <div class="login">
+    <h2>ログイン</h2>
+    <form [formGroup]="formGroup" class="formGroup">
+      <div class="login-grid">
+        <mat-form-field class="login-grid__input" appearance="outline">
+          <mat-label>メールアドレス</mat-label>
+          <input matInput type="email" autocomplete="email" formControlName="mail" />
+        </mat-form-field>
+        <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
+        <mat-form-field class="login-grid__input" appearance="outline">
+          <mat-label>パスワード</mat-label>
+          <input matInput type="password" autocomplete="current-password" formControlName="password" />
+        </mat-form-field>
       </div>
-      <div class="login-buttons__button">
-        <p>アカウントをお持ちでない方はこちら</p>
-        <button type="button" mat-stroked-button color="primary" routerLink="/signup">新規登録</button>
+      <div class="login-buttons">
+        <div class="login-buttons__button">
+          <button mat-raised-button color="accent" [disabled]="formGroup.invalid" (click)="login()">ログイン</button>
+        </div>
+        <div class="login-buttons__button">
+          <p>アカウントをお持ちでない方はこちら</p>
+          <button type="button" mat-stroked-button color="primary" routerLink="/signup">新規登録</button>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</mat-card>
