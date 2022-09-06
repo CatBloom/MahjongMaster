@@ -64,7 +64,7 @@ export class AuthService {
       .then(() => {
         this.userSubject.next(null);
         this.snack.openSnackBer('ログアウトしました', 'x');
-        this.router.navigateByUrl('/top');
+        this.router.navigateByUrl('/');
       })
       .catch(() => {
         this.snack.openSnackBer('Error', 'x');

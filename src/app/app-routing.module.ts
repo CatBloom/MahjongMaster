@@ -6,8 +6,7 @@ import { SignupComponent } from './core/signup/signup.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'top', pathMatch: 'full' },
-  { path: 'top', component: TopComponent },
+  { path: '', component: TopComponent, redirectTo: '', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   {
