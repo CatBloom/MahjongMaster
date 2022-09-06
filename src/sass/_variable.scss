@@ -1,12 +1,4 @@
 @use '@angular/material' as mat;
-@use 'theme' as theme;
-// material-color
-$light-primary: mat.get-color-from-palette(theme.$light-primary);
-$light-accent: mat.get-color-from-palette(theme.$light-accent);
-$light-warn: mat.get-color-from-palette(theme.$light-warn);
-$dark-primary: mat.get-color-from-palette(theme.$dark-primary);
-$dark-accent: mat.get-color-from-palette(theme.$dark-accent);
-$dark-warn: mat.get-color-from-palette(theme.$dark-warn);
 
 // background-color
 $light-background-color: #ffffff;
