@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TopComponent } from './core/top/top.component';
 import { LoginComponent } from './core/login/login.component';
 import { SignupComponent } from './core/signup/signup.component';
+import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => {
         return m.AdminModule;
       }),
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
