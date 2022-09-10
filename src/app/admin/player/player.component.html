@@ -1,36 +1,38 @@
 <mat-card>
   <div class="player">
     <div class="player-header-container">
-      <h2>プレイヤー登録</h2>
-      <div class="move-buttons">
-        <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage('details')">
-          大会成績
-        </button>
-        <button class="move-buttons__button" mat-stroked-button color="accent" (click)="movePage('game')">
-          成績管理
-        </button>
-      </div>
+      <h2>プレイヤー管理</h2>
     </div>
-
     <form [formGroup]="formGroup" autocomplete="off" class="formGroup" #form="ngForm">
-      <div class="add-player">
-        <mat-form-field class="add-player__input" appearance="outline">
-          <mat-label>プレイヤー名</mat-label>
-          <input matInput formControlName="name" [errorStateMatcher]="matcher" />
+      <div classs="league-selector">
+        <mat-form-field class="league-selector__input">
+          <mat-label>大会選択</mat-label>
+          <mat-select [formControl]="selectLeague" [errorStateMatcher]="matcher">
+            <mat-option *ngFor="let league of leagueList$ | async" [value]="league">
+              {{ league.name }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <button
-          class="add-player__button"
-          mat-raised-button
-          color="accent"
-          [disabled]="formGroup.invalid"
-          (click)="postPlayer()"
-        >
-          追加
-        </button>
       </div>
-      <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
+      <ng-container *ngIf="selectLeague.value">
+        <div class="add-player">
+          <mat-form-field class="add-player__input" appearance="outline">
+            <mat-label>プレイヤー名</mat-label>
+            <input matInput formControlName="name" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+          <button
+            class="add-player__button"
+            mat-raised-button
+            color="accent"
+            [disabled]="formGroup.invalid"
+            (click)="postPlayer()"
+          >
+            追加
+          </button>
+          <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
+        </div>
+        <app-player-list *ngIf="playerList$ | async as playerList" [playerList]="playerList"></app-player-list>
+      </ng-container>
     </form>
-
-    <app-player-list *ngIf="playerList$ | async as playerList" [playerList]="playerList"></app-player-list>
   </div>
 </mat-card>

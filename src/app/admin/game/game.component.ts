@@ -12,6 +12,7 @@ import { GameService } from '../../services/game.service';
 import { SnackService } from '../../services/snack.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { LeagueResponse } from 'src/app/interfaces/league';
 
 @Component({
   selector: 'app-game',
@@ -23,20 +24,25 @@ export class GameComponent implements OnInit, OnDestroy {
   get gameArray() {
     return this.formGroup.get('gameArray') as FormArray;
   }
-  //登録or更新
-  formType: string | null = null;
-  //取得したルール
-  rules: Rules = {} as Rules;
-
-  league$ = this.leagueService.league$;
-  game$ = this.gameService.game$;
+  //登録or更新orNULL
+  formType: 'post' | 'put' | null = null;
+  //自動計算用のフラグ管理
+  isAutoCalc = true;
+  leagueList$ = this.leagueService.leagueList$;
   gameList$ = this.gameService.gameList$;
   playerList$ = this.playerService.playerList$;
   tableColumns: string[] = ['results', 'createdAt'];
   matcher = new MyErrorStateMatcher();
+  selectLeague = new FormControl<LeagueResponse | null>(null);
   totalCheck = new FormControl<number | string>(0, { nonNullable: true });
+  //取得したルール
+  private rules: Rules = {} as Rules;
+  //取得したゲーム(更新用)
   private game: GameResponse = {} as GameResponse;
+  private league$ = this.leagueService.league$;
+  private game$ = this.gameService.game$;
   private pointSubscriptionsDestroy$ = new Subject<boolean>();
+  private totalPointSubscriptionsDestroy$ = new Subject<boolean>();
   private onDestroy$ = new Subject<boolean>();
 
   constructor(
@@ -55,17 +61,22 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activeRoute.params
-      .pipe(
-        takeUntil(this.onDestroy$),
-        map((params: Params) => params['league-id']),
-        distinctUntilChanged()
-      )
-      .subscribe((leagueId: string) => {
-        this.leagueService.getLeague(leagueId);
-        this.playerService.getPlayerList(leagueId);
-        this.gameService.getGameList(leagueId);
-      });
+    this.leagueService.getLeagueList();
+    this.selectLeague.valueChanges.pipe(takeUntil(this.onDestroy$), distinctUntilChanged()).subscribe((league) => {
+      if (!league) {
+        return;
+      }
+      this.playerService.getPlayerList(league.id);
+      this.gameService.getGameList(league.id);
+      this.formType = 'post';
+      this.rules = league.rules;
+      this.totalCheck.reset();
+      this.initFormCreate();
+      this.pointSubscriptionsDestroy$.next(true);
+      this.totalPointSubscriptionsDestroy$.next(true);
+      this.pointSubscriptions();
+      this.totalPointSubscription();
+    });
 
     this.activeRoute.params
       .pipe(
@@ -86,37 +97,35 @@ export class GameComponent implements OnInit, OnDestroy {
     this.game$.pipe(takeUntil(this.onDestroy$)).subscribe((game) => {
       if (game.id) {
         this.game = game;
-        this.setValue(game);
+        this.playerService.getPlayerList(game.leagueId);
+        this.leagueService.getLeague(game.leagueId);
       }
     });
-
-    //リーグルールを取得
-    this.league$
-      .pipe(
-        takeUntil(this.onDestroy$),
-        //idを比較し、同値の場合subscribeしない
-        distinctUntilChanged((pre, cur) => {
-          // pre === curでは比較できない
-          return pre.id === cur.id;
-        })
-      )
-      .subscribe((league) => {
-        if (league.rules) {
-          this.rules = league.rules;
-          this.initFormCreate();
-          this.pointSubscriptions();
-          this.totalPointSubscription();
-        }
-      });
+    //ルールを取得
+    this.league$.pipe(takeUntil(this.onDestroy$)).subscribe((league) => {
+      this.rules = league.rules;
+      this.initFormCreate();
+      this.pointSubscriptionsDestroy$.next(true);
+      this.totalPointSubscriptionsDestroy$.next(true);
+      this.pointSubscriptions();
+      this.totalPointSubscription();
+      this.setValue(this.game);
+    });
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.pointSubscriptionsDestroy$.next(true);
+    this.totalPointSubscriptionsDestroy$.next(true);
   }
 
   //form作成
   initFormCreate() {
+    //formを初期化
+    this.formGroup = this.fb.group({
+      gameArray: this.fb.array([]),
+    });
+    //参加人数の数だけformを作成
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.gameArray.push(
         this.fb.nonNullable.group({
@@ -134,30 +143,29 @@ export class GameComponent implements OnInit, OnDestroy {
     this.formGroup.reset();
   }
 
-  setValue(game: GameResponse) {
-    //Todo 更新時の処理をtemplateで行いたいがselectBoxに値が入らないため関数で行う
-    for (let i = 0; i < this.gameArray.length; i++) {
-      this.gameArray.controls[i].get('rank')?.setValue(game.results[i].rank);
-      this.gameArray.controls[i].get('id')?.setValue(game.results[i].playerId);
-      this.gameArray.controls[i].get('point')?.setValue(game.results[i].point);
-      this.gameArray.controls[i].get('calcPoint')?.setValue(game.results[i].calcPoint);
-    }
-  }
-
-  submitGame() {
-    if (!this.formType) {
-      this.postGame();
-    } else {
-      this.putGame();
+  //取得ゲームをformにセット
+  private setValue(game: GameResponse) {
+    const rankArray: number[] = [];
+    this.gameArray.controls.forEach((control, i) => {
+      control.get('rank')?.setValue(game.results[i].rank);
+      rankArray.push(game.results[i].rank);
+      control.get('id')?.setValue(game.results[i].playerId);
+      control.get('point')?.setValue(game.results[i].point);
+      control.get('calcPoint')?.setValue(game.results[i].calcPoint);
+    });
+    //rankに重複があったら自動計算をオフにする
+    const rankArraySet = new Set(rankArray);
+    if (rankArraySet.size !== rankArray.length) {
+      this.isAutoCalc = false;
+      this.autoCalcPointCheck(false);
     }
   }
 
   //game登録
   postGame() {
-    if (this.formGroup.invalid || this.checkValidation()) {
+    if (this.formGroup.invalid || this.checkValidation() || !this.selectLeague.value) {
       return;
     }
-
     const result: GameResult[] = [];
     const players: GamePlayers[] = [];
     for (let i = 0; i < this.rules.playerCount; i++) {
@@ -171,9 +179,8 @@ export class GameComponent implements OnInit, OnDestroy {
         id: this.gameArray.controls[i].get('id')?.value,
       });
     }
-
     const games: GameRequest = {
-      leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
+      leagueId: this.selectLeague.value.id,
       results: result,
       players: players,
     };
@@ -186,7 +193,6 @@ export class GameComponent implements OnInit, OnDestroy {
     if (this.formGroup.invalid || this.checkValidation()) {
       return;
     }
-
     const result: GameResult[] = [];
     const players: GamePlayers[] = [];
     for (let i = 0; i < this.rules.playerCount; i++) {
@@ -203,17 +209,16 @@ export class GameComponent implements OnInit, OnDestroy {
         gameId: this.game.id,
       });
     }
-
     const games: GameRequest = {
       id: this.game.id,
-      leagueId: String(this.activeRoute.snapshot.paramMap.get('league-id')),
+      leagueId: this.game.leagueId,
       results: result,
       players: players,
     };
-
     this.gameService.updateGame(games);
   }
 
+  //game削除
   deleteGame() {
     if (!this.game.id) {
       return;
@@ -229,8 +234,7 @@ export class GameComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((result) => {
         if (result) {
-          const leagueId = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-          this.gameService.deleteGame(this.game.id, leagueId);
+          this.gameService.deleteGame(this.game.id);
         }
       });
   }
@@ -238,11 +242,13 @@ export class GameComponent implements OnInit, OnDestroy {
   //Validation
   private checkValidation(): boolean {
     let totalPoint = 0;
+    let calcTotalPoint = 0;
     let prevPoint: number | null = null;
     let isCheckPoint = false;
     const playerArray: number[] = [];
     this.gameArray.controls.forEach((control) => {
       totalPoint += Number(control.get('point')?.value);
+      calcTotalPoint += Number(control.get('calcPoint')?.value) * 1000;
       playerArray.push(control.get('id')?.value);
 
       if (!prevPoint) {
@@ -259,9 +265,14 @@ export class GameComponent implements OnInit, OnDestroy {
       this.snackService.openSnackBer('合計点が一致しません', '✖️');
       return true;
     }
+    //順位点合計チェック
+    if (calcTotalPoint !== 0) {
+      this.snackService.openSnackBer('順位点合計が一致しません', '✖️');
+      return true;
+    }
     //playerの重複チェック
-    const test = new Set(playerArray);
-    if (test.size !== playerArray.length) {
+    const playerArraySet = new Set(playerArray);
+    if (playerArraySet.size !== playerArray.length) {
       this.snackService.openSnackBer('playerが重複しています', '✖️');
       return true;
     }
@@ -270,29 +281,14 @@ export class GameComponent implements OnInit, OnDestroy {
       this.snackService.openSnackBer('不正な点数があります', '✖️');
       return true;
     }
-
     return false;
   }
 
-  movePage(value: string) {
-    const id = String(this.activeRoute.snapshot.paramMap.get('league-id'));
-    switch (value) {
-      case 'player':
-        this.router.navigateByUrl(`/admin/player/edit/${id}`);
-        break;
-      case 'details':
-        this.router.navigateByUrl(`/details/${id}`);
-        break;
-      case 'post':
-        this.router.navigateByUrl(`/admin/game/edit/${id}`);
-        break;
-    }
-  }
-
   tableRowClick(game: GameRequest) {
-    this.router.navigateByUrl(`/admin/game/edit/${game.leagueId}/${game.id}`);
+    this.router.navigate(['/admin/game/edit/', game.id]);
   }
 
+  //自動計算の切替
   autoCalcPointCheck(check: boolean) {
     if (!check) {
       for (const control of this.gameArray.controls) {
@@ -303,6 +299,8 @@ export class GameComponent implements OnInit, OnDestroy {
     } else {
       for (const control of this.gameArray.controls) {
         control.get('rank')?.reset();
+        control.get('point')?.reset();
+        control.get('calcPoint')?.reset();
         control.get('rank')?.disable();
         control.get('calcPoint')?.disable();
       }
@@ -349,11 +347,12 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
+  //合計点チェック用
   private totalPointSubscription() {
     for (let i = 0; i < this.rules.playerCount; i++) {
       this.gameArray.controls[i]
         .get('point')
-        ?.valueChanges.pipe(takeUntil(this.onDestroy$))
+        ?.valueChanges.pipe(takeUntil(this.totalPointSubscriptionsDestroy$))
         .subscribe(() => {
           let totalPoint = 0;
           this.gameArray.controls.forEach((control) => {
