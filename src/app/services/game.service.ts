@@ -60,35 +60,18 @@ export class GameService {
     this.http
       .put<GameResponse>(`${this.apiUrl}/${id}`, game)
       .pipe()
-      .subscribe((res) => {
-        this.gameListSubject.next(
-          this.gameListSubject.getValue().map((game) => {
-            if (game.id === res.id) {
-              return res;
-            } else {
-              return game;
-            }
-          })
-        );
-        this.route.navigateByUrl(`/admin/game/edit/${res.leagueId}`);
+      .subscribe(() => {
+        this.route.navigateByUrl(`/admin/game/edit`);
       });
   }
 
   //ゲーム削除
-  deleteGame(id: number, leagueId: string): void {
+  deleteGame(id: number): void {
     this.http
       .delete<GameResponse>(`${this.apiUrl}/${id}`)
       .pipe()
-      .subscribe((res) => {
-        const newArray = this.gameListSubject.getValue().filter((game) => {
-          if (game.id !== res.id) {
-            return game;
-          } else {
-            return null;
-          }
-        });
-        this.gameListSubject.next(newArray);
-        this.route.navigateByUrl(`/admin/game/edit/${leagueId}`);
+      .subscribe(() => {
+        this.route.navigateByUrl(`/admin/game/edit`);
       });
   }
 }

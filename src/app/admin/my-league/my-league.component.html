@@ -1,9 +1,4 @@
 <mat-card>
-  <h2>大会リスト</h2>
-
-  <button mat-raised-button color="accent" [routerLink]="'/admin/league/add'">
-    <fa-icon transform="left-2 up-2" [icon]="iconFileCirclePlus" size="sm"></fa-icon>大会登録
-  </button>
-
+  <h2>大会一覧</h2>
   <app-league-list *ngIf="leagueList$ | async as leagueList" [leagueList]="leagueList"></app-league-list>
 </mat-card>

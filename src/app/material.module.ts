@@ -19,6 +19,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -43,6 +45,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSortModule,
     MatTableModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatTabsModule,
   ],
 })
 export class MaterialModule {}
