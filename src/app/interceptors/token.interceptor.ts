@@ -29,7 +29,6 @@ export class TokenInterceptor implements HttpInterceptor {
             setHeaders: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
-              LeagueID: this.getLeagueIdByURL(this.router.routerState.snapshot.url),
             },
           });
           return next.handle(req);
@@ -37,15 +36,5 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(request);
       })
     );
-  }
-
-  //URLからleagueIDを取得する関数
-  getLeagueIdByURL(url: string) {
-    //'edit/'後の開始位置
-    const start = url.indexOf('edit/') + 5;
-    //uuid後の終了位置
-    const finish = start + 32;
-    const id = url.substring(start, finish);
-    return !id ? '' : id;
   }
 }
