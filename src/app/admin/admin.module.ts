@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { AdminComponent } from './admin.component';
 import { LeagueComponent } from './league/league.component';
 import { LeagueDialogComponent } from './components/league-dialog/league-dialog.component';
 import { GameComponent } from './game/game.component';
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
+    AdminComponent,
     LeagueComponent,
     LeagueDialogComponent,
     GameComponent,
