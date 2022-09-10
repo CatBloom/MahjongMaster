@@ -16,7 +16,10 @@
         <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
         <mat-form-field class="signup-grid__input" appearance="outline">
           <mat-label>パスワード</mat-label>
-          <input matInput type="password" autocomplete="new-password" formControlName="password" />
+          <input matInput autocomplete="new-password" formControlName="password" [type]="hide ? 'password' : 'text'" />
+          <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
         </mat-form-field>
         <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
         <mat-error *ngIf="password.errors?.['maxlength']">32文字以下で入力してください</mat-error>

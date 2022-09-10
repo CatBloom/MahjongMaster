@@ -30,6 +30,9 @@ export class SignupComponent implements OnInit {
     return this.formGroup.get('password') as FormControl;
   }
 
+  //passwordの表示管理用
+  hide = true;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
