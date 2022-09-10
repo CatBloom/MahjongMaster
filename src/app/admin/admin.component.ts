@@ -12,7 +12,7 @@ interface Links {
 })
 export class AdminComponent implements OnInit {
   links: Links[] = [
-    { label: '大会一覧', path: '/admin/league' },
+    { label: '大会一覧', path: '/admin/league/list' },
     { label: '大会登録', path: '/admin/league/add' },
     { label: 'プレイヤー管理', path: '/admin/player/edit' },
     { label: '成績管理', path: '/admin/game/edit' },

@@ -51,7 +51,7 @@ export class AuthService {
     signInWithEmailAndPassword(this.auth, user.mail, user.password)
       .then((result) => {
         this.userSubject.next(result.user);
-        this.router.navigateByUrl('/admin/league');
+        this.router.navigateByUrl('/admin/league/list');
       })
       .catch(() => this.snack.openSnackBer('Error', 'x'))
       .finally(() => {

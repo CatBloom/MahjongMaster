@@ -70,7 +70,7 @@ export class LeagueService {
       .post<LeagueResponse>(`${this.apiUrl}`, newleague)
       .pipe()
       .subscribe(() => {
-        this.route.navigateByUrl('/admin/league');
+        this.route.navigateByUrl('/admin/league/list');
       });
   }
 

@@ -13,7 +13,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'league', component: MyLeagueComponent, canActivate: [AuthGuard] },
+      { path: 'league/list', component: MyLeagueComponent, canActivate: [AuthGuard] },
       { path: 'league/add', component: LeagueComponent, canActivate: [AuthGuard] },
       { path: 'player/edit', component: PlayerComponent, canActivate: [AuthGuard] },
       { path: 'game/edit', component: GameComponent, canActivate: [AuthGuard] },
