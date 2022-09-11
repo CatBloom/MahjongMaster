@@ -56,7 +56,8 @@
                     <mat-label>点数</mat-label>
                     <input
                       matInput
-                      type="number"
+                      type="text"
+                      inputmode="numeric"
                       formControlName="point"
                       [errorStateMatcher]="matcher"
                       appReplace
@@ -69,11 +70,12 @@
                     <mat-label>順位点</mat-label>
                     <input
                       matInput
-                      type="number"
+                      type="text"
+                      inputmode="numeric"
                       formControlName="calcPoint"
                       [errorStateMatcher]="matcher"
                       appReplace
-                      maxlength="4"
+                      maxlength="6"
                     />
                   </mat-form-field>
                 </div>
