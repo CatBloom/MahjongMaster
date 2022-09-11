@@ -1,43 +1,47 @@
 import { Directive, OnInit, HostListener, ElementRef } from '@angular/core';
+import { NgControl } from '@angular/forms';
 @Directive({
   selector: '[appReplace]',
 })
 export class ReplaceDirective implements OnInit {
-  constructor(private elemRef: ElementRef<HTMLInputElement>) {}
+  constructor(private elemRef: ElementRef<HTMLInputElement>, private ngControl: NgControl) {}
 
   ngOnInit(): void {}
 
   @HostListener('input') onInput(): void {
-    // const initValue = this.elemRef.nativeElement.value;
-    // let newValue: string = initValue;
-    // //全角数字を半角数字に変換
-    // newValue = newValue.replace(/[０-９]/g, (s) => {
-    //   return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
-    // });
-    // //半角ハイフンに似た要素を半角ハイフンに変換
-    // newValue = newValue.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
-    // //数字とハイフン以外の文字を除去
-    // newValue = newValue.replace(/[^\d-]/g, '');
-    // //先頭以外の-を除去
-    // if (newValue.slice(0, 1) === '-') {
-    //   newValue = newValue.replace(/-/g, '');
-    //   newValue = '-' + newValue;
-    // } else {
-    //   newValue = newValue.replace(/-/g, '');
-    // }
-    // //先頭が-直後の0を除去
-    // newValue = newValue.replace(/^(-)0+/g, '$1');
-    // //先頭が0で2桁以上の数字は先頭の0を除去
-    // newValue = newValue.replace(/^0+(\d+)/g, '$1');
-    // this.elemRef.nativeElement.value = newValue;
+    const initValue = this.elemRef.nativeElement.value;
+    const maxLength = this.elemRef.nativeElement.maxLength;
+    let newValue: string = initValue;
+    //全角数字を半角数字に変換
+    newValue = newValue.replace(/[０-９]/g, (s) => {
+      return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+    });
+    //半角ハイフンに似た要素を半角ハイフンに変換
+    newValue = newValue.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
+    //数字とハイフンとドット以外の文字を除去
+    newValue = newValue.replace(/[^\d-.]/g, '');
+    //先頭以外の-を除去
+    if (newValue.slice(0, 1) === '-') {
+      newValue = newValue.replace(/-/g, '');
+      newValue = '-' + newValue;
+    } else {
+      newValue = newValue.replace(/-/g, '');
+    }
+    //Maxlengthより多く打ててしまうタイミングがあるためトリミング
+    //Maxlengthが設定されていない場合-1になる
+    if (maxLength !== -1 && maxLength < initValue.length) {
+      newValue = newValue.substring(0, maxLength);
+    }
+    //nativeElementに直接挿入するとsubscriptionが反応しないためngControlを使用
+    this.ngControl.control?.setValue(newValue);
   }
-
   @HostListener('blur') onBlur(): void {
-    // const initValue = this.elemRef.nativeElement.value;
-    // let newValue: string = initValue;
-    // //絶対値で3桁以上の場合、下二桁を00に置き換える
-    // newValue =
-    //   String(Math.abs(Number(initValue))).length >= 3 ? newValue.slice(0, initValue.length - 2) + '00' : newValue;
-    // this.elemRef.nativeElement.value = newValue;
+    const initValue = this.elemRef.nativeElement.value;
+    //formを抜けた時、数値か判定
+    if (isNaN(Number(initValue))) {
+      this.ngControl.control?.setValue('');
+    } else {
+      this.ngControl.control?.setValue(Number(initValue));
+    }
   }
 }
