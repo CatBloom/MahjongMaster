@@ -88,7 +88,6 @@ export class AuthService {
         this.snack.openSnackBer('メールアドレスを変更しました', 'x');
         //user情報の更新
         this.getAuthState();
-        this.router.navigateByUrl('/setting');
       } catch (e) {
         if (e instanceof FirebaseError) {
           this.catchFirebaseErrors(e);
@@ -110,7 +109,6 @@ export class AuthService {
         this.snack.openSnackBer('パスワードを変更しました', 'x');
         //user情報の更新
         this.getAuthState();
-        this.router.navigateByUrl('/setting');
       } catch (e) {
         if (e instanceof FirebaseError) {
           this.catchFirebaseErrors(e);
