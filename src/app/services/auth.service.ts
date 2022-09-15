@@ -7,7 +7,14 @@ import {
   signOut,
   onAuthStateChanged,
   User,
+  deleteUser,
+  updatePassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updateEmail,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
+import { FirebaseError } from 'firebase/app';
 import { Router } from '@angular/router';
 import { UserSignup, UserLogin } from '../interfaces/user';
 import { SnackService } from '../services/snack.service';
@@ -31,19 +38,19 @@ export class AuthService {
     private spinner: SpinnerService
   ) {}
 
-  signUp(user: UserSignup) {
+  async signUp(user: UserSignup) {
     this.spinner.showSpinner();
-    createUserWithEmailAndPassword(this.auth, user.mail, user.password)
-      .then((result) => {
-        this.addUserName(result.user, user.name);
-      })
-      .then(() => {
-        this.login(user);
-      })
-      .catch(() => this.snack.openSnackBer('Error', 'x'))
-      .finally(() => {
-        this.spinner.hideSpinner();
-      });
+    try {
+      const result = await createUserWithEmailAndPassword(this.auth, user.mail, user.password);
+      await updateProfile(result.user, { displayName: user.name });
+      this.login(user);
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        this.catchFirebaseErrors(e);
+      }
+    } finally {
+      this.spinner.hideSpinner();
+    }
   }
 
   login(user: UserLogin) {
@@ -53,7 +60,7 @@ export class AuthService {
         this.userSubject.next(result.user);
         this.router.navigateByUrl('/admin/league/list');
       })
-      .catch(() => this.snack.openSnackBer('Error', 'x'))
+      .catch((err) => this.catchFirebaseErrors(err))
       .finally(() => {
         this.spinner.hideSpinner();
       });
@@ -66,17 +73,91 @@ export class AuthService {
         this.snack.openSnackBer('ログアウトしました', 'x');
         this.router.navigateByUrl('/');
       })
-      .catch(() => {
-        this.snack.openSnackBer('Error', 'x');
+      .catch((err) => {
+        this.catchFirebaseErrors(err);
       });
   }
 
-  addUserName(user: User, userName: string) {
-    updateProfile(user, { displayName: userName })
-      .then(() => {})
-      .catch(() => this.snack.openSnackBer('Error', 'x'));
+  async updateEmail(curPass: string, newMail: string) {
+    const user = await this.getAuthState();
+    if (user?.email) {
+      try {
+        const credential = EmailAuthProvider.credential(user.email, curPass);
+        await reauthenticateWithCredential(user, credential);
+        await updateEmail(user, newMail);
+        this.snack.openSnackBer('メールアドレスを変更しました', 'x');
+        //user情報の更新
+        this.getAuthState();
+      } catch (e) {
+        if (e instanceof FirebaseError) {
+          this.catchFirebaseErrors(e);
+        }
+      }
+    } else {
+      this.snack.openSnackBer('再ログインが必要です', 'x');
+      this.logout();
+    }
   }
 
+  async updatePassword(curPass: string, newPass: string) {
+    const user = await this.getAuthState();
+    if (user?.email) {
+      try {
+        const credential = EmailAuthProvider.credential(user.email, curPass);
+        await reauthenticateWithCredential(user, credential);
+        await updatePassword(user, newPass);
+        this.snack.openSnackBer('パスワードを変更しました', 'x');
+        //user情報の更新
+        this.getAuthState();
+      } catch (e) {
+        if (e instanceof FirebaseError) {
+          this.catchFirebaseErrors(e);
+        }
+      }
+    } else {
+      this.snack.openSnackBer('再ログインが必要です', 'x');
+      this.logout();
+    }
+  }
+
+  async deleteUser(curPass: string) {
+    const user = await this.getAuthState();
+    if (user?.email) {
+      try {
+        const credential = EmailAuthProvider.credential(user.email, curPass);
+        await reauthenticateWithCredential(user, credential);
+        await deleteUser(user);
+        this.snack.openSnackBer('削除が完了しました', 'x');
+        this.userSubject.next(null);
+        this.router.navigateByUrl('/');
+      } catch (e) {
+        if (e instanceof FirebaseError) {
+          this.catchFirebaseErrors(e);
+        }
+      }
+    } else {
+      this.snack.openSnackBer('再ログインが必要です', 'x');
+      this.logout();
+    }
+  }
+
+  resetPassword(email: string) {
+    const actionCodeSettings = {
+      // パスワード再設定後のリダイレクト URL
+      url: 'http://localhost:4200/login',
+      handleCodeInApp: false,
+    };
+    sendPasswordResetEmail(this.auth, email, actionCodeSettings)
+      .then(() => {
+        this.snack.openSnackBer('パスワード再設定用メールを送信しました', 'x');
+        this.router.navigateByUrl('/');
+      })
+      .catch((err) => {
+        this.catchFirebaseErrors(err);
+      });
+  }
+
+  //現在のuserを取得
   getAuthState() {
     return new Promise<User | null>((resolve) => {
       const unsubscribe = onAuthStateChanged(this.auth, (user) => {
@@ -85,5 +166,26 @@ export class AuthService {
         unsubscribe();
       });
     });
+  }
+
+  //Firebaseエラーハンドラー
+  catchFirebaseErrors(e: FirebaseError) {
+    switch (e.code) {
+      case 'auth/wrong-password':
+        this.snack.openSnackBer('パスワードが違います', 'x');
+        break;
+      case 'auth/email-already-in-use': {
+        this.snack.openSnackBer('このメールアドレスは既に使用されています', 'x');
+        break;
+      }
+      case 'auth/user-not-found': {
+        this.snack.openSnackBer('アカウントが見つかりません', 'x');
+        break;
+      }
+      default: {
+        this.snack.openSnackBer('エラーが発生しました。しばらく時間をおいて再度お試しください', 'x');
+        break;
+      }
+    }
   }
 }
