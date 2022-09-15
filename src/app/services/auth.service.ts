@@ -143,6 +143,22 @@ export class AuthService {
     }
   }
 
+  resetPassword(email: string) {
+    const actionCodeSettings = {
+      // パスワード再設定後のリダイレクト URL
+      url: 'http://localhost:4200/login',
+      handleCodeInApp: false,
+    };
+    sendPasswordResetEmail(this.auth, email, actionCodeSettings)
+      .then(() => {
+        this.snack.openSnackBer('パスワード再設定用メールを送信しました', 'x');
+        this.router.navigateByUrl('/');
+      })
+      .catch((err) => {
+        this.catchFirebaseErrors(err);
+      });
+  }
+
   //現在のuserを取得
   getAuthState() {
     return new Promise<User | null>((resolve) => {

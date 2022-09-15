@@ -4,6 +4,7 @@ import { TopComponent } from './core/top/top.component';
 import { LoginComponent } from './core/login/login.component';
 import { SignupComponent } from './core/signup/signup.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { ForgotPasswordComponent } from './core/forgot-password/forgot-password.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
       import('./setting/setting.module').then((m) => {
         return m.SettingModule;
       }),
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   {
     path: '**',
