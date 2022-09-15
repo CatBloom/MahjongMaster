@@ -1,0 +1,63 @@
+<div class="setting-header-container">
+  <h2>設定</h2>
+</div>
+
+<div class="setting-grid">
+  <mat-card>
+    <mat-card-subtitle>メールアドレス変更</mat-card-subtitle>
+    <form class="mail-form">
+      <mat-card-content>
+        <mat-form-field appearance="outline">
+          <mat-label>変更後のメールアドレス</mat-label>
+          <input matInput type="email" autocomplete="email" [formControl]="newMail" type="text" />
+        </mat-form-field>
+        <ng-container *ngIf="mailError">
+          <mat-error *ngIf="newMail.errors?.pattern">
+            6文字以上、32以下の半角英数字の組み合わせで入力してください
+          </mat-error>
+        </ng-container>
+      </mat-card-content>
+      <button type="button" (click)="updateMail()" mat-raised-button color="accent">メールアドレス変更</button>
+    </form>
+  </mat-card>
+  <mat-card>
+    <mat-card-subtitle>パスワード変更</mat-card-subtitle>
+    <form [formGroup]="passwordForm" class="password-form">
+      <mat-card-content>
+        <div class="password-flex">
+          <mat-form-field appearance="outline">
+            <mat-label>パスワード(新規)</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="newPassword"
+              autocomplete="off"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <ng-container *ngIf="passwordError">
+            <mat-error *ngIf="newPassword.errors?.pattern">
+              6文字以上、32以下の半角英数字の組み合わせで入力してください
+            </mat-error>
+          </ng-container>
+          <mat-form-field appearance="outline">
+            <mat-label>パスワード(確認)</mat-label>
+            <input matInput type="password" formControlName="confirmPassword" autocomplete="off" />
+          </mat-form-field>
+          <mat-error *ngIf="passwordForm.errors?.unmatch">パスワードが一致しません</mat-error>
+        </div>
+      </mat-card-content>
+      <button type="button" (click)="updatePassword()" mat-raised-button color="accent">パスワード変更</button>
+    </form>
+  </mat-card>
+  <mat-card>
+    <mat-card-subtitle>アカウント削除</mat-card-subtitle>
+    <mat-card-content>
+      <p>アカウントを削除すると、完全に削除されます。復元することはできません。</p>
+    </mat-card-content>
+    <button type="button" (click)="deleteUser()" mat-raised-button color="warn">アカウント削除</button>
+  </mat-card>
+</div>

@@ -26,6 +26,14 @@ const routes: Routes = [
       }),
   },
   {
+    path: 'setting',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./setting/setting.module').then((m) => {
+        return m.SettingModule;
+      }),
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },
