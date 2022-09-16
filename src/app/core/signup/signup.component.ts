@@ -17,7 +17,12 @@ export class SignupComponent implements OnInit {
     }),
     password: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/[\S]/), Validators.minLength(6), Validators.maxLength(32)],
+      validators: [
+        Validators.required,
+        Validators.pattern(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,32}$/i),
+        Validators.minLength(6),
+        Validators.maxLength(32),
+      ],
     }),
   });
   get mail() {
@@ -32,6 +37,7 @@ export class SignupComponent implements OnInit {
 
   //passwordの表示管理用
   hide = true;
+  formError = false;
 
   constructor(private authService: AuthService) {}
 
@@ -39,6 +45,7 @@ export class SignupComponent implements OnInit {
 
   signUp(): void {
     if (this.formGroup.invalid) {
+      this.formError = true;
       return;
     }
     const user: UserSignup = {

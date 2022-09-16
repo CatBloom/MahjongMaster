@@ -40,12 +40,12 @@
           <mat-radio-button value="custom">カスタムルール</mat-radio-button>
         </mat-radio-group>
       </div>
-
       <ng-container *ngIf="rulesRadio.value">
         <app-rules-form [formGroup]="formGroup"></app-rules-form>
       </ng-container>
-      <mat-error *ngIf="pointError">配給原点/返し点は5桁-6桁で入力してください</mat-error>
-      <mat-error *ngIf="umaError">ウマの合計を0点に合わせてください </mat-error>
+      <mat-error *ngIf="pointLengthError">配給原点/返し点は5桁-6桁で入力してください</mat-error>
+      <mat-error *ngIf="umaSumError">ウマの合計を0点に合わせてください </mat-error>
+
       <button
         class="league__button"
         mat-raised-button

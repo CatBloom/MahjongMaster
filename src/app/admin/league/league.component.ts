@@ -67,10 +67,11 @@ export class LeagueComponent implements OnInit, OnDestroy {
   displayDate = new FormControl<string>('', { nonNullable: true });
   // ルール選択ラジオボタンのformControl
   rulesRadio = new FormControl<string>('', { nonNullable: true });
-  // ポイントエラー
-  pointError = false;
-  // ウマエラー
-  umaError = false;
+
+  //validation管理用
+  pointLengthError = false;
+  umaSumError = false;
+
   matcher = new MyErrorStateMatcher();
   private onDestroy$ = new Subject<boolean>();
 
@@ -142,22 +143,22 @@ export class LeagueComponent implements OnInit, OnDestroy {
     const uma3 = Number(this.rulesGroup.get('uma3')?.value);
     const uma4 = Number(this.rulesGroup.get('uma4')?.value);
 
+    let validationError = false;
     // pointの長さチェック
     if (startPoint.length < 5 || returnPoint.length < 5) {
-      this.pointError = true;
-      return true;
+      this.pointLengthError = true;
+      validationError = true;
     } else {
-      this.pointError = false;
+      this.pointLengthError = false;
     }
     // umaの合計チェック
     if (uma1 + uma2 + uma3 + uma4 !== 0) {
-      this.umaError = true;
-      return true;
+      this.umaSumError = true;
+      validationError = true;
     } else {
-      this.umaError = false;
+      this.umaSumError = false;
     }
-
-    return false;
+    return validationError;
   }
 
   postLeague() {

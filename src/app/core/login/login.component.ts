@@ -10,8 +10,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   formGroup = new FormGroup({
-    mail: new FormControl<string>('', { nonNullable: true, validators: Validators.email }),
-    password: new FormControl<string>('', { nonNullable: true }),
+    mail: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
   get mail() {
     return this.formGroup.get('mail') as FormControl;

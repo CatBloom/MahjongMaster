@@ -35,6 +35,13 @@ export class GameComponent implements OnInit, OnDestroy {
   matcher = new MyErrorStateMatcher();
   selectLeague = new FormControl<LeagueResponse | null>(null);
   totalCheck = new FormControl<number | string>(0, { nonNullable: true });
+
+  //validation管理用
+  pointSumError = false;
+  calcPointSumError = false;
+  playerDuplicationError = false;
+  pointComparisonError = false;
+
   //取得したルール
   private rules: Rules = {} as Rules;
   //取得したゲーム(更新用)
@@ -103,13 +110,15 @@ export class GameComponent implements OnInit, OnDestroy {
     });
     //ルールを取得
     this.league$.pipe(takeUntil(this.onDestroy$)).subscribe((league) => {
-      this.rules = league.rules;
-      this.initFormCreate();
-      this.pointSubscriptionsDestroy$.next(true);
-      this.totalPointSubscriptionsDestroy$.next(true);
-      this.pointSubscriptions();
-      this.totalPointSubscription();
-      this.setValue(this.game);
+      if (league.id) {
+        this.rules = league.rules;
+        this.initFormCreate();
+        this.pointSubscriptionsDestroy$.next(true);
+        this.totalPointSubscriptionsDestroy$.next(true);
+        this.pointSubscriptions();
+        this.totalPointSubscription();
+        this.setValue(this.game);
+      }
     });
   }
 
@@ -260,28 +269,37 @@ export class GameComponent implements OnInit, OnDestroy {
       }
     });
 
+    let validationError = false;
     //合計点チェック
     if (totalPoint !== this.rules.startPoint * this.rules.playerCount) {
-      this.snackService.openSnackBer('合計点が一致しません', '✖️');
-      return true;
+      this.pointSumError = true;
+      validationError = true;
+    } else {
+      this.pointSumError = false;
     }
     //順位点合計チェック
     if (calcTotalPoint !== 0) {
-      this.snackService.openSnackBer('順位点合計が一致しません', '✖️');
-      return true;
+      this.calcPointSumError = true;
+      validationError = true;
+    } else {
+      this.calcPointSumError = false;
     }
     //playerの重複チェック
     const playerArraySet = new Set(playerArray);
     if (playerArraySet.size !== playerArray.length) {
-      this.snackService.openSnackBer('playerが重複しています', '✖️');
-      return true;
+      this.playerDuplicationError = true;
+      validationError = true;
+    } else {
+      this.playerDuplicationError = false;
     }
     //点数の大きさ順をチェック
     if (isCheckPoint) {
-      this.snackService.openSnackBer('不正な点数があります', '✖️');
-      return true;
+      this.pointComparisonError = true;
+      validationError = true;
+    } else {
+      this.pointComparisonError = false;
     }
-    return false;
+    return validationError;
   }
 
   tableRowClick(game: GameRequest) {
