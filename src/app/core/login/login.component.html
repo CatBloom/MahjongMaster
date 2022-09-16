@@ -7,19 +7,20 @@
           <mat-label>メールアドレス</mat-label>
           <input matInput type="email" autocomplete="email" formControlName="mail" />
         </mat-form-field>
-        <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
         <mat-form-field class="login-grid__input" appearance="outline">
           <mat-label>パスワード</mat-label>
           <input matInput type="password" autocomplete="current-password" formControlName="password" />
         </mat-form-field>
       </div>
-      <div class="login-buttons">
-        <div class="login-buttons__button">
-          <button mat-raised-button color="accent" [disabled]="formGroup.invalid" (click)="login()">ログイン</button>
+      <div class="login-links">
+        <div class="login-links__button">
+          <button type="button" mat-raised-button color="accent" (click)="login()">ログイン</button>
         </div>
-        <div class="login-buttons__button">
-          <p>アカウントをお持ちでない方はこちら</p>
-          <button type="button" mat-stroked-button color="primary" routerLink="/signup">新規登録</button>
+        <div class="login-links__link">
+          <p>パスワードを忘れた場合は<a routerLink="/forgot-password">こちら</a></p>
+        </div>
+        <div class="login-links__link">
+          <p>アカウントをお持ちでない方は<a routerLink="/signup">こちら</a></p>
         </div>
       </div>
     </form>

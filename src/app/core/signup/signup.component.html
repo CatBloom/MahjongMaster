@@ -7,13 +7,19 @@
           <mat-label>メールアドレス</mat-label>
           <input matInput type="email" autocomplete="email" formControlName="mail" />
         </mat-form-field>
-        <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
+        <ng-container *ngIf="formError">
+          <mat-error *ngIf="mail.errors?.required">メールアドレスは必須です </mat-error>
+          <mat-error *ngIf="mail.errors?.['email']">無効なメールアドレスです</mat-error>
+        </ng-container>
         <mat-form-field class="signup-grid__input" appearance="outline">
           <mat-label>名前</mat-label>
           <input matInput type="text" autocomplete="username" formControlName="name" />
         </mat-form-field>
-        <mat-error *ngIf="name.errors?.['minlength']">3文字以上入力してください</mat-error>
-        <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
+        <ng-container *ngIf="formError">
+          <mat-error *ngIf="name.errors?.required">名前は必須です </mat-error>
+          <mat-error *ngIf="name.errors?.['minlength']">3文字以上入力してください</mat-error>
+          <mat-error *ngIf="name.errors?.['maxlength']">10文字以下で入力してください</mat-error>
+        </ng-container>
         <mat-form-field class="signup-grid__input" appearance="outline">
           <mat-label>パスワード</mat-label>
           <input matInput autocomplete="new-password" formControlName="password" [type]="hide ? 'password' : 'text'" />
@@ -21,16 +27,19 @@
             <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
-        <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
-        <mat-error *ngIf="password.errors?.['maxlength']">32文字以下で入力してください</mat-error>
+        <ng-container *ngIf="formError">
+          <mat-error *ngIf="password.errors?.required">パスワードは必須です</mat-error>
+          <mat-error *ngIf="password.errors?.pattern">半角英数字の組み合わせで入力してください</mat-error>
+          <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
+          <mat-error *ngIf="password.errors?.['maxlength']">32文字以下で入力してください</mat-error>
+        </ng-container>
       </div>
-      <div class="signup-buttons">
-        <div class="signup-buttons__button">
-          <button mat-raised-button color="accent" (click)="signUp()" [disabled]="formGroup.invalid">新規登録</button>
+      <div class="signup-links">
+        <div class="signup-links__button">
+          <button button type="button" mat-raised-button color="accent" (click)="signUp()">新規登録</button>
         </div>
-        <div class="signup-buttons__button">
-          <p>すでにアカウントをお持ちの場合</p>
-          <button type="button" mat-stroked-button color="primary" routerLink="/login">ログイン</button>
+        <div class="signup-links__link">
+          <p>すでにアカウントをお持ちの場合は<a routerLink="/login">こちら</a></p>
         </div>
       </div>
     </form>

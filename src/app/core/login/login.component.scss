@@ -7,8 +7,18 @@
   display: grid;
 }
 
-.login-buttons {
+.login-links {
   margin-top: 2rem;
+  &__link {
+    margin-top: 1rem;
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
   &__button {
     margin-top: 1rem;
     p {
