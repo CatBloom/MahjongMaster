@@ -31,16 +31,15 @@ export class PieChartComponent implements OnInit {
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 20,
+        bottom: 10,
+      },
+    },
     plugins: {
       legend: {
-        labels: {
-          color: 'rgb(125, 125, 125)',
-        },
-        display: true,
-        position: 'top',
-        onClick: function () {
-          return false;
-        },
+        display: false,
       },
       tooltip: {
         callbacks: {

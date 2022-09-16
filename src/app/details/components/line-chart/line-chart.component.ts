@@ -32,6 +32,12 @@ export class LineChartComponent implements OnInit {
   // opitions
   public lineChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    layout: {
+      padding: {
+        top: 10,
+        bottom: 10,
+      },
+    },
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -48,17 +54,9 @@ export class LineChartComponent implements OnInit {
         display: false,
       },
       y: {
-        min: 0.5,
-        max: 4.4,
         ticks: {
-          color: 'rgb(125, 125, 125)',
+          display: false,
           stepSize: 1,
-          callback: function (ticks) {
-            if (ticks === 0.5 || ticks === 4.4) {
-              return;
-            }
-            return ticks + '位';
-          },
         },
         reverse: true,
       },
