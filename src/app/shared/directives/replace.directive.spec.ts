@@ -81,4 +81,20 @@ describe('ReplaceDirective', () => {
     fixture.detectChanges();
     expect(input.value).toEqual('-12345');
   });
+
+  it('blank return blank', () => {
+    const input = de.nativeElement as HTMLInputElement;
+    input.value = '';
+    input.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+    expect(input.value).toEqual('');
+  });
+
+  it('non number return blank', () => {
+    const input = de.nativeElement as HTMLInputElement;
+    input.value = '..123-';
+    input.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+    expect(input.value).toEqual('');
+  });
 });

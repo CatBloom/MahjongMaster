@@ -37,11 +37,13 @@ export class ReplaceDirective implements OnInit {
   }
   @HostListener('blur') onBlur(): void {
     const initValue = this.elemRef.nativeElement.value;
-    //formを抜けた時、数値か判定
-    if (isNaN(Number(initValue))) {
+    //numberに変換
+    const numNewValue = Number(initValue);
+    //空と数値以外は空を返す
+    if (isNaN(numNewValue) || initValue === '') {
       this.ngControl.control?.setValue('');
     } else {
-      this.ngControl.control?.setValue(Number(initValue));
+      this.ngControl.control?.setValue(numNewValue);
     }
   }
 }
