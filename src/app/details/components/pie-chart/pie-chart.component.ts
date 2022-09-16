@@ -1,15 +1,17 @@
-import { Component, ViewChild, Input, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, OnInit, OnDestroy } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration } from 'chart.js';
 import { PieData } from '../../../interfaces/result';
 import { BaseChartDirective } from 'ng2-charts';
+import { ThemeService } from 'src/app/services/theme.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss'],
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnInit, OnDestroy {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   @Input() set pieData(data: PieData) {
     this.pieChartData.labels = data.dateLabels;
@@ -31,16 +33,15 @@ export class PieChartComponent implements OnInit {
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 20,
+        bottom: 10,
+      },
+    },
     plugins: {
       legend: {
-        labels: {
-          color: 'rgb(125, 125, 125)',
-        },
-        display: true,
-        position: 'top',
-        onClick: function () {
-          return false;
-        },
+        display: false,
       },
       tooltip: {
         callbacks: {
@@ -76,8 +77,27 @@ export class PieChartComponent implements OnInit {
   };
 
   public pieChartPlugins = [DatalabelsPlugin];
+  onDestroy$ = new Subject<boolean>();
 
-  constructor() {}
+  constructor(private themeService: ThemeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.themeService.theme$.pipe(takeUntil(this.onDestroy$)).subscribe((theme) => {
+      if (theme === 'dark') {
+        if (this.pieChartOptions?.plugins?.datalabels?.color) {
+          this.pieChartOptions.plugins.datalabels.color = 'white';
+        }
+        this.pieChartOptions = { ...this.pieChartOptions };
+      } else {
+        if (this.pieChartOptions?.plugins?.datalabels?.color) {
+          this.pieChartOptions.plugins.datalabels.color = 'rgba(0, 0, 0, 0.5)';
+        }
+        this.pieChartOptions = { ...this.pieChartOptions };
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+  }
 }
