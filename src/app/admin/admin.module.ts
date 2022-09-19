@@ -11,6 +11,7 @@ import { LeagueListComponent } from './components/league-list/league-list.compon
 import { PlayerComponent } from './player/player.component';
 import { PlayerListComponent } from './components/player-list/player-list.component';
 import { PlayerListEditComponent } from './components/player-list-edit/player-list-edit.component';
+import { HelpComponent } from './help/help.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -26,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     PlayerComponent,
     PlayerListComponent,
     PlayerListEditComponent,
+    HelpComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, OwlDateTimeModule, OwlNativeDateTimeModule, SharedModule],
 })
