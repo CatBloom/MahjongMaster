@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LeagueService } from '../services/league.service';
 
 interface Links {
   label: string;
@@ -17,7 +18,9 @@ export class AdminComponent implements OnInit {
     { label: 'プレイヤー管理', path: '/admin/player/edit' },
     { label: '成績管理', path: '/admin/game/edit' },
   ];
-  constructor() {}
+  constructor(private leagueService: LeagueService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.leagueService.getLeagueList();
+  }
 }

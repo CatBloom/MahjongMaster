@@ -12,7 +12,5 @@ export class MyLeagueComponent implements OnInit {
   leagueList$ = this.leagueService.leagueList$;
   constructor(private leagueService: LeagueService) {}
 
-  ngOnInit(): void {
-    this.leagueService.getLeagueList();
-  }
+  ngOnInit(): void {}
 }

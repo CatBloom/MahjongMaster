@@ -66,7 +66,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.leagueService.getLeagueList();
     this.selectLeague.valueChanges.pipe(takeUntil(this.onDestroy$), distinctUntilChanged()).subscribe((league) => {
       if (!league) {
         return;

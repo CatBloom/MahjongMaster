@@ -32,7 +32,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
   constructor(private leagueService: LeagueService, private playerService: PlayerService) {}
 
   ngOnInit(): void {
-    this.leagueService.getLeagueList();
     this.selectLeague.valueChanges.pipe(takeUntil(this.onDestroy$), distinctUntilChanged()).subscribe((league) => {
       if (!league) {
         return;
