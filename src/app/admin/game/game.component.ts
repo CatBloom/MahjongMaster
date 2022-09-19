@@ -9,7 +9,6 @@ import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 import { GameRequest, GameResponse, GamePlayers, GameResult } from '../../interfaces/game';
 import { LeagueService } from '../../services/league.service';
 import { GameService } from '../../services/game.service';
-import { SnackService } from '../../services/snack.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { LeagueResponse } from 'src/app/interfaces/league';
@@ -56,7 +55,6 @@ export class GameComponent implements OnInit, OnDestroy {
     private leagueService: LeagueService,
     private playerService: PlayerService,
     private gameService: GameService,
-    private snackService: SnackService,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private fb: FormBuilder,
@@ -102,23 +100,19 @@ export class GameComponent implements OnInit, OnDestroy {
 
     //ゲームを取得
     this.game$.pipe(takeUntil(this.onDestroy$)).subscribe((game) => {
-      if (game.id) {
-        this.game = game;
-        this.playerService.getPlayerList(game.leagueId);
-        this.leagueService.getLeague(game.leagueId);
-      }
+      this.game = game;
+      this.playerService.getPlayerList(game.leagueId);
+      this.leagueService.getLeague(game.leagueId);
     });
     //ルールを取得
     this.league$.pipe(takeUntil(this.onDestroy$)).subscribe((league) => {
-      if (league.id) {
-        this.rules = league.rules;
-        this.initFormCreate();
-        this.pointSubscriptionsDestroy$.next(true);
-        this.totalPointSubscriptionsDestroy$.next(true);
-        this.pointSubscriptions();
-        this.totalPointSubscription();
-        this.setValue(this.game);
-      }
+      this.rules = league.rules;
+      this.initFormCreate();
+      this.pointSubscriptionsDestroy$.next(true);
+      this.totalPointSubscriptionsDestroy$.next(true);
+      this.pointSubscriptions();
+      this.totalPointSubscription();
+      this.setValue(this.game);
     });
   }
 

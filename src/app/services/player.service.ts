@@ -10,13 +10,9 @@ export class PlayerService {
   private readonly apiUrl = 'http://localhost:8080/api/v1/player';
 
   private playerListSubject = new BehaviorSubject<PlayerResponse[]>([]);
-  private playerSubject = new BehaviorSubject<PlayerResponse>({} as PlayerResponse);
 
   get playerList$() {
     return this.playerListSubject.asObservable();
-  }
-  get player$() {
-    return this.playerSubject.asObservable();
   }
 
   constructor(private http: HttpClient) {}
@@ -28,16 +24,6 @@ export class PlayerService {
       .pipe()
       .subscribe((res) => {
         this.playerListSubject.next(res);
-      });
-  }
-
-  //playerを取得
-  getPlayer(id: number): void {
-    this.http
-      .get<PlayerResponse>(`${this.apiUrl}/${id}`)
-      .pipe()
-      .subscribe((res) => {
-        this.playerSubject.next(res);
       });
   }
 

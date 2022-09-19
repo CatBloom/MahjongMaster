@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { LeagueRequest, LeagueResponse } from '../interfaces/league';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class LeagueService {
 
   private leagueSearchSubject = new BehaviorSubject<LeagueResponse[]>([]);
   private leagueListSubject = new BehaviorSubject<LeagueResponse[]>([]);
-  private leagueSubject = new BehaviorSubject<LeagueResponse>({} as LeagueResponse);
+  private leagueSubject = new Subject<LeagueResponse>();
 
   get leagueSearchSubject$() {
     return this.leagueSearchSubject.asObservable();

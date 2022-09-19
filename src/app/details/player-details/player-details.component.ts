@@ -12,7 +12,6 @@ import { ResultService } from '../../services/result.service';
 })
 export class PlayerDetailsComponent implements OnInit, OnDestroy {
   tableColumns: string[] = ['results', 'createdAt'];
-  player$ = this.playerService.player$;
   playerResult$ = this.resultService.playerResult$;
   lineData$ = this.resultService.lineData$;
   pieData$ = this.resultService.pieData$;
