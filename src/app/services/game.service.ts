@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { GameResponse, GameRequest } from '../interfaces/game';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ export class GameService {
   private readonly apiUrl = 'http://localhost:8080/api/v1/game';
 
   private gameListSubject = new BehaviorSubject<GameResponse[]>([]);
-  private gameSubject = new BehaviorSubject<GameResponse>({} as GameResponse);
+  private gameSubject = new Subject<GameResponse>();
 
   get gameList$() {
     return this.gameListSubject.asObservable();
