@@ -69,7 +69,9 @@ export class LeagueService {
     this.http
       .post<LeagueResponse>(`${this.apiUrl}`, newleague)
       .pipe()
-      .subscribe(() => {
+      .subscribe((res) => {
+        this.leagueListSubject.getValue().unshift(res);
+        this.leagueListSubject.next(this.leagueListSubject.getValue());
         this.route.navigateByUrl('/admin/league/list');
       });
   }
