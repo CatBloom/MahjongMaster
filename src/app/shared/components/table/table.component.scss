@@ -2,10 +2,7 @@
   width: 100%;
   &__element-row {
     &:hover {
-      background: rgb(140, 140, 140);
-    }
-    &:active {
-      background: rgb(125, 125, 125);
+      background: rgb(200, 200, 200);
     }
   }
   &__cell {
@@ -17,8 +14,4 @@
 
 :host ::ng-deep .mat-paginator-range-label {
   display: none !important;
-}
-
-.selectedBackground {
-  background: rgb(115, 115, 115);
 }
