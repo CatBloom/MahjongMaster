@@ -5,6 +5,7 @@ import { MyLeagueComponent } from './my-league/my-league.component';
 import { LeagueComponent } from './league/league.component';
 import { PlayerComponent } from './player/player.component';
 import { GameComponent } from './game/game.component';
+import { HelpComponent } from './help/help.component';
 import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'player/edit', component: PlayerComponent, canActivate: [AuthGuard] },
       { path: 'game/edit', component: GameComponent, canActivate: [AuthGuard] },
       { path: 'game/edit/:game-id', component: GameComponent, canActivate: [AuthGuard] },
+      { path: 'help', component: HelpComponent, canActivate: [AuthGuard] },
     ],
   },
 ];

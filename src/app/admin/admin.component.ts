@@ -17,6 +17,7 @@ export class AdminComponent implements OnInit {
     { label: '大会登録', path: '/admin/league/add' },
     { label: 'プレイヤー管理', path: '/admin/player/edit' },
     { label: '成績管理', path: '/admin/game/edit' },
+    { label: 'ヘルプ', path: '/admin/help' },
   ];
   constructor(private leagueService: LeagueService) {}
 

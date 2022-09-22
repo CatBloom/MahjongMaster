@@ -1,0 +1,39 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>成績管理機能説明</mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li>大会登録から大会を登録します。</li>
+      <li>プレイヤー管理からプレイヤーを登録します。</li>
+      <li>成績管理から成績を登録します。</li>
+      <li>大会の成績、大会ごとのプレイヤーの成績が反映されます。</li>
+    </ul>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>編集または削除方法</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-title>プレイヤー管理</mat-panel-title>
+    <mat-divider></mat-divider>
+    <ul>
+      <li>プレイヤー名の右にあるボタンをクリックするとプレイヤー名編集またはプレイヤー削除が選べます。</li>
+      <li class="red">【注意】削除したいプレイヤーの成績が登録済みだとプレイヤーは削除できません。</li>
+      <li class="red">【注意】プレイヤーを削除するとプレイヤーの復元はできません。</li>
+    </ul>
+    <mat-panel-title>成績管理</mat-panel-title>
+    <mat-divider></mat-divider>
+    <ul>
+      <li>編集または削除したいテーブルレコードをクリックすると成績更新ページに遷移します。</li>
+      <li>成績更新ページで成績編集または削除が選べます。</li>
+      <li class="red">【注意】成績を削除すると成績の復元はできません。</li>
+    </ul>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> お問い合わせ </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>ご不明点等ございましたらTwitterDMまたはGithubのissueからご連絡をお願いします。</p>
+    <app-sns-list></app-sns-list>
+  </mat-expansion-panel>
+</mat-accordion>

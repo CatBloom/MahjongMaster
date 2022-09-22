@@ -21,6 +21,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -47,6 +48,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     MatDatepickerModule,
     MatTabsModule,
+    MatExpansionModule,
   ],
 })
 export class MaterialModule {}
