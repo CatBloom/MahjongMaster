@@ -2,11 +2,12 @@
 @use 'mixin' as mixin;
 
 .container {
-  min-width: 400px;
+  min-width: 375px;
+  position: relative;
 }
 .grid {
   display: grid;
-  grid-template-columns: 1fr 800px 1fr;
+  grid-template-columns: 1fr 850px 1fr;
   &__header {
     grid-column: 1 / 4;
     grid-row: 1 / 2;
@@ -39,7 +40,7 @@
   padding: 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   .grid {
     grid-template-columns: 1fr 3fr 1fr;
     &__main {

@@ -6,9 +6,10 @@
 }
 
 .header-title {
-  text-decoration: none;
-  color: var.$dark-font-color;
-  font-size: 1.5rem;
+  img {
+    width: 11rem;
+    display: flex;
+  }
 }
 
 .mat-toolbar-single-row {
