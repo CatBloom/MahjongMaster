@@ -1,18 +1,9 @@
 <div class="footer">
   <div class="footer-grid">
-    <div class="footer-grid__title"><a routerLink="/">TitleLogo</a></div>
+    <a class="footer-grid__title" routerLink="/"><img src="assets/titlelogo.png" /></a>
     <div class="footer-grid__link">
-      <ul>
-        <li>SNS</li>
-        <li>
-          <a href="https://twitter.com/CatBloom_web"><fa-icon [icon]="iconTwitter" size="sm"></fa-icon> Twitter</a>
-        </li>
-        <li>
-          <a href="https://github.com/CatBloom/MahjongMaster">
-            <fa-icon [icon]="iconGithub" size="sm"></fa-icon> Github
-          </a>
-        </li>
-      </ul>
+      <app-sns-list></app-sns-list>
     </div>
   </div>
+  <div class="copyright"><p>© 2022 JanTools CatBloom</p></div>
 </div>
