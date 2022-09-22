@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { delay, finalize } from 'rxjs/operators';
 import { SpinnerService } from '../services/spinner.service';
 
 @Injectable()
@@ -16,6 +16,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
     this.totalRequests++;
 
     return next.handle(request).pipe(
+      delay(200),
       finalize(() => {
         this.completedRequests++;
 
