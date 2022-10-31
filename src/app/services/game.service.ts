@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { GameResponse, GameRequest } from '../interfaces/game';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
-  private readonly apiUrl = 'http://localhost:8080/api/v1/game';
+  private readonly apiUrl = environment.apiUrl;
 
   private gameListSubject = new BehaviorSubject<GameResponse[]>([]);
   private gameSubject = new Subject<GameResponse>();
@@ -25,7 +26,7 @@ export class GameService {
   //ゲームリストを取得
   getGameList(leagueId: string): void {
     this.http
-      .get<GameResponse[]>(`${this.apiUrl}/list/${leagueId}`)
+      .get<GameResponse[]>(`${this.apiUrl}/game/list/${leagueId}`)
       .pipe()
       .subscribe((res) => {
         this.gameListSubject.next(res);
@@ -35,7 +36,7 @@ export class GameService {
   //ゲームを取得
   getGame(id: string): void {
     this.http
-      .get<GameResponse>(`${this.apiUrl}/${id}`)
+      .get<GameResponse>(`${this.apiUrl}/game/${id}`)
       .pipe()
       .subscribe((res) => {
         this.gameSubject.next(res);
@@ -46,7 +47,7 @@ export class GameService {
   //ゲーム登録
   postGame(game: GameRequest): void {
     this.http
-      .post<GameResponse>(`${this.apiUrl}`, game)
+      .post<GameResponse>(`${this.apiUrl}/game`, game)
       .pipe()
       .subscribe((res) => {
         this.gameListSubject.getValue().unshift(res);
@@ -58,7 +59,7 @@ export class GameService {
   updateGame(game: GameRequest): void {
     const id = game.id;
     this.http
-      .put<GameResponse>(`${this.apiUrl}/${id}`, game)
+      .put<GameResponse>(`${this.apiUrl}/game/${id}`, game)
       .pipe()
       .subscribe(() => {
         this.route.navigateByUrl(`/admin/game/edit`);
@@ -68,7 +69,7 @@ export class GameService {
   //ゲーム削除
   deleteGame(id: number): void {
     this.http
-      .delete<GameResponse>(`${this.apiUrl}/${id}`)
+      .delete<GameResponse>(`${this.apiUrl}/game/${id}`)
       .pipe()
       .subscribe(() => {
         this.route.navigateByUrl(`/admin/game/edit`);

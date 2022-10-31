@@ -3,12 +3,13 @@ import { HttpClient, HttpBackend } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { LeagueRequest, LeagueResponse } from '../interfaces/league';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeagueService {
-  private readonly apiUrl = 'http://localhost:8080/api/v1/league';
+  private readonly apiUrl = environment.apiUrl;
 
   private leagueSearchSubject = new BehaviorSubject<LeagueResponse[]>([]);
   private leagueListSubject = new BehaviorSubject<LeagueResponse[]>([]);
@@ -37,7 +38,7 @@ export class LeagueService {
     }
     const url = encodeURI(name.trim());
     this.skipHttpClient
-      .get<LeagueResponse[]>(`${this.apiUrl}/search/${url}`)
+      .get<LeagueResponse[]>(`${this.apiUrl}/league/search/${url}`)
       .pipe()
       .subscribe((res) => {
         this.leagueSearchSubject.next(res);
@@ -47,7 +48,7 @@ export class LeagueService {
   //tokenから大会リストを取得
   getLeagueList(): void {
     this.http
-      .get<LeagueResponse[]>(`${this.apiUrl}/list`)
+      .get<LeagueResponse[]>(`${this.apiUrl}/league/list`)
       .pipe()
       .subscribe((res) => {
         this.leagueListSubject.next(res);
@@ -57,7 +58,7 @@ export class LeagueService {
   //大会の取得
   getLeague(id: string): void {
     this.http
-      .get<LeagueResponse>(`${this.apiUrl}/${id}`)
+      .get<LeagueResponse>(`${this.apiUrl}/league/${id}`)
       .pipe()
       .subscribe((res) => {
         this.leagueSubject.next(res);
@@ -67,7 +68,7 @@ export class LeagueService {
   //大会を登録
   postLeague(newleague: LeagueRequest): void {
     this.http
-      .post<LeagueResponse>(`${this.apiUrl}`, newleague)
+      .post<LeagueResponse>(`${this.apiUrl}/league`, newleague)
       .pipe()
       .subscribe((res) => {
         this.leagueListSubject.getValue().unshift(res);
@@ -80,7 +81,7 @@ export class LeagueService {
   updateLeague(league: LeagueRequest): void {
     const id = league.id;
     this.http
-      .put<LeagueResponse>(`${this.apiUrl}/${id}`, league)
+      .put<LeagueResponse>(`${this.apiUrl}/league/${id}`, league)
       .pipe()
       .subscribe(() => {});
   }

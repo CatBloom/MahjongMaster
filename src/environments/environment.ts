@@ -13,6 +13,7 @@ export const environment = {
     measurementId: 'G-6WC74LBVZQ',
   },
   production: false,
+  apiUrl: 'https://morning-scrubland-50376.herokuapp.com/api/v1',
 };
 
 /*

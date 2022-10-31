@@ -10,12 +10,13 @@ import {
   LineResponse,
 } from '../interfaces/result';
 import { DatePipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultService {
-  private readonly apiUrl = 'http://localhost:8080/api/v1/result';
+  private readonly apiUrl = environment.apiUrl;
 
   private leagueResultSubject = new BehaviorSubject<LeagueResultResponse[]>([]);
   private playerResultSubject = new BehaviorSubject<PlayerResultResponse>({} as PlayerResultResponse);
@@ -40,7 +41,7 @@ export class ResultService {
   //大会成績を取得
   getLeagueResult(leagueId: string): void {
     this.http
-      .get<LeagueResultResponse[]>(`${this.apiUrl}/league/${leagueId}`)
+      .get<LeagueResultResponse[]>(`${this.apiUrl}/result/league/${leagueId}`)
       .pipe()
       .subscribe((res) => {
         this.leagueResultSubject.next(res);
@@ -50,7 +51,7 @@ export class ResultService {
   //player成績を取得
   getPlayerResult(playerId: number): void {
     this.http
-      .get<PlayerResultResponse>(`${this.apiUrl}/player/${playerId}`)
+      .get<PlayerResultResponse>(`${this.apiUrl}/result/player/${playerId}`)
       .pipe()
       .subscribe((res) => {
         this.playerResultSubject.next(res);
@@ -60,7 +61,7 @@ export class ResultService {
   //pie-chart用
   getPieData(playerId: number) {
     this.http
-      .get<PieResponse[]>(`${this.apiUrl}/player/pie/${playerId}`)
+      .get<PieResponse[]>(`${this.apiUrl}/result/player/pie/${playerId}`)
       .pipe()
       .subscribe((res) => {
         this.createPieData(res);
@@ -70,7 +71,7 @@ export class ResultService {
   //line-chart用
   getLineData(playerId: number) {
     this.http
-      .get<LineResponse[]>(`${this.apiUrl}/player/line/${playerId}`)
+      .get<LineResponse[]>(`${this.apiUrl}/result/player/line/${playerId}`)
       .pipe()
       .subscribe((res) => {
         this.createLineData(res);
