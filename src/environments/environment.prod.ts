@@ -1,12 +1,13 @@
 export const environment = {
   firebase: {
-    projectId: 'mahjongmaster-eed13',
-    appId: '1:619101132511:web:d8bd42b4a753d35061bb6a',
-    storageBucket: 'mahjongmaster-eed13.appspot.com',
-    apiKey: 'AIzaSyAkPZALAFzwI9mMFZXlIPlZaOLUeg67Pm0',
-    authDomain: 'mahjongmaster-eed13.firebaseapp.com',
-    messagingSenderId: '619101132511',
-    measurementId: 'G-6WC74LBVZQ',
+    apiKey: 'AIzaSyCo5zynHQz0_gH8RIPVIvraM90QMkTStbw',
+    authDomain: 'jantools-67fb9.firebaseapp.com',
+    projectId: 'jantools-67fb9',
+    storageBucket: 'jantools-67fb9.appspot.com',
+    messagingSenderId: '826000181553',
+    appId: '1:826000181553:web:016e390cdd51d7dad2c810',
+    measurementId: 'G-DNZ16C2Y43',
   },
   production: true,
+  apiUrl: 'https://jantools.herokuapp.com/api/v1',
 };
