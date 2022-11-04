@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class LeagueService {
   private readonly apiUrl = environment.apiUrl;
 
-  private leagueSearchSubject = new BehaviorSubject<LeagueResponse[]>([]);
+  private leagueSearchSubject = new BehaviorSubject<LeagueResponse[] | null>(null);
   private leagueListSubject = new BehaviorSubject<LeagueResponse[]>([]);
   private leagueSubject = new Subject<LeagueResponse>();
 
@@ -32,8 +32,8 @@ export class LeagueService {
 
   //大会検索用
   searchLeague(name: string) {
-    if (!name || name.length < 5) {
-      this.leagueSearchSubject.next([]);
+    if (!name || name.length < 3) {
+      this.leagueSearchSubject.next(null);
       return;
     }
     const url = encodeURI(name.trim());
