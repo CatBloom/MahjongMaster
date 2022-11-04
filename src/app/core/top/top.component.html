@@ -1,12 +1,37 @@
-<button mat-button color="primary" routerLink="/login">ログイン</button>
-<button mat-button color="primary" routerLink="/signup">新規登録</button>
+<div class="img-container">
+  <img src="assets/top_image.jpeg" />
+</div>
 
-<app-search [auto]="auto" (sendValue)="leagueSearch($event)"></app-search>
-<!--Todo オートコンプリートのコンポーネントを分離する -->
-<mat-autocomplete #auto="matAutocomplete">
-  <ng-container *ngIf="search$ | async as league">
-    <mat-option *ngFor="let l of league" routerLink="/details/{{ l.id }}">
-      {{ l.name }}
-    </mat-option>
-  </ng-container>
-</mat-autocomplete>
+<div class="top-container">
+  <div class="top-content">
+    <h1 class="top-content__main-title">雀Tools</h1>
+    <p>雀Toolsは麻雀大会の成績管理ができるWEBサービスです。</p>
+  </div>
+  <div class="top-content">
+    <button mat-raised-button color="accent" routerLink="/signup">新規アカウント登録</button>
+  </div>
+  <div class="top-content">
+    <h2 class="top-content__sub-title">大会検索</h2>
+    <app-search [auto]="auto" (sendValue)="leagueSearch($event)"></app-search>
+    <!--Todo オートコンプリートのコンポーネントを分離する -->
+    <mat-autocomplete #auto="matAutocomplete">
+      <ng-container *ngIf="search$ | async as league">
+        <ng-container *ngIf="league.length !== 0; else elseContent">
+          <mat-option *ngFor="let l of league" routerLink="/details/{{ l.id }}">
+            {{ l.name }}
+          </mat-option>
+        </ng-container>
+        <ng-template #elseContent>
+          <mat-option disabled> データが存在しません </mat-option>
+        </ng-template>
+      </ng-container>
+    </mat-autocomplete>
+  </div>
+  <div class="top-content">
+    <div class="news-list">
+      <mat-list>
+        <mat-list-item>2022/11/05 雀Tools Beta release version:0.1</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>
