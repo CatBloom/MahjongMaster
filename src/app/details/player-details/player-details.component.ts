@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
-import { PlayerService } from '../../services/player.service';
 import { ResultService } from '../../services/result.service';
 
 @Component({
@@ -17,12 +16,7 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   pieData$ = this.resultService.pieData$;
   private onDestroy$ = new Subject<boolean>();
 
-  constructor(
-    private playerService: PlayerService,
-    private resultService: ResultService,
-    private activeRoute: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private resultService: ResultService, private activeRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.activeRoute.params
