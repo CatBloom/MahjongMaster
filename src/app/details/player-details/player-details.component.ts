@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
@@ -16,7 +17,12 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   pieData$ = this.resultService.pieData$;
   private onDestroy$ = new Subject<boolean>();
 
-  constructor(private resultService: ResultService, private activeRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private resultService: ResultService,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private title: Title
+  ) {}
 
   ngOnInit(): void {
     this.activeRoute.params
@@ -30,6 +36,11 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
         this.resultService.getPieData(playerId);
         this.resultService.getLineData(playerId);
       });
+
+    //タイトル変更
+    this.playerResult$.pipe(takeUntil(this.onDestroy$)).subscribe((playerResult) => {
+      this.title.setTitle(`${playerResult.name} | 雀Tools`);
+    });
   }
 
   ngOnDestroy(): void {
