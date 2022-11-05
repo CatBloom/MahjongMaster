@@ -1,12 +1,12 @@
 # 雀Tools
 このprojectは麻雀成績管理アプリ"雀Tools"のAngularSPAです。
 ## 使用技術
-Angular14
-AngularMaterial14
-ChartJS
-TypeScript
-Firebase 
-## WEBAPI
+Angular14  
+AngularMaterial14  
+ChartJS  
+TypeScript  
+Firebase  
+## WEBAPI  
 [雀ToolsAPI](https://github.com/CatBloom/MahjongMasterApi)
 
 ## Development
