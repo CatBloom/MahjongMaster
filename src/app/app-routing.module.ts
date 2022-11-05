@@ -8,9 +8,9 @@ import { ForgotPasswordComponent } from './core/forgot-password/forgot-password.
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: TopComponent, redirectTo: '', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: '', title: '雀Tools', component: TopComponent, redirectTo: '', pathMatch: 'full' },
+  { path: 'login', title: 'ログイン | 雀Tools', component: LoginComponent },
+  { path: 'signup', title: '新規登録 | 雀Tools', component: SignupComponent },
   {
     path: 'details',
     loadChildren: () =>
@@ -28,6 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'setting',
+    title: '設定 | 雀Tools',
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./setting/setting.module').then((m) => {
@@ -36,6 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'forgot-password',
+    title: 'パスワード再設定 | 雀Tools',
     component: ForgotPasswordComponent,
   },
   {
