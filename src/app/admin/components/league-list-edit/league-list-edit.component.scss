@@ -1,0 +1,14 @@
+.league-list-item {
+  display: flex;
+  justify-content: space-between;
+  &__name {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    a {
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+    }
+  }
+}

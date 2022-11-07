@@ -1,0 +1,11 @@
+<div class="league-list-item">
+  <div class="league-list-item__name">
+    <a routerLink="/details/{{ league.id }}">{{ league.name }}</a>
+  </div>
+  <div class="league-list-item__button">
+    <button mat-stroked-button (click)="deleteLeague()" color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+</div>

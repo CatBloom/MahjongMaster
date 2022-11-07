@@ -89,8 +89,17 @@ export class LeagueService {
   //大会削除
   deleteLeague(id: string): void {
     this.http
-      .delete(`${this.apiUrl}/${id}`)
+      .delete<LeagueResponse>(`${this.apiUrl}/league/${id}`)
       .pipe()
-      .subscribe(() => {});
+      .subscribe((res) => {
+        const newArray = this.leagueListSubject.getValue().filter((league) => {
+          if (league.id !== res.id) {
+            return league;
+          } else {
+            return null;
+          }
+        });
+        this.leagueListSubject.next(newArray);
+      });
   }
 }
