@@ -8,6 +8,7 @@ import { GameComponent } from './game/game.component';
 import { RulesFormComponent } from './components/rules-form/rules-form.component';
 import { MyLeagueComponent } from './my-league/my-league.component';
 import { LeagueListComponent } from './components/league-list/league-list.component';
+import { LeagueListEditComponent } from './components/league-list-edit/league-list-edit.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerListComponent } from './components/player-list/player-list.component';
 import { PlayerListEditComponent } from './components/player-list-edit/player-list-edit.component';
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     RulesFormComponent,
     MyLeagueComponent,
     LeagueListComponent,
+    LeagueListEditComponent,
     PlayerComponent,
     PlayerListComponent,
     PlayerListEditComponent,
