@@ -11,6 +11,7 @@ import { TopComponent } from './core/top/top.component';
 import { LoginComponent } from './core/login/login.component';
 import { SignupComponent } from './core/signup/signup.component';
 import { ForgotPasswordComponent } from './core/forgot-password/forgot-password.component';
+import { PolicyComponent } from './core/policy/policy.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 // pipes
 import { DatePipe } from '@angular/common';
@@ -31,6 +32,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
     SignupComponent,
     NotFoundComponent,
     ForgotPasswordComponent,
+    PolicyComponent,
   ],
   imports: [
     AppRoutingModule,
