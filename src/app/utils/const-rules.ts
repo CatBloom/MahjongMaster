@@ -9,10 +9,10 @@ export const MahjongSoulRules: Rules = {
   dora: 3,
   startPoint: 25000,
   returnPoint: 25000,
-  uma1: 10,
+  uma1: 15,
   uma2: 5,
   uma3: -5,
-  uma4: -10,
+  uma4: -15,
 };
 // 天鳳公式ルール
 export const TenhouRules: Rules = {
