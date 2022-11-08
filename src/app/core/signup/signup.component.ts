@@ -24,6 +24,12 @@ export class SignupComponent implements OnInit {
         Validators.maxLength(32),
       ],
     }),
+    tos: new FormControl<boolean>(false, {
+      nonNullable: true,
+    }),
+    policy: new FormControl<boolean>(false, {
+      nonNullable: true,
+    }),
   });
   get mail() {
     return this.formGroup.get('mail') as FormControl;
@@ -33,6 +39,12 @@ export class SignupComponent implements OnInit {
   }
   get password() {
     return this.formGroup.get('password') as FormControl;
+  }
+  get tos() {
+    return this.formGroup.get('tos') as FormControl;
+  }
+  get policy() {
+    return this.formGroup.get('policy') as FormControl;
   }
 
   //passwordの表示管理用
