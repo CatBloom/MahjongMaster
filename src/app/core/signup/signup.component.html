@@ -33,10 +33,33 @@
           <mat-error *ngIf="password.errors?.['minlength']">6文字以上入力してください</mat-error>
           <mat-error *ngIf="password.errors?.['maxlength']">32文字以下で入力してください</mat-error>
         </ng-container>
+        <section class="signup-checkboxs">
+          <ul>
+            <li>
+              <mat-checkbox formControlName="tos">
+                <a routerLink="/tos" target="_blank" rel="noreferrer">利用規約</a>に同意する
+              </mat-checkbox>
+            </li>
+            <li>
+              <mat-checkbox formControlName="policy">
+                <a routerLink="/policy" target="_blank" rel="noreferrer">プライバシーポリシー</a>に同意する
+              </mat-checkbox>
+            </li>
+          </ul>
+        </section>
       </div>
       <div class="signup-links">
         <div class="signup-links__button">
-          <button button type="button" mat-raised-button color="accent" (click)="signUp()">新規登録</button>
+          <button
+            button
+            type="button"
+            mat-raised-button
+            color="accent"
+            [disabled]="!tos.value || !policy.value"
+            (click)="signUp()"
+          >
+            新規登録
+          </button>
         </div>
         <div class="signup-links__link">
           <p>すでにアカウントをお持ちの場合は<a routerLink="/login">こちら</a></p>
