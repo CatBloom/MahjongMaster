@@ -16,7 +16,7 @@ export class PlayerListEditComponent implements OnInit, OnDestroy {
   inputPlayer: FormControl<string> = new FormControl('', { nonNullable: true });
   private onDestroy$ = new Subject<boolean>();
 
-  constructor(private playerSevice: PlayerService, private matDialog: MatDialog) {}
+  constructor(private playerService: PlayerService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -42,7 +42,7 @@ export class PlayerListEditComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((result) => {
         if (result) {
-          this.playerSevice.deletePlayer(this.player.id);
+          this.playerService.deletePlayer(this.player.id);
         }
         this.isPlayerEdit = false;
       });
@@ -55,7 +55,7 @@ export class PlayerListEditComponent implements OnInit, OnDestroy {
         leagueId: this.player.leagueId,
         name: this.inputPlayer.value,
       };
-      this.playerSevice.updatePlayer(updatePlayerData);
+      this.playerService.updatePlayer(updatePlayerData);
     }
     this.isPlayerEdit = false;
   }
