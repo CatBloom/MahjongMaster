@@ -32,7 +32,7 @@ export class LeagueService {
 
   //大会検索用
   searchLeague(name: string) {
-    if (!name || name.length < 3) {
+    if (!name) {
       this.leagueSearchSubject.next(null);
       return;
     }
