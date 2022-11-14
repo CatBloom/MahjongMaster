@@ -28,12 +28,6 @@
   }
 }
 
-.news-list {
-  @include mixin.material;
-  text-align: left;
-  min-height: 10rem;
-}
-
 @media screen and (max-width: 1920px) {
   .img-container {
     margin-left: calc(50% - 50vw);
