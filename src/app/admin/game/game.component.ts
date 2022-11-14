@@ -250,7 +250,7 @@ export class GameComponent implements OnInit, OnDestroy {
     const playerArray: number[] = [];
     this.gameArray.controls.forEach((control) => {
       totalPoint += Number(control.get('point')?.value);
-      calcTotalPoint += Number(control.get('calcPoint')?.value) * 1000;
+      calcTotalPoint += Math.trunc(Number(control.get('calcPoint')?.value) * 1000);
       playerArray.push(control.get('id')?.value);
 
       if (!prevPoint) {
