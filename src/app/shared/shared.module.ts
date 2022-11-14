@@ -15,6 +15,7 @@ import { RuleListComponent } from '../shared/components/rule-list/rule-list.comp
 import { TableComponent } from '../shared/components/table/table.component';
 import { TableResultRowComponent } from '../shared/components/table-result-row/table-result-row.component';
 import { SNSListComponent } from './components/sns-list/sns-list.component';
+import { NewsListComponent } from './components/news-list/news-list.component';
 //pipe
 import { JapanesePipe } from '../shared/pipes/japanese.pipe';
 import { CustomSlicePipe } from '../shared/pipes/custom-slice.pipe';
@@ -35,6 +36,7 @@ import { ReplaceDirective } from '../shared/directives/replace.directive';
     JapanesePipe,
     ReplaceDirective,
     SNSListComponent,
+    NewsListComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FontAwesomeModule, RouterModule],
   exports: [
@@ -54,6 +56,7 @@ import { ReplaceDirective } from '../shared/directives/replace.directive';
     JapanesePipe,
     ReplaceDirective,
     SNSListComponent,
+    NewsListComponent,
   ],
 })
 export class SharedModule {}

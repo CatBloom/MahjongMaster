@@ -1,0 +1,7 @@
+@use 'mixin' as mixin;
+
+.news-list {
+  @include mixin.material;
+  text-align: left;
+  min-height: 10rem;
+}
